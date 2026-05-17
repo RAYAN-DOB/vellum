@@ -21,9 +21,10 @@ export const routes = {
 } as const;
 
 export const publicNavigation = [
-  { label: "Services", href: routes.public.services },
-  { label: "Securite", href: routes.public.security },
-  { label: "Contact", href: routes.public.contact },
+  { label: "Solution", href: "#solution" },
+  { label: "Services", href: "#services" },
+  { label: "Securite", href: "#security" },
+  { label: "Process", href: "#process" },
 ] as const;
 
 export const workspaceNavigation = [

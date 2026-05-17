@@ -3,26 +3,34 @@ import { publicNavigation, routes } from "@/lib/routes";
 
 export function Footer() {
   return (
-    <footer className="border-t border-neutral-200 bg-neutral-50">
-      <Container className="flex flex-col gap-6 py-8 md:flex-row md:items-center md:justify-between">
-        <div>
-          <p className="text-sm font-semibold text-neutral-950">PlanWork MVP</p>
-          <p className="mt-1 max-w-xl text-sm leading-6 text-neutral-600">
-            Plateforme de demonstration pour demandes techniques B2B, sans
-            document client reel ni stockage sensible.
+    <footer className="border-t border-neutral-200 bg-neutral-950 text-white">
+      <Container className="grid gap-8 py-10 md:grid-cols-[1.4fr_1fr] md:items-start">
+        <div className="max-w-xl">
+          <p className="text-sm font-semibold tracking-normal">PlanWork</p>
+          <p className="mt-3 text-sm leading-6 text-neutral-300">
+            Socle MVP pour piloter des demandes de plans techniques, livrables
+            et corrections avec une attention forte portee a la confidentialite
+            et au cloisonnement futur des projets.
+          </p>
+          <p className="mt-4 text-xs leading-5 text-neutral-500">
+            Donnees fictives uniquement. Aucun fichier client reel, DWG, PDF,
+            croquis ou document confidentiel n&apos;est stocke dans cette version.
           </p>
         </div>
 
-        <nav aria-label="Navigation secondaire" className="flex flex-wrap gap-3">
+        <nav
+          aria-label="Navigation secondaire"
+          className="flex flex-wrap gap-x-4 gap-y-3 md:justify-end"
+        >
           <a
-            className="text-sm font-medium text-neutral-600 hover:text-neutral-950"
+            className="text-sm font-medium text-neutral-300 hover:text-white"
             href={routes.public.home}
           >
             Accueil
           </a>
           {publicNavigation.map((item) => (
             <a
-              className="text-sm font-medium text-neutral-600 hover:text-neutral-950"
+              className="text-sm font-medium text-neutral-300 hover:text-white"
               href={item.href}
               key={item.href}
             >
