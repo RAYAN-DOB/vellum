@@ -29,7 +29,18 @@ export const publicNavigation = [
 
 export const workspaceNavigation = [
   { label: "Tableau de bord", href: routes.workspace.dashboard },
-  { label: "Demandes", href: routes.workspace.requests },
+  { label: "Nouvelle demande", href: routes.workspace.newRequest },
+] as const;
+
+export const roleNavigation = [
+  { label: "Espace client", href: routes.roles.client },
+  { label: "Chef de projet", href: routes.roles.projectManager },
+  { label: "Dessinateur", href: routes.roles.drafter },
+  { label: "Admin", href: routes.roles.admin },
+] as const;
+
+export const workspaceSecondaryNavigation = [
+  { label: "Demandes mockees", href: routes.workspace.requests },
   { label: "Projets", href: routes.workspace.projects },
   { label: "Livrables", href: routes.workspace.deliverables },
 ] as const;

@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/Card";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { mockDataNotice } from "@/lib/mock-data";
+import { routes } from "@/lib/routes";
 
 const metrics = [
   { value: "4", label: "espaces prevus", detail: "client, chef de projet, dessinateur, admin" },
@@ -213,7 +214,7 @@ function HeroSection() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
               className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-white px-5 text-sm font-semibold text-neutral-950 shadow-sm transition-colors hover:bg-blue-50"
-              href="#contact"
+              href={routes.workspace.newRequest}
             >
               Demander un cadrage
               <ArrowRight className="size-4" aria-hidden="true" />

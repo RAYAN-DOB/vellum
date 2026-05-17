@@ -1,3 +1,6 @@
+import type { ProjectConfidentiality } from "./project";
+import type { Role } from "./roles";
+
 export type RequestType =
   | "dwg_creation"
   | "pdf_correction"
@@ -24,8 +27,11 @@ export type ProjectRequest = {
   type: RequestType;
   priority: RequestPriority;
   status: RequestStatus;
+  confidentiality: ProjectConfidentiality;
+  requesterRole: Role;
   summary: string;
   expectedFormats: string[];
+  desiredDueDate?: string;
   hasMockAttachments: boolean;
   createdAt: string;
   updatedAt: string;
