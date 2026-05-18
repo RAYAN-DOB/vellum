@@ -19,11 +19,11 @@ export function PermissionsMatrix() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="min-w-0">
         <CardHeader>
           <CardTitle>Matrice de permissions V1</CardTitle>
         </CardHeader>
-        <CardContent className="overflow-x-auto">
+        <CardContent className="min-w-0 overflow-x-auto">
           <table className="min-w-[760px] w-full border-separate border-spacing-0 text-left text-sm">
             <thead>
               <tr className="text-neutral-500">
