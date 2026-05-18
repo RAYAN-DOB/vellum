@@ -1,14 +1,37 @@
 import type { HTMLAttributes } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+const cardVariants = cva(
+  "premium-panel rounded-lg border bg-white text-slate-950",
+  {
+    variants: {
+      tone: {
+        default: "border-slate-200/80",
+        muted: "border-slate-200 bg-slate-50/80 shadow-none",
+        dark: "technical-grid-dark border-slate-800 bg-slate-950 text-white",
+        warning: "border-amber-200 bg-amber-50 shadow-none",
+      },
+      interactive: {
+        true: "transition duration-200 hover:-translate-y-0.5 hover:border-blue-200",
+        false: "",
+      },
+    },
+    defaultVariants: {
+      tone: "default",
+      interactive: false,
+    },
+  },
+);
+
+type CardProps = HTMLAttributes<HTMLDivElement> &
+  VariantProps<typeof cardVariants>;
+
+export function Card({ className, tone, interactive, ...props }: CardProps) {
   return (
     <div
-      className={cn(
-        "premium-panel rounded-lg border border-slate-200/80 bg-white text-slate-950",
-        className,
-      )}
+      className={cn(cardVariants({ tone, interactive }), className)}
       {...props}
     />
   );

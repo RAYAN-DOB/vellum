@@ -18,6 +18,8 @@ import { Container } from "@/components/layout/Container";
 import { Footer } from "@/components/layout/Footer";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { Badge } from "@/components/ui/Badge";
+import { BorderBeam } from "@/components/ui/BorderBeam";
+import { Button } from "@/components/ui/Button";
 import {
   Card,
   CardContent,
@@ -132,6 +134,7 @@ const nextSteps = [
 function HeroVisual() {
   return (
     <div className="technical-grid-dark relative min-h-[420px] overflow-hidden rounded-lg border border-white/15 bg-slate-900 shadow-2xl shadow-slate-950/40">
+      <BorderBeam className="opacity-80" />
       <div className="absolute inset-x-6 top-6 flex items-center justify-between border-b border-white/10 pb-4 text-xs text-slate-400">
         <span>DEMO-PLAN-001</span>
         <span>Confidentiel - MVP</span>
@@ -211,19 +214,22 @@ function HeroSection() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-white px-5 text-sm font-semibold text-slate-950 shadow-[0_18px_40px_rgba(255,255,255,0.12)] transition hover:bg-blue-50"
-              href={routes.workspace.newRequest}
+            <Button
+              asChild
+              className="h-12 bg-white text-slate-950 shadow-[0_18px_40px_rgba(255,255,255,0.12)] hover:bg-blue-50"
             >
-              Creer une demande demo
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </a>
-            <a
-              className="inline-flex h-12 items-center justify-center rounded-md border border-white/20 px-5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
-              href="#security"
+              <a href={routes.workspace.newRequest}>
+                Creer une demande demo
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </a>
+            </Button>
+            <Button
+              asChild
+              className="h-12 border-white/20 bg-white/5 text-white hover:bg-white/10"
+              variant="outline"
             >
-              Comprendre la confidentialite
-            </a>
+              <a href="#security">Comprendre la confidentialite</a>
+            </Button>
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
@@ -297,7 +303,7 @@ function SolutionSection() {
             const Icon = point.icon;
 
             return (
-              <Card className="transition hover:-translate-y-0.5 hover:border-blue-200" key={point.title}>
+              <Card interactive key={point.title}>
                 <CardHeader>
                   <div className="flex size-11 items-center justify-center rounded-md bg-blue-50 text-blue-700">
                     <Icon className="size-5" aria-hidden="true" />
@@ -407,7 +413,7 @@ function ProcessSection() {
 
         <div className="mt-10 grid gap-4 lg:grid-cols-4">
           {processSteps.map((step) => (
-            <Card className="shadow-none transition hover:border-blue-200 hover:bg-white" key={step.step}>
+            <Card interactive className="shadow-none hover:bg-white" key={step.step}>
               <CardHeader>
                 <span className="text-sm font-semibold text-blue-700">
                   {step.step}
@@ -427,7 +433,8 @@ function FinalCtaSection() {
   return (
     <section className="bg-white py-20" id="contact">
       <Container>
-        <div className="technical-grid-dark overflow-hidden rounded-lg border border-slate-800 bg-slate-950 p-8 text-white shadow-xl shadow-slate-950/10 sm:p-10 lg:p-12">
+        <div className="technical-grid-dark relative overflow-hidden rounded-lg border border-slate-800 bg-slate-950 p-8 text-white shadow-xl shadow-slate-950/10 sm:p-10 lg:p-12">
+          <BorderBeam className="opacity-60" />
           <div className="grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
             <div>
               <Badge className="bg-white/10 text-blue-100 ring-white/15" tone="blue">

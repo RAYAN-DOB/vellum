@@ -10,6 +10,7 @@ import {
 import type { ReactNode } from "react";
 
 import { Container } from "@/components/layout/Container";
+import { BorderBeam } from "@/components/ui/BorderBeam";
 import { cn } from "@/lib/utils";
 import {
   roleNavigation,
@@ -159,7 +160,8 @@ export function AppShell({
         </aside>
 
         <main className="min-w-0">
-          <div className="mb-6 flex flex-col gap-4 overflow-hidden rounded-lg border border-slate-800 bg-slate-950 p-5 text-white shadow-[0_25px_70px_rgba(15,23,42,0.22)] sm:p-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="relative mb-6 flex flex-col gap-4 overflow-hidden rounded-lg border border-slate-800 bg-slate-950 p-5 text-white shadow-[0_25px_70px_rgba(15,23,42,0.22)] sm:p-6 lg:flex-row lg:items-end lg:justify-between">
+            <BorderBeam className="opacity-45" />
             <div>
               <p className="text-sm font-semibold uppercase tracking-normal text-blue-300">
                 {eyebrow}
