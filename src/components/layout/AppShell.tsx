@@ -48,22 +48,22 @@ export function AppShell({
   actions,
 }: AppShellProps) {
   return (
-    <div className="min-h-screen bg-neutral-50 text-neutral-950">
-      <header className="border-b border-neutral-200 bg-white">
+    <div className="technical-grid min-h-screen bg-slate-100 text-slate-950">
+      <header className="border-b border-white/10 bg-slate-950 text-white">
         <Container className="flex min-h-16 items-center justify-between gap-4">
           <a className="flex items-center gap-3" href={routes.public.home}>
-            <span className="flex size-9 items-center justify-center rounded-md bg-neutral-950 text-sm font-semibold text-white">
+            <span className="flex size-9 items-center justify-center rounded-md border border-blue-300/30 bg-blue-500 text-sm font-semibold text-white shadow-[0_0_30px_rgba(37,99,235,0.35)]">
               PW
             </span>
             <span>
               <span className="block text-sm font-semibold">PlanWork</span>
-              <span className="hidden text-xs text-neutral-500 sm:block">
-                Espace MVP statique
+              <span className="hidden text-xs text-slate-400 sm:block">
+                Secure project ops MVP
               </span>
             </span>
           </a>
           <a
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-neutral-200 bg-white px-4 text-sm font-medium text-neutral-700 shadow-sm transition-colors hover:bg-neutral-50 hover:text-neutral-950"
+            className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-4 text-sm font-medium text-slate-200 transition hover:bg-white/10 hover:text-white"
             href={routes.public.home}
           >
             <Home className="size-4" aria-hidden="true" />
@@ -76,9 +76,9 @@ export function AppShell({
         <aside className="lg:sticky lg:top-6 lg:self-start">
           <nav
             aria-label="Navigation interne"
-            className="rounded-lg border border-neutral-200 bg-white p-3 shadow-sm"
+            className="rounded-lg border border-slate-200/80 bg-white/90 p-3 shadow-[0_18px_55px_rgba(15,23,42,0.08)] backdrop-blur"
           >
-            <div className="px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-neutral-500">
+            <div className="px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500">
               Operations
             </div>
             <div className="grid gap-1">
@@ -89,10 +89,10 @@ export function AppShell({
                   <a
                     aria-current={activeHref === item.href ? "page" : undefined}
                     className={cn(
-                      "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                      "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
                       activeHref === item.href
-                        ? "bg-neutral-950 text-white"
-                        : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-950",
+                        ? "bg-slate-950 text-white shadow-[0_12px_25px_rgba(15,23,42,0.16)]"
+                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-950",
                     )}
                     href={item.href}
                     key={item.href}
@@ -104,7 +104,7 @@ export function AppShell({
               })}
             </div>
 
-            <div className="mt-5 px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-neutral-500">
+            <div className="mt-5 px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500">
               Details
             </div>
             <div className="grid gap-1">
@@ -112,10 +112,10 @@ export function AppShell({
                 <a
                   aria-current={activeHref === item.href ? "page" : undefined}
                   className={cn(
-                    "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
                     activeHref === item.href
-                      ? "bg-neutral-950 text-white"
-                      : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-950",
+                      ? "bg-slate-950 text-white shadow-[0_12px_25px_rgba(15,23,42,0.16)]"
+                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-950",
                   )}
                   href={item.href}
                   key={item.href}
@@ -125,7 +125,7 @@ export function AppShell({
               ))}
             </div>
 
-            <div className="mt-5 px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-neutral-500">
+            <div className="mt-5 px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500">
               Vues par role
             </div>
             <div className="grid gap-1">
@@ -136,10 +136,10 @@ export function AppShell({
                   <a
                     aria-current={activeHref === item.href ? "page" : undefined}
                     className={cn(
-                      "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                      "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
                       activeHref === item.href
-                        ? "bg-blue-700 text-white"
-                        : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-950",
+                        ? "bg-blue-700 text-white shadow-[0_12px_25px_rgba(29,78,216,0.22)]"
+                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-950",
                     )}
                     href={item.href}
                     key={item.href}
@@ -159,15 +159,15 @@ export function AppShell({
         </aside>
 
         <main className="min-w-0">
-          <div className="mb-6 flex flex-col gap-4 rounded-lg border border-neutral-200 bg-white p-5 shadow-sm sm:p-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="mb-6 flex flex-col gap-4 overflow-hidden rounded-lg border border-slate-800 bg-slate-950 p-5 text-white shadow-[0_25px_70px_rgba(15,23,42,0.22)] sm:p-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-normal text-blue-700">
+              <p className="text-sm font-semibold uppercase tracking-normal text-blue-300">
                 {eyebrow}
               </p>
-              <h1 className="mt-2 text-3xl font-semibold leading-tight tracking-normal text-neutral-950">
+              <h1 className="mt-2 text-3xl font-semibold leading-tight tracking-normal text-white">
                 {title}
               </h1>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-600">
+              <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300">
                 {description}
               </p>
             </div>

@@ -133,16 +133,16 @@ export function RoleWorkspace({ role }: RoleWorkspaceProps) {
 
   return (
     <div className="grid gap-6">
-      <Card className="bg-neutral-950 text-white">
+      <Card className="technical-grid-dark overflow-hidden bg-slate-950 text-white">
         <CardContent className="grid gap-6 p-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
-            <span className="flex size-12 items-center justify-center rounded-md bg-white text-neutral-950">
+            <span className="flex size-12 items-center justify-center rounded-md bg-white text-slate-950">
               <Icon className="size-6" aria-hidden="true" />
             </span>
             <h2 className="mt-5 text-2xl font-semibold tracking-normal">
               {config.title}
             </h2>
-            <p className="mt-3 text-sm leading-6 text-neutral-300">
+            <p className="mt-3 text-sm leading-6 text-slate-300">
               {config.description}
             </p>
           </div>
@@ -150,7 +150,7 @@ export function RoleWorkspace({ role }: RoleWorkspaceProps) {
           <div className="grid gap-3 sm:grid-cols-3">
             {config.focus.map((item) => (
               <div
-                className="rounded-md border border-white/10 bg-white/[0.06] p-4 text-sm leading-6 text-neutral-200"
+                className="rounded-md border border-white/10 bg-white/[0.07] p-4 text-sm leading-6 text-slate-200 backdrop-blur"
                 key={item}
               >
                 {item}

@@ -131,18 +131,17 @@ const nextSteps = [
 
 function HeroVisual() {
   return (
-    <div className="relative min-h-[420px] overflow-hidden rounded-lg border border-white/15 bg-neutral-900 shadow-2xl shadow-neutral-950/40">
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] bg-[size:28px_28px]" />
-      <div className="absolute inset-x-6 top-6 flex items-center justify-between border-b border-white/10 pb-4 text-xs text-neutral-400">
+    <div className="technical-grid-dark relative min-h-[420px] overflow-hidden rounded-lg border border-white/15 bg-slate-900 shadow-2xl shadow-slate-950/40">
+      <div className="absolute inset-x-6 top-6 flex items-center justify-between border-b border-white/10 pb-4 text-xs text-slate-400">
         <span>DEMO-PLAN-001</span>
         <span>Confidentiel - MVP</span>
       </div>
 
       <div className="absolute left-8 right-8 top-24 grid gap-4 md:grid-cols-[1.1fr_0.9fr]">
-        <div className="rounded-md border border-white/10 bg-white/[0.06] p-4 backdrop-blur">
+        <div className="rounded-md border border-white/10 bg-white/[0.07] p-4 backdrop-blur">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-xs uppercase text-neutral-400">Demande</p>
+              <p className="text-xs uppercase text-slate-400">Demande</p>
               <p className="mt-1 text-lg font-semibold text-white">
                 Correction plan PDF fictif
               </p>
@@ -156,12 +155,12 @@ function HeroVisual() {
           </div>
         </div>
 
-        <div className="rounded-md border border-white/10 bg-white/[0.05] p-4">
-          <p className="text-xs uppercase text-neutral-400">Acces</p>
+        <div className="rounded-md border border-white/10 bg-white/[0.06] p-4 backdrop-blur">
+          <p className="text-xs uppercase text-slate-400">Acces</p>
           <div className="mt-4 space-y-3">
             {["Client", "Chef de projet", "Dessinateur"].map((role) => (
               <div className="flex items-center justify-between gap-3" key={role}>
-                <span className="text-sm text-neutral-200">{role}</span>
+                <span className="text-sm text-slate-200">{role}</span>
                 <span className="size-2 rounded-full bg-emerald-400" />
               </div>
             ))}
@@ -169,12 +168,12 @@ function HeroVisual() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-8 right-8 rounded-md border border-white/10 bg-neutral-950/75 p-4 backdrop-blur">
+      <div className="absolute bottom-8 left-8 right-8 rounded-md border border-white/10 bg-slate-950/75 p-4 backdrop-blur">
         <div className="grid gap-3 sm:grid-cols-3">
           {["Brief", "Production", "Validation"].map((item, index) => (
             <div key={item}>
               <div className="mb-2 flex items-center gap-2">
-                <span className="flex size-6 items-center justify-center rounded-full bg-white text-xs font-semibold text-neutral-950">
+                <span className="flex size-6 items-center justify-center rounded-md bg-white text-xs font-semibold text-slate-950">
                   {index + 1}
                 </span>
                 <span className="text-sm font-medium text-white">{item}</span>
@@ -195,7 +194,7 @@ function HeroVisual() {
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-neutral-950 text-white">
+    <section className="technical-grid-dark relative overflow-hidden bg-slate-950 text-white">
       <Container className="grid gap-12 py-14 sm:py-16 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:py-14 2xl:py-20">
         <div className="relative z-10 max-w-3xl">
           <Badge className="bg-white/10 text-blue-100 ring-white/15" tone="blue">
@@ -205,7 +204,7 @@ function HeroSection() {
             Pilotez vos demandes de plans, livrables et corrections sans perdre
             le controle.
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-8 text-neutral-300 sm:text-lg">
+          <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
             Une base MVP sobre et evolutive pour structurer les demandes DWG,
             PDF, croquis et documents projet, avec une attention forte portee a
             la confidentialite et aux futures permissions.
@@ -213,7 +212,7 @@ function HeroSection() {
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-white px-5 text-sm font-semibold text-neutral-950 shadow-sm transition-colors hover:bg-blue-50"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-white px-5 text-sm font-semibold text-slate-950 shadow-[0_18px_40px_rgba(255,255,255,0.12)] transition hover:bg-blue-50"
               href={routes.workspace.newRequest}
             >
               Demander un cadrage
@@ -234,10 +233,10 @@ function HeroSection() {
                 key={`${metric.value}-${metric.label}`}
               >
                 <p className="text-3xl font-semibold text-white">{metric.value}</p>
-                <p className="mt-1 text-sm font-medium text-neutral-200">
+                <p className="mt-1 text-sm font-medium text-slate-200">
                   {metric.label}
                 </p>
-                <p className="mt-1 text-xs leading-5 text-neutral-400">
+                <p className="mt-1 text-xs leading-5 text-slate-400">
                   {metric.detail}
                 </p>
               </div>
@@ -266,13 +265,13 @@ function ProblemSection() {
 
           <div className="grid gap-4">
             {clientProblems.map((problem) => (
-              <Card className="border-neutral-200 bg-neutral-50 shadow-none" key={problem}>
+              <Card className="border-slate-200 bg-slate-50/80 shadow-none" key={problem}>
                 <CardContent className="flex gap-4 p-5">
                   <CheckCircle2
                     className="mt-0.5 size-5 shrink-0 text-blue-700"
                     aria-hidden="true"
                   />
-                  <p className="text-base leading-7 text-neutral-700">{problem}</p>
+                  <p className="text-base leading-7 text-slate-700">{problem}</p>
                 </CardContent>
               </Card>
             ))}
@@ -285,7 +284,7 @@ function ProblemSection() {
 
 function SolutionSection() {
   return (
-    <section className="bg-neutral-50 py-20" id="solution">
+    <section className="technical-grid bg-slate-100 py-20" id="solution">
       <Container>
         <SectionTitle
           eyebrow="Solution"
@@ -298,7 +297,7 @@ function SolutionSection() {
             const Icon = point.icon;
 
             return (
-              <Card className="shadow-sm" key={point.title}>
+              <Card className="transition hover:-translate-y-0.5 hover:border-blue-200" key={point.title}>
                 <CardHeader>
                   <div className="flex size-11 items-center justify-center rounded-md bg-blue-50 text-blue-700">
                     <Icon className="size-5" aria-hidden="true" />
@@ -356,7 +355,7 @@ function UseCasesSection() {
 
 function SecuritySection() {
   return (
-    <section className="bg-neutral-950 py-20 text-white" id="security">
+    <section className="technical-grid-dark bg-slate-950 py-20 text-white" id="security">
       <Container>
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
@@ -367,7 +366,7 @@ function SecuritySection() {
               Pas de promesse de fausse securite : le MVP prepare les bons
               garde-fous.
             </h2>
-            <p className="mt-5 text-base leading-8 text-neutral-300">
+            <p className="mt-5 text-base leading-8 text-slate-300">
               Les restrictions visuelles ne suffisent jamais. Les futurs acces
               aux fichiers devront etre controles cote serveur, rattaches au
               projet, au role et a l&apos;organisation.
@@ -382,7 +381,7 @@ function SecuritySection() {
                     className="mt-0.5 size-5 shrink-0 text-blue-300"
                     aria-hidden="true"
                   />
-                  <p className="text-sm leading-6 text-neutral-200">{principle}</p>
+                  <p className="text-sm leading-6 text-slate-200">{principle}</p>
                 </div>
               ))}
             </div>
@@ -398,7 +397,7 @@ function SecuritySection() {
 
 function ProcessSection() {
   return (
-    <section className="bg-neutral-50 py-20" id="process">
+    <section className="technical-grid bg-slate-100 py-20" id="process">
       <Container>
         <SectionTitle
           eyebrow="Process"
@@ -408,7 +407,7 @@ function ProcessSection() {
 
         <div className="mt-10 grid gap-4 lg:grid-cols-4">
           {processSteps.map((step) => (
-            <Card className="shadow-none" key={step.step}>
+            <Card className="shadow-none transition hover:border-blue-200 hover:bg-white" key={step.step}>
               <CardHeader>
                 <span className="text-sm font-semibold text-blue-700">
                   {step.step}
@@ -428,7 +427,7 @@ function FinalCtaSection() {
   return (
     <section className="bg-white py-20" id="contact">
       <Container>
-        <div className="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-950 p-8 text-white shadow-xl shadow-neutral-950/10 sm:p-10 lg:p-12">
+        <div className="technical-grid-dark overflow-hidden rounded-lg border border-slate-800 bg-slate-950 p-8 text-white shadow-xl shadow-slate-950/10 sm:p-10 lg:p-12">
           <div className="grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
             <div>
               <Badge className="bg-white/10 text-blue-100 ring-white/15" tone="blue">
@@ -438,10 +437,10 @@ function FinalCtaSection() {
                 Construire ensuite les pages publiques detaillees ou le premier
                 parcours de demande.
               </h2>
-              <p className="mt-5 max-w-2xl text-base leading-8 text-neutral-300">
-                La landing pose le discours produit. La suite logique est de
-                transformer le CTA en formulaire de demande mocke, sans upload
-                reel et sans authentification.
+              <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300">
+                La V1 montre deja le parcours public, le workspace et les vues
+                metier. La suite consiste a securiser l&apos;architecture serveur
+                avant tout traitement de fichiers reels.
               </p>
             </div>
 

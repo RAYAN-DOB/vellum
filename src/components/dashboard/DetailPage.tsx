@@ -35,7 +35,7 @@ export function DetailPage({
 
   return (
     <div className="grid gap-6">
-      <Card className="bg-neutral-950 text-white">
+      <Card className="technical-grid-dark overflow-hidden bg-slate-950 text-white">
         <CardContent className="p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
@@ -45,7 +45,7 @@ export function DetailPage({
               <h2 className="mt-2 text-2xl font-semibold tracking-normal">
                 {title}
               </h2>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-300">
+              <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300">
                 {description}
               </p>
             </div>
@@ -65,13 +65,13 @@ export function DetailPage({
           <CardContent className="grid gap-3 sm:grid-cols-2">
             {fields.map((field) => (
               <div
-                className="rounded-md border border-neutral-200 bg-neutral-50 p-4"
+                className="rounded-md border border-slate-200 bg-slate-50/80 p-4"
                 key={field.label}
               >
-                <p className="text-xs font-semibold uppercase tracking-normal text-neutral-500">
+                <p className="text-xs font-semibold uppercase tracking-normal text-slate-500">
                   {field.label}
                 </p>
-                <div className="mt-2 text-sm font-medium text-neutral-950">
+                <div className="mt-2 text-sm font-medium text-slate-950">
                   {field.value}
                 </div>
               </div>
@@ -86,20 +86,25 @@ export function DetailPage({
               Exemple d&apos;audit trail futur, sans backend ni journal reel.
             </CardDescription>
           </CardHeader>
-          <CardContent className="grid gap-3">
+          <CardContent className="relative grid gap-3">
             {history.map((item) => (
-              <div className="flex gap-3" key={`${item.date}-${item.label}`}>
-                <span className="mt-1 flex size-8 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-700">
-                  <Clock3 className="size-4" aria-hidden="true" />
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-neutral-950">
-                    {item.label}
-                  </p>
-                  <p className="text-xs text-neutral-500">{item.date}</p>
-                  <p className="mt-1 text-sm leading-6 text-neutral-600">
-                    {item.detail}
-                  </p>
+              <div
+                className="rounded-md border border-slate-200 bg-white p-4"
+                key={`${item.date}-${item.label}`}
+              >
+                <div className="flex gap-3">
+                  <span className="mt-1 flex size-8 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-700 ring-1 ring-blue-100">
+                    <Clock3 className="size-4" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="text-sm font-semibold text-slate-950">
+                      {item.label}
+                    </p>
+                    <p className="text-xs text-slate-500">{item.date}</p>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                      {item.detail}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -131,7 +136,7 @@ export function DetailPage({
             className="mt-0.5 size-5 shrink-0 text-blue-700"
             aria-hidden="true"
           />
-          <p className="text-sm leading-6 text-neutral-600">
+          <p className="text-sm leading-6 text-slate-600">
             La V1 prepare les objets metier. Les futurs acces aux fichiers
             devront etre verifies cote serveur selon role, projet, organisation,
             NDA et statut de ressource.

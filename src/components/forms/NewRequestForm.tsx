@@ -54,6 +54,11 @@ const initialState: FormState = {
   requesterRole: "Client",
 };
 
+const controlClass =
+  "h-11 rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-950 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100";
+
+const labelClass = "text-sm font-medium text-slate-700";
+
 export function NewRequestForm() {
   const [form, setForm] = useState<FormState>(initialState);
 
@@ -86,12 +91,12 @@ export function NewRequestForm() {
 
   return (
     <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-      <Card>
+      <Card className="overflow-hidden">
         <CardHeader>
           <CardTitle>Nouvelle demande mockee</CardTitle>
           <CardDescription>
-            Formulaire front uniquement : aucune sauvegarde, aucun upload, aucun
-            controle serveur dans cette version.
+            Cadrage front uniquement pour structurer le besoin sans exposer de
+            fichier sensible.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -100,11 +105,11 @@ export function NewRequestForm() {
             onSubmit={(event) => event.preventDefault()}
           >
             <div className="grid gap-2">
-              <label className="text-sm font-medium text-neutral-700" htmlFor="projectName">
+              <label className={labelClass} htmlFor="projectName">
                 Nom du projet
               </label>
               <input
-                className="h-11 rounded-md border border-neutral-300 bg-white px-3 text-sm text-neutral-950 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className={controlClass}
                 id="projectName"
                 onChange={(event) => updateField("projectName", event.target.value)}
                 value={form.projectName}
@@ -113,11 +118,11 @@ export function NewRequestForm() {
 
             <div className="grid gap-5 md:grid-cols-2">
               <div className="grid gap-2">
-                <label className="text-sm font-medium text-neutral-700" htmlFor="requestType">
+                <label className={labelClass} htmlFor="requestType">
                   Type de demande
                 </label>
                 <select
-                  className="h-11 rounded-md border border-neutral-300 bg-white px-3 text-sm text-neutral-950 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                  className={controlClass}
                   id="requestType"
                   onChange={(event) => updateField("requestType", event.target.value)}
                   value={form.requestType}
@@ -131,11 +136,11 @@ export function NewRequestForm() {
               </div>
 
               <div className="grid gap-2">
-                <label className="text-sm font-medium text-neutral-700" htmlFor="priority">
+                <label className={labelClass} htmlFor="priority">
                   Priorite
                 </label>
                 <select
-                  className="h-11 rounded-md border border-neutral-300 bg-white px-3 text-sm text-neutral-950 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                  className={controlClass}
                   id="priority"
                   onChange={(event) => updateField("priority", event.target.value)}
                   value={form.priority}
@@ -150,11 +155,11 @@ export function NewRequestForm() {
             </div>
 
             <div className="grid gap-2">
-              <label className="text-sm font-medium text-neutral-700" htmlFor="description">
+              <label className={labelClass} htmlFor="description">
                 Description
               </label>
               <textarea
-                className="min-h-32 rounded-md border border-neutral-300 bg-white px-3 py-3 text-sm leading-6 text-neutral-950 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className="min-h-32 rounded-md border border-slate-300 bg-white px-3 py-3 text-sm leading-6 text-slate-950 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                 id="description"
                 onChange={(event) => updateField("description", event.target.value)}
                 value={form.description}
@@ -162,7 +167,7 @@ export function NewRequestForm() {
             </div>
 
             <fieldset className="grid gap-3">
-              <legend className="text-sm font-medium text-neutral-700">
+              <legend className={labelClass}>
                 Formats attendus
               </legend>
               <div className="grid gap-2 sm:grid-cols-5">
@@ -174,8 +179,8 @@ export function NewRequestForm() {
                       className={cn(
                         "flex cursor-pointer items-center justify-center rounded-md border px-3 py-2 text-sm font-medium transition",
                         checked
-                          ? "border-neutral-950 bg-neutral-950 text-white"
-                          : "border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50",
+                          ? "border-slate-950 bg-slate-950 text-white shadow-[0_12px_24px_rgba(15,23,42,0.16)]"
+                          : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
                       )}
                       key={format}
                     >
@@ -194,11 +199,11 @@ export function NewRequestForm() {
 
             <div className="grid gap-5 md:grid-cols-3">
               <div className="grid gap-2">
-                <label className="text-sm font-medium text-neutral-700" htmlFor="confidentiality">
+                <label className={labelClass} htmlFor="confidentiality">
                   Confidentialite
                 </label>
                 <select
-                  className="h-11 rounded-md border border-neutral-300 bg-white px-3 text-sm text-neutral-950 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                  className={controlClass}
                   id="confidentiality"
                   onChange={(event) =>
                     updateField("confidentiality", event.target.value)
@@ -214,11 +219,11 @@ export function NewRequestForm() {
               </div>
 
               <div className="grid gap-2">
-                <label className="text-sm font-medium text-neutral-700" htmlFor="desiredDueDate">
+                <label className={labelClass} htmlFor="desiredDueDate">
                   Delai souhaite
                 </label>
                 <input
-                  className="h-11 rounded-md border border-neutral-300 bg-white px-3 text-sm text-neutral-950 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                  className={controlClass}
                   id="desiredDueDate"
                   onChange={(event) =>
                     updateField("desiredDueDate", event.target.value)
@@ -229,11 +234,11 @@ export function NewRequestForm() {
               </div>
 
               <div className="grid gap-2">
-                <label className="text-sm font-medium text-neutral-700" htmlFor="requesterRole">
+                <label className={labelClass} htmlFor="requesterRole">
                   Role du demandeur
                 </label>
                 <select
-                  className="h-11 rounded-md border border-neutral-300 bg-white px-3 text-sm text-neutral-950 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                  className={controlClass}
                   id="requesterRole"
                   onChange={(event) =>
                     updateField("requesterRole", event.target.value)
@@ -270,33 +275,33 @@ export function NewRequestForm() {
             </div>
 
             <button
-              className="inline-flex h-11 items-center justify-center rounded-md bg-neutral-950 px-5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-neutral-800"
+              className="inline-flex h-11 items-center justify-center rounded-md bg-slate-950 px-5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(15,23,42,0.22)] transition hover:bg-slate-800 active:translate-y-px"
               type="button"
             >
-              Simulation locale uniquement
+              Generer le recapitulatif mock
             </button>
           </form>
         </CardContent>
       </Card>
 
       <div className="grid gap-6 xl:self-start">
-        <Card className="bg-neutral-950 text-white">
+        <Card className="technical-grid-dark overflow-hidden bg-slate-950 text-white">
           <CardHeader>
-            <div className="flex size-11 items-center justify-center rounded-md bg-white text-neutral-950">
+            <div className="flex size-11 items-center justify-center rounded-md bg-white text-slate-950">
               <FileText className="size-5" aria-hidden="true" />
             </div>
             <CardTitle className="text-white">Apercu de la demande</CardTitle>
-            <CardDescription className="text-neutral-300">
+            <CardDescription className="text-slate-300">
               Recapitulatif genere cote navigateur, sans sauvegarde.
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3">
             {previewItems.map((item) => (
               <div
-                className="rounded-md border border-white/10 bg-white/[0.06] p-3"
+                className="rounded-md border border-white/10 bg-white/[0.07] p-3 backdrop-blur"
                 key={item.label}
               >
-                <p className="text-xs uppercase tracking-normal text-neutral-400">
+                <p className="text-xs uppercase tracking-normal text-slate-400">
                   {item.label}
                 </p>
                 <p className="mt-1 text-sm font-medium text-white">{item.value}</p>
@@ -313,7 +318,7 @@ export function NewRequestForm() {
                 Permissions futures
               </p>
             </div>
-            <p className="text-sm leading-6 text-neutral-600">
+            <p className="text-sm leading-6 text-slate-600">
               Ce formulaire prepare les champs utiles, mais ne prouve aucune
               securite. Les futures actions serveur devront verifier le role, le
               projet, l&apos;organisation et la confidentialite.
@@ -329,10 +334,10 @@ export function NewRequestForm() {
         <Card>
           <CardContent className="flex gap-3 p-5">
             <CalendarDays
-              className="mt-0.5 size-5 shrink-0 text-neutral-500"
+              className="mt-0.5 size-5 shrink-0 text-slate-500"
               aria-hidden="true"
             />
-            <p className="text-sm leading-6 text-neutral-600">
+            <p className="text-sm leading-6 text-slate-600">
               Le delai souhaite est indicatif. Aucun workflow de validation ou
               SLA reel n&apos;est active dans cette version.
             </p>

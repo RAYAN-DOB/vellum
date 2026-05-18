@@ -30,11 +30,11 @@ export function SectionTitle({
             {eyebrow}
           </p>
         ) : null}
-        <h2 className="mt-2 text-2xl font-semibold tracking-normal text-neutral-950 sm:text-3xl">
+        <h2 className="mt-2 text-2xl font-semibold tracking-normal text-slate-950 sm:text-3xl">
           {title}
         </h2>
         {description ? (
-          <p className="mt-3 text-base leading-7 text-neutral-600">{description}</p>
+          <p className="mt-3 text-base leading-7 text-slate-600">{description}</p>
         ) : null}
       </div>
       {actions ? <div className="shrink-0">{actions}</div> : null}

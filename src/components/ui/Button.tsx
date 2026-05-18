@@ -15,13 +15,13 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-neutral-950 text-white shadow-sm hover:bg-neutral-800 focus-visible:outline-neutral-950",
+    "bg-slate-950 text-white shadow-[0_14px_30px_rgba(15,23,42,0.22)] hover:bg-slate-800 focus-visible:outline-slate-950",
   secondary:
-    "bg-white text-neutral-950 shadow-sm ring-1 ring-neutral-200 hover:bg-neutral-50 focus-visible:outline-neutral-700",
+    "bg-white text-slate-950 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50 focus-visible:outline-slate-700",
   outline:
-    "border border-neutral-300 bg-transparent text-neutral-900 hover:bg-neutral-100 focus-visible:outline-neutral-700",
+    "border border-slate-300 bg-white/70 text-slate-900 hover:bg-slate-100 focus-visible:outline-slate-700",
   ghost:
-    "bg-transparent text-neutral-700 hover:bg-neutral-100 hover:text-neutral-950 focus-visible:outline-neutral-700",
+    "bg-transparent text-slate-700 hover:bg-slate-100 hover:text-slate-950 focus-visible:outline-slate-700",
   danger:
     "bg-red-600 text-white shadow-sm hover:bg-red-700 focus-visible:outline-red-700",
 };
@@ -46,7 +46,7 @@ export function Button({
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center rounded-md font-medium transition-colors",
+        "inline-flex items-center justify-center rounded-md font-medium transition duration-200 active:translate-y-px",
         "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
         "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
         sizeClasses[size],

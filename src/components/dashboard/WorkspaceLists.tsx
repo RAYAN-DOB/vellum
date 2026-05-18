@@ -44,18 +44,18 @@ export function RequestList() {
       <CardContent className="grid gap-3">
         {mockRequests.map((request) => (
           <article
-            className="rounded-md border border-neutral-200 bg-neutral-50 p-4"
+            className="group rounded-md border border-slate-200 bg-slate-50/80 p-4 transition hover:border-blue-200 hover:bg-white"
             key={request.id}
           >
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <a
-                  className="text-sm font-semibold text-neutral-950 hover:text-blue-700"
+                  className="text-sm font-semibold text-slate-950 hover:text-blue-700"
                   href={`${routes.workspace.requests}/${request.id}`}
                 >
                   {request.title}
                 </a>
-                <p className="mt-1 text-sm leading-6 text-neutral-600">
+                <p className="mt-1 text-sm leading-6 text-slate-600">
                   {request.summary}
                 </p>
               </div>
@@ -64,7 +64,7 @@ export function RequestList() {
                 <StatusBadge value={request.priority} />
               </div>
             </div>
-            <div className="mt-4 grid gap-2 text-xs text-neutral-500 sm:grid-cols-3">
+            <div className="mt-4 grid gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-xs text-slate-500 sm:grid-cols-3">
               <span>{requestTypeLabels[request.type]}</span>
               <span>{request.expectedFormats.join(" + ")}</span>
               <span>Demandeur : {userName(request.createdById)}</span>
@@ -88,7 +88,7 @@ export function ProjectList() {
       <CardContent className="grid gap-3">
         {mockProjects.map((project) => (
           <article
-            className="rounded-md border border-neutral-200 bg-white p-4"
+            className="group rounded-md border border-slate-200 bg-white p-4 transition hover:border-blue-200"
             key={project.id}
           >
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
@@ -97,20 +97,24 @@ export function ProjectList() {
                   {project.reference}
                 </p>
                 <a
-                  className="mt-1 block text-sm font-semibold text-neutral-950 hover:text-blue-700"
+                  className="mt-1 block text-sm font-semibold text-slate-950 hover:text-blue-700"
                   href={`${routes.workspace.projects}/${project.id}`}
                 >
                   {project.name}
                 </a>
-                <p className="mt-2 text-sm leading-6 text-neutral-600">
+                <p className="mt-2 text-sm leading-6 text-slate-600">
                   {project.description}
                 </p>
               </div>
               <StatusBadge value={project.status} />
             </div>
-            <div className="mt-4 flex flex-wrap gap-2 text-xs text-neutral-500">
-              <span>{confidentialityLabels[project.confidentiality]}</span>
-              <span>Client : {userName(project.clientId)}</span>
+            <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-500">
+              <span className="rounded-md bg-slate-100 px-2 py-1">
+                {confidentialityLabels[project.confidentiality]}
+              </span>
+              <span className="rounded-md bg-slate-100 px-2 py-1">
+                Client : {userName(project.clientId)}
+              </span>
             </div>
           </article>
         ))}
@@ -131,26 +135,30 @@ export function DeliverableList() {
       <CardContent className="grid gap-3">
         {mockDeliverables.map((deliverable) => (
           <article
-            className="rounded-md border border-neutral-200 bg-neutral-50 p-4"
+            className="group rounded-md border border-slate-200 bg-slate-50/80 p-4 transition hover:border-blue-200 hover:bg-white"
             key={deliverable.id}
           >
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <a
-                  className="text-sm font-semibold text-neutral-950 hover:text-blue-700"
+                  className="text-sm font-semibold text-slate-950 hover:text-blue-700"
                   href={`${routes.workspace.deliverables}/${deliverable.id}`}
                 >
                   {deliverable.title}
                 </a>
-                <p className="mt-1 text-sm text-neutral-600">
+                <p className="mt-1 text-sm text-slate-600">
                   {deliverable.mockFileName}
                 </p>
               </div>
               <StatusBadge value={deliverable.status} />
             </div>
-            <div className="mt-4 flex flex-wrap gap-2 text-xs text-neutral-500">
-              <span>Format : {deliverable.format.toUpperCase()}</span>
-              <span>Soumis par : {userName(deliverable.submittedById)}</span>
+            <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-500">
+              <span className="rounded-md bg-white px-2 py-1 ring-1 ring-slate-200">
+                Format : {deliverable.format.toUpperCase()}
+              </span>
+              <span className="rounded-md bg-white px-2 py-1 ring-1 ring-slate-200">
+                Soumis par : {userName(deliverable.submittedById)}
+              </span>
             </div>
           </article>
         ))}

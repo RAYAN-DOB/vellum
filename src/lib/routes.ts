@@ -41,8 +41,11 @@ export const roleNavigation = [
 ] as const;
 
 export const workspaceSecondaryNavigation = [
-  { label: "Demandes mockees", href: routes.workspace.requests },
-  { label: "Projets", href: routes.workspace.projects },
-  { label: "Livrables", href: routes.workspace.deliverables },
+  { label: "Demande exemple", href: `${routes.workspace.requests}/request-demo-001` },
+  { label: "Projet exemple", href: `${routes.workspace.projects}/project-demo-001` },
+  {
+    label: "Livrable exemple",
+    href: `${routes.workspace.deliverables}/deliverable-demo-001`,
+  },
   { label: "Permissions mockees", href: routes.workspace.permissions },
 ] as const;

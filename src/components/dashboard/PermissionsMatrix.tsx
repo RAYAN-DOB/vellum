@@ -19,47 +19,47 @@ export function PermissionsMatrix() {
         </CardContent>
       </Card>
 
-      <Card className="min-w-0">
+      <Card className="min-w-0 overflow-hidden">
         <CardHeader>
           <CardTitle>Matrice de permissions V1</CardTitle>
         </CardHeader>
         <CardContent className="min-w-0 overflow-x-auto">
           <table className="min-w-[760px] w-full border-separate border-spacing-0 text-left text-sm">
-            <thead>
-              <tr className="text-neutral-500">
-                <th className="border-b border-neutral-200 px-3 py-3 font-semibold">
+            <thead className="bg-slate-50">
+              <tr className="text-slate-500">
+                <th className="border-b border-slate-200 px-3 py-3 font-semibold">
                   Role
                 </th>
-                <th className="border-b border-neutral-200 px-3 py-3 font-semibold">
+                <th className="border-b border-slate-200 px-3 py-3 font-semibold">
                   Projet
                 </th>
-                <th className="border-b border-neutral-200 px-3 py-3 font-semibold">
+                <th className="border-b border-slate-200 px-3 py-3 font-semibold">
                   Demande
                 </th>
-                <th className="border-b border-neutral-200 px-3 py-3 font-semibold">
+                <th className="border-b border-slate-200 px-3 py-3 font-semibold">
                   Livrable
                 </th>
-                <th className="border-b border-neutral-200 px-3 py-3 font-semibold">
+                <th className="border-b border-slate-200 px-3 py-3 font-semibold">
                   Fichiers
                 </th>
               </tr>
             </thead>
             <tbody>
               {mockPermissionMatrix.map((row) => (
-                <tr key={row.role}>
-                  <td className="border-b border-neutral-100 px-3 py-4 font-semibold text-neutral-950">
+                <tr className="transition hover:bg-blue-50/40" key={row.role}>
+                  <td className="border-b border-slate-100 px-3 py-4 font-semibold text-slate-950">
                     {row.role}
                   </td>
-                  <td className="border-b border-neutral-100 px-3 py-4 text-neutral-600">
+                  <td className="border-b border-slate-100 px-3 py-4 text-slate-600">
                     {row.project}
                   </td>
-                  <td className="border-b border-neutral-100 px-3 py-4 text-neutral-600">
+                  <td className="border-b border-slate-100 px-3 py-4 text-slate-600">
                     {row.request}
                   </td>
-                  <td className="border-b border-neutral-100 px-3 py-4 text-neutral-600">
+                  <td className="border-b border-slate-100 px-3 py-4 text-slate-600">
                     {row.deliverable}
                   </td>
-                  <td className="border-b border-neutral-100 px-3 py-4 text-neutral-600">
+                  <td className="border-b border-slate-100 px-3 py-4 text-slate-600">
                     {row.file}
                   </td>
                 </tr>
