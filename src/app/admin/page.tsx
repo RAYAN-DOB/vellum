@@ -6,9 +6,9 @@ export default function AdminWorkspacePage() {
   return (
     <AppShell
       activeHref={routes.roles.admin}
-      description="Vue admin simple et fictive pour anticiper roles, confidentialite et gouvernance sans privileges reels."
+      description="Espace de demo pour expliquer la future gouvernance : roles, projets sensibles, cloisonnement et journalisation, sans privileges reels en V1."
       eyebrow="Vue par role"
-      title="Admin MVP"
+      title="Espace admin"
     >
       <RoleWorkspace role="admin" />
     </AppShell>

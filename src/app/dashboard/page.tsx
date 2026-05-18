@@ -6,8 +6,8 @@ export default function DashboardPage() {
   return (
     <AppShell
       activeHref={routes.workspace.dashboard}
-      description="Vue centrale mockee pour suivre les demandes, projets et livrables sans backend, auth ou stockage fichier."
-      title="Dashboard MVP"
+      description="Vue centrale de demo pour comprendre les demandes a traiter, les projets en cours, les livrables a valider et les limites de la V1."
+      title="Pilotage des demandes"
     >
       <DashboardOverview />
     </AppShell>

@@ -30,35 +30,35 @@ import { mockDataNotice } from "@/lib/mock-data";
 import { routes } from "@/lib/routes";
 
 const metrics = [
-  { value: "4", label: "espaces prevus", detail: "client, chef de projet, dessinateur, admin" },
-  { value: "0", label: "fichier sensible public", detail: "aucun document reel dans le MVP" },
-  { value: "1", label: "fil projet central", detail: "demandes, echanges et livrables regroupes" },
+  { value: "4", label: "espaces metier", detail: "client, chef de projet, dessinateur, admin" },
+  { value: "0", label: "fichier sensible", detail: "aucun document reel stocke dans cette V1" },
+  { value: "1", label: "suivi central", detail: "demandes, statuts et livrables reunis" },
 ] as const;
 
 const clientProblems = [
-  "Demandes dispersees entre emails, fichiers joints et versions locales.",
-  "Manque de visibilite sur l'etat d'un plan, d'une correction ou d'un livrable.",
-  "Risque de confusion entre projet, brief, fichier source et version finale.",
+  "Les demandes arrivent par email, message ou fichier joint, puis se perdent hors du projet.",
+  "Le client ne sait pas toujours si un plan est a cadrer, en production, en correction ou a valider.",
+  "Les versions, retours et livrables se melangent quand aucun espace unique ne porte l'historique.",
 ] as const;
 
 const solutionPoints = [
   {
     icon: FolderKanban,
-    title: "Demandes structurees",
+    title: "Une demande claire des le depart",
     description:
-      "Chaque besoin est rattache a un projet, un statut, un responsable et des livrables attendus.",
+      "Nom du projet, type de besoin, priorite, formats attendus, delai et niveau de confidentialite sont poses au meme endroit.",
   },
   {
     icon: MessageSquareText,
-    title: "Echanges contextualises",
+    title: "Un suivi lisible par role",
     description:
-      "Client, chef de projet et dessinateur travaillent autour du meme objet metier.",
+      "Client, chef de projet, dessinateur et admin voient la meme base metier, adaptee a leur responsabilite.",
   },
   {
     icon: LockKeyhole,
-    title: "Base pensee pour le cloisonnement",
+    title: "Une base prete pour la securite",
     description:
-      "La future securite partira des roles, des projets et des droits d'acces, pas de simples vues front.",
+      "La V1 montre le modele cible, tout en restant honnete : les vrais controles serveur arriveront en V2.",
   },
 ] as const;
 
@@ -67,33 +67,33 @@ const useCases = [
     icon: FileText,
     title: "Plans PDF a corriger",
     description:
-      "Transformer une annotation ou une demande de reprise en tache claire et suivie.",
+      "Transformer une correction floue en demande priorisee, suivie et rattachee au bon projet.",
   },
   {
     icon: PenTool,
     title: "Croquis a formaliser",
     description:
-      "Cadrer le besoin avant production pour limiter les allers-retours inutiles.",
+      "Clarifier l'attendu avant production pour eviter les allers-retours improductifs.",
   },
   {
     icon: Layers3,
     title: "DWG et versions techniques",
     description:
-      "Preparer un parcours ou chaque version sera rattachee a un projet et a des permissions.",
+      "Preparer un futur suivi des versions sans exposer de fichier technique reel dans cette V1.",
   },
   {
     icon: FileCheck2,
     title: "Livrables a valider",
     description:
-      "Centraliser les statuts, commentaires et validations sans exposer les fichiers sensibles.",
+      "Distinguer brouillon, revue, corrections et validation finale dans un parcours comprehensible.",
   },
 ] as const;
 
 const securityPrinciples = [
-  "Aucun fichier sensible dans public/",
-  "Acces futurs controles cote serveur",
-  "Droits rattaches aux projets et roles",
-  "NDA et confidentialite integres au modele",
+  "Aucun vrai DWG, PDF ou plan client dans la V1",
+  "Les futurs acces fichiers devront etre controles cote serveur",
+  "Les droits seront rattaches au projet, au role et a l'organisation",
+  "NDA, confidentialite et journalisation sont prevus dans le modele",
 ] as const;
 
 const processSteps = [
@@ -101,32 +101,32 @@ const processSteps = [
     step: "01",
     title: "Qualifier la demande",
     description:
-      "Le client decrit le besoin, le contexte projet et les livrables attendus.",
+      "Le besoin est formule proprement avant toute production ou transmission de fichier reel.",
   },
   {
     step: "02",
     title: "Structurer le suivi",
     description:
-      "Le chef de projet priorise, clarifie et assigne la demande au bon intervenant.",
+      "Le chef de projet clarifie, priorise et prepare l'assignation au bon intervenant.",
   },
   {
     step: "03",
     title: "Produire et corriger",
     description:
-      "Le dessinateur avance avec un historique clair des retours et statuts.",
+      "Le dessinateur dispose du contexte utile et les retours restent associes a la demande.",
   },
   {
     step: "04",
     title: "Valider le livrable",
     description:
-      "Les versions finales restent rattachees au projet et aux droits d'acces prevus.",
+      "Le livrable garde un statut clair : en revue, a corriger, valide ou archive plus tard.",
   },
 ] as const;
 
 const nextSteps = [
-  { label: "Creation de demande", icon: ClipboardCheck },
-  { label: "Roles futurs", icon: UserRoundCheck },
-  { label: "Confidentialite projet", icon: Sparkles },
+  { label: "Tester le parcours demande", icon: ClipboardCheck },
+  { label: "Voir les espaces par role", icon: UserRoundCheck },
+  { label: "Lire le modele de confidentialite", icon: Sparkles },
 ] as const;
 
 function HeroVisual() {
@@ -202,12 +202,12 @@ function HeroSection() {
           </Badge>
           <h1 className="mt-6 text-3xl font-semibold leading-tight tracking-normal text-white sm:text-5xl lg:text-4xl 2xl:text-5xl">
             Pilotez vos demandes de plans, livrables et corrections sans perdre
-            le controle.
+            le controle de vos projets techniques.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-            Une base MVP sobre et evolutive pour structurer les demandes DWG,
-            PDF, croquis et documents projet, avec une attention forte portee a
-            la confidentialite et aux futures permissions.
+            Une V1 front statique pour montrer comment centraliser les demandes
+            DWG, PDF, croquis et livrables, sans stocker de fichier sensible et
+            sans promettre une securite serveur qui n&apos;existe pas encore.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -215,18 +215,18 @@ function HeroSection() {
               className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-white px-5 text-sm font-semibold text-slate-950 shadow-[0_18px_40px_rgba(255,255,255,0.12)] transition hover:bg-blue-50"
               href={routes.workspace.newRequest}
             >
-              Demander un cadrage
+              Creer une demande demo
               <ArrowRight className="size-4" aria-hidden="true" />
             </a>
             <a
               className="inline-flex h-12 items-center justify-center rounded-md border border-white/20 px-5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
               href="#security"
             >
-              Voir l&apos;approche securite
+              Comprendre la confidentialite
             </a>
           </div>
 
-          <div className="mt-10 hidden gap-4 2xl:grid 2xl:grid-cols-3">
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {metrics.map((metric) => (
               <div
                 className="border-l border-white/15 pl-4"
@@ -259,8 +259,8 @@ function ProblemSection() {
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <SectionTitle
             eyebrow="Probleme client"
-            title="Les projets techniques se compliquent quand les demandes vivent hors contexte."
-            description="Le MVP pose les fondations d'un espace commun ou les informations utiles ne sont plus separees du projet, du statut et des acteurs responsables."
+            title="Un plan technique ne se gere pas comme une simple piece jointe."
+            description="La valeur de la plateforme est de remettre chaque demande dans son contexte : projet, priorite, role, statut, livrable attendu et niveau de confidentialite."
           />
 
           <div className="grid gap-4">
@@ -288,8 +288,8 @@ function SolutionSection() {
       <Container>
         <SectionTitle
           eyebrow="Solution"
-          title="Un socle operationnel pour organiser les demandes avant d'ajouter les couches sensibles."
-          description="La plateforme commence par les objets metier essentiels : projet, demande, acteur, statut et livrable. La securite reelle viendra ensuite cote serveur, sur cette structure."
+          title="Une premiere experience complete pour comprendre le futur produit."
+          description="Cette V1 ne remplace pas une production securisee. Elle presente le parcours, les roles, la logique projet et les decisions de confidentialite a valider avant la V2."
         />
 
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -320,8 +320,8 @@ function UseCasesSection() {
       <Container>
         <SectionTitle
           eyebrow="Services et cas d'usage"
-          title="Une interface pensee pour les fichiers et livrables techniques."
-          description="Le MVP ne stocke aucun document sensible reel. Il prepare les parcours qui permettront plus tard de gerer les fichiers avec controle serveur."
+          title="Les cas d'usage sont concrets, meme si les donnees restent fictives."
+          description="Plans PDF, croquis, reprises DWG et livrables : la V1 montre comment les demandes seront suivies, sans ouvrir de flux d'upload reel."
         />
 
         <div className="mt-10 grid gap-5 md:grid-cols-2">
@@ -363,13 +363,13 @@ function SecuritySection() {
               Securite et confidentialite
             </Badge>
             <h2 className="mt-5 text-3xl font-semibold leading-tight tracking-normal text-white sm:text-4xl">
-              Pas de promesse de fausse securite : le MVP prepare les bons
-              garde-fous.
+              La confidentialite est traitee comme un sujet d&apos;architecture, pas
+              comme un simple badge.
             </h2>
             <p className="mt-5 text-base leading-8 text-slate-300">
-              Les restrictions visuelles ne suffisent jamais. Les futurs acces
-              aux fichiers devront etre controles cote serveur, rattaches au
-              projet, au role et a l&apos;organisation.
+              Les ecrans montrent l&apos;intention produit, mais aucun fichier reel
+              n&apos;est accepte dans cette V1. La V2 devra ajouter authentification,
+              permissions serveur, stockage prive et journalisation.
             </p>
           </div>
 
@@ -401,8 +401,8 @@ function ProcessSection() {
       <Container>
         <SectionTitle
           eyebrow="Process"
-          title="Un parcours simple pour rendre chaque demande lisible."
-          description="La premiere version garde le produit concentre sur le suivi et la clarte, sans paiement, matching automatique, marketplace ou upload sensible."
+          title="Un parcours lisible pour une decision en moins de deux minutes."
+          description="Un associe ou un client doit comprendre rapidement ce que la plateforme apporte : moins de dispersion, plus de suivi, des roles clairs et une securite a construire correctement."
         />
 
         <div className="mt-10 grid gap-4 lg:grid-cols-4">
@@ -434,13 +434,13 @@ function FinalCtaSection() {
                 Prochaine etape
               </Badge>
               <h2 className="mt-5 max-w-3xl text-3xl font-semibold leading-tight tracking-normal sm:text-4xl">
-                Construire ensuite les pages publiques detaillees ou le premier
-                parcours de demande.
+                La V1 est prete pour une demo produit claire, pas pour une mise
+                en production.
               </h2>
               <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300">
-                La V1 montre deja le parcours public, le workspace et les vues
-                metier. La suite consiste a securiser l&apos;architecture serveur
-                avant tout traitement de fichiers reels.
+                Elle permet de valider le positionnement, les ecrans et le
+                vocabulaire metier. La prochaine etape doit porter sur les vrais
+                comptes, permissions serveur et fichiers prives.
               </p>
             </div>
 

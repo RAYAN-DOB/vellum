@@ -13,15 +13,16 @@ export function PermissionsMatrix() {
             aria-hidden="true"
           />
           <p className="text-sm leading-6 text-amber-900">
-            Matrice mockee : elle documente l&apos;intention produit mais ne securise
-            rien sans backend, auth, permissions serveur et journalisation.
+            Cette matrice explique le modele de droits vise. Elle ne securise
+            rien en V1 : les vrais controles devront etre faits cote serveur avec
+            auth, permissions projet et journalisation.
           </p>
         </CardContent>
       </Card>
 
       <Card className="min-w-0 overflow-hidden">
         <CardHeader>
-          <CardTitle>Matrice de permissions V1</CardTitle>
+          <CardTitle>Qui pourra faire quoi en V2 ?</CardTitle>
         </CardHeader>
         <CardContent className="min-w-0 overflow-x-auto">
           <table className="min-w-[760px] w-full border-separate border-spacing-0 text-left text-sm">

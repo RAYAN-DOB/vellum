@@ -6,7 +6,7 @@ export default function ClientWorkspacePage() {
   return (
     <AppShell
       activeHref={routes.roles.client}
-      description="Vue client fictive pour suivre les demandes et livrables sans exposer de fichier sensible."
+      description="Espace de demo pour montrer comment un client suivra ses projets, ses demandes et ses livrables sans exposer de fichier sensible dans la V1."
       eyebrow="Vue par role"
       title="Espace client"
     >

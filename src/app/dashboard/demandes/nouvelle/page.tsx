@@ -6,8 +6,8 @@ export default function NewRequestPage() {
   return (
     <AppShell
       activeHref={routes.workspace.newRequest}
-      description="Parcours front statique pour cadrer une demande technique sans upload reel, sans backend et sans donnee sensible."
-      title="Nouvelle demande"
+      description="Formulaire de demo pour structurer un besoin technique avant tout upload reel : contexte, formats attendus, priorite, delai et confidentialite."
+      title="Creer une demande demo"
     >
       <NewRequestForm />
     </AppShell>

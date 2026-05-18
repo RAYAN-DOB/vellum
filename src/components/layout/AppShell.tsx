@@ -41,7 +41,7 @@ const workspaceIcons = {
 
 export function AppShell({
   activeHref,
-  eyebrow = "Workspace MVP",
+  eyebrow = "Demo V1",
   title,
   description,
   children,
@@ -58,7 +58,7 @@ export function AppShell({
             <span>
               <span className="block text-sm font-semibold">PlanWork</span>
               <span className="hidden text-xs text-slate-400 sm:block">
-                Secure project ops MVP
+                Demo secure project ops
               </span>
             </span>
           </a>
@@ -79,7 +79,7 @@ export function AppShell({
             className="rounded-lg border border-slate-200/80 bg-white/90 p-3 shadow-[0_18px_55px_rgba(15,23,42,0.08)] backdrop-blur"
           >
             <div className="px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500">
-              Operations
+              Pilotage
             </div>
             <div className="grid gap-1">
               {workspaceNavigation.map((item) => {
@@ -105,7 +105,7 @@ export function AppShell({
             </div>
 
             <div className="mt-5 px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500">
-              Details
+              Exemples
             </div>
             <div className="grid gap-1">
               {workspaceSecondaryNavigation.map((item) => (
@@ -126,7 +126,7 @@ export function AppShell({
             </div>
 
             <div className="mt-5 px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500">
-              Vues par role
+              Espaces metier
             </div>
             <div className="grid gap-1">
               {roleNavigation.map((item) => {
@@ -152,8 +152,8 @@ export function AppShell({
             </div>
 
             <div className="mt-5 rounded-md border border-amber-200 bg-amber-50 p-3 text-xs leading-5 text-amber-900">
-              MVP sans auth reelle : ces vues simulent les futurs roles et ne
-              remplacent pas les controles serveur.
+              V1 front statique : les vues simulent les futurs roles, sans auth
+              ni controle serveur.
             </div>
           </nav>
         </aside>

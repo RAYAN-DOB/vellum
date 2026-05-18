@@ -15,19 +15,19 @@ import { routes } from "@/lib/routes";
 const operationQueues = [
   {
     label: "A traiter",
-    detail: "Demandes entrantes et cadrage avant assignation.",
+    detail: "Demandes a clarifier avant production ou assignation.",
     value: "2",
     href: routes.workspace.newRequest,
   },
   {
     label: "En cours",
-    detail: "Projets techniques actifs avec livrables attendus.",
+    detail: "Projets actifs avec suivi de statut et livrables attendus.",
     value: "4",
     href: routes.workspace.dashboard,
   },
   {
     label: "A valider",
-    detail: "Retours client, corrections et livrables en revue.",
+    detail: "Livrables ou corrections a relire avant retour client.",
     value: "3",
     href: `${routes.workspace.deliverables}/deliverable-demo-001`,
   },
@@ -38,27 +38,27 @@ export function DashboardOverview() {
     <div className="grid gap-6">
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <StatCard
-          detail="Projets fictifs suivis dans le workspace MVP."
+          detail="Dossiers demo regroupant demandes, statuts et livrables."
           icon={FolderKanban}
-          label="Projets actifs"
+          label="Projets suivis"
           value={mockDashboardStats.activeProjects}
         />
         <StatCard
-          detail="Demandes non fermees, toutes issues de donnees mockees."
+          detail="Besoins techniques ouverts, sans fichier reel attache."
           icon={ClipboardList}
-          label="Demandes ouvertes"
+          label="Demandes a piloter"
           value={mockDashboardStats.openRequests}
         />
         <StatCard
-          detail="Livrables en attente de revue ou correction."
+          detail="Elements fictifs en revue, correction ou validation."
           icon={PackageCheck}
-          label="Livrables a suivre"
+          label="Livrables en suivi"
           value={mockDashboardStats.pendingDeliverables}
         />
         <StatCard
-          detail="Signal produit pour les futurs controles serveur."
+          detail="Cas demo ou les futures permissions serveur seront critiques."
           icon={LockKeyhole}
-          label="Projets restreints"
+          label="Acces sensibles"
           value={mockDashboardStats.restrictedProjects}
         />
       </section>
@@ -66,7 +66,7 @@ export function DashboardOverview() {
       <Card className="border-amber-200 bg-amber-50 shadow-none">
         <CardContent className="p-5">
           <p className="text-sm font-semibold text-amber-950">
-            Limite de securite MVP
+            Important pour la demo
           </p>
           <p className="mt-2 text-sm leading-6 text-amber-900">{mockDataNotice}</p>
         </CardContent>
@@ -82,7 +82,7 @@ export function DashboardOverview() {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-normal text-blue-700">
-                  File operationnelle
+                  Vue operationnelle
                 </p>
                 <h2 className="mt-2 text-lg font-semibold text-slate-950">
                   {queue.label}

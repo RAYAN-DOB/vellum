@@ -52,7 +52,7 @@ export const mockProjects: Project[] = [
     reference: "DEMO-PLAN-001",
     name: "Reprise de plans fictifs pour espace tertiaire",
     description:
-      "Projet de demonstration sans donnees client ni document technique reel.",
+      "Dossier demo pour montrer le suivi d'une reprise de plans sans donnee client ni document reel.",
     organizationId: "org-demo-atelier",
     clientId: "user-client-demo",
     projectManagerId: "user-pm-demo",
@@ -67,7 +67,7 @@ export const mockProjects: Project[] = [
     reference: "DEMO-CROQUIS-002",
     name: "Formalisation fictive de croquis interieur",
     description:
-      "Projet mocke pour tester le suivi de brief et de livrables sans document reel.",
+      "Exemple de projet ou un croquis serait transforme en livrable structure, sans fichier reel en V1.",
     organizationId: "org-demo-atelier",
     clientId: "user-client-demo",
     projectManagerId: "user-pm-demo",
@@ -82,7 +82,7 @@ export const mockProjects: Project[] = [
     reference: "DEMO-DWG-003",
     name: "Preparation fictive de reprise DWG",
     description:
-      "Projet de demonstration reserve aux ecrans MVP, sans fichier technique associe.",
+      "Cas demo pour illustrer une demande DWG prioritaire avec confidentialite renforcee.",
     organizationId: "org-demo-atelier",
     clientId: "user-client-demo",
     status: "intake",
@@ -105,7 +105,7 @@ export const mockRequests: ProjectRequest[] = [
     confidentiality: "nda_required",
     requesterRole: "client",
     summary:
-      "Demande fictive utilisee pour tester le parcours MVP sans fichier sensible.",
+      "Correction a cadrer sur un plan PDF de demonstration, sans piece jointe reelle.",
     expectedFormats: ["PDF", "DWG"],
     desiredDueDate: "2026-05-28",
     hasMockAttachments: true,
@@ -123,7 +123,7 @@ export const mockRequests: ProjectRequest[] = [
     confidentiality: "standard",
     requesterRole: "project_manager",
     summary:
-      "Brief de demonstration pour verifier le cadrage avant production.",
+      "Brief a clarifier avant production pour limiter les allers-retours.",
     expectedFormats: ["PDF"],
     desiredDueDate: "2026-06-03",
     hasMockAttachments: false,
@@ -141,7 +141,7 @@ export const mockRequests: ProjectRequest[] = [
     confidentiality: "restricted",
     requesterRole: "client",
     summary:
-      "Simulation de demande prioritaire sans fichier source ni plan reel.",
+      "Demande prioritaire qui montre le futur besoin de droits projet stricts.",
     expectedFormats: ["DWG", "PDF"],
     desiredDueDate: "2026-05-24",
     hasMockAttachments: false,
@@ -155,7 +155,7 @@ export const mockDeliverables: Deliverable[] = [
     id: "deliverable-demo-001",
     projectId: "project-demo-001",
     requestId: "request-demo-001",
-    title: "Version de demonstration non telechargeable",
+    title: "Livrable PDF de demonstration",
     format: "pdf",
     status: "under_review",
     submittedById: "user-drafter-demo",
@@ -169,7 +169,7 @@ export const mockDeliverables: Deliverable[] = [
     id: "deliverable-demo-002",
     projectId: "project-demo-002",
     requestId: "request-demo-002",
-    title: "Planche de synthese fictive",
+    title: "Planche de synthese a corriger",
     format: "image",
     status: "changes_requested",
     submittedById: "user-drafter-demo",
@@ -183,7 +183,7 @@ export const mockDeliverables: Deliverable[] = [
     id: "deliverable-demo-003",
     projectId: "project-demo-001",
     requestId: "request-demo-001",
-    title: "Archive fictive de controle interne",
+    title: "Archive de controle interne fictive",
     format: "zip",
     status: "draft",
     submittedById: "user-drafter-demo",
@@ -207,58 +207,58 @@ export const mockDashboardStats = {
 };
 
 export const mockDataNotice =
-  "Donnees fictives uniquement. Aucun fichier client, DWG, PDF, croquis ou document sensible reel n'est present dans ce MVP.";
+  "V1 front statique uniquement : donnees fictives, aucun vrai DWG/PDF/plan, pas d'upload, pas d'auth, pas de backend et pas de securite serveur active.";
 
 export const mockHistory = {
   requests: [
     {
       date: "2026-05-16 09:15",
       label: "Demande creee",
-      detail: "Creation fictive depuis le parcours Nouvelle demande.",
+      detail: "Le besoin est structure avec projet, formats, priorite et confidentialite.",
     },
     {
       date: "2026-05-16 12:35",
       label: "Qualification mockee",
-      detail: "Priorite et formats attendus verifies sans fichier joint.",
+      detail: "Le chef de projet verifierait le contexte avant assignation.",
     },
     {
       date: "2026-05-17 10:10",
       label: "Assignation simulee",
-      detail: "Aucun controle serveur reel n'est applique dans cette V1.",
+      detail: "Assignation illustrative : aucune permission serveur n'est appliquee en V1.",
     },
   ],
   projects: [
     {
       date: "2026-05-08 10:00",
       label: "Projet ouvert",
-      detail: "Projet fictif ajoute au suivi workspace.",
+      detail: "Le dossier centralise les demandes, statuts et livrables associes.",
     },
     {
       date: "2026-05-12 14:30",
       label: "Confidentialite revue",
-      detail: "Niveau de confidentialite affiche pour preparer le modele futur.",
+      detail: "Le niveau de confidentialite prepare les futures regles d'acces.",
     },
     {
       date: "2026-05-16 16:20",
       label: "Revue de statut",
-      detail: "Statut mis a jour dans les donnees mockees uniquement.",
+      detail: "Changement de statut visible en demo, non persiste en base.",
     },
   ],
   deliverables: [
     {
       date: "2026-05-14 16:00",
       label: "Livrable mocke cree",
-      detail: "Nom de fichier fictif, aucun document present dans public/.",
+      detail: "Nom de fichier fictif uniquement, aucun document present dans public/.",
     },
     {
       date: "2026-05-15 09:30",
       label: "Revue fictive",
-      detail: "Commentaires simules sans stockage serveur.",
+      detail: "La revue illustre le futur circuit de validation.",
     },
     {
       date: "2026-05-16 15:00",
       label: "Controle interne",
-      detail: "Trace illustrative pour preparer un futur audit log.",
+      detail: "Trace illustrative pour preparer le futur journal d'audit.",
     },
   ],
 } as const;
@@ -267,8 +267,8 @@ export const mockPermissionMatrix = [
   {
     role: "Client",
     project: "Voir ses projets",
-    request: "Creer et commenter",
-    deliverable: "Voir les livrables autorises",
+    request: "Creer et suivre ses demandes",
+    deliverable: "Relire les livrables autorises",
     file: "Aucun acces reel au MVP",
   },
   {
@@ -276,7 +276,7 @@ export const mockPermissionMatrix = [
     project: "Coordonner les projets assignes",
     request: "Qualifier, assigner, commenter",
     deliverable: "Revoir et demander corrections",
-    file: "Controle serveur futur requis",
+    file: "Acces prive a construire en V2",
   },
   {
     role: "Dessinateur",

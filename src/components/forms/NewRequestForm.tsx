@@ -14,11 +14,11 @@ import {
 import { cn } from "@/lib/utils";
 
 const requestTypeOptions = [
-  { label: "Creation DWG fictive", value: "Creation DWG" },
-  { label: "Correction PDF fictive", value: "Correction PDF" },
-  { label: "Reprise technique", value: "Reprise technique" },
-  { label: "Brief projet", value: "Brief projet" },
-  { label: "Revision de livrable", value: "Revision livrable" },
+  { label: "Creer ou reprendre un DWG", value: "Creation DWG" },
+  { label: "Corriger un PDF technique", value: "Correction PDF" },
+  { label: "Reprendre un plan existant", value: "Reprise technique" },
+  { label: "Cadrer un brief projet", value: "Brief projet" },
+  { label: "Faire reviser un livrable", value: "Revision livrable" },
 ] as const;
 
 const formatOptions = ["DWG", "PDF", "PNG", "ZIP", "Autre"] as const;
@@ -43,10 +43,10 @@ type FormState = {
 };
 
 const initialState: FormState = {
-  projectName: "Projet demo - reprise de plans fictifs",
+  projectName: "Projet demo - reprise de plans non sensibles",
   requestType: requestTypeOptions[1].value,
   description:
-    "Decrire ici le besoin sans joindre de document client reel ni information confidentielle.",
+    "Expliquer le besoin, les contraintes et le resultat attendu sans coller de donnee client confidentielle.",
   expectedFormats: ["PDF", "DWG"],
   priority: "Normale",
   confidentiality: "NDA requis",
@@ -93,10 +93,10 @@ export function NewRequestForm() {
     <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
       <Card className="overflow-hidden">
         <CardHeader>
-          <CardTitle>Nouvelle demande mockee</CardTitle>
+          <CardTitle>Cadrer une demande technique</CardTitle>
           <CardDescription>
-            Cadrage front uniquement pour structurer le besoin sans exposer de
-            fichier sensible.
+            Cette V1 montre les informations a collecter avant traitement :
+            contexte projet, type de demande, formats, priorite et confidentialite.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -106,7 +106,7 @@ export function NewRequestForm() {
           >
             <div className="grid gap-2">
               <label className={labelClass} htmlFor="projectName">
-                Nom du projet
+                Nom du projet ou dossier
               </label>
               <input
                 className={controlClass}
@@ -119,7 +119,7 @@ export function NewRequestForm() {
             <div className="grid gap-5 md:grid-cols-2">
               <div className="grid gap-2">
                 <label className={labelClass} htmlFor="requestType">
-                  Type de demande
+                  Nature de la demande
                 </label>
                 <select
                   className={controlClass}
@@ -137,7 +137,7 @@ export function NewRequestForm() {
 
               <div className="grid gap-2">
                 <label className={labelClass} htmlFor="priority">
-                  Priorite
+                  Priorite percue
                 </label>
                 <select
                   className={controlClass}
@@ -156,7 +156,7 @@ export function NewRequestForm() {
 
             <div className="grid gap-2">
               <label className={labelClass} htmlFor="description">
-                Description
+                Description du besoin
               </label>
               <textarea
                 className="min-h-32 rounded-md border border-slate-300 bg-white px-3 py-3 text-sm leading-6 text-slate-950 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
@@ -168,7 +168,7 @@ export function NewRequestForm() {
 
             <fieldset className="grid gap-3">
               <legend className={labelClass}>
-                Formats attendus
+                Formats de livrable attendus
               </legend>
               <div className="grid gap-2 sm:grid-cols-5">
                 {formatOptions.map((format) => {
@@ -200,7 +200,7 @@ export function NewRequestForm() {
             <div className="grid gap-5 md:grid-cols-3">
               <div className="grid gap-2">
                 <label className={labelClass} htmlFor="confidentiality">
-                  Confidentialite
+                  Niveau de confidentialite
                 </label>
                 <select
                   className={controlClass}
@@ -220,7 +220,7 @@ export function NewRequestForm() {
 
               <div className="grid gap-2">
                 <label className={labelClass} htmlFor="desiredDueDate">
-                  Delai souhaite
+                  Date souhaitee
                 </label>
                 <input
                   className={controlClass}
@@ -235,7 +235,7 @@ export function NewRequestForm() {
 
               <div className="grid gap-2">
                 <label className={labelClass} htmlFor="requesterRole">
-                  Role du demandeur
+                  Profil du demandeur
                 </label>
                 <select
                   className={controlClass}
@@ -265,10 +265,10 @@ export function NewRequestForm() {
                     Aucun upload reel dans le MVP
                   </p>
                   <p className="mt-1 text-sm leading-6 text-amber-900">
-                    Les vrais DWG, PDF, plans, croquis ou documents confidentiels
-                    ne sont pas acceptes dans cette version. Le futur upload devra
-                    passer par des controles serveur, des droits projet et une
-                    journalisation.
+                    Cette V1 n&apos;accepte aucun vrai DWG, PDF, plan, croquis ou
+                    document projet. L&apos;upload devra etre ajoute en V2 avec
+                    stockage prive, droits serveur, liens non publics et journal
+                    d&apos;acces.
                   </p>
                 </div>
               </div>
@@ -278,7 +278,7 @@ export function NewRequestForm() {
               className="inline-flex h-11 items-center justify-center rounded-md bg-slate-950 px-5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(15,23,42,0.22)] transition hover:bg-slate-800 active:translate-y-px"
               type="button"
             >
-              Generer le recapitulatif mock
+              Mettre a jour le recapitulatif
             </button>
           </form>
         </CardContent>
@@ -290,9 +290,10 @@ export function NewRequestForm() {
             <div className="flex size-11 items-center justify-center rounded-md bg-white text-slate-950">
               <FileText className="size-5" aria-hidden="true" />
             </div>
-            <CardTitle className="text-white">Apercu de la demande</CardTitle>
+            <CardTitle className="text-white">Recapitulatif de demo</CardTitle>
             <CardDescription className="text-slate-300">
-              Recapitulatif genere cote navigateur, sans sauvegarde.
+              Apercu local uniquement : rien n&apos;est envoye, sauvegarde ou
+              securise.
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3">
@@ -315,13 +316,12 @@ export function NewRequestForm() {
             <div className="flex items-center gap-3">
               <ShieldAlert className="size-5 text-blue-700" aria-hidden="true" />
               <p className="text-sm font-semibold text-neutral-950">
-                Permissions futures
+                Droits a construire en V2
               </p>
             </div>
             <p className="text-sm leading-6 text-slate-600">
-              Ce formulaire prepare les champs utiles, mais ne prouve aucune
-              securite. Les futures actions serveur devront verifier le role, le
-              projet, l&apos;organisation et la confidentialite.
+              Les champs de role et confidentialite preparent le modele cible.
+              Ils ne remplacent pas des permissions serveur.
             </p>
             <div className="flex flex-wrap gap-2">
               <Badge tone="blue">Role</Badge>
@@ -338,8 +338,8 @@ export function NewRequestForm() {
               aria-hidden="true"
             />
             <p className="text-sm leading-6 text-slate-600">
-              Le delai souhaite est indicatif. Aucun workflow de validation ou
-              SLA reel n&apos;est active dans cette version.
+              La date souhaitee aide a comprendre la priorite, mais aucun SLA ni
+              workflow de validation reel n&apos;est actif dans cette V1.
             </p>
           </CardContent>
         </Card>

@@ -6,7 +6,7 @@ export default function DrafterWorkspacePage() {
   return (
     <AppShell
       activeHref={routes.roles.drafter}
-      description="Vue dessinateur statique pour lire les briefs, suivre les retours et preparer les livrables."
+      description="Espace de demo pour montrer comment le dessinateur lira le brief, suivra les retours et preparera les livrables attendus."
       eyebrow="Vue par role"
       title="Espace dessinateur"
     >

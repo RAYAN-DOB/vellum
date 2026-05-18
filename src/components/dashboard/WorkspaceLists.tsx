@@ -36,9 +36,10 @@ export function RequestList() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Demandes mockees</CardTitle>
+        <CardTitle>Demandes techniques</CardTitle>
         <CardDescription>
-          Suivi statique des demandes, sans fichier source ni stockage reel.
+          Exemples de besoins a cadrer, assigner ou valider. Aucun fichier source
+          reel n&apos;est stocke.
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-3">
@@ -80,9 +81,10 @@ export function ProjectList() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Projets mockes</CardTitle>
+        <CardTitle>Projets suivis</CardTitle>
         <CardDescription>
-          Projets fictifs pour tester le cloisonnement futur par projet.
+          Dossiers demo qui montrent comment les demandes seront cloisonnees par
+          projet en V2.
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-3">
@@ -127,9 +129,10 @@ export function DeliverableList() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Livrables mockes</CardTitle>
+        <CardTitle>Livrables et versions</CardTitle>
         <CardDescription>
-          Noms fictifs uniquement, sans fichiers presents dans public/.
+          Noms de fichiers fictifs uniquement, pour illustrer le futur suivi de
+          version sans upload reel.
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-3">

@@ -40,7 +40,7 @@ export function DetailPage({
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-normal text-blue-200">
-                Detail mocke
+                Vue de demonstration
               </p>
               <h2 className="mt-2 text-2xl font-semibold tracking-normal">
                 {title}
@@ -59,7 +59,8 @@ export function DetailPage({
           <CardHeader>
             <CardTitle>Informations</CardTitle>
             <CardDescription>
-              Donnees fictives utilisees pour presenter le parcours V1.
+              Informations metier fictives pour expliquer ce qui sera suivi en
+              production.
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3 sm:grid-cols-2">
@@ -81,9 +82,10 @@ export function DetailPage({
 
         <Card>
           <CardHeader>
-            <CardTitle>Historique fictif</CardTitle>
+            <CardTitle>Historique de suivi</CardTitle>
             <CardDescription>
-              Exemple d&apos;audit trail futur, sans backend ni journal reel.
+              Exemple du journal attendu en V2. Il n&apos;est pas encore sauvegarde
+              cote serveur.
             </CardDescription>
           </CardHeader>
           <CardContent className="relative grid gap-3">
@@ -120,11 +122,12 @@ export function DetailPage({
           />
           <div>
             <p className="text-sm font-semibold text-amber-950">
-              Permissions non securisees au MVP
+              Limite importante de la V1
             </p>
             <p className="mt-1 text-sm leading-6 text-amber-900">
-              Cette page affiche une intention produit. Aucun controle serveur,
-              aucune auth et aucun cloisonnement reel ne sont actifs.
+              Cette page aide a comprendre le futur produit. Elle ne prouve pas
+              une securite reelle : aucun controle serveur, aucune auth et aucun
+              cloisonnement actif ne sont en place.
             </p>
           </div>
         </CardContent>
@@ -137,9 +140,10 @@ export function DetailPage({
             aria-hidden="true"
           />
           <p className="text-sm leading-6 text-slate-600">
-            La V1 prepare les objets metier. Les futurs acces aux fichiers
-            devront etre verifies cote serveur selon role, projet, organisation,
-            NDA et statut de ressource.
+            La V1 prepare les objets metier : projet, demande, statut,
+            livrable, historique et confidentialite. Les futurs acces fichiers
+            devront etre verifies cote serveur selon role, projet, organisation
+            et NDA.
           </p>
         </CardContent>
       </Card>

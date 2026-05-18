@@ -26,24 +26,24 @@ type RoleConfig = {
 
 const roleConfigs: Record<Role, RoleConfig> = {
   admin: {
-    title: "Vue admin simple",
+    title: "Espace admin",
     description:
-      "Espace statique pour preparer les futurs controles, sans droits reels ni console sensible.",
+      "Vue de gouvernance pour anticiper les roles, les projets sensibles et les futures regles d'acces. Aucun privilege reel n'est actif dans cette V1.",
     icon: UserCog,
     focus: [
-      "Surveiller les roles et organisations fictifs",
-      "Identifier les projets a confidentialite restreinte",
-      "Preparer la future journalisation des acces",
+      "Visualiser les roles et organisations de demo",
+      "Identifier les projets qui demanderont un cloisonnement strict",
+      "Preparer la future journalisation des acces fichiers",
     ],
     metrics: [
       {
-        detail: "Signal mock pour les futurs droits d'acces.",
+        detail: "Projets de demo ou les droits devront etre stricts.",
         icon: ShieldCheck,
         label: "Projets restreints",
         value: mockDashboardStats.restrictedProjects,
       },
       {
-        detail: "Vues statiques sans gestion utilisateur reelle.",
+        detail: "Roles presentes pour valider le modele produit.",
         icon: UserCog,
         label: "Roles simules",
         value: 4,
@@ -53,22 +53,22 @@ const roleConfigs: Record<Role, RoleConfig> = {
   client: {
     title: "Espace client",
     description:
-      "Vue mockee pour suivre les demandes, projets et livrables associes a un client fictif.",
+      "Vue client pour comprendre ou en sont les demandes, quels livrables restent a relire et quelles informations sont attendues.",
     icon: UserRound,
     focus: [
-      "Creer une demande structuree",
-      "Suivre les statuts de projets",
-      "Lire les retours sans exposer de fichier sensible",
+      "Cadrer une nouvelle demande sans envoyer de fichier reel",
+      "Suivre les statuts des projets et corrections",
+      "Retrouver les livrables attendus et les retours associes",
     ],
     metrics: [
       {
-        detail: "Demandes fictives encore ouvertes.",
+        detail: "Demandes de demo en cours de traitement.",
         icon: ClipboardCheck,
         label: "Demandes suivies",
         value: mockDashboardStats.openRequests,
       },
       {
-        detail: "Livrables non definitifs visibles en demo.",
+        detail: "Livrables fictifs a relire ou corriger.",
         icon: ShieldCheck,
         label: "A valider",
         value: mockDashboardStats.pendingDeliverables,
@@ -78,22 +78,22 @@ const roleConfigs: Record<Role, RoleConfig> = {
   drafter: {
     title: "Espace dessinateur",
     description:
-      "Vue statique pour comprendre les demandes assignees et les livrables attendus.",
+      "Vue de production pour lire le brief, comprendre le contexte projet et suivre les livrables attendus.",
     icon: ShieldCheck,
     focus: [
-      "Consulter les briefs assignes",
-      "Produire des livrables fictifs",
-      "Centraliser les retours de correction",
+      "Lire les demandes assignees avec leur priorite",
+      "Comprendre les formats et corrections attendus",
+      "Suivre les retours sans manipuler de fichier reel",
     ],
     metrics: [
       {
-        detail: "Projets fictifs avec dessinateur assigne.",
+        detail: "Demandes demo attribuees au role dessinateur.",
         icon: ClipboardCheck,
         label: "Assignations",
         value: 2,
       },
       {
-        detail: "Livrables en revue ou correction.",
+        detail: "Livrables fictifs en attente de retour.",
         icon: ShieldCheck,
         label: "En revue",
         value: mockDashboardStats.pendingDeliverables,
@@ -103,22 +103,22 @@ const roleConfigs: Record<Role, RoleConfig> = {
   project_manager: {
     title: "Espace chef de projet",
     description:
-      "Vue mockee pour coordonner demandes, priorites, assignations et validations.",
+      "Vue de coordination pour qualifier les demandes, prioriser les corrections et preparer les validations client.",
     icon: UsersRound,
     focus: [
-      "Qualifier les demandes entrantes",
-      "Prioriser les corrections",
-      "Suivre les livrables avant validation client",
+      "Qualifier les demandes avant production",
+      "Arbitrer les priorites et les delais",
+      "Controler les livrables avant retour client",
     ],
     metrics: [
       {
-        detail: "Demandes fictives a coordonner.",
+        detail: "Demandes demo a cadrer ou suivre.",
         icon: ClipboardCheck,
         label: "Demandes actives",
         value: mockDashboardStats.openRequests,
       },
       {
-        detail: "Projets avec statut non archive.",
+        detail: "Projets demo encore actifs dans le suivi.",
         icon: UsersRound,
         label: "Projets suivis",
         value: mockDashboardStats.activeProjects,

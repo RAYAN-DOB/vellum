@@ -6,8 +6,8 @@ export default function PermissionsPage() {
   return (
     <AppShell
       activeHref={routes.workspace.permissions}
-      description="Matrice de permissions mockee pour clarifier l'intention produit sans pretendre securiser la V1."
-      title="Permissions mockees"
+      description="Modele de droits cible pour expliquer qui pourra voir, piloter ou valider les projets. Les controles serveur ne sont pas encore actifs."
+      title="Modele de permissions"
     >
       <PermissionsMatrix />
     </AppShell>
