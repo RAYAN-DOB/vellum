@@ -11,7 +11,12 @@ import type { ReactNode } from "react";
 
 import { Container } from "@/components/layout/Container";
 import { cn } from "@/lib/utils";
-import { roleNavigation, routes, workspaceNavigation } from "@/lib/routes";
+import {
+  roleNavigation,
+  routes,
+  workspaceNavigation,
+  workspaceSecondaryNavigation,
+} from "@/lib/routes";
 
 type AppShellProps = {
   activeHref: string;
@@ -97,6 +102,27 @@ export function AppShell({
                   </a>
                 );
               })}
+            </div>
+
+            <div className="mt-5 px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-neutral-500">
+              Details
+            </div>
+            <div className="grid gap-1">
+              {workspaceSecondaryNavigation.map((item) => (
+                <a
+                  aria-current={activeHref === item.href ? "page" : undefined}
+                  className={cn(
+                    "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    activeHref === item.href
+                      ? "bg-neutral-950 text-white"
+                      : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-950",
+                  )}
+                  href={item.href}
+                  key={item.href}
+                >
+                  {item.label}
+                </a>
+              ))}
             </div>
 
             <div className="mt-5 px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-neutral-500">

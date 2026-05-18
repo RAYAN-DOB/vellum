@@ -208,3 +208,88 @@ export const mockDashboardStats = {
 
 export const mockDataNotice =
   "Donnees fictives uniquement. Aucun fichier client, DWG, PDF, croquis ou document sensible reel n'est present dans ce MVP.";
+
+export const mockHistory = {
+  requests: [
+    {
+      date: "2026-05-16 09:15",
+      label: "Demande creee",
+      detail: "Creation fictive depuis le parcours Nouvelle demande.",
+    },
+    {
+      date: "2026-05-16 12:35",
+      label: "Qualification mockee",
+      detail: "Priorite et formats attendus verifies sans fichier joint.",
+    },
+    {
+      date: "2026-05-17 10:10",
+      label: "Assignation simulee",
+      detail: "Aucun controle serveur reel n'est applique dans cette V1.",
+    },
+  ],
+  projects: [
+    {
+      date: "2026-05-08 10:00",
+      label: "Projet ouvert",
+      detail: "Projet fictif ajoute au suivi workspace.",
+    },
+    {
+      date: "2026-05-12 14:30",
+      label: "Confidentialite revue",
+      detail: "Niveau de confidentialite affiche pour preparer le modele futur.",
+    },
+    {
+      date: "2026-05-16 16:20",
+      label: "Revue de statut",
+      detail: "Statut mis a jour dans les donnees mockees uniquement.",
+    },
+  ],
+  deliverables: [
+    {
+      date: "2026-05-14 16:00",
+      label: "Livrable mocke cree",
+      detail: "Nom de fichier fictif, aucun document present dans public/.",
+    },
+    {
+      date: "2026-05-15 09:30",
+      label: "Revue fictive",
+      detail: "Commentaires simules sans stockage serveur.",
+    },
+    {
+      date: "2026-05-16 15:00",
+      label: "Controle interne",
+      detail: "Trace illustrative pour preparer un futur audit log.",
+    },
+  ],
+} as const;
+
+export const mockPermissionMatrix = [
+  {
+    role: "Client",
+    project: "Voir ses projets",
+    request: "Creer et commenter",
+    deliverable: "Voir les livrables autorises",
+    file: "Aucun acces reel au MVP",
+  },
+  {
+    role: "Chef de projet",
+    project: "Coordonner les projets assignes",
+    request: "Qualifier, assigner, commenter",
+    deliverable: "Revoir et demander corrections",
+    file: "Controle serveur futur requis",
+  },
+  {
+    role: "Dessinateur",
+    project: "Voir les projets assignes",
+    request: "Mettre a jour les demandes assignees",
+    deliverable: "Soumettre des livrables fictifs",
+    file: "Aucun upload reel",
+  },
+  {
+    role: "Admin",
+    project: "Vue globale mockee",
+    request: "Vue globale mockee",
+    deliverable: "Vue globale mockee",
+    file: "Pas de privilege reel sans backend",
+  },
+] as const;

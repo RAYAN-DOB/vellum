@@ -11,6 +11,7 @@ export const routes = {
     newRequest: "/dashboard/demandes/nouvelle",
     projects: "/dashboard/projets",
     deliverables: "/dashboard/livrables",
+    permissions: "/dashboard/permissions",
   },
   roles: {
     client: "/client",
@@ -43,4 +44,5 @@ export const workspaceSecondaryNavigation = [
   { label: "Demandes mockees", href: routes.workspace.requests },
   { label: "Projets", href: routes.workspace.projects },
   { label: "Livrables", href: routes.workspace.deliverables },
+  { label: "Permissions mockees", href: routes.workspace.permissions },
 ] as const;

@@ -12,6 +12,7 @@ import {
   mockRequests,
   mockUsers,
 } from "@/lib/mock-data";
+import { routes } from "@/lib/routes";
 
 const confidentialityLabels = {
   nda_required: "NDA requis",
@@ -48,9 +49,12 @@ export function RequestList() {
           >
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <p className="text-sm font-semibold text-neutral-950">
+                <a
+                  className="text-sm font-semibold text-neutral-950 hover:text-blue-700"
+                  href={`${routes.workspace.requests}/${request.id}`}
+                >
                   {request.title}
-                </p>
+                </a>
                 <p className="mt-1 text-sm leading-6 text-neutral-600">
                   {request.summary}
                 </p>
@@ -92,9 +96,12 @@ export function ProjectList() {
                 <p className="text-xs font-semibold uppercase tracking-normal text-blue-700">
                   {project.reference}
                 </p>
-                <h3 className="mt-1 text-sm font-semibold text-neutral-950">
+                <a
+                  className="mt-1 block text-sm font-semibold text-neutral-950 hover:text-blue-700"
+                  href={`${routes.workspace.projects}/${project.id}`}
+                >
                   {project.name}
-                </h3>
+                </a>
                 <p className="mt-2 text-sm leading-6 text-neutral-600">
                   {project.description}
                 </p>
@@ -129,9 +136,12 @@ export function DeliverableList() {
           >
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <p className="text-sm font-semibold text-neutral-950">
+                <a
+                  className="text-sm font-semibold text-neutral-950 hover:text-blue-700"
+                  href={`${routes.workspace.deliverables}/${deliverable.id}`}
+                >
                   {deliverable.title}
-                </p>
+                </a>
                 <p className="mt-1 text-sm text-neutral-600">
                   {deliverable.mockFileName}
                 </p>
