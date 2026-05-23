@@ -10,7 +10,7 @@ import {
 import type { ReactNode } from "react";
 
 import { Container } from "@/components/layout/Container";
-import { BorderBeam } from "@/components/ui/BorderBeam";
+import { ArchitecturalGridBackground } from "@/components/ui/ArchitecturalGridBackground";
 import { cn } from "@/lib/utils";
 import {
   roleNavigation,
@@ -51,22 +51,22 @@ export function AppShell({
   actions,
 }: AppShellProps) {
   return (
-    <div className="technical-grid min-h-screen bg-slate-100 text-slate-950">
-      <header className="border-b border-white/10 bg-slate-950 text-white">
+    <div className="paper-grid min-h-screen bg-[#f4f1ea] text-[#171613]">
+      <header className="border-b border-[#34312b] bg-[#171613] text-[#f7f3ea]">
         <Container className="flex min-h-16 items-center justify-between gap-4">
           <a className="flex items-center gap-3" href={routes.public.home}>
-            <span className="flex size-9 items-center justify-center rounded-md border border-blue-300/30 bg-blue-500 text-sm font-semibold text-white shadow-[0_0_30px_rgba(37,99,235,0.35)]">
+            <span className="flex size-9 items-center justify-center rounded-[3px] border border-[#f7f3ea]/18 bg-[#24221d] text-sm font-semibold text-[#f7f3ea] shadow-[0_0_28px_rgba(215,198,164,0.10)]">
               PW
             </span>
             <span>
               <span className="block text-sm font-semibold">PlanWork</span>
-              <span className="hidden text-xs text-slate-400 sm:block">
-                Demo secure project ops
+              <span className="hidden text-xs text-[#8f8777] sm:block">
+                Architectural project cockpit
               </span>
             </span>
           </a>
           <a
-            className="hidden h-10 shrink-0 items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-4 text-sm font-medium text-slate-200 transition hover:bg-white/10 hover:text-white sm:inline-flex"
+            className="hidden h-10 shrink-0 items-center justify-center gap-2 rounded-[3px] border border-[#f7f3ea]/12 bg-[#f7f3ea]/5 px-4 text-sm font-medium text-[#d9d0bf] transition hover:bg-[#f7f3ea]/10 hover:text-[#f7f3ea] sm:inline-flex"
             href={routes.public.home}
           >
             <Home className="size-4" aria-hidden="true" />
@@ -79,9 +79,9 @@ export function AppShell({
         <aside className="min-w-0 lg:sticky lg:top-6 lg:self-start">
           <nav
             aria-label="Navigation interne"
-            className="min-w-0 overflow-hidden rounded-lg border border-slate-200/80 bg-white/90 p-3 shadow-[0_18px_55px_rgba(15,23,42,0.08)] backdrop-blur"
+            className="min-w-0 overflow-hidden rounded-[4px] border border-[#d8d0bf] bg-[#fbfaf6]/86 p-3 shadow-[0_24px_70px_rgba(22,21,18,0.08)] backdrop-blur"
           >
-            <div className="hidden px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500 lg:block">
+            <div className="hidden px-3 pb-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#8a7a5f] lg:block">
               Pilotage
             </div>
             <div className="flex gap-2 overflow-x-auto pb-1 lg:grid lg:gap-1 lg:overflow-visible lg:pb-0">
@@ -92,10 +92,10 @@ export function AppShell({
                   <a
                     aria-current={activeHref === item.href ? "page" : undefined}
                     className={cn(
-                      "flex shrink-0 items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
+                      "flex shrink-0 items-center gap-3 rounded-[3px] px-3 py-2 text-sm font-medium transition",
                       activeHref === item.href
-                        ? "bg-slate-950 text-white shadow-[0_12px_25px_rgba(15,23,42,0.16)]"
-                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-950",
+                        ? "bg-[#171613] text-[#f7f3ea] shadow-[0_12px_25px_rgba(22,21,18,0.16)]"
+                        : "text-[#6b665a] hover:bg-[#eee8dc] hover:text-[#171613]",
                     )}
                     href={item.href}
                     key={item.href}
@@ -107,7 +107,7 @@ export function AppShell({
               })}
             </div>
 
-            <div className="mt-4 hidden px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500 lg:mt-5 lg:block">
+            <div className="mt-4 hidden px-3 pb-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#8a7a5f] lg:mt-5 lg:block">
               Exemples
             </div>
             <div className="mt-2 flex gap-2 overflow-x-auto pb-1 lg:mt-0 lg:grid lg:gap-1 lg:overflow-visible lg:pb-0">
@@ -115,10 +115,10 @@ export function AppShell({
                 <a
                   aria-current={activeHref === item.href ? "page" : undefined}
                   className={cn(
-                    "flex shrink-0 items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
+                    "flex shrink-0 items-center gap-3 rounded-[3px] px-3 py-2 text-sm font-medium transition",
                     activeHref === item.href
-                      ? "bg-slate-950 text-white shadow-[0_12px_25px_rgba(15,23,42,0.16)]"
-                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-950",
+                      ? "bg-[#171613] text-[#f7f3ea] shadow-[0_12px_25px_rgba(22,21,18,0.16)]"
+                      : "text-[#6b665a] hover:bg-[#eee8dc] hover:text-[#171613]",
                   )}
                   href={item.href}
                   key={item.href}
@@ -128,7 +128,7 @@ export function AppShell({
               ))}
             </div>
 
-            <div className="mt-4 hidden px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500 lg:mt-5 lg:block">
+            <div className="mt-4 hidden px-3 pb-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#8a7a5f] lg:mt-5 lg:block">
               Espaces metier
             </div>
             <div className="mt-2 flex gap-2 overflow-x-auto pb-1 lg:mt-0 lg:grid lg:gap-1 lg:overflow-visible lg:pb-0">
@@ -139,10 +139,10 @@ export function AppShell({
                   <a
                     aria-current={activeHref === item.href ? "page" : undefined}
                     className={cn(
-                      "flex shrink-0 items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
+                      "flex shrink-0 items-center gap-3 rounded-[3px] px-3 py-2 text-sm font-medium transition",
                       activeHref === item.href
-                        ? "bg-blue-700 text-white shadow-[0_12px_25px_rgba(29,78,216,0.22)]"
-                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-950",
+                        ? "bg-[#2b2923] text-[#f7f3ea] shadow-[0_12px_25px_rgba(22,21,18,0.18)]"
+                        : "text-[#6b665a] hover:bg-[#eee8dc] hover:text-[#171613]",
                     )}
                     href={item.href}
                     key={item.href}
@@ -154,7 +154,7 @@ export function AppShell({
               })}
             </div>
 
-            <div className="mt-5 hidden rounded-md border border-amber-200 bg-amber-50 p-3 text-xs leading-5 text-amber-900 lg:block">
+            <div className="mt-5 hidden rounded-[3px] border border-[#e4c887] bg-[#fbf2dd] p-3 text-xs leading-5 text-[#7a5213] lg:block">
               V1 front statique : les vues simulent les futurs roles, sans auth
               ni controle serveur.
             </div>
@@ -162,21 +162,22 @@ export function AppShell({
         </aside>
 
         <main className="min-w-0 max-w-[calc(100vw-2rem)] overflow-hidden sm:max-w-full">
-          <div className="relative mb-6 flex flex-col gap-4 overflow-hidden rounded-lg border border-slate-800 bg-slate-950 p-5 text-white shadow-[0_25px_70px_rgba(15,23,42,0.22)] sm:p-6 lg:flex-row lg:items-end lg:justify-between">
-            <BorderBeam className="opacity-45" />
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-normal text-blue-300">
+          <ArchitecturalGridBackground className="mb-6 rounded-[6px] border border-[#3c3932] p-5 shadow-[0_32px_90px_rgba(22,21,18,0.18)] sm:p-6">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div className="min-w-0">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#d7c6a4]">
                 {eyebrow}
               </p>
               <h1 className="mt-2 text-3xl font-semibold leading-tight tracking-normal text-white">
                 {title}
               </h1>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300">
+              <p className="mt-3 max-w-[20rem] break-words text-sm leading-6 text-[#cfc6b5] sm:max-w-3xl">
                 {description}
               </p>
             </div>
             {actions ? <div className="shrink-0">{actions}</div> : null}
-          </div>
+            </div>
+          </ArchitecturalGridBackground>
 
           {children}
         </main>

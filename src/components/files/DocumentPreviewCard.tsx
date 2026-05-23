@@ -41,7 +41,7 @@ export function DocumentPreviewCard({ file }: DocumentPreviewCardProps) {
     <Card className="shadow-none" interactive>
       <CardContent className="p-4">
         <div className="flex items-start gap-3">
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-md bg-slate-950 text-white">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-[3px] border border-[#d8d0bf] bg-[#171613] text-[#f7f3ea]">
             <Icon className="size-5" aria-hidden="true" />
           </span>
           <div className="min-w-0 flex-1">
@@ -51,13 +51,13 @@ export function DocumentPreviewCard({ file }: DocumentPreviewCardProps) {
                 {statusLabel[file.status]}
               </Badge>
             </div>
-            <p className="mt-3 truncate text-sm font-semibold text-slate-950">
+            <p className="mt-3 truncate text-sm font-semibold text-[#171613]">
               {file.name}
             </p>
-            <p className="mt-1 text-xs leading-5 text-slate-600">
+            <p className="mt-1 text-xs leading-5 text-[#6b665a]">
               {file.description}
             </p>
-            <p className="mt-3 text-xs font-medium text-slate-500">
+            <p className="mt-3 text-xs font-medium text-[#8a7a5f]">
               {file.sizeLabel} - fichier fictif V1
             </p>
           </div>

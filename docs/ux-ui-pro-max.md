@@ -1,28 +1,30 @@
 # UX UI Pro Max Direction
 
-Direction retenue : SaaS B2B premium, trust and authority, dense mais lisible, inspire interfaces Apple, Linear, Vercel et outils de gestion de projets techniques.
+Direction retenue : rupture avec le SaaS bleu classique. La V1.5 adopte une identite "architectural future UI" : studio d'architecture premium, table de dessin numerique, cockpit projet et documents confidentiels.
 
 ## Principes UI
 
+- Base graphite, noir profond, blanc casse et gris chaud.
+- Accents limites : ivoire, argent, vert statut, ambre alerte.
+- Bleu autorise uniquement en micro-accent technique, jamais dominant.
+- Grille architecturale subtile, traits fins, panneaux calques.
 - Une action principale par ecran.
-- Contraste fort, texte lisible, cartes sobres.
-- Grille technique subtile, jamais decorative au point de nuire a la lecture.
-- Micro-interactions courtes, sans effet gadget.
-- Mobile-first : pas de debordement horizontal.
-- Couleur fonctionnelle avec texte explicite, jamais couleur seule.
+- Pas de fausse promesse : V1 front mockee, securite serveur en V2.
+- Mobile-first : pas de debordement horizontal, CTA visibles, chat utilisable.
 
 ## Systeme visuel
 
-- Fond : blanc, slate, noir profond.
-- Accent principal : bleu technique.
-- Etats : vert pour validation, ambre pour attente, rouge pour urgence.
-- Rayon : cartes sobres, 8px environ.
-- Icones : lucide uniquement, style coherent.
+- Surfaces : `#171613`, `#f4f1ea`, `#fbfaf6`.
+- Bordures : fines, chaudes, proches papier/calque.
+- Rayon : 3 a 6px pour une sensation precise, pas "startup rounded".
+- Ombres : faibles, profondes, sans effet gadget.
+- Icones : lucide, lineaires, coherentes.
 
 ```mermaid
 flowchart LR
-  Product["Produit technique B2B"] --> Trust["Trust / Authority"]
-  Trust --> Visuals["Noir, blanc, slate, bleu"]
-  Visuals --> Components["Cards, tables, chat, sidebars"]
-  Components --> UX["Lisibilite, roles, workflow"]
+  Product["Plans techniques sensibles"] --> Mood["Studio architecture premium"]
+  Mood --> Palette["Graphite / ivoire / gris chaud"]
+  Mood --> Patterns["Grille, calques, cotes, versioning"]
+  Patterns --> Screens["Landing, cockpit chat, roles, details"]
+  Screens --> Trust["Lisible, sobre, credible"]
 ```

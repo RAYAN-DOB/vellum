@@ -3,16 +3,15 @@ import { publicNavigation, routes } from "@/lib/routes";
 
 export function Footer() {
   return (
-    <footer className="technical-grid-dark border-t border-slate-800 bg-slate-950 text-white">
+    <footer className="drawing-line border-t border-[#34312b] bg-[#171613] text-[#f7f3ea]">
       <Container className="grid gap-8 py-10 md:grid-cols-[1.4fr_1fr] md:items-start">
         <div className="max-w-xl">
           <p className="text-sm font-semibold tracking-normal">PlanWork</p>
-          <p className="mt-3 text-sm leading-6 text-slate-300">
-            Socle MVP pour piloter des demandes de plans techniques, livrables
-            et corrections avec une attention forte portee a la confidentialite
-            et au cloisonnement futur des projets.
+          <p className="mt-3 text-sm leading-6 text-[#cfc6b5]">
+            V1 de demonstration pour cadrer, suivre et presenter des demandes
+            de plans techniques, reprises DWG/PDF, corrections et livrables.
           </p>
-          <p className="mt-4 text-xs leading-5 text-slate-500">
+          <p className="mt-4 text-xs leading-5 text-[#8b8374]">
             Donnees fictives uniquement. Aucun fichier client reel, DWG, PDF,
             croquis ou document confidentiel n&apos;est stocke dans cette version.
           </p>
@@ -23,14 +22,14 @@ export function Footer() {
           className="flex flex-wrap gap-x-4 gap-y-3 md:justify-end"
         >
           <a
-            className="text-sm font-medium text-slate-300 hover:text-white"
+            className="text-sm font-medium text-[#cfc6b5] hover:text-[#f7f3ea]"
             href={routes.public.home}
           >
             Accueil
           </a>
           {publicNavigation.map((item) => (
             <a
-              className="text-sm font-medium text-slate-300 hover:text-white"
+              className="text-sm font-medium text-[#cfc6b5] hover:text-[#f7f3ea]"
               href={item.href}
               key={item.href}
             >

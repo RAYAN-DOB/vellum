@@ -14,13 +14,13 @@ export function ManagerAssignmentBoard() {
         <CardContent className="grid gap-3">
           {mockRequests.map((request) => (
             <article
-              className="rounded-md border border-slate-200 bg-slate-50/80 p-4"
+              className="rounded-[3px] border border-[#d8d0bf] bg-[#f8f5ed]/80 p-4"
               key={request.id}
             >
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <p className="font-semibold text-slate-950">{request.title}</p>
-                  <p className="mt-1 text-sm leading-6 text-slate-600">
+                  <p className="font-semibold text-[#171613]">{request.title}</p>
+                  <p className="mt-1 text-sm leading-6 text-[#6b665a]">
                     {request.summary}
                   </p>
                 </div>
@@ -28,7 +28,7 @@ export function ManagerAssignmentBoard() {
                   {request.priority}
                 </Badge>
               </div>
-              <div className="mt-4 grid gap-2 text-xs text-slate-500 sm:grid-cols-3">
+              <div className="mt-4 grid gap-2 text-xs text-[#8a7a5f] sm:grid-cols-3">
                 <span>Formats : {request.expectedFormats.join(" + ")}</span>
                 <span>Delai : {request.desiredDueDate ?? "A confirmer"}</span>
                 <span>Action : qualifier puis assigner</span>
@@ -45,11 +45,11 @@ export function ManagerAssignmentBoard() {
         <CardContent className="grid gap-3">
           {mockTeamCapacity.map((person) => (
             <div
-              className="rounded-md border border-slate-200 bg-white p-4"
+              className="rounded-[3px] border border-[#d8d0bf] bg-[#fbfaf6] p-4"
               key={person.id}
             >
               <div className="flex items-start gap-3">
-                <span className="flex size-10 items-center justify-center rounded-md bg-blue-50 text-blue-700">
+                <span className="flex size-10 items-center justify-center rounded-[3px] bg-[#171613] text-[#f7f3ea]">
                   {person.roleLabel.includes("Manager") ? (
                     <ClipboardCheck className="size-5" aria-hidden="true" />
                   ) : (
@@ -57,14 +57,14 @@ export function ManagerAssignmentBoard() {
                   )}
                 </span>
                 <div>
-                  <p className="font-semibold text-slate-950">{person.name}</p>
-                  <p className="text-sm text-slate-600">{person.roleLabel}</p>
-                  <p className="mt-2 text-xs text-slate-500">
+                  <p className="font-semibold text-[#171613]">{person.name}</p>
+                  <p className="text-sm text-[#6b665a]">{person.roleLabel}</p>
+                  <p className="mt-2 text-xs text-[#8a7a5f]">
                     {person.skills.join(" / ")}
                   </p>
                 </div>
               </div>
-              <div className="mt-3 flex items-center gap-2 text-sm text-slate-600">
+              <div className="mt-3 flex items-center gap-2 text-sm text-[#6b665a]">
                 <CalendarDays className="size-4" aria-hidden="true" />
                 {person.loadLabel}
               </div>

@@ -56,7 +56,7 @@ const initialState: FormState = {
 };
 
 const controlClass =
-  "h-11 rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-950 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100";
+  "h-11 rounded-[3px] border border-[#d8d0bf] bg-[#fbfaf6] px-3 text-sm text-[#171613] shadow-sm outline-none transition focus:border-[#8a7a5f] focus:ring-2 focus:ring-[#d7c6a4]/35";
 
 const labelClass = "text-sm font-medium text-slate-700";
 
@@ -160,7 +160,7 @@ export function NewRequestForm() {
                 Description du besoin
               </label>
               <textarea
-                className="min-h-32 rounded-md border border-slate-300 bg-white px-3 py-3 text-sm leading-6 text-slate-950 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className="min-h-32 rounded-[3px] border border-[#d8d0bf] bg-[#fbfaf6] px-3 py-3 text-sm leading-6 text-[#171613] shadow-sm outline-none transition focus:border-[#8a7a5f] focus:ring-2 focus:ring-[#d7c6a4]/35"
                 id="description"
                 onChange={(event) => updateField("description", event.target.value)}
                 value={form.description}
@@ -312,7 +312,7 @@ export function NewRequestForm() {
         <Card>
           <CardContent className="grid gap-4 p-5">
             <div className="flex items-center gap-3">
-              <ShieldAlert className="size-5 text-blue-700" aria-hidden="true" />
+              <ShieldAlert className="size-5 text-[#7b6b4f]" aria-hidden="true" />
               <p className="text-sm font-semibold text-neutral-950">
                 Droits a construire en V2
               </p>

@@ -39,27 +39,27 @@ export function AdminControlCenter() {
         return (
           <Card key={tile.label}>
             <CardHeader>
-              <span className="flex size-10 items-center justify-center rounded-md bg-slate-950 text-white">
+              <span className="flex size-10 items-center justify-center rounded-[3px] bg-[#171613] text-[#f7f3ea]">
                 <Icon className="size-5" aria-hidden="true" />
               </span>
               <CardTitle>{tile.label}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-2xl font-semibold text-slate-950">{tile.value}</p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{tile.detail}</p>
+              <p className="text-2xl font-semibold text-[#171613]">{tile.value}</p>
+              <p className="mt-2 text-sm leading-6 text-[#6b665a]">{tile.detail}</p>
             </CardContent>
           </Card>
         );
       })}
       <Card className="md:col-span-2 xl:col-span-4">
         <CardContent className="grid gap-3 p-5 sm:grid-cols-3">
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-[#6b665a]">
             {mockUsers.length} utilisateurs fictifs.
           </p>
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-[#6b665a]">
             {mockProjects.length} projets demo.
           </p>
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-[#6b665a]">
             {mockTeamCapacity.length} membres equipe presentes.
           </p>
         </CardContent>

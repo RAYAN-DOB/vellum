@@ -4,17 +4,17 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const cardVariants = cva(
-  "premium-panel rounded-lg border bg-white text-slate-950",
+  "premium-panel rounded-[4px] border bg-[#fbfaf6] text-[#171613]",
   {
     variants: {
       tone: {
-        default: "border-slate-200/80",
-        muted: "border-slate-200 bg-slate-50/80 shadow-none",
-        dark: "technical-grid-dark border-slate-800 bg-slate-950 text-white",
-        warning: "border-amber-200 bg-amber-50 shadow-none",
+        default: "border-[#d8d0bf]/90",
+        muted: "border-[#d8d0bf] bg-[#f2ede4]/80 shadow-none",
+        dark: "drawing-line border-[#3c3932] bg-[#171613] text-[#f7f3ea]",
+        warning: "border-[#e4c887] bg-[#fbf2dd] shadow-none",
       },
       interactive: {
-        true: "transition duration-200 hover:-translate-y-0.5 hover:border-blue-200",
+        true: "transition duration-200 hover:-translate-y-0.5 hover:border-[#b9aa8f] hover:shadow-[0_28px_85px_rgba(22,21,18,0.12)]",
         false: "",
       },
     },
@@ -50,7 +50,7 @@ export function CardTitle({
 }: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
-      className={cn("text-base font-semibold leading-6 text-slate-950", className)}
+      className={cn("text-base font-semibold leading-6 text-[#171613]", className)}
       {...props}
     />
   );
@@ -61,7 +61,7 @@ export function CardDescription({
   ...props
 }: HTMLAttributes<HTMLParagraphElement>) {
   return (
-    <p className={cn("text-sm leading-6 text-slate-600", className)} {...props} />
+    <p className={cn("text-sm leading-6 text-[#6b665a]", className)} {...props} />
   );
 }
 
@@ -79,7 +79,7 @@ export function CardFooter({
   return (
     <div
       className={cn(
-        "flex items-center justify-between gap-3 border-t border-slate-200 p-5 sm:p-6",
+        "flex items-center justify-between gap-3 border-t border-[#d8d0bf] p-5 sm:p-6",
         className,
       )}
       {...props}

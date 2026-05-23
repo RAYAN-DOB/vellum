@@ -2,33 +2,30 @@
 
 ## Routes principales
 
-- `/` : landing publique.
-- `/dashboard` : pilotage global mocke.
-- `/dashboard/demandes/nouvelle` : chat depot projet.
+- `/` : landing publique premium.
+- `/client` : portail client.
+- `/client/nouveau-projet` : cockpit chat de depot projet.
+- `/client/projets` : liste des projets client.
+- `/client/projets/[projectId]` : detail projet cote client.
+- `/dashboard` : command center global mocke.
+- `/dashboard/demandes/nouvelle` : alias du parcours nouveau projet.
 - `/dashboard/demandes/[requestId]` : detail demande.
 - `/dashboard/projets/[projectId]` : detail projet.
 - `/dashboard/livrables/[deliverableId]` : detail livrable.
-- `/dashboard/permissions` : matrice permissions.
-- `/client` : espace client.
-- `/client/nouveau-projet` : nouveau projet via chat.
-- `/client/projets` : projets client.
-- `/client/projets/[projectId]` : detail projet client.
-- `/chef-projet` : espace manager.
-- `/dessinateur` : espace architecte.
-- `/admin` : espace admin.
+- `/dashboard/permissions` : matrice de permissions cible.
+- `/chef-projet`, `/dessinateur`, `/admin` : espaces role.
 
 ```mermaid
 flowchart TD
   Home["/"] --> NewProject["/client/nouveau-projet"]
-  Home --> Dashboard["/dashboard"]
-  Dashboard --> RequestNew["/dashboard/demandes/nouvelle"]
-  Dashboard --> RequestDetail["/dashboard/demandes/[requestId]"]
+  Home --> Client["/client"]
+  Client --> ClientProjects["/client/projets"]
+  ClientProjects --> ClientProjectDetail["/client/projets/[projectId]"]
+  NewProject --> ClientProjects
+  Dashboard["/dashboard"] --> RequestDetail["/dashboard/demandes/[requestId]"]
   Dashboard --> ProjectDetail["/dashboard/projets/[projectId]"]
   Dashboard --> DeliverableDetail["/dashboard/livrables/[deliverableId]"]
   Dashboard --> Permissions["/dashboard/permissions"]
-  Dashboard --> Client["/client"]
-  Client --> ClientProjects["/client/projets"]
-  ClientProjects --> ClientProjectDetail["/client/projets/[projectId]"]
   Dashboard --> Manager["/chef-projet"]
   Dashboard --> Architect["/dessinateur"]
   Dashboard --> Admin["/admin"]
@@ -36,9 +33,10 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-  Public["Public landing"] --> CTA["Tester le chat projet"]
-  CTA --> ClientNew["Client nouveau projet"]
-  ClientNew --> ClientProjects["Mes projets"]
-  ClientProjects --> ClientDetail["Detail projet client"]
-  ClientDetail --> DashboardDetail["Details dashboard"]
+  PublicHeader["Header public"] --> Home["Landing"]
+  Home --> CTA["Deposer un projet"]
+  CTA --> Chat["Cockpit chat"]
+  AppShell["Navigation interne"] --> Workspace["Dashboard"]
+  AppShell --> Roles["Espaces roles"]
+  AppShell --> Matrix["Permissions"]
 ```

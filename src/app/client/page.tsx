@@ -6,9 +6,9 @@ export default function ClientWorkspacePage() {
   return (
     <AppShell
       activeHref={routes.roles.client}
-      description="Espace de demo pour montrer comment un client suivra ses projets, ses demandes et ses livrables sans exposer de fichier sensible dans la V1."
+      description="Portail client mocke pour suivre les dossiers, documents fictifs, actions attendues, echanges et validations sans exposer de fichier sensible."
       eyebrow="Vue par role"
-      title="Espace client"
+      title="Portail client"
     >
       <RoleWorkspace role="client" />
     </AppShell>

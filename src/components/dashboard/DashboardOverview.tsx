@@ -75,25 +75,25 @@ export function DashboardOverview() {
       <section className="grid gap-4 lg:grid-cols-3">
         {operationQueues.map((queue) => (
           <a
-            className="group rounded-lg border border-slate-200/80 bg-white p-5 shadow-[0_18px_55px_rgba(15,23,42,0.08)] transition hover:-translate-y-0.5 hover:border-blue-200"
+            className="group rounded-[4px] border border-[#d8d0bf] bg-[#fbfaf6]/90 p-5 shadow-[0_24px_70px_rgba(22,21,18,0.08)] transition hover:-translate-y-0.5 hover:border-[#b9aa8f]"
             href={queue.href}
             key={queue.label}
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-normal text-blue-700">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7a5f]">
                   Vue operationnelle
                 </p>
-                <h2 className="mt-2 text-lg font-semibold text-slate-950">
+                <h2 className="mt-2 text-lg font-semibold text-[#171613]">
                   {queue.label}
                 </h2>
               </div>
-              <span className="flex size-10 items-center justify-center rounded-md bg-slate-950 text-sm font-semibold text-white">
+              <span className="flex size-10 items-center justify-center rounded-[3px] bg-[#171613] text-sm font-semibold text-[#f7f3ea]">
                 {queue.value}
               </span>
             </div>
-            <p className="mt-4 text-sm leading-6 text-slate-600">{queue.detail}</p>
-            <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-700">
+            <p className="mt-4 text-sm leading-6 text-[#6b665a]">{queue.detail}</p>
+            <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#7b6b4f]">
               Ouvrir
               <ArrowRight className="size-4 transition group-hover:translate-x-0.5" />
             </span>

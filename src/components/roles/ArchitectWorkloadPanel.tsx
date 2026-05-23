@@ -14,16 +14,16 @@ export function ArchitectWorkloadPanel() {
         <CardContent className="grid gap-3">
           {mockProjects.slice(0, 2).map((project) => (
             <article
-              className="rounded-md border border-slate-200 bg-slate-50/80 p-4"
+              className="rounded-[3px] border border-[#d8d0bf] bg-[#f8f5ed]/80 p-4"
               key={project.id}
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-normal text-blue-700">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7a5f]">
                     {project.reference}
                   </p>
-                  <p className="mt-1 font-semibold text-slate-950">{project.name}</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                  <p className="mt-1 font-semibold text-[#171613]">{project.name}</p>
+                  <p className="mt-2 text-sm leading-6 text-[#6b665a]">
                     {project.description}
                   </p>
                 </div>
@@ -39,24 +39,24 @@ export function ArchitectWorkloadPanel() {
           <CardTitle>Questions, apercus et livrables</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-3 md:grid-cols-3">
-          <div className="rounded-md border border-slate-200 bg-white p-4">
-            <MessageSquareText className="size-5 text-blue-700" aria-hidden="true" />
-            <p className="mt-3 font-semibold text-slate-950">Questions client</p>
-            <p className="mt-1 text-sm text-slate-600">
+          <div className="rounded-[3px] border border-[#d8d0bf] bg-[#fbfaf6] p-4">
+            <MessageSquareText className="size-5 text-[#7b6b4f]" aria-hidden="true" />
+            <p className="mt-3 font-semibold text-[#171613]">Questions client</p>
+            <p className="mt-1 text-sm text-[#6b665a]">
               Clarifier annotations, priorites et formats finaux.
             </p>
           </div>
-          <div className="rounded-md border border-slate-200 bg-white p-4">
-            <Eye className="size-5 text-blue-700" aria-hidden="true" />
-            <p className="mt-3 font-semibold text-slate-950">Apercu a transmettre</p>
-            <p className="mt-1 text-sm text-slate-600">
+          <div className="rounded-[3px] border border-[#d8d0bf] bg-[#fbfaf6] p-4">
+            <Eye className="size-5 text-[#7b6b4f]" aria-hidden="true" />
+            <p className="mt-3 font-semibold text-[#171613]">Apercu a transmettre</p>
+            <p className="mt-1 text-sm text-[#6b665a]">
               Validation d&apos;orientation avant devis.
             </p>
           </div>
-          <div className="rounded-md border border-slate-200 bg-white p-4">
-            <PackageCheck className="size-5 text-blue-700" aria-hidden="true" />
-            <p className="mt-3 font-semibold text-slate-950">Livrables</p>
-            <p className="mt-1 text-sm text-slate-600">
+          <div className="rounded-[3px] border border-[#d8d0bf] bg-[#fbfaf6] p-4">
+            <PackageCheck className="size-5 text-[#7b6b4f]" aria-hidden="true" />
+            <p className="mt-3 font-semibold text-[#171613]">Livrables</p>
+            <p className="mt-1 text-sm text-[#6b665a]">
               {mockDeliverables.length} elements fictifs, {mockProjectFiles.length} documents.
             </p>
           </div>

@@ -1,13 +1,12 @@
 # Data Model
 
-Le modele V1.5 est mocke. Il sert a preparer les objets V2.
+Le modele V1.5 est fictif, stocke dans `src/lib/mock-data.ts`. Il prepare les objets necessaires a la V2 sans stockage reel.
 
 ```mermaid
 classDiagram
   class User {
     id
     name
-    email
     role
     organizationId
     ndaAccepted
@@ -15,19 +14,20 @@ classDiagram
   class Project {
     id
     reference
-    name
+    clientId
+    managerId
+    drafterIds
     status
     confidentiality
-    clientId
-    projectManagerId
   }
   class ProjectRequest {
     id
     projectId
+    createdById
     type
     priority
-    status
     expectedFormats
+    status
   }
   class ProjectFile {
     id
@@ -37,12 +37,12 @@ classDiagram
     confidentiality
     isMockOnly
   }
-  class ProjectMessage {
+  class Message {
     id
     projectId
     authorRole
-    body
-    timestamp
+    kind
+    isMockOnly
   }
   class Deliverable {
     id
@@ -50,17 +50,18 @@ classDiagram
     requestId
     format
     status
-  }
-  class QuotePreview {
-    id
-    projectId
-    status
-    amountLabel
+    isSensitive
   }
   User "1" --> "*" Project
   Project "1" --> "*" ProjectRequest
   Project "1" --> "*" ProjectFile
-  Project "1" --> "*" ProjectMessage
+  Project "1" --> "*" Message
   ProjectRequest "1" --> "*" Deliverable
-  Project "1" --> "*" QuotePreview
 ```
+
+## Notes V2
+
+- Ajouter base de donnees.
+- Ajouter stockage prive.
+- Relier chaque fichier a un projet, une organisation, un role et un journal d'acces.
+- Refuser toute exposition client sans controle serveur.

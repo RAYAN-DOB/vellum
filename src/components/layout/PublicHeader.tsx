@@ -4,22 +4,22 @@ import { publicNavigation, routes } from "@/lib/routes";
 
 export function PublicHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-[#ded7c8] bg-[#f4f1ea]/88 backdrop-blur-xl">
       <Container className="flex min-h-16 items-center justify-between gap-4">
         <a
-          className="group flex min-w-0 items-center gap-3 text-slate-950"
+          className="group flex min-w-0 items-center gap-3 text-[#171613]"
           href={routes.public.home}
           aria-label="Retour a l'accueil"
         >
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-slate-950 text-sm font-semibold text-white shadow-sm">
+          <span className="flex size-9 shrink-0 items-center justify-center rounded-[3px] border border-[#3c3932] bg-[#171613] text-sm font-semibold text-[#f7f3ea] shadow-sm">
             PW
           </span>
           <span className="flex min-w-0 flex-col">
             <span className="text-sm font-semibold tracking-normal">
               PlanWork
             </span>
-            <span className="hidden text-xs text-slate-500 sm:block">
-              Secure project ops
+            <span className="hidden text-xs text-[#7a7467] sm:block">
+              Drawing office cockpit
             </span>
           </span>
         </a>
@@ -30,7 +30,7 @@ export function PublicHeader() {
         >
           {publicNavigation.map((item) => (
             <a
-              className="rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-950"
+              className="rounded-[3px] px-3 py-2 text-sm font-medium text-[#5e594d] transition-colors hover:bg-[#e7dfd0] hover:text-[#171613]"
               href={item.href}
               key={item.href}
             >
@@ -40,7 +40,7 @@ export function PublicHeader() {
         </nav>
 
         <Button asChild className="shrink-0">
-          <a href={routes.workspace.newRequest}>Creer une demande</a>
+          <a href={routes.roles.clientNewProject}>Deposer un projet</a>
         </Button>
       </Container>
     </header>

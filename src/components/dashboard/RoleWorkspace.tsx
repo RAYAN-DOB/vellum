@@ -7,7 +7,8 @@ import { ClientProjectList } from "@/components/project/ClientProjectList";
 import { AdminControlCenter } from "@/components/roles/AdminControlCenter";
 import { ArchitectWorkloadPanel } from "@/components/roles/ArchitectWorkloadPanel";
 import { ManagerAssignmentBoard } from "@/components/roles/ManagerAssignmentBoard";
-import { Card, CardContent } from "@/components/ui/Card";
+import { ArchitecturalGridBackground } from "@/components/ui/ArchitecturalGridBackground";
+import { CardContent } from "@/components/ui/Card";
 import { mockDashboardStats } from "@/lib/mock-data";
 import type { Role } from "@/types/roles";
 
@@ -30,7 +31,7 @@ type RoleConfig = {
 
 const roleConfigs: Record<Role, RoleConfig> = {
   admin: {
-    title: "Espace admin",
+    title: "Console admin",
     description:
       "Vue de gouvernance pour anticiper les roles, les projets sensibles et les futures regles d'acces. Aucun privilege reel n'est actif dans cette V1.",
     icon: UserCog,
@@ -55,7 +56,7 @@ const roleConfigs: Record<Role, RoleConfig> = {
     ],
   },
   client: {
-    title: "Espace client",
+    title: "Portail client",
     description:
       "Vue client pour comprendre ou en sont les demandes, quels livrables restent a relire et quelles informations sont attendues.",
     icon: UserRound,
@@ -80,7 +81,7 @@ const roleConfigs: Record<Role, RoleConfig> = {
     ],
   },
   drafter: {
-    title: "Espace dessinateur",
+    title: "Atelier architecte",
     description:
       "Vue de production pour lire le brief, comprendre le contexte projet et suivre les livrables attendus.",
     icon: ShieldCheck,
@@ -105,7 +106,7 @@ const roleConfigs: Record<Role, RoleConfig> = {
     ],
   },
   project_manager: {
-    title: "Espace chef de projet",
+    title: "Cockpit manager",
     description:
       "Vue de coordination pour qualifier les demandes, prioriser les corrections et preparer les validations client.",
     icon: UsersRound,
@@ -137,16 +138,16 @@ export function RoleWorkspace({ role }: RoleWorkspaceProps) {
 
   return (
     <div className="grid gap-6">
-      <Card className="technical-grid-dark overflow-hidden bg-slate-950 text-white">
+      <ArchitecturalGridBackground className="rounded-[6px] border border-[#34312b]">
         <CardContent className="grid gap-6 p-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
-            <span className="flex size-12 items-center justify-center rounded-md bg-white text-slate-950">
+            <span className="flex size-12 items-center justify-center rounded-[3px] bg-[#f7f3ea] text-[#171613]">
               <Icon className="size-6" aria-hidden="true" />
             </span>
             <h2 className="mt-5 text-2xl font-semibold tracking-normal">
               {config.title}
             </h2>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
+            <p className="mt-3 text-sm leading-6 text-[#cfc6b5]">
               {config.description}
             </p>
           </div>
@@ -154,7 +155,7 @@ export function RoleWorkspace({ role }: RoleWorkspaceProps) {
           <div className="grid gap-3 sm:grid-cols-3">
             {config.focus.map((item) => (
               <div
-                className="rounded-md border border-white/10 bg-white/[0.07] p-4 text-sm leading-6 text-slate-200 backdrop-blur"
+                className="rounded-[3px] border border-[#f7f3ea]/12 bg-[#f7f3ea]/[0.06] p-4 text-sm leading-6 text-[#e7dece] backdrop-blur"
                 key={item}
               >
                 {item}
@@ -162,7 +163,7 @@ export function RoleWorkspace({ role }: RoleWorkspaceProps) {
             ))}
           </div>
         </CardContent>
-      </Card>
+      </ArchitecturalGridBackground>
 
       <section className="grid gap-4 md:grid-cols-2">
         {config.metrics.map((metric) => (

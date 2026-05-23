@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f7fb;
-  --foreground: #111827;
-  --surface: #ffffff;
-  --line: #dbe3ee;
-  --blueprint: #1d4ed8;
+  --background: #f4f1ea;
+  --foreground: #161512;
+  --surface: #fbfaf6;
+  --line: #ddd7c9;
+  --blueprint: #8f8777;
 }
 
 @theme inline {
@@ -33,34 +33,57 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: #bfdbfe;
-  color: #0f172a;
+  background: #d7c6a4;
+  color: #161512;
 }
 
 @layer utilities {
   .technical-grid {
     background-image:
-      linear-gradient(rgba(29, 78, 216, 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(29, 78, 216, 0.08) 1px, transparent 1px);
-    background-size: 28px 28px;
+      linear-gradient(rgba(22, 21, 18, 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(22, 21, 18, 0.055) 1px, transparent 1px);
+    background-size: 32px 32px;
   }
 
   .technical-grid-dark {
     background-image:
-      linear-gradient(rgba(147, 197, 253, 0.12) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(147, 197, 253, 0.12) 1px, transparent 1px);
-    background-size: 30px 30px;
+      linear-gradient(rgba(244, 241, 234, 0.075) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244, 241, 234, 0.075) 1px, transparent 1px);
+    background-size: 34px 34px;
   }
 
   .premium-panel {
     box-shadow:
-      0 18px 55px rgba(15, 23, 42, 0.08),
-      0 1px 0 rgba(255, 255, 255, 0.7) inset;
+      0 24px 70px rgba(22, 21, 18, 0.08),
+      0 1px 0 rgba(255, 255, 255, 0.75) inset;
+  }
+
+  .architectural-surface {
+    background-color: #171613;
+    background-image:
+      radial-gradient(circle at top left, rgba(255, 255, 255, 0.14), transparent 24rem),
+      linear-gradient(135deg, #171613 0%, #23211c 48%, #0f0f0d 100%);
+  }
+
+  .drawing-line {
+    background-image:
+      linear-gradient(rgba(244, 241, 234, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244, 241, 234, 0.06) 1px, transparent 1px),
+      linear-gradient(rgba(244, 241, 234, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244, 241, 234, 0.03) 1px, transparent 1px);
+    background-size: 48px 48px, 48px 48px, 12px 12px, 12px 12px;
+  }
+
+  .paper-grid {
+    background-image:
+      linear-gradient(rgba(22, 21, 18, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(22, 21, 18, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 }

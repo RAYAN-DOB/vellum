@@ -55,13 +55,13 @@ export default async function ClientProjectDetailPage({
     >
       <div className="grid gap-6">
         <section className="grid gap-6 xl:grid-cols-[1fr_360px]">
-          <Card className="technical-grid-dark overflow-hidden bg-slate-950 text-white">
+          <Card tone="dark" className="overflow-hidden">
             <CardHeader>
-              <Badge className="bg-white/10 text-blue-100 ring-white/15" tone="blue">
+              <Badge className="bg-[#f7f3ea]/10 text-[#d7c6a4] ring-[#f7f3ea]/18">
                 {project.reference}
               </Badge>
-              <CardTitle className="text-white">{project.name}</CardTitle>
-              <CardDescription className="text-slate-300">
+              <CardTitle className="text-[#f7f3ea]">{project.name}</CardTitle>
+              <CardDescription className="text-[#cfc6b5]">
                 {project.description}
               </CardDescription>
             </CardHeader>
@@ -83,7 +83,7 @@ export default async function ClientProjectDetailPage({
                 Le manager doit confirmer les formats finaux avant assignation.
               </CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-3 text-sm text-slate-600">
+            <CardContent className="grid gap-3 text-sm text-[#6b665a]">
               <p>{requests.length} demande(s) liee(s) au projet.</p>
               <p>{files.length} document(s) fictif(s) prepares.</p>
               <p>{quote?.note ?? "Aucun devis reel dans cette V1."}</p>

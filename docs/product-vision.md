@@ -1,15 +1,15 @@
 # Product Vision
 
-PlanWork est une plateforme B2B pour cadrer, suivre et piloter des projets lies a des plans techniques, documents projet et livrables.
+PlanWork est une plateforme B2B pour deposer, cadrer, suivre et piloter des demandes liees a des plans techniques : DWG, PDF, croquis, schemas electriques, plomberie, photos de site, notes projet, corrections et livrables.
 
-La V1.5 reste une demonstration front statique. Elle doit permettre a un associe, mentor ou client de comprendre rapidement la promesse produit : un client depose un projet dans un chat plein ecran, prepare ses documents, puis l'equipe qualifie, assigne et suit la production.
+La V1.5 reste une demonstration front statique. Elle sert a vendre la vision produit : un client depose un projet dans un cockpit/chat pleine page, l'equipe qualifie, un architecte ou dessinateur travaille, puis le client suit l'avancement.
 
 ## Promesse
 
-- Centraliser les demandes qui arrivent aujourd'hui par email, message ou fichier joint.
-- Transformer un besoin flou en dossier projet lisible.
-- Prepararer la future securite serveur autour des roles, projets, documents et NDA.
-- Donner une vision claire des espaces client, manager, architecte et admin.
+- Remplacer les demandes dispersees par un dossier projet clair.
+- Structurer le besoin client avant production.
+- Donner a chaque role une vue adaptee : client, manager, architecte, admin.
+- Preparer une V2 avec comptes, stockage prive, permissions serveur, NDA et audit.
 
 ## Limites V1.5
 
@@ -23,13 +23,13 @@ La V1.5 reste une demonstration front statique. Elle doit permettre a un associe
 
 ```mermaid
 flowchart TD
-  Client["Client"] --> Chat["Chat depot projet"]
-  Chat --> Docs["Documents mockes"]
-  Chat --> Summary["Synthese projet"]
+  Client["Client"] --> Chat["Cockpit chat depot projet"]
+  Chat --> MockDocs["Documents fictifs"]
+  Chat --> Summary["Synthese exploitable"]
   Summary --> Manager["Manager qualifie"]
-  Manager --> Architect["Architecte produit un apercu"]
-  Architect --> ClientReview["Client valide orientation"]
-  ClientReview --> Quote["Devis futur"]
-  Quote --> Payment["Paiement V2"]
-  Payment --> Delivery["Livraison securisee V2"]
+  Manager --> Architect["Architecte / dessinateur"]
+  Architect --> Preview["Apercu / version de travail"]
+  Preview --> ClientReview["Client suit et valide"]
+  ClientReview --> Quote["Devis futur V2"]
+  Quote --> SecureDelivery["Livraison securisee V2"]
 ```

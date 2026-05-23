@@ -6,9 +6,9 @@ export default function ProjectManagerWorkspacePage() {
   return (
     <AppShell
       activeHref={routes.roles.projectManager}
-      description="Espace de demo pour montrer comment le chef de projet coordonnera les demandes, les priorites, les corrections et les validations."
+      description="Cockpit manager mocke pour qualifier les demandes entrantes, arbitrer la charge equipe, preparer les assignations et suivre les validations."
       eyebrow="Vue par role"
-      title="Espace chef de projet"
+      title="Cockpit manager"
     >
       <RoleWorkspace role="project_manager" />
     </AppShell>

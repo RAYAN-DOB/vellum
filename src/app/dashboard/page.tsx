@@ -6,7 +6,7 @@ export default function DashboardPage() {
   return (
     <AppShell
       activeHref={routes.workspace.dashboard}
-      description="Vue centrale de demo pour comprendre les demandes a traiter, les projets en cours, les livrables a valider et les limites de la V1."
+      description="Vue command center pour lire les demandes a traiter, les projets actifs, les livrables a valider et les limites front mockees de la V1."
       title="Pilotage des demandes"
     >
       <DashboardOverview />

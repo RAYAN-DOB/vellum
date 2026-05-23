@@ -19,12 +19,12 @@ export function ProjectTimeline({ steps }: ProjectTimelineProps) {
 
           return (
             <div className="flex gap-3" key={step.id}>
-              <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-700 ring-1 ring-blue-100">
+              <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-[3px] bg-[#171613] text-[#f7f3ea] ring-1 ring-[#34312b]">
                 <Icon className="size-4" aria-hidden="true" />
               </span>
               <div>
-                <p className="text-sm font-semibold text-slate-950">{step.label}</p>
-                <p className="mt-1 text-sm leading-6 text-slate-600">
+                <p className="text-sm font-semibold text-[#171613]">{step.label}</p>
+                <p className="mt-1 text-sm leading-6 text-[#6b665a]">
                   {step.description}
                 </p>
               </div>

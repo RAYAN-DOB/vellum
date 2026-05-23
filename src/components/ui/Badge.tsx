@@ -8,14 +8,14 @@ type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
 };
 
 const badgeVariants = cva(
-  "inline-flex max-w-full items-center rounded-md px-2.5 py-1 text-xs font-semibold ring-1 ring-inset",
+  "inline-flex max-w-full items-center rounded-[3px] px-2.5 py-1 text-xs font-semibold ring-1 ring-inset",
   {
     variants: {
       tone: {
-        neutral: "bg-slate-100 text-slate-700 ring-slate-200",
-        blue: "bg-blue-50 text-blue-700 ring-blue-200",
-        green: "bg-emerald-50 text-emerald-700 ring-emerald-200",
-        amber: "bg-amber-50 text-amber-800 ring-amber-200",
+        neutral: "bg-[#eee8dc] text-[#5e594d] ring-[#d8d0bf]",
+        blue: "bg-[#e9edf0] text-[#47515a] ring-[#cbd3d8]",
+        green: "bg-emerald-50 text-emerald-800 ring-emerald-200",
+        amber: "bg-[#f4ead7] text-[#8a5b15] ring-[#e4c887]",
         red: "bg-red-50 text-red-700 ring-red-200",
       },
     },

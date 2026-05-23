@@ -1,37 +1,39 @@
 # Roles And Permissions
 
-La V1.5 affiche un modele cible. Elle ne securise rien cote serveur.
+La V1.5 affiche une matrice de permissions cible. Elle ne securise rien cote serveur. Les restrictions UI sont seulement pedagogiques.
 
 ## Roles
 
-- Client : depose un projet, suit ses projets, repond aux questions.
-- Manager : qualifie, assigne, prepare le devis.
-- Architecte : produit, pose des questions, transmet un apercu.
-- Admin : gouvernance, roles, activite, configuration future.
+- Client : depose un projet, suit ses dossiers, repond aux questions, valide un apercu futur.
+- Manager : qualifie, priorise, assigne, prepare devis et validation.
+- Architecte / dessinateur : analyse documents, pose questions, prepare apercus et livrables.
+- Admin : gouvernance, roles, permissions, activite et configuration future.
 
 ```mermaid
 flowchart TD
-  Admin["Admin"] --> Manager["Manager"]
-  Manager --> Architect["Architecte / dessinateur"]
-  Client["Client"] --> Manager
-  Architect --> Client
+  Project["Projet"] --> Client["Client"]
+  Project --> Manager["Manager"]
+  Project --> Architect["Architecte / dessinateur"]
+  Project --> Admin["Admin"]
+  Client --> ClientActions["Voir ses projets / completer / valider"]
+  Manager --> ManagerActions["Qualifier / assigner / suivre"]
+  Architect --> ArchitectActions["Produire / questionner / livrer"]
+  Admin --> AdminActions["Gouverner / auditer / configurer"]
 ```
 
+## Modele cible
+
 ```mermaid
-flowchart TD
-  Role["Role global"] --> ProjectRole["Role projet"]
+flowchart LR
+  User["Utilisateur"] --> GlobalRole["Role global"]
+  GlobalRole --> Org["Organisation"]
+  Org --> ProjectRole["Role dans projet"]
   ProjectRole --> Assignment["Assignation"]
-  Assignment --> ResourceState["Etat ressource"]
-  ResourceState --> Permission["can(actor, action, resource)"]
-  NDA["NDA"] --> Permission
-  Org["Organisation"] --> Permission
+  Assignment --> Resource["Projet / fichier / message / livrable"]
+  Resource --> Policy["can(actor, action, resource)"]
+  Policy --> Audit["Journalisation V2"]
 ```
 
-## Actions futures
+## Regle non negociable
 
-| Role | Projet | Documents | Messages | Devis |
-| --- | --- | --- | --- | --- |
-| Client | Ses projets | Fichiers autorises | Lire/repondre | Voir apres validation |
-| Manager | Projets assignes | Qualifier | Coordonner | Preparer |
-| Architecte | Projets assignes | Lire selon droits | Poser questions | Non |
-| Admin | Gouvernance | Selon politique | Audit | Configurer |
+Toute action sensible devra etre verifiee cote serveur en V2 : lecture fichier, upload, telechargement, message, livrable, devis, paiement et administration.

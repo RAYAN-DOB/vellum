@@ -4,14 +4,16 @@
 
 ```mermaid
 journey
-  title Parcours client V1.5
+  title Depot et suivi d'un projet technique
+  section Decouverte
+    Comprend la promesse sur la landing: 4: Client
+    Lance le cockpit de depot: 5: Client
   section Depot
-    Ouvre la landing: 5: Client
-    Lance le chat projet: 5: Client
-    Decrit son besoin: 4: Client
-    Prepare documents mockes: 4: Client
+    Decrit le besoin dans le chat: 5: Client
+    Prepare les documents fictifs: 4: Client
+    Consulte la synthese: 4: Client
   section Suivi
-    Consulte ses projets: 5: Client
+    Suit le statut du projet: 4: Client
     Repond aux questions: 4: Client
     Valide un apercu futur: 3: Client
 ```
@@ -20,22 +22,20 @@ journey
 
 ```mermaid
 flowchart TD
-  Intake["Demande entrante"] --> Qualify["Qualifier besoin"]
-  Qualify --> CheckDocs["Verifier documents"]
-  CheckDocs --> Capacity["Verifier charge equipe"]
-  Capacity --> Assign["Assigner architecte"]
-  Assign --> Follow["Suivre questions et apercus"]
-  Follow --> Quote["Preparer devis futur"]
+  Incoming["Demande entrante"] --> Qualify["Qualification"]
+  Qualify --> Scope["Scope / formats / priorite"]
+  Scope --> Capacity["Lecture charge equipe"]
+  Capacity --> Assign["Assignation mockee"]
+  Assign --> Quote["Devis futur"]
 ```
 
 ## Parcours architecte
 
 ```mermaid
 flowchart TD
-  Assigned["Projet assigne"] --> ReadBrief["Lire brief et documents"]
-  ReadBrief --> Ask["Poser question client"]
-  Ask --> Produce["Produire apercu"]
-  Produce --> Review["Envoyer au manager"]
-  Review --> Iterate["Corriger si necessaire"]
-  Iterate --> Deliver["Preparer livrable futur"]
+  Assigned["Projet assigne"] --> ReadDocs["Analyse documents mockes"]
+  ReadDocs --> Questions["Questions client"]
+  Questions --> Preview["Apercu a preparer"]
+  Preview --> Version["Version / livrable fictif"]
+  Version --> Review["Retour manager / client"]
 ```

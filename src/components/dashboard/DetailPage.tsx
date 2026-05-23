@@ -51,17 +51,17 @@ export function DetailPage({
 
   return (
     <div className="grid gap-6">
-      <Card className="technical-grid-dark overflow-hidden bg-slate-950 text-white">
+      <Card tone="dark" className="overflow-hidden">
         <CardContent className="p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-normal text-blue-200">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#d7c6a4]">
                 Vue de demonstration
               </p>
               <h2 className="mt-2 text-2xl font-semibold tracking-normal">
                 {title}
               </h2>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300">
+              <p className="mt-3 max-w-3xl text-sm leading-6 text-[#cfc6b5]">
                 {description}
               </p>
             </div>
@@ -82,13 +82,13 @@ export function DetailPage({
           <CardContent className="grid gap-3 sm:grid-cols-2">
             {fields.map((field) => (
               <div
-                className="rounded-md border border-slate-200 bg-slate-50/80 p-4"
+                className="rounded-[3px] border border-[#d8d0bf] bg-[#f8f5ed]/80 p-4"
                 key={field.label}
               >
-                <p className="text-xs font-semibold uppercase tracking-normal text-slate-500">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7a5f]">
                   {field.label}
                 </p>
-                <div className="mt-2 text-sm font-medium text-slate-950">
+                <div className="mt-2 text-sm font-medium text-[#171613]">
                   {field.value}
                 </div>
               </div>
@@ -107,19 +107,19 @@ export function DetailPage({
           <CardContent className="relative grid gap-3">
             {history.map((item) => (
               <div
-                className="rounded-md border border-slate-200 bg-white p-4"
+                className="rounded-[3px] border border-[#d8d0bf] bg-[#fbfaf6] p-4"
                 key={`${item.date}-${item.label}`}
               >
                 <div className="flex gap-3">
-                  <span className="mt-1 flex size-8 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-700 ring-1 ring-blue-100">
+                  <span className="mt-1 flex size-8 shrink-0 items-center justify-center rounded-[3px] bg-[#171613] text-[#f7f3ea] ring-1 ring-[#34312b]">
                     <Clock3 className="size-4" aria-hidden="true" />
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-slate-950">
+                    <p className="text-sm font-semibold text-[#171613]">
                       {item.label}
                     </p>
-                    <p className="text-xs text-slate-500">{item.date}</p>
-                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                    <p className="text-xs text-[#8a7a5f]">{item.date}</p>
+                    <p className="mt-1 text-sm leading-6 text-[#6b665a]">
                       {item.detail}
                     </p>
                   </div>
@@ -153,17 +153,17 @@ export function DetailPage({
         </section>
       ) : null}
 
-      <Card className="border-amber-200 bg-amber-50 shadow-none">
+      <Card className="border-[#e4c887] bg-[#fbf2dd] shadow-none">
         <CardContent className="flex gap-3 p-5">
           <AlertTriangle
-            className="mt-0.5 size-5 shrink-0 text-amber-700"
+            className="mt-0.5 size-5 shrink-0 text-[#8a5b15]"
             aria-hidden="true"
           />
           <div>
-            <p className="text-sm font-semibold text-amber-950">
+            <p className="text-sm font-semibold text-[#5b3b0d]">
               Limite importante de la V1
             </p>
-            <p className="mt-1 text-sm leading-6 text-amber-900">
+            <p className="mt-1 text-sm leading-6 text-[#7a5213]">
               Cette page aide a comprendre le futur produit. Elle ne prouve pas
               une securite reelle : aucun controle serveur, aucune auth et aucun
               cloisonnement actif ne sont en place.
@@ -175,10 +175,10 @@ export function DetailPage({
       <Card>
         <CardContent className="flex gap-3 p-5">
           <ShieldCheck
-            className="mt-0.5 size-5 shrink-0 text-blue-700"
+            className="mt-0.5 size-5 shrink-0 text-[#7b6b4f]"
             aria-hidden="true"
           />
-          <p className="text-sm leading-6 text-slate-600">
+          <p className="text-sm leading-6 text-[#6b665a]">
             La V1 prepare les objets metier : projet, demande, statut,
             livrable, historique et confidentialite. Les futurs acces fichiers
             devront etre verifies cote serveur selon role, projet, organisation

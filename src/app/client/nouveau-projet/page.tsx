@@ -6,7 +6,7 @@ export default function ClientNewProjectPage() {
   return (
     <AppShell
       activeHref={routes.roles.clientNewProject}
-      description="Experience centrale V1.5 : le client decrit son projet dans un chat pleine page et prepare des documents fictifs."
+      description="Cockpit V1.5 pour decrire le projet, preparer les documents fictifs et transmettre la demande."
       eyebrow="Espace client"
       title="Nouveau projet"
     >

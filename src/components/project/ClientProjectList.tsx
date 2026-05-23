@@ -27,7 +27,7 @@ export function ClientProjectList() {
               <CardHeader>
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-normal text-blue-700">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7a5f]">
                       {project.reference}
                     </p>
                     <CardTitle className="mt-2">{project.name}</CardTitle>
@@ -40,13 +40,13 @@ export function ClientProjectList() {
               </CardHeader>
               <CardContent className="grid gap-4">
                 <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div className="rounded-md bg-slate-50 p-3">
-                    <p className="text-xs text-slate-500">Demandes</p>
-                    <p className="mt-1 font-semibold text-slate-950">{requestCount}</p>
+                  <div className="rounded-[3px] bg-[#eee8dc] p-3">
+                    <p className="text-xs text-[#8a7a5f]">Demandes</p>
+                    <p className="mt-1 font-semibold text-[#171613]">{requestCount}</p>
                   </div>
-                  <div className="rounded-md bg-slate-50 p-3">
-                    <p className="text-xs text-slate-500">Documents</p>
-                    <p className="mt-1 font-semibold text-slate-950">
+                  <div className="rounded-[3px] bg-[#eee8dc] p-3">
+                    <p className="text-xs text-[#8a7a5f]">Documents</p>
+                    <p className="mt-1 font-semibold text-[#171613]">
                       {
                         mockProjectFiles.filter((file) => file.projectId === project.id)
                           .length
