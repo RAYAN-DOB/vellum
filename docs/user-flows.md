@@ -18,6 +18,30 @@ journey
     Valide un apercu futur: 3: Client
 ```
 
+## Parcours intake V1.5
+
+```mermaid
+flowchart TD
+  Start["/client/nouveau-projet"] --> Capture["Capture box Lazy-inspired"]
+  Capture --> Chips["Types documents fictifs"]
+  Capture --> Summary["Synthese projet mockee"]
+  Summary --> Send["Envoyer a l'equipe"]
+  Send --> Transition["Transition analyse / transmission"]
+  Transition --> Project["/client/projets/project-demo-001"]
+```
+
+## Parcours demo complet
+
+```mermaid
+flowchart LR
+  Client["Client depose"] --> Manager["Manager qualifie"]
+  Manager --> Quote["Devis mocke"]
+  Manager --> Architect["Architecte produit"]
+  Architect --> Viewer["Viewer document"]
+  Viewer --> ClientReview["Client valide / corrige"]
+  ClientReview --> Delivery["Livrables V2"]
+```
+
 ## Parcours manager
 
 ```mermaid

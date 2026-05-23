@@ -1,4 +1,4 @@
-import { RoleWorkspace } from "@/components/dashboard/RoleWorkspace";
+import { ClientCommandCenter } from "@/components/client/ClientCommandCenter";
 import { AppShell } from "@/components/layout/AppShell";
 import { routes } from "@/lib/routes";
 
@@ -6,11 +6,11 @@ export default function ClientWorkspacePage() {
   return (
     <AppShell
       activeHref={routes.roles.client}
-      description="Portail client mocke pour suivre les dossiers, documents fictifs, actions attendues, echanges et validations sans exposer de fichier sensible."
+      description="Cockpit client mocke pour deposer, suivre, repondre et valider des projets techniques sans exposer de fichier sensible."
       eyebrow="Vue par role"
-      title="Portail client"
+      title="Cockpit client"
     >
-      <RoleWorkspace role="client" />
+      <ClientCommandCenter />
     </AppShell>
   );
 }

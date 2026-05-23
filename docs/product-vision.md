@@ -21,6 +21,19 @@ La V1.5 reste une demonstration front statique. Elle sert a vendre la vision pro
 - Pas de paiement.
 - Pas de securite serveur active.
 
+## V1.5 actuelle
+
+La V1.5 montre maintenant le produit comme un workflow complet :
+
+- capture client Lazy-inspired pour transformer un besoin libre en demande structuree ;
+- cockpit client pour voir projets, actions, messages, devis et livrables ;
+- console manager pour qualifier, assigner et preparer un devis mocke ;
+- atelier architecte / dessinateur pour analyser, questionner et preparer un apercu ;
+- viewer document mocke pour illustrer calques, annotations et validation ;
+- centre admin pour gouvernance, roles, activite et securite V2 a construire.
+
+Le demo role switcher et la command palette servent uniquement a presenter le parcours plus vite. Ils ne remplacent pas une authentification.
+
 ```mermaid
 flowchart TD
   Client["Client"] --> Chat["Cockpit chat depot projet"]

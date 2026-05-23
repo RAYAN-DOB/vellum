@@ -2,14 +2,20 @@ import {
   FilePlus2,
   Home,
   LayoutDashboard,
+  Mail,
+  ReceiptText,
   ShieldCheck,
+  SlidersHorizontal,
   UserCog,
   UserRound,
   UsersRound,
 } from "lucide-react";
 import type { ReactNode } from "react";
 
+import { CommandPalette } from "@/components/command/CommandPalette";
 import { Container } from "@/components/layout/Container";
+import { DemoRoleSwitcher } from "@/components/layout/DemoRoleSwitcher";
+import { NotificationCenter } from "@/components/notifications/NotificationCenter";
 import { ArchitecturalGridBackground } from "@/components/ui/ArchitecturalGridBackground";
 import { cn } from "@/lib/utils";
 import {
@@ -30,9 +36,13 @@ type AppShellProps = {
 
 const roleIcons = {
   [routes.roles.client]: UserRound,
+  [routes.roles.clientMessages]: Mail,
   [routes.roles.clientNewProject]: FilePlus2,
+  [routes.roles.clientOnboarding]: UserRound,
+  [routes.roles.clientSettings]: SlidersHorizontal,
   [routes.roles.clientProjects]: LayoutDashboard,
   [routes.roles.projectManager]: UsersRound,
+  [routes.roles.projectManagerQuotes]: ReceiptText,
   [routes.roles.drafter]: ShieldCheck,
   [routes.roles.admin]: UserCog,
 } as const;
@@ -72,6 +82,10 @@ export function AppShell({
             <Home className="size-4" aria-hidden="true" />
             Accueil public
           </a>
+          <div className="flex items-center gap-2">
+            <CommandPalette />
+            <NotificationCenter />
+          </div>
         </Container>
       </header>
 
@@ -157,6 +171,10 @@ export function AppShell({
             <div className="mt-5 hidden rounded-[3px] border border-[#e4c887] bg-[#fbf2dd] p-3 text-xs leading-5 text-[#7a5213] lg:block">
               V1 front statique : les vues simulent les futurs roles, sans auth
               ni controle serveur.
+            </div>
+
+            <div className="mt-4 hidden lg:block">
+              <DemoRoleSwitcher activeHref={activeHref} />
             </div>
           </nav>
         </aside>

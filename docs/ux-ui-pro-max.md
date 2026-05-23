@@ -31,6 +31,22 @@ Mise a jour landing : le premier ecran doit maintenant viser une sensation plus 
 - Bleu SaaS interdit dans le premier ecran ; accents limites a ivoire, ambre doux et vert statut.
 - Les sections suivantes restent harmonisees avec la DA, sans rupture entre hero et page.
 
+## Intake Lazy-inspired
+
+- `/client/nouveau-projet` devient le moment produit principal : ecran sombre immersif, capture box large, halo horizontal discret, documents fictifs et synthese immediate.
+- La saisie doit ressembler a une conversation avec un expert, pas a un formulaire CRM.
+- Les chips documents restent lisibles et sobres : DWG, PDF, croquis, schema electrique, schema plomberie, photo, note, correction, livrable attendu.
+- La transition d'envoi montre une qualification mockee : analyse, structuration, transmission manager, creation projet, ouverture cockpit.
+- Mention obligatoire : aucun fichier reel n'est envoye en V1.
+
+## Workflow app
+
+- Client : cockpit simple avec action principale "Deposer un projet", actions attendues, messages et livrables a valider.
+- Manager : console dense type Linear/Raycast, demandes entrantes, inspector projet, capacite equipe et devis mocke.
+- Architecte : atelier de production, documents a analyser, checklist, questions client, apercus et planning.
+- Admin : gouvernance serieuse, roles, permissions, activite, sante plateforme et securite V2 a prevoir.
+- Les micro-interactions doivent confirmer une action et clarifier la prochaine etape, jamais decorer gratuitement.
+
 ```mermaid
 flowchart LR
   Product["Plans techniques sensibles"] --> Mood["Studio architecture premium"]

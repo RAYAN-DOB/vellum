@@ -200,6 +200,18 @@ export const mockDeliverables: Deliverable[] = [
 
 export const mockProjectFiles: ProjectFile[] = [
   {
+    id: "document-demo-001",
+    projectId: "project-demo-001",
+    name: "Apercu plan annote - document-demo-001.pdf",
+    type: "pdf",
+    status: "mock_ready",
+    confidentiality: "nda_required",
+    sizeLabel: "1.4 Mo",
+    description:
+      "Document fictif dedie au viewer premium : calques, annotations et validation mockee.",
+    isMockOnly: true,
+  },
+  {
     id: "file-demo-dwg",
     projectId: "project-demo-001",
     name: "Plan existant - niveau 1.dwg",

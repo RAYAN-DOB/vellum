@@ -9,6 +9,15 @@ La V1.5 affiche une matrice de permissions cible. Elle ne securise rien cote ser
 - Architecte / dessinateur : analyse documents, pose questions, prepare apercus et livrables.
 - Admin : gouvernance, roles, permissions, activite et configuration future.
 
+## Surfaces V1.5 par role
+
+- Client : `/client`, `/client/nouveau-projet`, `/client/projets`, `/client/messages`, `/client/parametres`.
+- Manager : `/chef-projet`, `/chef-projet/devis`.
+- Architecte / dessinateur : `/dessinateur`.
+- Admin : `/admin` et `/dashboard/permissions`.
+
+Le switcher de role est un outil de demonstration. Il ne modifie aucun token, aucune session et aucun droit reel.
+
 ```mermaid
 flowchart TD
   Project["Projet"] --> Client["Client"]
