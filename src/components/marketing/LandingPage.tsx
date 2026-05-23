@@ -17,7 +17,7 @@ import {
 import { Container } from "@/components/layout/Container";
 import { Footer } from "@/components/layout/Footer";
 import { PublicHeader } from "@/components/layout/PublicHeader";
-import { DrawingBoardPreview } from "@/components/marketing/DrawingBoardPreview";
+import { HeroProjectCockpitMockup } from "@/components/marketing/HeroProjectCockpitMockup";
 import { ArchitecturalGridBackground } from "@/components/ui/ArchitecturalGridBackground";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -33,9 +33,9 @@ import { mockDataNotice } from "@/lib/mock-data";
 import { routes } from "@/lib/routes";
 
 const evidence = [
-  { value: "7", label: "formats prepares", detail: "DWG, PDF, croquis, schemas, photos, notes" },
-  { value: "4", label: "espaces metier", detail: "client, manager, architecte, admin" },
-  { value: "0", label: "fichier reel", detail: "V1 front mockee, aucun document sensible" },
+  { value: "DWG", label: "plans et calques", detail: "reprises, cotations, versions" },
+  { value: "PDF", label: "annotations", detail: "corrections et apercus" },
+  { value: "Chat", label: "brief central", detail: "besoin, pieces, synthese" },
 ] as const;
 
 const problems = [
@@ -81,70 +81,91 @@ const process = [
 
 function HeroSection() {
   return (
-    <ArchitecturalGridBackground className="border-b border-[#34312b]">
-      <Container className="grid gap-12 py-14 lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:py-20">
+    <section className="cinematic-hero relative overflow-hidden border-b border-[#f8f4ea]/10 bg-[#070706] text-[#f8f4ea]">
+      <div className="absolute inset-0 drawing-line opacity-55" />
+      <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-black via-black/60 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#090908] via-[#090908]/70 to-transparent" />
+      <Container className="relative z-10 grid min-h-[92svh] gap-10 pb-10 pt-32 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:pb-12 lg:pt-28">
         <div className="max-w-3xl">
-          <Badge className="bg-[#f7f3ea]/10 text-[#d7c6a4] ring-[#f7f3ea]/18">
-            Architectural project cockpit
-          </Badge>
-          <h1 className="mt-7 text-4xl font-semibold leading-[1.04] tracking-[-0.02em] text-[#f7f3ea] sm:text-6xl lg:text-5xl xl:text-6xl">
-            Un espace premium pour deposer, cadrer et suivre vos plans
-            techniques.
+          <h1 className="text-[36px] font-semibold leading-[1] text-[#f8f4ea] sm:text-6xl lg:text-[58px] xl:text-[68px]">
+            <span className="block sm:hidden">Le cockpit pour</span>
+            <span className="block sm:hidden">vos plans</span>
+            <span className="block sm:hidden">techniques.</span>
+            <span className="hidden sm:inline">
+              Le cockpit pour vos plans techniques.
+            </span>
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-[#cfc6b5] sm:text-lg">
-            PlanWork transforme une demande floue en dossier lisible : chat de
-            depot, documents techniques mockes, suivi manager, production
-            architecte et validation client.
+          <p className="mt-7 max-w-[20rem] text-[15px] leading-7 text-[#cfc6b5] sm:max-w-2xl sm:text-lg sm:leading-8">
+            Plans DWG, PDF, croquis, schemas et corrections : centralisez vos
+            demandes, echangez avec l&apos;equipe et suivez chaque livrable depuis un
+            espace client premium.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button asChild className="h-12 bg-[#f7f3ea] text-[#171613] hover:bg-white">
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <Button
+              asChild
+              className="h-[52px] rounded-full bg-[#f8f4ea] px-6 text-[#171613] shadow-[0_18px_60px_rgba(248,244,234,0.16)] hover:bg-white"
+            >
               <a href={routes.roles.clientNewProject}>
-                Entrer dans le cockpit
+                Deposer un projet
                 <ArrowRight className="size-4" aria-hidden="true" />
               </a>
             </Button>
             <Button
               asChild
-              className="h-12 border-[#f7f3ea]/18 bg-[#f7f3ea]/5 text-[#f7f3ea] hover:bg-[#f7f3ea]/10"
+              className="h-[52px] rounded-full border-[#f8f4ea]/18 bg-[#f8f4ea]/6 px-6 text-[#f8f4ea] hover:bg-[#f8f4ea]/10"
               variant="outline"
             >
-              <a href="#security">Voir les limites V1</a>
+              <a href={routes.roles.client}>Voir le cockpit</a>
             </Button>
           </div>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          <div className="mt-12 hidden gap-3 sm:grid sm:grid-cols-3">
             {evidence.map((item) => (
-              <div className="border-l border-[#f7f3ea]/14 pl-4" key={item.label}>
-                <p className="text-3xl font-semibold text-[#f7f3ea]">{item.value}</p>
-                <p className="mt-1 text-sm font-medium text-[#e7dece]">{item.label}</p>
-                <p className="mt-1 text-xs leading-5 text-[#9d9485]">{item.detail}</p>
+              <div
+                className="rounded-[24px] border border-[#f8f4ea]/10 bg-[#f8f4ea]/[0.045] p-4 backdrop-blur"
+                key={item.label}
+              >
+                <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#d7c6a4]">
+                  {item.value}
+                </p>
+                <p className="mt-3 text-sm font-semibold text-[#f8f4ea]">
+                  {item.label}
+                </p>
+                <p className="mt-1 text-xs leading-5 text-[#9d9485]">
+                  {item.detail}
+                </p>
               </div>
             ))}
           </div>
         </div>
 
-        <DrawingBoardPreview />
+        <HeroProjectCockpitMockup />
       </Container>
-    </ArchitecturalGridBackground>
+    </section>
   );
 }
 
 function ProblemSection() {
   return (
-    <section className="bg-[#f4f1ea] py-20">
+    <section className="bg-[#090908] py-20 text-[#f8f4ea]">
       <Container>
         <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
           <SectionTitle
             eyebrow="Constat"
             title="Un projet de plans ne doit pas vivre dans une boite mail."
             description="Le client doit voir ou en est son dossier, l'equipe doit comprendre quoi produire, et les futurs fichiers sensibles devront rester strictement cloisonnes."
+            tone="dark"
           />
           <div className="grid gap-3">
             {problems.map((problem) => (
-              <Card className="bg-[#fbfaf6]/88 shadow-none" key={problem}>
+              <Card
+                className="rounded-[28px] border-[#f8f4ea]/10 bg-[#f8f4ea]/[0.045] shadow-none"
+                tone="dark"
+                key={problem}
+              >
                 <CardContent className="flex gap-4 p-5">
-                  <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-[#7b6b4f]" />
-                  <p className="text-base leading-7 text-[#4f4a40]">{problem}</p>
+                  <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-emerald-200" />
+                  <p className="text-base leading-7 text-[#ded6c7]">{problem}</p>
                 </CardContent>
               </Card>
             ))}
@@ -157,7 +178,7 @@ function ProblemSection() {
 
 function CapabilitySection() {
   return (
-    <section className="bg-[#fbfaf6] py-20" id="solution">
+    <section className="bg-[#f8f4ea] py-20" id="solution">
       <Container>
         <SectionTitle
           eyebrow="Produit"
@@ -166,9 +187,9 @@ function CapabilitySection() {
         />
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
           {capabilities.map(({ icon: Icon, title, description }) => (
-            <Card interactive className="bg-[#f8f5ed]" key={title}>
+            <Card interactive className="rounded-[28px] bg-[#fffdf8]" key={title}>
               <CardHeader>
-                <span className="flex size-11 items-center justify-center rounded-[3px] border border-[#d8d0bf] bg-[#171613] text-[#f7f3ea]">
+                <span className="flex size-12 items-center justify-center rounded-full border border-[#d8d0bf] bg-[#171613] text-[#f7f3ea]">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
                 <CardTitle>{title}</CardTitle>
@@ -184,7 +205,7 @@ function CapabilitySection() {
 
 function UseCaseSection() {
   return (
-    <section className="paper-grid bg-[#f4f1ea] py-20" id="services">
+    <section className="paper-grid bg-[#efe8dc] py-20" id="services">
       <Container>
         <SectionTitle
           eyebrow="Prestations"
@@ -193,7 +214,11 @@ function UseCaseSection() {
         />
         <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {useCases.map(({ icon: Icon, label }) => (
-            <Card className="bg-[#fbfaf6]/90 shadow-none" interactive key={label}>
+            <Card
+              className="rounded-[28px] bg-[#fbfaf6]/90 shadow-none"
+              interactive
+              key={label}
+            >
               <CardContent className="p-5">
                 <Icon className="size-5 text-[#7b6b4f]" aria-hidden="true" />
                 <p className="mt-5 text-lg font-semibold text-[#171613]">{label}</p>
@@ -261,7 +286,7 @@ function ProcessSection() {
         />
         <div className="mt-10 grid gap-4 lg:grid-cols-4">
           {process.map(([step, title, description]) => (
-            <Card className="shadow-none" key={step}>
+            <Card className="rounded-[28px] shadow-none" key={step}>
               <CardHeader>
                 <span className="font-mono text-sm text-[#8a7a5f]">{step}</span>
                 <CardTitle>{title}</CardTitle>
@@ -279,7 +304,7 @@ function FinalCtaSection() {
   return (
     <section className="bg-[#f4f1ea] py-20">
       <Container>
-        <ArchitecturalGridBackground className="rounded-[6px] border border-[#34312b] p-8 sm:p-10 lg:p-12">
+        <ArchitecturalGridBackground className="rounded-[34px] border border-[#34312b] p-8 sm:p-10 lg:p-12">
           <div className="grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
             <div>
               <Badge className="bg-[#f7f3ea]/10 text-[#d7c6a4] ring-[#f7f3ea]/18">
@@ -302,7 +327,7 @@ function FinalCtaSection() {
                 { label: "Lire la matrice permissions", icon: LockKeyhole, href: routes.workspace.permissions },
               ].map(({ label, icon: Icon, href }) => (
                 <a
-                  className="flex items-center justify-between gap-3 rounded-[3px] border border-[#f7f3ea]/12 bg-[#f7f3ea]/6 p-4 text-sm font-medium text-[#f7f3ea] transition hover:bg-[#f7f3ea]/10"
+                  className="flex items-center justify-between gap-3 rounded-full border border-[#f7f3ea]/12 bg-[#f7f3ea]/6 p-4 text-sm font-medium text-[#f7f3ea] transition hover:bg-[#f7f3ea]/10"
                   href={href}
                   key={label}
                 >
