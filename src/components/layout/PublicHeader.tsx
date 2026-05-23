@@ -1,4 +1,5 @@
 import { Container } from "@/components/layout/Container";
+import { Button } from "@/components/ui/Button";
 import { publicNavigation, routes } from "@/lib/routes";
 
 export function PublicHeader() {
@@ -38,12 +39,9 @@ export function PublicHeader() {
           ))}
         </nav>
 
-        <a
-          className="inline-flex h-10 shrink-0 items-center justify-center rounded-md bg-slate-950 px-4 text-sm font-medium text-white shadow-[0_14px_30px_rgba(15,23,42,0.18)] transition hover:bg-slate-800"
-          href={routes.workspace.newRequest}
-        >
-          Creer une demande
-        </a>
+        <Button asChild className="shrink-0">
+          <a href={routes.workspace.newRequest}>Creer une demande</a>
+        </Button>
       </Container>
     </header>
   );

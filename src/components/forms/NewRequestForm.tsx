@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { AlertTriangle, CalendarDays, FileText, ShieldAlert } from "lucide-react";
 
 import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 import {
   Card,
   CardContent,
@@ -274,12 +275,9 @@ export function NewRequestForm() {
               </div>
             </div>
 
-            <button
-              className="inline-flex h-11 items-center justify-center rounded-md bg-slate-950 px-5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(15,23,42,0.22)] transition hover:bg-slate-800 active:translate-y-px"
-              type="button"
-            >
+            <Button type="button">
               Mettre a jour le recapitulatif
-            </button>
+            </Button>
           </form>
         </CardContent>
       </Card>
