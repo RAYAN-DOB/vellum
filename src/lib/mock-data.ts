@@ -1,7 +1,11 @@
 import type { Deliverable } from "@/types/deliverable";
+import type { ProjectFile } from "@/types/file";
+import type { ProjectMessage } from "@/types/message";
 import type { Project } from "@/types/project";
+import type { QuotePreview } from "@/types/quote";
 import type { ProjectRequest } from "@/types/request";
 import type { User } from "@/types/user";
+import type { TeamCapacity, WorkflowStep } from "@/types/workflow";
 
 export const mockUsers: User[] = [
   {
@@ -191,6 +195,214 @@ export const mockDeliverables: Deliverable[] = [
     isSensitive: false,
     createdAt: "2026-05-16T15:00:00.000Z",
     updatedAt: "2026-05-16T15:00:00.000Z",
+  },
+];
+
+export const mockProjectFiles: ProjectFile[] = [
+  {
+    id: "file-demo-dwg",
+    projectId: "project-demo-001",
+    name: "Plan existant - niveau 1.dwg",
+    type: "dwg",
+    status: "mock_ready",
+    confidentiality: "nda_required",
+    sizeLabel: "2.8 Mo",
+    description: "Fichier fictif pour illustrer un plan source DWG.",
+    isMockOnly: true,
+  },
+  {
+    id: "file-demo-pdf",
+    projectId: "project-demo-001",
+    name: "Annotations client.pdf",
+    type: "pdf",
+    status: "needs_context",
+    confidentiality: "nda_required",
+    sizeLabel: "740 Ko",
+    description: "PDF fictif avec corrections attendues.",
+    isMockOnly: true,
+  },
+  {
+    id: "file-demo-sketch",
+    projectId: "project-demo-002",
+    name: "Croquis circulation.jpg",
+    type: "sketch",
+    status: "review_only",
+    confidentiality: "standard",
+    sizeLabel: "1.1 Mo",
+    description: "Croquis non sensible utilise pour la demo.",
+    isMockOnly: true,
+  },
+  {
+    id: "file-demo-elec",
+    projectId: "project-demo-003",
+    name: "Schema elec a reprendre.pdf",
+    type: "electrical_schema",
+    status: "not_uploaded",
+    confidentiality: "restricted",
+    sizeLabel: "Mock",
+    description: "Emplacement prevu pour schema electrique futur.",
+    isMockOnly: true,
+  },
+  {
+    id: "file-demo-plumbing",
+    projectId: "project-demo-003",
+    name: "Schema plomberie - principe.png",
+    type: "plumbing_schema",
+    status: "not_uploaded",
+    confidentiality: "restricted",
+    sizeLabel: "Mock",
+    description: "Emplacement prevu pour schema plomberie futur.",
+    isMockOnly: true,
+  },
+  {
+    id: "file-demo-photo",
+    projectId: "project-demo-002",
+    name: "Photos site - reperage.zip",
+    type: "site_photo",
+    status: "review_only",
+    confidentiality: "standard",
+    sizeLabel: "5 photos",
+    description: "Lot fictif de photos de site.",
+    isMockOnly: true,
+  },
+  {
+    id: "file-demo-note",
+    projectId: "project-demo-001",
+    name: "Notes projet et contraintes.txt",
+    type: "project_note",
+    status: "mock_ready",
+    confidentiality: "nda_required",
+    sizeLabel: "Texte",
+    description: "Notes de cadrage fictives.",
+    isMockOnly: true,
+  },
+];
+
+export const mockProjectMessages: ProjectMessage[] = [
+  {
+    id: "msg-demo-001",
+    projectId: "project-demo-001",
+    authorName: "Claire Martin",
+    authorRole: "client",
+    kind: "client_question",
+    body: "Je souhaite faire reprendre le plan PDF et obtenir une version propre avec les zones techniques bien separees.",
+    timestamp: "2026-05-16 09:20",
+    isMockOnly: true,
+  },
+  {
+    id: "msg-demo-002",
+    projectId: "project-demo-001",
+    authorName: "Samir Bernard",
+    authorRole: "project_manager",
+    kind: "manager_reply",
+    body: "La demande est claire. Il faudra confirmer les formats finaux attendus avant assignation architecte.",
+    timestamp: "2026-05-16 11:45",
+    isMockOnly: true,
+  },
+  {
+    id: "msg-demo-003",
+    projectId: "project-demo-001",
+    authorName: "Nora Petit",
+    authorRole: "drafter",
+    kind: "architect_question",
+    body: "Je peux preparer un apercu de principe. Question a poser : les annotations rouges sont-elles toutes prioritaires ?",
+    timestamp: "2026-05-17 10:10",
+    isMockOnly: true,
+  },
+  {
+    id: "msg-demo-004",
+    projectId: "project-demo-001",
+    authorName: "Systeme V1",
+    authorRole: "system",
+    kind: "system_note",
+    body: "Conversation mockee : aucun message n'est sauvegarde en base.",
+    timestamp: "2026-05-17 10:12",
+    isMockOnly: true,
+  },
+];
+
+export const mockWorkflowSteps: WorkflowStep[] = [
+  {
+    id: "deposit",
+    label: "Depot projet",
+    owner: "client",
+    description: "Le client decrit son besoin et prepare ses documents en mock.",
+    isActive: true,
+  },
+  {
+    id: "qualification",
+    label: "Qualification manager",
+    owner: "manager",
+    description: "Le manager verifie le scope, les documents et la confidentialite.",
+  },
+  {
+    id: "assignment",
+    label: "Assignation architecte",
+    owner: "manager",
+    description: "Affectation selon charge, competence et disponibilite.",
+  },
+  {
+    id: "production",
+    label: "Production",
+    owner: "architect",
+    description: "Preparation d'un apercu ou d'une version de travail.",
+  },
+  {
+    id: "preview_validation",
+    label: "Validation apercu",
+    owner: "client",
+    description: "Le client valide l'orientation avant devis.",
+  },
+  {
+    id: "quote",
+    label: "Devis",
+    owner: "manager",
+    description: "Devis mocke en V1, paiement prevu plus tard.",
+  },
+  {
+    id: "secure_delivery",
+    label: "Livraison securisee",
+    owner: "admin",
+    description: "Transmission finale a construire en V2 avec stockage prive.",
+  },
+];
+
+export const mockTeamCapacity: TeamCapacity[] = [
+  {
+    id: "capacity-architect-01",
+    name: "Nora Petit",
+    roleLabel: "Architecte / dessinatrice",
+    skills: ["DWG", "PDF", "Reprise technique"],
+    loadLabel: "62% charge",
+    availability: "available",
+  },
+  {
+    id: "capacity-architect-02",
+    name: "Yanis Morel",
+    roleLabel: "Architecte reseaux",
+    skills: ["Schema elec", "Schema plomberie", "Synthese"],
+    loadLabel: "84% charge",
+    availability: "busy",
+  },
+  {
+    id: "capacity-manager-01",
+    name: "Samir Bernard",
+    roleLabel: "Manager projet",
+    skills: ["Qualification", "Devis", "Relation client"],
+    loadLabel: "3 demandes a qualifier",
+    availability: "review",
+  },
+];
+
+export const mockQuotePreviews: QuotePreview[] = [
+  {
+    id: "quote-demo-001",
+    projectId: "project-demo-001",
+    status: "draft",
+    label: "Devis a preparer apres validation de l'apercu",
+    amountLabel: "Non chiffre en V1",
+    note: "Le paiement et les devis reels seront ajoutes en V2.",
+    isMockOnly: true,
   },
 ];
 

@@ -3,6 +3,10 @@ import { ClipboardCheck, ShieldCheck, UserCog, UserRound, UsersRound } from "luc
 
 import { DeliverableList, ProjectList, RequestList } from "@/components/dashboard/WorkspaceLists";
 import { StatCard } from "@/components/dashboard/StatCard";
+import { ClientProjectList } from "@/components/project/ClientProjectList";
+import { AdminControlCenter } from "@/components/roles/AdminControlCenter";
+import { ArchitectWorkloadPanel } from "@/components/roles/ArchitectWorkloadPanel";
+import { ManagerAssignmentBoard } from "@/components/roles/ManagerAssignmentBoard";
 import { Card, CardContent } from "@/components/ui/Card";
 import { mockDashboardStats } from "@/lib/mock-data";
 import type { Role } from "@/types/roles";
@@ -172,12 +176,20 @@ export function RoleWorkspace({ role }: RoleWorkspaceProps) {
         ))}
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
-        <RequestList />
-        <ProjectList />
-      </section>
+      {role === "client" ? <ClientProjectList /> : null}
+      {role === "project_manager" ? <ManagerAssignmentBoard /> : null}
+      {role === "drafter" ? <ArchitectWorkloadPanel /> : null}
+      {role === "admin" ? <AdminControlCenter /> : null}
 
-      <DeliverableList />
+      {role !== "client" ? (
+        <>
+          <section className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+            <RequestList />
+            <ProjectList />
+          </section>
+          <DeliverableList />
+        </>
+      ) : null}
     </div>
   );
 }

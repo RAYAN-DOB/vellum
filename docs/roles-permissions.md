@@ -1,21 +1,37 @@
-# Roles et permissions
+# Roles And Permissions
 
-Le modele cible prevoit plusieurs roles, tout en evitant de dupliquer l'application par role. Les espaces doivent partager les memes objets metier lorsque c'est possible, avec des vues adaptees aux responsabilites de chacun.
+La V1.5 affiche un modele cible. Elle ne securise rien cote serveur.
 
-## Roles prevus
+## Roles
 
-- client : cree et suit ses demandes, consulte les livrables autorises ;
-- chef de projet : qualifie les demandes, suit l'avancement, coordonne les livrables ;
-- dessinateur : traite les demandes assignees et prepare les livrables ;
-- admin : supervise la plateforme, les utilisateurs, les roles et les parametres.
+- Client : depose un projet, suit ses projets, repond aux questions.
+- Manager : qualifie, assigne, prepare le devis.
+- Architecte : produit, pose des questions, transmet un apercu.
+- Admin : gouvernance, roles, activite, configuration future.
 
-## Modele cible
-
-La logique de permissions devra etre centralisee plus tard dans `src/lib/permissions`, autour d'un modele conceptuel :
-
-```ts
-can(actor, action, resource)
+```mermaid
+flowchart TD
+  Admin["Admin"] --> Manager["Manager"]
+  Manager --> Architect["Architecte / dessinateur"]
+  Client["Client"] --> Manager
+  Architect --> Client
 ```
 
-Ce modele devra tenir compte du role global, du role projet, des assignations et de l'etat de la ressource. Les restrictions cote interface ne suffiront jamais : toute future action serveur devra refaire ses propres controles.
+```mermaid
+flowchart TD
+  Role["Role global"] --> ProjectRole["Role projet"]
+  ProjectRole --> Assignment["Assignation"]
+  Assignment --> ResourceState["Etat ressource"]
+  ResourceState --> Permission["can(actor, action, resource)"]
+  NDA["NDA"] --> Permission
+  Org["Organisation"] --> Permission
+```
 
+## Actions futures
+
+| Role | Projet | Documents | Messages | Devis |
+| --- | --- | --- | --- | --- |
+| Client | Ses projets | Fichiers autorises | Lire/repondre | Voir apres validation |
+| Manager | Projets assignes | Qualifier | Coordonner | Preparer |
+| Architecte | Projets assignes | Lire selon droits | Poser questions | Non |
+| Admin | Gouvernance | Selon politique | Audit | Configurer |

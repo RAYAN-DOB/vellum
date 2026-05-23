@@ -43,6 +43,7 @@ export default async function RequestDetailPage({
           { label: "Fichiers", value: "Aucun upload reel au MVP" },
         ]}
         historyType="requests"
+        projectId={request.projectId}
         status={request.status}
         title={request.title}
       />

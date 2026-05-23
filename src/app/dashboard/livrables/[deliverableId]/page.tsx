@@ -52,6 +52,7 @@ export default async function DeliverableDetailPage({
           { label: "Fichier", value: "Non disponible au MVP" },
         ]}
         historyType="deliverables"
+        projectId={deliverable.projectId}
         status={deliverable.status}
         title={deliverable.title}
       />

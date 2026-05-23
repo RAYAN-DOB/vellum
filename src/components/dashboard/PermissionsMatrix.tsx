@@ -6,6 +6,30 @@ import { mockPermissionMatrix } from "@/lib/mock-data";
 export function PermissionsMatrix() {
   return (
     <div className="grid gap-6">
+      <section className="grid gap-4 md:grid-cols-3">
+        {[
+          {
+            title: "Ressources",
+            text: "Projet, demande, document, message, apercu, devis et livrable.",
+          },
+          {
+            title: "Controle cible",
+            text: "Role global, role projet, assignation, NDA et etat de ressource.",
+          },
+          {
+            title: "V1 actuelle",
+            text: "Affichage front uniquement. Rien n'est securise cote serveur.",
+          },
+        ].map((item) => (
+          <Card key={item.title}>
+            <CardContent className="p-5">
+              <p className="font-semibold text-slate-950">{item.title}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{item.text}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </section>
+
       <Card className="border-amber-200 bg-amber-50 shadow-none">
         <CardContent className="flex gap-3 p-5">
           <AlertTriangle

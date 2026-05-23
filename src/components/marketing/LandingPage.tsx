@@ -32,9 +32,9 @@ import { mockDataNotice } from "@/lib/mock-data";
 import { routes } from "@/lib/routes";
 
 const metrics = [
-  { value: "4", label: "espaces metier", detail: "client, chef de projet, dessinateur, admin" },
-  { value: "0", label: "fichier sensible", detail: "aucun document reel stocke dans cette V1" },
-  { value: "1", label: "suivi central", detail: "demandes, statuts et livrables reunis" },
+  { value: "1", label: "chat projet", detail: "depot client en pleine page" },
+  { value: "7", label: "types documents", detail: "DWG, PDF, croquis, schemas, photos, notes" },
+  { value: "4", label: "espaces metier", detail: "client, manager, architecte, admin" },
 ] as const;
 
 const clientProblems = [
@@ -46,19 +46,19 @@ const clientProblems = [
 const solutionPoints = [
   {
     icon: FolderKanban,
-    title: "Une demande claire des le depart",
+    title: "Un depot projet guide par chat",
     description:
-      "Nom du projet, type de besoin, priorite, formats attendus, delai et niveau de confidentialite sont poses au meme endroit.",
+      "Le client decrit son besoin dans un grand chat, ajoute des documents mockes et obtient une synthese exploitable.",
   },
   {
     icon: MessageSquareText,
-    title: "Un suivi lisible par role",
+    title: "Un suivi par role sans duplication",
     description:
       "Client, chef de projet, dessinateur et admin voient la meme base metier, adaptee a leur responsabilite.",
   },
   {
     icon: LockKeyhole,
-    title: "Une base prete pour la securite",
+    title: "Une base prete pour V2",
     description:
       "La V1 montre le modele cible, tout en restant honnete : les vrais controles serveur arriveront en V2.",
   },
@@ -208,9 +208,9 @@ function HeroSection() {
             le controle de vos projets techniques.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-            Une V1 front statique pour montrer comment centraliser les demandes
-            DWG, PDF, croquis et livrables, sans stocker de fichier sensible et
-            sans promettre une securite serveur qui n&apos;existe pas encore.
+            Une V1 front statique pour visualiser le futur parcours : depot par
+            chat, documents projet, qualification manager, production architecte
+            et suivi client, sans backend ni fichier sensible reel.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -218,8 +218,8 @@ function HeroSection() {
               asChild
               className="h-12 bg-white text-slate-950 shadow-[0_18px_40px_rgba(255,255,255,0.12)] hover:bg-blue-50"
             >
-              <a href={routes.workspace.newRequest}>
-                Creer une demande demo
+              <a href={routes.roles.clientNewProject}>
+                Tester le chat projet
                 <ArrowRight className="size-4" aria-hidden="true" />
               </a>
             </Button>
@@ -294,8 +294,8 @@ function SolutionSection() {
       <Container>
         <SectionTitle
           eyebrow="Solution"
-          title="Une premiere experience complete pour comprendre le futur produit."
-          description="Cette V1 ne remplace pas une production securisee. Elle presente le parcours, les roles, la logique projet et les decisions de confidentialite a valider avant la V2."
+          title="Le cœur produit devient un espace de depot projet en conversation."
+          description="Cette V1.5 montre la promesse principale : transformer un brief technique disperse en dossier clair, qualifiable et delegable."
         />
 
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -326,8 +326,8 @@ function UseCasesSection() {
       <Container>
         <SectionTitle
           eyebrow="Services et cas d'usage"
-          title="Les cas d'usage sont concrets, meme si les donnees restent fictives."
-          description="Plans PDF, croquis, reprises DWG et livrables : la V1 montre comment les demandes seront suivies, sans ouvrir de flux d'upload reel."
+          title="Les cas d'usage couvrent les vrais documents d'un projet technique."
+          description="DWG, PDF, croquis, schemas electriques, plomberie, photos de site et notes projet sont modelises en mock, sans upload reel."
         />
 
         <div className="mt-10 grid gap-5 md:grid-cols-2">
@@ -441,7 +441,7 @@ function FinalCtaSection() {
                 Prochaine etape
               </Badge>
               <h2 className="mt-5 max-w-3xl text-3xl font-semibold leading-tight tracking-normal sm:text-4xl">
-                La V1 est prete pour une demo produit claire, pas pour une mise
+                La V1.5 est prete pour une demo produit claire, pas pour une mise
                 en production.
               </h2>
               <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300">

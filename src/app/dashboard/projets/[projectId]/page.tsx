@@ -46,6 +46,7 @@ export default async function ProjectDetailPage({
           { label: "Fichiers", value: "Aucun fichier projet reel" },
         ]}
         historyType="projects"
+        projectId={project.id}
         status={project.status}
         title={project.name}
       />

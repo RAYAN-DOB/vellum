@@ -15,6 +15,8 @@ export const routes = {
   },
   roles: {
     client: "/client",
+    clientNewProject: "/client/nouveau-projet",
+    clientProjects: "/client/projets",
     projectManager: "/chef-projet",
     drafter: "/dessinateur",
     admin: "/admin",
@@ -30,11 +32,13 @@ export const publicNavigation = [
 
 export const workspaceNavigation = [
   { label: "Tableau de bord", href: routes.workspace.dashboard },
-  { label: "Nouvelle demande", href: routes.workspace.newRequest },
+  { label: "Chat depot projet", href: routes.workspace.newRequest },
 ] as const;
 
 export const roleNavigation = [
   { label: "Espace client", href: routes.roles.client },
+  { label: "Nouveau projet", href: routes.roles.clientNewProject },
+  { label: "Projets client", href: routes.roles.clientProjects },
   { label: "Chef de projet", href: routes.roles.projectManager },
   { label: "Dessinateur", href: routes.roles.drafter },
   { label: "Admin", href: routes.roles.admin },

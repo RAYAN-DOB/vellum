@@ -1,6 +1,9 @@
 import { AlertTriangle, Clock3, ShieldCheck } from "lucide-react";
 import type { ReactNode } from "react";
 
+import { DocumentPreviewCard } from "@/components/files/DocumentPreviewCard";
+import { MessageThread } from "@/components/project/MessageThread";
+import { ProjectTimeline } from "@/components/project/ProjectTimeline";
 import { StatusBadge } from "@/components/dashboard/StatusBadge";
 import {
   Card,
@@ -9,7 +12,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/Card";
-import { mockHistory } from "@/lib/mock-data";
+import {
+  mockHistory,
+  mockProjectFiles,
+  mockProjectMessages,
+  mockWorkflowSteps,
+} from "@/lib/mock-data";
 
 type DetailField = {
   label: string;
@@ -22,6 +30,7 @@ type DetailPageProps = {
   status?: Parameters<typeof StatusBadge>[0]["value"];
   fields: DetailField[];
   historyType: keyof typeof mockHistory;
+  projectId?: string;
 };
 
 export function DetailPage({
@@ -30,8 +39,15 @@ export function DetailPage({
   status,
   fields,
   historyType,
+  projectId,
 }: DetailPageProps) {
   const history = mockHistory[historyType];
+  const files = projectId
+    ? mockProjectFiles.filter((file) => file.projectId === projectId)
+    : [];
+  const messages = projectId
+    ? mockProjectMessages.filter((message) => message.projectId === projectId)
+    : [];
 
   return (
     <div className="grid gap-6">
@@ -113,6 +129,29 @@ export function DetailPage({
           </CardContent>
         </Card>
       </section>
+
+      {projectId ? (
+        <section className="grid gap-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Documents mockes</CardTitle>
+              <CardDescription>
+                Fichiers fictifs pour visualiser le futur espace documents.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {files.map((file) => (
+                <DocumentPreviewCard file={file} key={file.id} />
+              ))}
+            </CardContent>
+          </Card>
+
+          <section className="grid gap-6 xl:grid-cols-[1fr_0.8fr]">
+            <MessageThread messages={messages} />
+            <ProjectTimeline steps={mockWorkflowSteps} />
+          </section>
+        </section>
+      ) : null}
 
       <Card className="border-amber-200 bg-amber-50 shadow-none">
         <CardContent className="flex gap-3 p-5">

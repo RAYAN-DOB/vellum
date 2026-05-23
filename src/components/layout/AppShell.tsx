@@ -30,6 +30,8 @@ type AppShellProps = {
 
 const roleIcons = {
   [routes.roles.client]: UserRound,
+  [routes.roles.clientNewProject]: FilePlus2,
+  [routes.roles.clientProjects]: LayoutDashboard,
   [routes.roles.projectManager]: UsersRound,
   [routes.roles.drafter]: ShieldCheck,
   [routes.roles.admin]: UserCog,
@@ -64,7 +66,7 @@ export function AppShell({
             </span>
           </a>
           <a
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-4 text-sm font-medium text-slate-200 transition hover:bg-white/10 hover:text-white"
+            className="hidden h-10 shrink-0 items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-4 text-sm font-medium text-slate-200 transition hover:bg-white/10 hover:text-white sm:inline-flex"
             href={routes.public.home}
           >
             <Home className="size-4" aria-hidden="true" />
@@ -73,16 +75,16 @@ export function AppShell({
         </Container>
       </header>
 
-      <Container className="grid gap-6 py-6 lg:grid-cols-[260px_1fr] lg:py-8">
-        <aside className="lg:sticky lg:top-6 lg:self-start">
+      <Container className="grid min-w-0 gap-6 py-6 lg:grid-cols-[260px_1fr] lg:py-8">
+        <aside className="min-w-0 lg:sticky lg:top-6 lg:self-start">
           <nav
             aria-label="Navigation interne"
-            className="rounded-lg border border-slate-200/80 bg-white/90 p-3 shadow-[0_18px_55px_rgba(15,23,42,0.08)] backdrop-blur"
+            className="min-w-0 overflow-hidden rounded-lg border border-slate-200/80 bg-white/90 p-3 shadow-[0_18px_55px_rgba(15,23,42,0.08)] backdrop-blur"
           >
-            <div className="px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500">
+            <div className="hidden px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500 lg:block">
               Pilotage
             </div>
-            <div className="grid gap-1">
+            <div className="flex gap-2 overflow-x-auto pb-1 lg:grid lg:gap-1 lg:overflow-visible lg:pb-0">
               {workspaceNavigation.map((item) => {
                 const Icon = workspaceIcons[item.href];
 
@@ -90,7 +92,7 @@ export function AppShell({
                   <a
                     aria-current={activeHref === item.href ? "page" : undefined}
                     className={cn(
-                      "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
+                      "flex shrink-0 items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
                       activeHref === item.href
                         ? "bg-slate-950 text-white shadow-[0_12px_25px_rgba(15,23,42,0.16)]"
                         : "text-slate-600 hover:bg-slate-100 hover:text-slate-950",
@@ -105,15 +107,15 @@ export function AppShell({
               })}
             </div>
 
-            <div className="mt-5 px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500">
+            <div className="mt-4 hidden px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500 lg:mt-5 lg:block">
               Exemples
             </div>
-            <div className="grid gap-1">
+            <div className="mt-2 flex gap-2 overflow-x-auto pb-1 lg:mt-0 lg:grid lg:gap-1 lg:overflow-visible lg:pb-0">
               {workspaceSecondaryNavigation.map((item) => (
                 <a
                   aria-current={activeHref === item.href ? "page" : undefined}
                   className={cn(
-                    "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
+                    "flex shrink-0 items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
                     activeHref === item.href
                       ? "bg-slate-950 text-white shadow-[0_12px_25px_rgba(15,23,42,0.16)]"
                       : "text-slate-600 hover:bg-slate-100 hover:text-slate-950",
@@ -126,10 +128,10 @@ export function AppShell({
               ))}
             </div>
 
-            <div className="mt-5 px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500">
+            <div className="mt-4 hidden px-3 pb-2 text-xs font-semibold uppercase tracking-normal text-slate-500 lg:mt-5 lg:block">
               Espaces metier
             </div>
-            <div className="grid gap-1">
+            <div className="mt-2 flex gap-2 overflow-x-auto pb-1 lg:mt-0 lg:grid lg:gap-1 lg:overflow-visible lg:pb-0">
               {roleNavigation.map((item) => {
                 const Icon = roleIcons[item.href];
 
@@ -137,7 +139,7 @@ export function AppShell({
                   <a
                     aria-current={activeHref === item.href ? "page" : undefined}
                     className={cn(
-                      "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
+                      "flex shrink-0 items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
                       activeHref === item.href
                         ? "bg-blue-700 text-white shadow-[0_12px_25px_rgba(29,78,216,0.22)]"
                         : "text-slate-600 hover:bg-slate-100 hover:text-slate-950",
@@ -152,14 +154,14 @@ export function AppShell({
               })}
             </div>
 
-            <div className="mt-5 rounded-md border border-amber-200 bg-amber-50 p-3 text-xs leading-5 text-amber-900">
+            <div className="mt-5 hidden rounded-md border border-amber-200 bg-amber-50 p-3 text-xs leading-5 text-amber-900 lg:block">
               V1 front statique : les vues simulent les futurs roles, sans auth
               ni controle serveur.
             </div>
           </nav>
         </aside>
 
-        <main className="min-w-0">
+        <main className="min-w-0 max-w-[calc(100vw-2rem)] overflow-hidden sm:max-w-full">
           <div className="relative mb-6 flex flex-col gap-4 overflow-hidden rounded-lg border border-slate-800 bg-slate-950 p-5 text-white shadow-[0_25px_70px_rgba(15,23,42,0.22)] sm:p-6 lg:flex-row lg:items-end lg:justify-between">
             <BorderBeam className="opacity-45" />
             <div>
