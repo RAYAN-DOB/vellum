@@ -1,6 +1,7 @@
 import { ArrowRight, MessageSquareText, PhoneCall } from "lucide-react";
 
 import { DocumentPreviewCard } from "@/components/files/DocumentPreviewCard";
+import { StatusBadge } from "@/components/dashboard/StatusBadge";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import {
@@ -13,10 +14,16 @@ import {
 import { mockProjectFiles, mockProjects, mockRequests } from "@/lib/mock-data";
 import { routes } from "@/lib/routes";
 
+const confidentialityLabel = {
+  standard: "Standard",
+  nda_required: "NDA requis",
+  restricted: "Restreint",
+} as const;
+
 export function ClientProjectList() {
   return (
     <div className="grid gap-6">
-      <section className="grid gap-4 lg:grid-cols-3">
+      <section className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
         {mockProjects.map((project) => {
           const requestCount = mockRequests.filter(
             (request) => request.projectId === project.id,
@@ -32,10 +39,11 @@ export function ClientProjectList() {
                     </p>
                     <CardTitle className="mt-2">{project.name}</CardTitle>
                   </div>
-                  <Badge tone={project.confidentiality === "restricted" ? "amber" : "blue"}>
-                    {project.status}
+                  <Badge tone={project.confidentiality === "restricted" ? "amber" : "neutral"}>
+                    {confidentialityLabel[project.confidentiality]}
                   </Badge>
                 </div>
+                <StatusBadge value={project.status} />
                 <CardDescription>{project.description}</CardDescription>
               </CardHeader>
               <CardContent className="grid gap-4">
@@ -83,7 +91,7 @@ export function ClientProjectList() {
             Cartes fictives pour presenter le futur espace de fichiers projet.
           </CardDescription>
         </CardHeader>
-        <CardContent className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <CardContent className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
           {mockProjectFiles.map((file) => (
             <DocumentPreviewCard file={file} key={file.id} />
           ))}

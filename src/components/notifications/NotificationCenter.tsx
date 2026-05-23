@@ -23,7 +23,7 @@ export function NotificationCenter() {
       </button>
 
       {open ? (
-        <div className="absolute right-0 top-12 z-40 w-[min(24rem,calc(100vw-2rem))] overflow-hidden rounded-[24px] border border-[#34312b] bg-[#10100e]/96 text-[#f7f3ea] shadow-[0_30px_100px_rgba(0,0,0,0.38)] backdrop-blur-xl">
+        <div className="fixed inset-x-4 top-16 z-40 overflow-hidden rounded-[24px] border border-[#34312b] bg-[#10100e]/96 text-[#f7f3ea] shadow-[0_30px_100px_rgba(0,0,0,0.38)] backdrop-blur-xl sm:absolute sm:inset-x-auto sm:right-0 sm:top-12 sm:w-[min(24rem,calc(100vw-2rem))]">
           <div className="border-b border-[#f7f3ea]/10 px-4 py-4">
             <p className="text-sm font-semibold">Notifications projet</p>
             <p className="mt-1 text-xs text-[#9d9485]">

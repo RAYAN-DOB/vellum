@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const cardVariants = cva(
-  "premium-panel rounded-[4px] border bg-[#fbfaf6] text-[#171613]",
+  "premium-panel min-w-0 rounded-[4px] border bg-[#fbfaf6] text-[#171613]",
   {
     variants: {
       tone: {
@@ -41,7 +41,9 @@ export function CardHeader({
   className,
   ...props
 }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("space-y-1.5 p-5 sm:p-6", className)} {...props} />;
+  return (
+    <div className={cn("min-w-0 space-y-1.5 p-5 sm:p-6", className)} {...props} />
+  );
 }
 
 export function CardTitle({
@@ -50,7 +52,10 @@ export function CardTitle({
 }: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
-      className={cn("text-base font-semibold leading-6 text-[#171613]", className)}
+      className={cn(
+        "break-words text-base font-semibold leading-6 text-[#171613]",
+        className,
+      )}
       {...props}
     />
   );
@@ -61,7 +66,10 @@ export function CardDescription({
   ...props
 }: HTMLAttributes<HTMLParagraphElement>) {
   return (
-    <p className={cn("text-sm leading-6 text-[#6b665a]", className)} {...props} />
+    <p
+      className={cn("break-words text-sm leading-6 text-[#6b665a]", className)}
+      {...props}
+    />
   );
 }
 
@@ -69,7 +77,9 @@ export function CardContent({
   className,
   ...props
 }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("p-5 pt-0 sm:p-6 sm:pt-0", className)} {...props} />;
+  return (
+    <div className={cn("min-w-0 p-5 pt-0 sm:p-6 sm:pt-0", className)} {...props} />
+  );
 }
 
 export function CardFooter({

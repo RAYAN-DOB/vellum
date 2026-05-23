@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 import { DocumentPreviewCard } from "@/components/files/DocumentPreviewCard";
+import { StatusBadge } from "@/components/dashboard/StatusBadge";
 import { MessageThread } from "@/components/project/MessageThread";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -29,6 +30,12 @@ import type { Project } from "@/types/project";
 import type { QuotePreview } from "@/types/quote";
 import type { ProjectRequest } from "@/types/request";
 
+const confidentialityLabel = {
+  standard: "Standard",
+  nda_required: "NDA requis",
+  restricted: "Restreint",
+} as const;
+
 type PremiumProjectDetailProps = {
   project: Project;
   files: ProjectFile[];
@@ -47,17 +54,17 @@ export function PremiumProjectDetail({
   const activeStatuses = workflowStatuses.slice(1, 9);
 
   return (
-    <div className="grid gap-6">
-      <section className="grid gap-6 xl:grid-cols-[1fr_360px]">
+    <div className="grid min-w-0 gap-6">
+      <section className="grid min-w-0 gap-6 xl:grid-cols-[1fr_360px]">
         <Card tone="dark" className="overflow-hidden rounded-[32px]">
           <CardHeader>
             <div className="flex flex-wrap items-center gap-2">
               <Badge className="bg-[#f7f3ea]/10 text-[#d7c6a4] ring-[#f7f3ea]/18">
                 {project.reference}
               </Badge>
-              <Badge tone="green">{project.status}</Badge>
+              <StatusBadge value={project.status} />
               <Badge tone={project.confidentiality === "restricted" ? "amber" : "neutral"}>
-                {project.confidentiality}
+                {confidentialityLabel[project.confidentiality]}
               </Badge>
             </div>
             <CardTitle className="max-w-3xl text-3xl leading-tight text-[#f7f3ea]">
@@ -113,7 +120,7 @@ export function PremiumProjectDetail({
         </Card>
       </section>
 
-      <section className="grid gap-3 md:grid-cols-4">
+      <section className="grid min-w-0 gap-3 md:grid-cols-4">
         {activeStatuses.map((status) => (
           <Card
             className="rounded-[24px] shadow-none"
@@ -136,7 +143,7 @@ export function PremiumProjectDetail({
         ))}
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[1fr_0.8fr]">
+      <section className="grid min-w-0 gap-6 xl:grid-cols-[1fr_0.8fr]">
         <Card className="rounded-[32px]">
           <CardHeader>
             <CardTitle>Documents projet</CardTitle>
@@ -144,10 +151,10 @@ export function PremiumProjectDetail({
               Apercus fictifs : aucun vrai fichier n&apos;est stocke.
             </CardDescription>
           </CardHeader>
-          <CardContent className="grid gap-4 md:grid-cols-2">
+          <CardContent className="grid min-w-0 gap-4 md:grid-cols-2">
             {files.map((file) => (
               <a
-                className="block rounded-[24px] transition hover:-translate-y-0.5"
+                className="block min-w-0 rounded-[24px] transition hover:-translate-y-0.5"
                 href={`${routes.roles.clientProjects}/${project.id}/documents/${file.id}`}
                 key={file.id}
               >
@@ -187,7 +194,7 @@ export function PremiumProjectDetail({
         </Card>
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[1fr_0.82fr]">
+      <section className="grid min-w-0 gap-6 xl:grid-cols-[1fr_0.82fr]">
         <MessageThread messages={messages} />
 
         <Card className="rounded-[32px]">
@@ -218,7 +225,7 @@ export function PremiumProjectDetail({
         </Card>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-3">
+      <section className="grid min-w-0 gap-4 md:grid-cols-3">
         {[
           { title: "Confidentialite", detail: mockDataNotice, icon: LockKeyhole },
           { title: "Demandes liees", detail: `${requests.length} demande(s) rattachee(s) au projet.`, icon: UserRoundCheck },

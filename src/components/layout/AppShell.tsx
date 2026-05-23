@@ -98,7 +98,7 @@ export function AppShell({
             <div className="hidden px-3 pb-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#8a7a5f] lg:block">
               Pilotage
             </div>
-            <div className="flex gap-2 overflow-x-auto pb-1 lg:grid lg:gap-1 lg:overflow-visible lg:pb-0">
+            <div className="grid grid-cols-2 gap-2 pb-1 lg:grid-cols-1 lg:gap-1 lg:pb-0">
               {workspaceNavigation.map((item) => {
                 const Icon = workspaceIcons[item.href];
 
@@ -106,7 +106,7 @@ export function AppShell({
                   <a
                     aria-current={activeHref === item.href ? "page" : undefined}
                     className={cn(
-                      "flex shrink-0 items-center gap-3 rounded-[3px] px-3 py-2 text-sm font-medium transition",
+                      "flex min-w-0 items-center gap-3 rounded-[3px] px-3 py-2 text-sm font-medium transition",
                       activeHref === item.href
                         ? "bg-[#171613] text-[#f7f3ea] shadow-[0_12px_25px_rgba(22,21,18,0.16)]"
                         : "text-[#6b665a] hover:bg-[#eee8dc] hover:text-[#171613]",
@@ -115,7 +115,7 @@ export function AppShell({
                     key={item.href}
                   >
                     <Icon className="size-4" aria-hidden="true" />
-                    {item.label}
+                    <span className="truncate">{item.label}</span>
                   </a>
                 );
               })}
@@ -124,12 +124,12 @@ export function AppShell({
             <div className="mt-4 hidden px-3 pb-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#8a7a5f] lg:mt-5 lg:block">
               Exemples
             </div>
-            <div className="mt-2 flex gap-2 overflow-x-auto pb-1 lg:mt-0 lg:grid lg:gap-1 lg:overflow-visible lg:pb-0">
+            <div className="mt-2 grid grid-cols-2 gap-2 pb-1 lg:mt-0 lg:grid-cols-1 lg:gap-1 lg:pb-0">
               {workspaceSecondaryNavigation.map((item) => (
                 <a
                   aria-current={activeHref === item.href ? "page" : undefined}
                   className={cn(
-                    "flex shrink-0 items-center gap-3 rounded-[3px] px-3 py-2 text-sm font-medium transition",
+                    "flex min-w-0 items-center gap-3 rounded-[3px] px-3 py-2 text-sm font-medium transition",
                     activeHref === item.href
                       ? "bg-[#171613] text-[#f7f3ea] shadow-[0_12px_25px_rgba(22,21,18,0.16)]"
                       : "text-[#6b665a] hover:bg-[#eee8dc] hover:text-[#171613]",
@@ -137,7 +137,7 @@ export function AppShell({
                   href={item.href}
                   key={item.href}
                 >
-                  {item.label}
+                  <span className="truncate">{item.label}</span>
                 </a>
               ))}
             </div>
@@ -145,7 +145,7 @@ export function AppShell({
             <div className="mt-4 hidden px-3 pb-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#8a7a5f] lg:mt-5 lg:block">
               Espaces metier
             </div>
-            <div className="mt-2 flex gap-2 overflow-x-auto pb-1 lg:mt-0 lg:grid lg:gap-1 lg:overflow-visible lg:pb-0">
+            <div className="mt-2 grid grid-cols-2 gap-2 pb-1 lg:mt-0 lg:grid-cols-1 lg:gap-1 lg:pb-0">
               {roleNavigation.map((item) => {
                 const Icon = roleIcons[item.href];
 
@@ -153,7 +153,7 @@ export function AppShell({
                   <a
                     aria-current={activeHref === item.href ? "page" : undefined}
                     className={cn(
-                      "flex shrink-0 items-center gap-3 rounded-[3px] px-3 py-2 text-sm font-medium transition",
+                      "flex min-w-0 items-center gap-3 rounded-[3px] px-3 py-2 text-sm font-medium transition",
                       activeHref === item.href
                         ? "bg-[#2b2923] text-[#f7f3ea] shadow-[0_12px_25px_rgba(22,21,18,0.18)]"
                         : "text-[#6b665a] hover:bg-[#eee8dc] hover:text-[#171613]",
@@ -162,7 +162,7 @@ export function AppShell({
                     key={item.href}
                   >
                     <Icon className="size-4" aria-hidden="true" />
-                    {item.label}
+                    <span className="truncate">{item.label}</span>
                   </a>
                 );
               })}
@@ -179,7 +179,7 @@ export function AppShell({
           </nav>
         </aside>
 
-        <main className="min-w-0 max-w-[calc(100vw-2rem)] overflow-hidden sm:max-w-full">
+        <main className="min-w-0 w-full max-w-[calc(100vw-2rem)] overflow-hidden sm:max-w-full">
           <ArchitecturalGridBackground className="mb-6 rounded-[6px] border border-[#3c3932] p-5 shadow-[0_32px_90px_rgba(22,21,18,0.18)] sm:p-6">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="min-w-0">

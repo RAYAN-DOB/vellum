@@ -42,7 +42,7 @@ const transitionSteps = [
 ] as const;
 
 const defaultText =
-  "J'ai un plan PDF d'un local a reprendre. Je veux ajouter les arrivees electriques, corriger les cotes et obtenir une version DWG propre avec un apercu avant validation.";
+  "J'ai un plan PDF a reprendre, des arrivees electriques a ajouter, des cotes a corriger et je veux un DWG propre avec apercu.";
 
 export function ProjectDepositFlow() {
   const router = useRouter();

@@ -1,13 +1,26 @@
 "use client";
 
 import { Command, Search, Sparkles } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { commandActions } from "@/lib/workflow";
 
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setOpen((value) => !value);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const actions = useMemo(() => {
     const normalized = query.trim().toLowerCase();
@@ -24,6 +37,7 @@ export function CommandPalette() {
   return (
     <div className="relative">
       <button
+        aria-label="Ouvrir la palette de commandes"
         aria-expanded={open}
         className="inline-flex h-10 items-center gap-2 rounded-full border border-[#d8d0bf] bg-[#fbfaf6]/80 px-3 text-sm font-medium text-[#5e594d] shadow-sm transition hover:bg-white hover:text-[#171613]"
         onClick={() => setOpen((value) => !value)}
@@ -34,7 +48,7 @@ export function CommandPalette() {
       </button>
 
       {open ? (
-        <div className="absolute right-0 top-12 z-40 w-[min(23rem,calc(100vw-2rem))] overflow-hidden rounded-[24px] border border-[#34312b] bg-[#10100e]/96 text-[#f7f3ea] shadow-[0_30px_100px_rgba(0,0,0,0.38)] backdrop-blur-xl">
+        <div className="fixed inset-x-4 top-16 z-40 overflow-hidden rounded-[24px] border border-[#34312b] bg-[#10100e]/96 text-[#f7f3ea] shadow-[0_30px_100px_rgba(0,0,0,0.38)] backdrop-blur-xl sm:absolute sm:inset-x-auto sm:right-0 sm:top-12 sm:w-[min(23rem,calc(100vw-2rem))]">
           <div className="flex items-center gap-3 border-b border-[#f7f3ea]/10 px-4 py-3">
             <Search className="size-4 text-[#d7c6a4]" aria-hidden="true" />
             <input

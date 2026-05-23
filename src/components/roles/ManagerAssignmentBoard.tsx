@@ -10,7 +10,7 @@ import {
   UsersRound,
 } from "lucide-react";
 
-import { Badge } from "@/components/ui/Badge";
+import { StatusBadge } from "@/components/dashboard/StatusBadge";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { mockProjectFiles, mockRequests, mockTeamCapacity } from "@/lib/mock-data";
@@ -21,8 +21,8 @@ export function ManagerAssignmentBoard() {
   const selectedFiles = mockProjectFiles.filter((file) => file.projectId === selected.projectId);
 
   return (
-    <section className="grid gap-6 xl:grid-cols-[320px_minmax(0,1fr)_340px]">
-      <Card className="rounded-[30px]">
+    <section className="grid gap-6 xl:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] 2xl:grid-cols-[300px_minmax(0,1fr)_300px]">
+      <Card className="rounded-[30px] xl:col-span-2 2xl:col-span-1">
         <CardHeader>
           <CardTitle>Demandes entrantes</CardTitle>
         </CardHeader>
@@ -39,9 +39,7 @@ export function ManagerAssignmentBoard() {
                     {request.summary}
                   </p>
                 </div>
-                <Badge tone={request.priority === "urgent" ? "red" : "amber"}>
-                  {request.priority}
-                </Badge>
+                <StatusBadge value={request.priority} />
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
                 {request.expectedFormats.map((format) => (
@@ -69,15 +67,13 @@ export function ManagerAssignmentBoard() {
                 {selected.title}
               </CardTitle>
             </div>
-            <Badge className="bg-[#f7f3ea]/10 text-[#d7c6a4] ring-[#f7f3ea]/18">
-              {selected.status}
-            </Badge>
+            <StatusBadge value={selected.status} />
           </div>
         </CardHeader>
         <CardContent className="grid gap-5">
           <div className="grid gap-3 md:grid-cols-3">
             {[
-              { label: "Urgence", value: selected.priority, icon: Gauge },
+              { label: "Urgence", value: selected.priority === "urgent" ? "Urgente" : "Normale", icon: Gauge },
               { label: "Delai", value: selected.desiredDueDate ?? "A cadrer", icon: CalendarDays },
               { label: "Pieces", value: `${selectedFiles.length} mock`, icon: FileText },
             ].map(({ label, value, icon: Icon }) => (
