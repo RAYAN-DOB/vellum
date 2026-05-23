@@ -87,7 +87,7 @@ function HeroSection() {
       <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#090908] via-[#090908]/70 to-transparent" />
       <Container className="relative z-10 grid min-h-[92svh] gap-10 pb-10 pt-32 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:pb-12 lg:pt-28">
         <div className="max-w-3xl">
-          <h1 className="text-[36px] font-semibold leading-[1] text-[#f8f4ea] sm:text-6xl lg:text-[58px] xl:text-[68px]">
+          <h1 className="max-w-[21rem] text-[34px] font-semibold leading-[1] text-[#f8f4ea] sm:max-w-none sm:text-6xl lg:text-[58px] xl:text-[68px]">
             <span className="block sm:hidden">Le cockpit pour</span>
             <span className="block sm:hidden">vos plans</span>
             <span className="block sm:hidden">techniques.</span>
@@ -100,10 +100,10 @@ function HeroSection() {
             demandes, echangez avec l&apos;equipe et suivez chaque livrable depuis un
             espace client premium.
           </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-9 flex max-w-[22rem] flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:items-center">
             <Button
               asChild
-              className="h-[52px] rounded-full bg-[#f8f4ea] px-6 text-[#171613] shadow-[0_18px_60px_rgba(248,244,234,0.16)] hover:bg-white"
+              className="h-[52px] w-full rounded-full bg-[#f8f4ea] px-6 text-[#171613] shadow-[0_18px_60px_rgba(248,244,234,0.16)] hover:bg-white sm:w-auto"
             >
               <a href={routes.roles.clientNewProject}>
                 Deposer un projet
@@ -112,7 +112,7 @@ function HeroSection() {
             </Button>
             <Button
               asChild
-              className="h-[52px] rounded-full border-[#f8f4ea]/18 bg-[#f8f4ea]/6 px-6 text-[#f8f4ea] hover:bg-[#f8f4ea]/10"
+              className="h-[52px] w-full rounded-full border-[#f8f4ea]/18 bg-[#f8f4ea]/6 px-6 text-[#f8f4ea] hover:bg-[#f8f4ea]/10 sm:w-auto"
               variant="outline"
             >
               <a href={routes.roles.client}>Voir le cockpit</a>
