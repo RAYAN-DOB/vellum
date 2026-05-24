@@ -1,19 +1,20 @@
 import {
+  ArrowRight,
   ArrowUpRight,
   FilePlus2,
-  FolderKanban,
+  FolderOpen,
   MessageSquare,
   ShieldCheck,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/Button";
 import { StatusPill } from "@/components/ui/StatusPill";
 import {
   confidentialityLabels,
   projectStatusLabels,
   projectStatusTone,
   type ProjectListItem,
-} from "@/lib/projects";
+} from "@/lib/project-display";
+import { routes } from "@/lib/routes";
 import type { SessionUser } from "@/lib/auth";
 
 type Props = {
@@ -34,95 +35,79 @@ export function ClientDashboard({ user, projects, unreadMessages }: Props) {
   const activeProjects = projects.filter(
     (p) => !["delivered", "archived", "cancelled"].includes(p.status),
   );
+  const recentProjects = projects.slice(0, 5);
   const lastProject = projects[0];
+  const firstName = (user.profile.full_name ?? user.email).split(" ")[0];
 
   return (
-    <div className="space-y-8">
-      <section className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-[6px] border border-[#d8d0bf] bg-white/85 p-5 shadow-[0_24px_70px_rgba(22,21,18,0.07)]">
-          <p className="text-xs uppercase tracking-[0.2em] text-[#8a7a5f]">
-            Projets actifs
-          </p>
-          <p className="mt-2 text-3xl font-semibold text-[#171613]">
-            {activeProjects.length}
-          </p>
-          <p className="mt-1 text-xs text-[#6b665a]">
-            En qualification, production ou validation
-          </p>
-        </div>
-        <div className="rounded-[6px] border border-[#d8d0bf] bg-white/85 p-5">
-          <p className="text-xs uppercase tracking-[0.2em] text-[#8a7a5f]">
-            Messages non lus
-          </p>
-          <p className="mt-2 text-3xl font-semibold text-[#171613]">
-            {unreadMessages}
-          </p>
-          <p className="mt-1 text-xs text-[#6b665a]">
-            Notifications projets entrantes
-          </p>
-        </div>
-        <div className="rounded-[6px] border border-[#d8d0bf] bg-white/85 p-5">
-          <p className="text-xs uppercase tracking-[0.2em] text-[#8a7a5f]">
-            Total projets
-          </p>
-          <p className="mt-2 text-3xl font-semibold text-[#171613]">
-            {projects.length}
-          </p>
-          <p className="mt-1 text-xs text-[#6b665a]">
-            Toutes phases confondues
-          </p>
-        </div>
-      </section>
-
-      <section className="rounded-[6px] border border-[#d8d0bf] bg-white/85 p-6 shadow-[0_24px_70px_rgba(22,21,18,0.07)]">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#8a7a5f]">
-              Action principale
-            </p>
-            <h2 className="mt-1 text-xl font-semibold text-[#171613]">
-              Bonjour {user.profile.full_name ?? "client"}, prêt à déposer un
-              nouveau projet ?
+    <div className="space-y-12">
+      {/* Hero band — primary CTA */}
+      <section className="relative overflow-hidden rounded-[4px] border border-line bg-paper">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 grid-paper opacity-40"
+        />
+        <div className="relative grid gap-8 p-8 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div className="max-w-xl">
+            <p className="caption">Action principale</p>
+            <h2 className="display mt-4 text-3xl text-ink sm:text-[2.5rem]">
+              Bonjour {firstName},
+              <br />
+              <span className="italic">déposons un projet.</span>
             </h2>
-            <p className="mt-1 max-w-2xl text-sm text-[#6b665a]">
-              Décrivez votre besoin, joignez vos plans, et notre équipe vous
-              qualifie sous 24h ouvrées.
+            <p className="mt-5 text-[15px] leading-[1.6] text-graphite">
+              Décrivez votre besoin, joignez vos plans. Votre chef de projet
+              vous répond sous 24 h ouvrées avec une qualification.
             </p>
           </div>
-          <Button asChild size="lg" icon={<FilePlus2 className="size-4" />}>
-            <a href="/client/nouveau-projet">Nouveau projet</a>
-          </Button>
+          <a
+            href={routes.client.newProject}
+            className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 self-start rounded-full bg-ink px-6 text-[14px] font-medium text-paper transition hover:bg-iron-hover lg:self-end"
+          >
+            <FilePlus2 className="size-4" aria-hidden="true" />
+            Nouveau projet
+            <ArrowRight
+              className="size-4 transition-transform group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
+          </a>
         </div>
       </section>
 
+      {/* Stat row */}
+      <section className="grid gap-px overflow-hidden rounded-[4px] border border-line bg-line sm:grid-cols-3">
+        <StatCell label="Projets actifs" value={activeProjects.length} hint="En qualification, production ou validation" />
+        <StatCell label="Messages non lus" value={unreadMessages} hint="Notifications projets entrantes" />
+        <StatCell label="Total projets" value={projects.length} hint="Toutes phases confondues" />
+      </section>
+
+      {/* Recent projects */}
       <section>
-        <header className="mb-3 flex items-center justify-between">
-          <h2 className="text-base font-semibold text-[#171613]">
-            Vos projets récents
-          </h2>
+        <header className="flex items-baseline justify-between border-b border-line pb-4">
+          <h2 className="display text-2xl text-ink">Vos projets récents</h2>
           <a
-            href="/client/projets"
-            className="inline-flex items-center gap-1 text-sm text-[#6b665a] hover:text-[#171613]"
+            href={routes.client.projects}
+            className="caption inline-flex cursor-pointer items-center gap-1.5 transition-colors hover:text-ink"
           >
             Voir tout
-            <ArrowUpRight className="size-3.5" aria-hidden />
+            <ArrowUpRight className="size-3.5" aria-hidden="true" />
           </a>
         </header>
 
-        {projects.length === 0 ? (
-          <EmptyState />
+        {recentProjects.length === 0 ? (
+          <DashboardEmptyState />
         ) : (
-          <ul className="space-y-2">
-            {projects.slice(0, 5).map((project) => (
+          <ul className="mt-6 grid gap-3">
+            {recentProjects.map((project) => (
               <li key={project.id}>
                 <a
-                  href={`/client/projets/${project.id}`}
-                  className="flex flex-col gap-3 rounded-[4px] border border-[#d8d0bf] bg-white/95 p-4 transition hover:border-[#171613] hover:shadow-[0_18px_40px_rgba(22,21,18,0.10)] sm:flex-row sm:items-center sm:justify-between"
+                  href={routes.client.project(project.id)}
+                  className="group flex flex-col gap-3 rounded-[3px] border border-line bg-paper p-5 transition-colors hover:border-ink hover:bg-vellum/40 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div className="min-w-0">
-                    <div className="flex flex-wrap items-center gap-2 text-xs text-[#6b665a]">
-                      <span className="font-mono text-[11px]">
-                        {project.reference}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-mono text-[11px] text-mute">
+                        {project.reference ?? "—"}
                       </span>
                       <StatusPill tone={projectStatusTone[project.status]}>
                         {projectStatusLabels[project.status]}
@@ -136,22 +121,25 @@ export function ClientDashboard({ user, projects, unreadMessages }: Props) {
                               : "neutral"
                         }
                       >
-                        <ShieldCheck className="size-3" aria-hidden />
+                        <ShieldCheck className="size-3" aria-hidden="true" />
                         {confidentialityLabels[project.confidentiality]}
                       </StatusPill>
                     </div>
-                    <p className="mt-1.5 truncate font-medium text-[#171613]">
+                    <p className="mt-2 truncate font-display text-lg text-ink">
                       {project.title}
                     </p>
                     {project.description ? (
-                      <p className="mt-1 line-clamp-1 text-xs text-[#6b665a]">
+                      <p className="mt-1 line-clamp-1 text-[13px] text-mute">
                         {project.description}
                       </p>
                     ) : null}
                   </div>
-                  <div className="flex shrink-0 items-center gap-4 text-xs text-[#6b665a]">
+                  <div className="flex shrink-0 items-center gap-4 text-[12px] text-mute">
                     <span>Créé le {formatDate(project.created_at)}</span>
-                    <ArrowUpRight className="size-4 text-[#8a7a5f]" aria-hidden />
+                    <ArrowUpRight
+                      className="size-4 text-mute transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-ink"
+                      aria-hidden="true"
+                    />
                   </div>
                 </a>
               </li>
@@ -160,25 +148,31 @@ export function ClientDashboard({ user, projects, unreadMessages }: Props) {
         )}
       </section>
 
+      {/* Continue last project */}
       {lastProject ? (
-        <section className="rounded-[6px] border border-[#d8d0bf] bg-[#f8f5ed] p-5">
-          <header className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#8a7a5f]">
-            <FolderKanban className="size-4" aria-hidden />
-            Continuer
-          </header>
-          <p className="mt-2 text-sm text-[#171613]">
-            Reprendre <strong className="font-semibold">{lastProject.title}</strong>{" "}
-            ({projectStatusLabels[lastProject.status]})
+        <section className="rounded-[4px] border border-line bg-vellum/40 p-6">
+          <p className="caption">Reprendre</p>
+          <p className="mt-3 text-[15px] text-ink">
+            <strong className="font-medium">{lastProject.title}</strong>
+            <span className="text-mute">
+              {" "}
+              · {projectStatusLabels[lastProject.status]}
+            </span>
           </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            <Button asChild variant="primary" size="sm">
-              <a href={`/client/projets/${lastProject.id}`}>Ouvrir le projet</a>
-            </Button>
-            <Button asChild variant="outline" size="sm" icon={<MessageSquare className="size-3.5" />}>
-              <a href={`/client/projets/${lastProject.id}#messages`}>
-                Envoyer un message
-              </a>
-            </Button>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <a
+              href={routes.client.project(lastProject.id)}
+              className="inline-flex h-10 cursor-pointer items-center justify-center rounded-full bg-ink px-5 text-[13px] font-medium text-paper transition hover:bg-iron-hover"
+            >
+              Ouvrir le projet
+            </a>
+            <a
+              href={`${routes.client.project(lastProject.id)}#messages`}
+              className="inline-flex h-10 cursor-pointer items-center justify-center gap-1.5 rounded-full border border-line-strong px-5 text-[13px] font-medium text-graphite transition hover:border-ink hover:text-ink"
+            >
+              <MessageSquare className="size-3.5" aria-hidden="true" />
+              Envoyer un message
+            </a>
           </div>
         </section>
       ) : null}
@@ -186,25 +180,44 @@ export function ClientDashboard({ user, projects, unreadMessages }: Props) {
   );
 }
 
-function EmptyState() {
+function StatCell({
+  label,
+  value,
+  hint,
+}: {
+  label: string;
+  value: number | string;
+  hint?: string;
+}) {
   return (
-    <div className="rounded-[6px] border border-dashed border-[#d8d0bf] bg-white/70 p-8 text-center">
-      <FolderKanban
-        className="mx-auto size-8 text-[#8a7a5f]"
-        aria-hidden
-      />
-      <p className="mt-3 text-sm font-medium text-[#171613]">
-        Aucun projet pour le moment
+    <div className="bg-paper p-6">
+      <p className="caption">{label}</p>
+      <p className="font-display mt-3 text-4xl leading-none text-ink">
+        {value}
       </p>
-      <p className="mx-auto mt-1 max-w-md text-xs text-[#6b665a]">
+      {hint ? <p className="mt-2 text-[12px] text-mute">{hint}</p> : null}
+    </div>
+  );
+}
+
+function DashboardEmptyState() {
+  return (
+    <div className="mt-6 rounded-[3px] border border-dashed border-line-strong bg-paper p-10 text-center">
+      <FolderOpen className="mx-auto size-7 text-mute" aria-hidden="true" />
+      <p className="mt-4 font-display text-xl text-ink">
+        Aucun projet pour le moment.
+      </p>
+      <p className="mx-auto mt-2 max-w-md text-[13px] leading-[1.6] text-mute">
         Démarrez votre premier projet en quelques minutes : décrivez votre
-        besoin, joignez vos plans, et notre équipe prend le relais.
+        besoin, joignez vos plans, nous prenons le relais.
       </p>
-      <div className="mt-4">
-        <Button asChild icon={<FilePlus2 className="size-4" />}>
-          <a href="/client/nouveau-projet">Déposer un projet</a>
-        </Button>
-      </div>
+      <a
+        href={routes.client.newProject}
+        className="mt-5 inline-flex h-10 cursor-pointer items-center justify-center gap-1.5 rounded-full bg-ink px-5 text-[13px] font-medium text-paper transition hover:bg-iron-hover"
+      >
+        <FilePlus2 className="size-4" aria-hidden="true" />
+        Déposer un projet
+      </a>
     </div>
   );
 }

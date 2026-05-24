@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Layers, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Layers3, ShieldCheck } from "lucide-react";
 
 import { StatusPill } from "@/components/ui/StatusPill";
 import {
@@ -9,20 +9,21 @@ import {
   projectStatusTone,
   type ProjectListItem,
 } from "@/lib/project-display";
+import { routes } from "@/lib/routes";
 
 type Props = { projects: ProjectListItem[] };
 
 export function ArchitectCockpit({ projects }: Props) {
   if (projects.length === 0) {
     return (
-      <div className="rounded-[6px] border border-dashed border-[#d8d0bf] bg-white/70 p-10 text-center">
-        <Layers className="mx-auto size-8 text-[#8a7a5f]" aria-hidden />
-        <p className="mt-3 text-sm font-medium text-[#171613]">
-          Aucun projet assigné pour le moment
+      <div className="rounded-[3px] border border-dashed border-line-strong bg-paper p-12 text-center">
+        <Layers3 className="mx-auto size-7 text-mute" aria-hidden="true" />
+        <p className="font-display mt-4 text-xl text-ink">
+          Aucun projet assigné pour le moment.
         </p>
-        <p className="mx-auto mt-1 max-w-md text-xs text-[#6b665a]">
-          Dès qu'un chef de projet vous assigne un nouveau projet, il
-          apparaîtra ici. Vous recevrez aussi une notification.
+        <p className="mx-auto mt-2 max-w-md text-[13px] leading-[1.6] text-mute">
+          Dès qu&apos;un chef de projet vous assigne un projet, il apparaît
+          ici. Vous recevez aussi une notification dans votre messagerie.
         </p>
       </div>
     );
@@ -36,88 +37,114 @@ export function ArchitectCockpit({ projects }: Props) {
   );
 
   return (
-    <div className="space-y-8">
-      <section>
-        <h3 className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-[#8a7a5f]">
-          Projets actifs <span className="text-[#6b665a]">· {active.length}</span>
-        </h3>
-        <ul className="space-y-2">
+    <div className="space-y-12">
+      <Group title="Projets actifs" count={active.length}>
+        <ul className="grid gap-3">
           {active.map((p) => (
-            <li
-              key={p.id}
-              className="rounded-[4px] border border-[#d8d0bf] bg-white/95 p-4"
-            >
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-2 text-xs text-[#6b665a]">
-                    <span className="font-mono">{p.reference}</span>
-                    <StatusPill tone={projectStatusTone[p.status]}>
-                      {projectStatusLabels[p.status]}
-                    </StatusPill>
-                    <StatusPill
-                      tone={
-                        p.confidentiality === "restricted"
-                          ? "red"
-                          : p.confidentiality === "nda_required"
-                            ? "amber"
-                            : "neutral"
-                      }
-                    >
-                      <ShieldCheck className="size-3" aria-hidden />
-                      {confidentialityLabels[p.confidentiality]}
-                    </StatusPill>
-                  </div>
-                  <p className="mt-1.5 font-medium text-[#171613]">
-                    {p.title}
-                  </p>
-                  <p className="mt-1 text-xs text-[#6b665a]">
-                    Client : {p.client?.full_name ?? p.client?.email ?? "—"}
-                    {p.manager?.full_name
-                      ? ` · Manager : ${p.manager.full_name}`
-                      : ""}
-                  </p>
-                </div>
-                <a
-                  href={`/client/projets/${p.id}`}
-                  className="inline-flex items-center gap-1 text-xs font-medium text-[#171613] hover:underline"
-                >
-                  Ouvrir
-                  <ArrowUpRight className="size-3.5" aria-hidden />
-                </a>
-              </div>
+            <li key={p.id}>
+              <ProjectCard project={p} />
             </li>
           ))}
         </ul>
-      </section>
+      </Group>
 
       {closed.length > 0 ? (
-        <section>
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-[#8a7a5f]">
-            Livrés / archivés <span className="text-[#6b665a]">· {closed.length}</span>
-          </h3>
-          <ul className="space-y-2">
-            {closed.map((p) => (
+        <Group title="Livrés & archivés" count={closed.length}>
+          <ul className="overflow-hidden rounded-[3px] border border-line">
+            {closed.map((p, i) => (
               <li
                 key={p.id}
-                className="flex items-center justify-between rounded-[4px] border border-[#d8d0bf] bg-[#fbfaf6] px-4 py-3 text-sm"
+                className={
+                  i > 0
+                    ? "border-t border-line"
+                    : ""
+                }
               >
-                <div className="min-w-0">
-                  <span className="font-mono text-xs text-[#6b665a]">
-                    {p.reference}
-                  </span>
-                  <span className="ml-2 text-[#171613]">{p.title}</span>
-                </div>
                 <a
-                  href={`/client/projets/${p.id}`}
-                  className="text-xs text-[#6b665a] hover:text-[#171613]"
+                  href={routes.studio.project(p.id)}
+                  className="flex items-center justify-between gap-4 bg-paper px-5 py-4 text-[13px] transition-colors hover:bg-vellum/40"
                 >
-                  Revoir →
+                  <div className="min-w-0">
+                    <span className="font-mono text-[11px] text-mute">
+                      {p.reference ?? "—"}
+                    </span>
+                    <span className="ml-3 truncate text-ink">{p.title}</span>
+                  </div>
+                  <span className="caption transition-colors group-hover:text-ink">
+                    Revoir →
+                  </span>
                 </a>
               </li>
             ))}
           </ul>
-        </section>
+        </Group>
       ) : null}
     </div>
+  );
+}
+
+function Group({
+  title,
+  count,
+  children,
+}: {
+  title: string;
+  count: number;
+  children: React.ReactNode;
+}) {
+  return (
+    <section>
+      <header className="mb-4 flex items-baseline gap-3 border-b border-line pb-3">
+        <h3 className="display text-xl text-ink">{title}</h3>
+        <span className="caption">· {count}</span>
+      </header>
+      {children}
+    </section>
+  );
+}
+
+function ProjectCard({ project }: { project: ProjectListItem }) {
+  return (
+    <a
+      href={routes.studio.project(project.id)}
+      className="group flex flex-col gap-3 rounded-[3px] border border-line bg-paper p-5 transition-colors hover:border-ink hover:bg-vellum/40 sm:flex-row sm:items-start sm:justify-between"
+    >
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="font-mono text-[11px] text-mute">
+            {project.reference ?? "—"}
+          </span>
+          <StatusPill tone={projectStatusTone[project.status]}>
+            {projectStatusLabels[project.status]}
+          </StatusPill>
+          <StatusPill
+            tone={
+              project.confidentiality === "restricted"
+                ? "red"
+                : project.confidentiality === "nda_required"
+                  ? "amber"
+                  : "neutral"
+            }
+          >
+            <ShieldCheck className="size-3" aria-hidden="true" />
+            {confidentialityLabels[project.confidentiality]}
+          </StatusPill>
+        </div>
+        <p className="mt-2 font-display text-lg text-ink">{project.title}</p>
+        <p className="mt-1 text-[12px] text-mute">
+          Client : {project.client?.full_name ?? project.client?.email ?? "—"}
+          {project.manager?.full_name
+            ? ` · Chef de projet : ${project.manager.full_name}`
+            : ""}
+        </p>
+      </div>
+      <span className="caption inline-flex shrink-0 items-center gap-1.5 text-mute transition-colors group-hover:text-ink">
+        Ouvrir
+        <ArrowUpRight
+          className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          aria-hidden="true"
+        />
+      </span>
+    </a>
   );
 }
