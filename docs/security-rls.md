@@ -62,7 +62,7 @@ Path convention: `{bucket}/{project_id}/{filename}`. The RLS policy
 extracts the first path segment with `(string_to_array(name, '/'))[1]::uuid`
 and re-uses `can_access_project`.
 
-Avatars live at `avatars/{user_id}/{filename}` and are scoped to the
+Avatars live at `profile-avatars/{user_id}/{filename}` and are scoped to the
 authenticated user via `auth.uid()::text` comparison.
 
 ## Audit trail

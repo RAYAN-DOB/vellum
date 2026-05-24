@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "db:reset": "npx supabase db reset",
     "lint": "eslint"
   },
   "dependencies": {

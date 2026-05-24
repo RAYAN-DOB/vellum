@@ -96,10 +96,10 @@ declare
   v_project_assigned   uuid;
   v_project_progress   uuid;
 begin
-  select id into v_client    from public.profiles where email = 'client@test.com';
-  select id into v_manager   from public.profiles where email = 'manager@test.com';
-  select id into v_architect from public.profiles where email = 'architecte@test.com';
-  select id into v_admin     from public.profiles where email = 'admin@test.com';
+  select id into v_client    from public.profiles where email = 'client@planwork.dev';
+  select id into v_manager   from public.profiles where email = 'manager@planwork.dev';
+  select id into v_architect from public.profiles where email = 'archi@planwork.dev';
+  select id into v_admin     from public.profiles where email = 'admin@planwork.dev';
 
   if v_client is null then
     raise notice 'Demo accounts not found — create them in Supabase Auth, then re-run seed.';

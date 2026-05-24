@@ -8,7 +8,7 @@ import { getSignedDocumentUrl } from "@/lib/client/upload";
 
 type Props = {
   path: string;
-  bucket?: "project-documents" | "deliverables";
+  bucket?: "project-documents" | "project-deliverables";
 };
 
 export function DocumentDownloadButton({

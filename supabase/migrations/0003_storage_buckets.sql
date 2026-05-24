@@ -5,15 +5,15 @@
 -- storage.objects that reference public.can_access_project / public.is_admin.
 -- File paths must always start with the project_id segment, e.g.:
 --   project-documents/{project_id}/{filename}
---   deliverables/{project_id}/{filename}
---   avatars/{user_id}/{filename}
+--   project-deliverables/{project_id}/{filename}
+--   profile-avatars/{user_id}/{filename}
 -- ============================================================================
 
 insert into storage.buckets (id, name, public)
 values
   ('project-documents', 'project-documents', false),
-  ('deliverables',      'deliverables',      false),
-  ('avatars',           'avatars',           false)
+  ('project-deliverables', 'project-deliverables', false),
+  ('profile-avatars',      'profile-avatars',      false)
 on conflict (id) do nothing;
 
 -- ----------------------------------------------------------------------------
@@ -50,58 +50,58 @@ create policy "storage project-documents delete"
   );
 
 -- ----------------------------------------------------------------------------
--- deliverables
+-- project-deliverables
 -- ----------------------------------------------------------------------------
-drop policy if exists "storage deliverables read" on storage.objects;
-create policy "storage deliverables read"
+drop policy if exists "storage project-deliverables read" on storage.objects;
+create policy "storage project-deliverables read"
   on storage.objects for select to authenticated
   using (
-    bucket_id = 'deliverables'
+    bucket_id = 'project-deliverables'
     and (
       public.is_admin()
       or public.can_access_project((string_to_array(name, '/'))[1]::uuid)
     )
   );
 
-drop policy if exists "storage deliverables write" on storage.objects;
-create policy "storage deliverables write"
+drop policy if exists "storage project-deliverables write" on storage.objects;
+create policy "storage project-deliverables write"
   on storage.objects for insert to authenticated
   with check (
-    bucket_id = 'deliverables'
+    bucket_id = 'project-deliverables'
     and (
       public.is_admin()
       or public.current_role() in ('manager','architect')
     )
   );
 
-drop policy if exists "storage deliverables delete" on storage.objects;
-create policy "storage deliverables delete"
+drop policy if exists "storage project-deliverables delete" on storage.objects;
+create policy "storage project-deliverables delete"
   on storage.objects for delete to authenticated
   using (
-    bucket_id = 'deliverables'
+    bucket_id = 'project-deliverables'
     and (public.is_admin() or owner = auth.uid())
   );
 
 -- ----------------------------------------------------------------------------
--- avatars
+-- profile-avatars
 -- ----------------------------------------------------------------------------
-drop policy if exists "storage avatars read" on storage.objects;
-create policy "storage avatars read"
+drop policy if exists "storage profile-avatars read" on storage.objects;
+create policy "storage profile-avatars read"
   on storage.objects for select to authenticated
-  using (bucket_id = 'avatars');
+  using (bucket_id = 'profile-avatars');
 
-drop policy if exists "storage avatars write" on storage.objects;
-create policy "storage avatars write"
+drop policy if exists "storage profile-avatars write" on storage.objects;
+create policy "storage profile-avatars write"
   on storage.objects for insert to authenticated
   with check (
-    bucket_id = 'avatars'
+    bucket_id = 'profile-avatars'
     and (string_to_array(name, '/'))[1] = auth.uid()::text
   );
 
-drop policy if exists "storage avatars update" on storage.objects;
-create policy "storage avatars update"
+drop policy if exists "storage profile-avatars update" on storage.objects;
+create policy "storage profile-avatars update"
   on storage.objects for update to authenticated
   using (
-    bucket_id = 'avatars'
+    bucket_id = 'profile-avatars'
     and (string_to_array(name, '/'))[1] = auth.uid()::text
   );

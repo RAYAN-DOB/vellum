@@ -68,7 +68,7 @@ export async function uploadProjectDocumentsClient(
  */
 export async function getSignedDocumentUrl(
   path: string,
-  bucket: "project-documents" | "deliverables" = "project-documents",
+  bucket: "project-documents" | "project-deliverables" = "project-documents",
   expiresIn = 60,
 ): Promise<string | null> {
   const supabase = createSupabaseBrowserClient();

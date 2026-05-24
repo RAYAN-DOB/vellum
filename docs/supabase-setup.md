@@ -39,10 +39,10 @@ In *Authentication → Users → Invite* (or **Add user**), create:
 
 | Email                  | Role (set via SQL after first sign-in) |
 | ---------------------- | -------------------------------------- |
-| `client@test.com`      | client                                 |
-| `architecte@test.com`  | architect                              |
-| `manager@test.com`     | manager                                |
-| `admin@test.com`       | admin                                  |
+| `client@planwork.dev`  | client                                 |
+| `archi@planwork.dev`   | architect                              |
+| `manager@planwork.dev` | manager                                |
+| `admin@planwork.dev`   | admin                                  |
 
 Each user gets a row in `public.profiles` automatically via the
 `handle_new_user` trigger. Default role is `client`.
@@ -65,8 +65,8 @@ The seed is idempotent — it can be re-run safely.
 | Bucket               | Purpose                                |
 | -------------------- | -------------------------------------- |
 | `project-documents`  | Client uploads (PDF, DWG, sketches…)   |
-| `deliverables`       | Architect / manager final outputs      |
-| `avatars`            | Profile pictures                       |
+| `project-deliverables` | Architect / manager final outputs    |
+| `profile-avatars`      | Profile pictures                     |
 
 All three are **private**. Reads use short-lived signed URLs generated from
 the app (`src/lib/client/upload.ts → getSignedDocumentUrl`). Writes are
@@ -97,7 +97,7 @@ npm install
 npm run dev
 ```
 
-Sign in with `client@test.com` / your chosen password.
+Sign in with `client@planwork.dev` / your chosen password.
 
 ## 7. Production: Vercel
 
