@@ -3,11 +3,21 @@ import { notFound } from "next/navigation";
 
 import { ClientShell } from "@/components/shells/ClientShell";
 import { DocumentDownloadButton } from "@/components/files/DocumentDownloadButton";
+import { DocumentInlinePreview } from "@/components/files/DocumentInlinePreview";
 import { requireRole } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { routes } from "@/lib/routes";
+import type { ProjectDocumentRow } from "@/types/database";
 
 export const dynamic = "force-dynamic";
+
+type DocumentWithProject = ProjectDocumentRow & {
+  project: {
+    id: string;
+    reference: string | null;
+    title: string;
+  } | null;
+};
 
 export default async function ClientDocumentReviewPage({
   params,
@@ -26,15 +36,15 @@ export default async function ClientDocumentReviewPage({
     .maybeSingle();
 
   if (!document) notFound();
+  const documentWithProject = document as unknown as DocumentWithProject;
 
   return (
     <ClientShell
       activeHref={routes.client.projects}
       eyebrow="Document projet"
-      title={document.file_name}
+      title={documentWithProject.file_name}
       description={`Aperçu du document associé au projet ${
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (document as any).project?.title ?? ""
+        documentWithProject.project?.title ?? ""
       }.`}
     >
       <a
@@ -50,24 +60,28 @@ export default async function ClientDocumentReviewPage({
           <div className="flex items-center gap-3">
             <FileText className="size-6 text-[#8a7a5f]" aria-hidden />
             <div>
-              <p className="font-medium text-[#171613]">{document.file_name}</p>
+              <p className="font-medium text-[#171613]">
+                {documentWithProject.file_name}
+              </p>
               <p className="text-xs text-[#6b665a]">
-                {document.file_type ?? "Type inconnu"} ·{" "}
-                {document.file_size
-                  ? `${(document.file_size / 1024 / 1024).toFixed(2)} MB`
+                {documentWithProject.file_type ?? "Type inconnu"} ·{" "}
+                {documentWithProject.file_size
+                  ? `${(documentWithProject.file_size / 1024 / 1024).toFixed(2)} MB`
                   : "Taille inconnue"}
               </p>
             </div>
           </div>
-          <DocumentDownloadButton path={document.file_path} />
+          <DocumentDownloadButton path={documentWithProject.file_path} />
         </div>
 
-        <p className="mt-6 rounded-[4px] border border-dashed border-[#d8d0bf] bg-[#fbfaf6] p-4 text-xs leading-5 text-[#6b665a]">
-          Le viewer intégré (calques, annotations, comparateur de versions)
-          arrive dans une prochaine itération. En attendant, utilisez le
-          téléchargement ci-dessus pour ouvrir le document dans votre outil
-          habituel.
-        </p>
+        <div className="mt-6">
+          <DocumentInlinePreview
+            fileName={documentWithProject.file_name}
+            fileSize={documentWithProject.file_size}
+            fileType={documentWithProject.file_type}
+            path={documentWithProject.file_path}
+          />
+        </div>
       </section>
     </ClientShell>
   );
