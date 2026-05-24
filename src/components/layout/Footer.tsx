@@ -1,43 +1,77 @@
-import { Container } from "@/components/layout/Container";
+import { VellumLogo } from "@/components/brand/VellumLogo";
 import { publicNavigation, routes } from "@/lib/routes";
 
+const legalLinks = [
+  { label: "Mentions légales", href: "/mentions-legales" },
+  { label: "Confidentialité", href: "/confidentialite" },
+  { label: "Conditions", href: "/conditions" },
+] as const;
+
+const productLinks = [
+  { label: "Connexion", href: routes.public.login },
+  { label: "Créer un compte", href: routes.public.register },
+  { label: "Workflow", href: "#workflow" },
+  { label: "Sécurité", href: "#securite" },
+] as const;
+
 export function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="drawing-line border-t border-[#34312b] bg-[#171613] text-[#f7f3ea]">
-      <Container className="grid gap-8 py-10 md:grid-cols-[1.4fr_1fr] md:items-start">
-        <div className="max-w-xl">
-          <p className="text-sm font-semibold tracking-normal">PlanWork</p>
-          <p className="mt-3 text-sm leading-6 text-[#cfc6b5]">
-            V1 de demonstration pour cadrer, suivre et presenter des demandes
-            de plans techniques, reprises DWG/PDF, corrections et livrables.
-          </p>
-          <p className="mt-4 text-xs leading-5 text-[#8b8374]">
-            Donnees fictives uniquement. Aucun fichier client reel, DWG, PDF,
-            croquis ou document confidentiel n&apos;est stocke dans cette version.
+    <footer className="border-t border-line bg-paper">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-10 lg:px-10">
+        <div className="max-w-sm">
+          <a
+            href={routes.public.home}
+            className="inline-flex items-center gap-2.5"
+            aria-label="Vellum — accueil"
+          >
+            <VellumLogo size="sm" tone="ink" />
+            <span className="font-display text-xl text-ink">Vellum</span>
+          </a>
+          <p className="mt-5 text-[14px] leading-[1.65] text-mute">
+            Le bureau de dépôt des projets techniques. DWG, PDF, croquis,
+            schémas — un seul fil, quatre rôles, une traçabilité native.
           </p>
         </div>
 
-        <nav
-          aria-label="Navigation secondaire"
-          className="flex flex-wrap gap-x-4 gap-y-3 md:justify-end"
-        >
-          <a
-            className="text-sm font-medium text-[#cfc6b5] hover:text-[#f7f3ea]"
-            href={routes.public.home}
-          >
-            Accueil
-          </a>
-          {publicNavigation.map((item) => (
-            <a
-              className="text-sm font-medium text-[#cfc6b5] hover:text-[#f7f3ea]"
-              href={item.href}
-              key={item.href}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-      </Container>
+        <FooterColumn title="Produit" links={[...productLinks]} />
+        <FooterColumn title="Navigation" links={[...publicNavigation]} />
+        <FooterColumn title="Légal" links={[...legalLinks]} />
+      </div>
+
+      <div className="border-t border-line">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-3 px-6 py-6 text-[12px] text-mute sm:flex-row sm:items-center lg:px-10">
+          <p>© {year} Vellum. Tous droits réservés.</p>
+          <p className="caption">v1 · Built with Next.js &amp; Supabase</p>
+        </div>
+      </div>
     </footer>
+  );
+}
+
+function FooterColumn({
+  title,
+  links,
+}: {
+  title: string;
+  links: ReadonlyArray<{ label: string; href: string }>;
+}) {
+  return (
+    <div>
+      <p className="caption">{title}</p>
+      <ul className="mt-5 space-y-2.5">
+        {links.map((link) => (
+          <li key={link.href}>
+            <a
+              href={link.href}
+              className="draft-link text-[14px] text-graphite transition-colors hover:text-ink"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

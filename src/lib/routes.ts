@@ -4,6 +4,8 @@ export const routes = {
     services: "/services",
     security: "/securite-confidentialite",
     contact: "/contact",
+    login: "/login",
+    register: "/register",
   },
   workspace: {
     dashboard: "/dashboard",
@@ -28,15 +30,15 @@ export const routes = {
 } as const;
 
 export const publicNavigation = [
-  { label: "Solution", href: "#solution" },
-  { label: "Services", href: "#services" },
-  { label: "Securite", href: "#security" },
-  { label: "Process", href: "#process" },
+  { label: "Produit", href: "#produit" },
+  { label: "Workflow", href: "#workflow" },
+  { label: "Sécurité", href: "#securite" },
+  { label: "Tarifs", href: "#tarifs" },
 ] as const;
 
 export const workspaceNavigation = [
   { label: "Tableau de bord", href: routes.workspace.dashboard },
-  { label: "Chat depot projet", href: routes.workspace.newRequest },
+  { label: "Nouveau dépôt", href: routes.workspace.newRequest },
 ] as const;
 
 export const roleNavigation = [
@@ -45,7 +47,7 @@ export const roleNavigation = [
   { label: "Projets client", href: routes.roles.clientProjects },
   { label: "Onboarding", href: routes.roles.clientOnboarding },
   { label: "Messages", href: routes.roles.clientMessages },
-  { label: "Parametres", href: routes.roles.clientSettings },
+  { label: "Paramètres", href: routes.roles.clientSettings },
   { label: "Chef de projet", href: routes.roles.projectManager },
   { label: "Devis", href: routes.roles.projectManagerQuotes },
   { label: "Dessinateur", href: routes.roles.drafter },
@@ -59,5 +61,5 @@ export const workspaceSecondaryNavigation = [
     label: "Livrable exemple",
     href: `${routes.workspace.deliverables}/deliverable-demo-001`,
   },
-  { label: "Permissions mockees", href: routes.workspace.permissions },
+  { label: "Permissions", href: routes.workspace.permissions },
 ] as const;
