@@ -4,10 +4,8 @@ import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { ArrowRight, Loader2 } from "lucide-react";
 
-import { signInAction } from "@/lib/actions/auth";
 import { AuthInput } from "@/components/auth/AuthInput";
-
-type Props = { redirectTo?: string };
+import { requestPasswordResetAction } from "@/lib/actions/auth";
 
 const initialState = {} as { error?: string; success?: string };
 
@@ -22,11 +20,11 @@ function SubmitButton() {
       {pending ? (
         <>
           <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-          Connexion…
+          Envoi…
         </>
       ) : (
         <>
-          Se connecter
+          Envoyer le lien
           <ArrowRight
             className="size-4 transition-transform group-hover:translate-x-0.5"
             aria-hidden="true"
@@ -37,35 +35,22 @@ function SubmitButton() {
   );
 }
 
-export function SignInForm({ redirectTo }: Props) {
-  const [state, formAction] = useActionState(signInAction, initialState);
+export function ForgotPasswordForm() {
+  const [state, formAction] = useActionState(
+    requestPasswordResetAction,
+    initialState,
+  );
 
   return (
     <form action={formAction} className="space-y-5">
-      <input type="hidden" name="redirect" value={redirectTo ?? ""} />
       <AuthInput
-        label="Email professionnel"
+        label="Email du compte"
         name="email"
         type="email"
         autoComplete="email"
         required
         placeholder="vous@entreprise.com"
-      />
-      <AuthInput
-        label="Mot de passe"
-        name="password"
-        type="password"
-        autoComplete="current-password"
-        required
-        placeholder="••••••••"
-        rightSlot={
-          <a
-            href="/forgot-password"
-            className="text-[11px] font-normal normal-case tracking-normal text-mute transition-colors hover:text-ink"
-          >
-            Oublié ?
-          </a>
-        }
+        hint="Vous recevrez un lien de réinitialisation valable 1 heure."
       />
 
       {state.error ? (
@@ -76,16 +61,23 @@ export function SignInForm({ redirectTo }: Props) {
           {state.error}
         </p>
       ) : null}
+      {state.success ? (
+        <p
+          role="status"
+          className="rounded-[3px] border border-moss/30 bg-moss/5 px-3 py-2 text-[13px] text-moss"
+        >
+          {state.success}
+        </p>
+      ) : null}
 
       <SubmitButton />
 
       <p className="text-center text-[13px] text-mute">
-        Pas encore de compte ?{" "}
         <a
           className="draft-link cursor-pointer font-medium text-ink"
-          href="/register"
+          href="/login"
         >
-          Créer un compte client
+          ← Retour à la connexion
         </a>
       </p>
     </form>

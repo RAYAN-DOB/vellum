@@ -124,6 +124,37 @@ export async function signUpAction(
   redirect(defaultRouteForRole(requestedRole));
 }
 
+export async function requestPasswordResetAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+  if (!email) {
+    return { error: "Veuillez saisir un email valide." };
+  }
+
+  const supabase = await createSupabaseServerClient();
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${siteUrl}/auth/callback?next=/client/parametres`,
+  });
+
+  if (error) {
+    // Return the same success message either way to avoid email enumeration.
+    return {
+      success:
+        "Si un compte existe avec cet email, un lien de réinitialisation a été envoyé.",
+    };
+  }
+
+  return {
+    success:
+      "Si un compte existe avec cet email, un lien de réinitialisation a été envoyé.",
+  };
+}
+
 export async function signOutAction() {
   const supabase = await createSupabaseServerClient();
   const {
