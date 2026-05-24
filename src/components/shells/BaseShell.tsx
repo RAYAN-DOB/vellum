@@ -1,7 +1,9 @@
 import type { ComponentType, ReactNode, SVGProps } from "react";
 
 import { VellumLogo } from "@/components/brand/VellumLogo";
+import { CommandPalette } from "@/components/command/CommandPalette";
 import { Container } from "@/components/layout/Container";
+import { NotificationBell } from "@/components/notifications/NotificationBell";
 import { UserMenu } from "@/components/layout/UserMenu";
 import { cn } from "@/lib/utils";
 
@@ -67,7 +69,9 @@ export function BaseShell({
             </span>
           </a>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <CommandPalette />
+            <NotificationBell />
             <UserMenu />
           </div>
         </Container>
