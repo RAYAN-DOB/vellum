@@ -85,7 +85,7 @@ Fill in:
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://<ref>.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...       # enabled publishable key (sb_publishable_...)
 SUPABASE_SERVICE_ROLE_KEY=...           # admin-only, server-only
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```

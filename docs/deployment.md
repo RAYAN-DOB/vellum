@@ -24,6 +24,10 @@ Both must pass with no errors.
    | `SUPABASE_SERVICE_ROLE_KEY`       | **server only**          |
    | `NEXT_PUBLIC_SITE_URL`            | client (auth redirects)  |
 
+   Use the enabled Supabase publishable key (`sb_publishable_...`) for
+   `NEXT_PUBLIC_SUPABASE_ANON_KEY`. The variable name stays unchanged because
+   the Supabase client expects a public key in that slot.
+
 3. Set the same variables in *Production*, *Preview* and *Development*.
 4. Trigger a deploy. Vercel detects Next.js 16 / Turbopack automatically.
 
