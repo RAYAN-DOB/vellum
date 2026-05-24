@@ -1,48 +1,103 @@
-# Roles And Permissions
+# Rôles & permissions — PlanWork
 
-La V1.5 affiche une matrice de permissions cible. Elle ne securise rien cote serveur. Les restrictions UI sont seulement pedagogiques.
+Quatre rôles, une seule plateforme, des permissions configurables.
 
-## Roles
+## Rôles
 
-- Client : depose un projet, suit ses dossiers, repond aux questions, valide un apercu futur.
-- Manager : qualifie, priorise, assigne, prepare devis et validation.
-- Architecte / dessinateur : analyse documents, pose questions, prepare apercus et livrables.
-- Admin : gouvernance, roles, permissions, activite et configuration future.
+| Rôle           | Slug DB     | URL d'arrivée    |
+| -------------- | ----------- | ---------------- |
+| Client         | `client`    | `/client`        |
+| Architecte     | `architect` | `/dessinateur`   |
+| Chef de projet | `manager`   | `/chef-projet`   |
+| Administrateur | `admin`     | `/admin`         |
 
-## Surfaces V1.5 par role
+L'inscription publique (`/register`) ne crée que des comptes `client`. Les
+trois autres rôles sont créés par l'admin via `/admin/users` (action
+`inviteUserAction` qui utilise la service-role key).
 
-- Client : `/client`, `/client/nouveau-projet`, `/client/projets`, `/client/messages`, `/client/parametres`.
-- Manager : `/chef-projet`, `/chef-projet/devis`.
-- Architecte / dessinateur : `/dessinateur`.
-- Admin : `/admin` et `/dashboard/permissions`.
+## Permissions
 
-Le switcher de role est un outil de demonstration. Il ne modifie aucun token, aucune session et aucun droit reel.
+Tableau lisible — la source de vérité est la table `public.permissions`
+(populée par `supabase/seed.sql`).
 
-```mermaid
-flowchart TD
-  Project["Projet"] --> Client["Client"]
-  Project --> Manager["Manager"]
-  Project --> Architect["Architecte / dessinateur"]
-  Project --> Admin["Admin"]
-  Client --> ClientActions["Voir ses projets / completer / valider"]
-  Manager --> ManagerActions["Qualifier / assigner / suivre"]
-  Architect --> ArchitectActions["Produire / questionner / livrer"]
-  Admin --> AdminActions["Gouverner / auditer / configurer"]
+| Clé                         | Description                                | Catégorie     |
+| --------------------------- | ------------------------------------------ | ------------- |
+| `projects.read.own`         | Voir ses projets                           | projects      |
+| `projects.read.assigned`    | Voir les projets assignés                  | projects      |
+| `projects.read.all`         | Voir tous les projets                      | projects      |
+| `projects.create`           | Créer un projet                            | projects      |
+| `projects.update`           | Modifier un projet                         | projects      |
+| `projects.update.status`    | Changer le statut                          | projects      |
+| `projects.assign`           | Assigner un architecte                     | projects      |
+| `documents.upload`          | Téléverser un document                     | documents     |
+| `documents.read.assigned`   | Lire les docs des projets assignés         | documents     |
+| `documents.read.all`        | Lire tous les documents                    | documents     |
+| `messages.send`             | Envoyer un message projet                  | messages      |
+| `quotes.read`               | Voir les devis                             | quotes        |
+| `quotes.create`             | Créer un devis                             | quotes        |
+| `quotes.update`             | Modifier un devis                          | quotes        |
+| `quotes.approve`            | Accepter / refuser un devis                | quotes        |
+| `deliverables.read`         | Lire les livrables                         | deliverables  |
+| `deliverables.upload`       | Téléverser un livrable                     | deliverables  |
+| `deliverables.publish`      | Publier un livrable                        | deliverables  |
+| `users.read`                | Lire la liste des utilisateurs             | admin         |
+| `users.manage`              | Créer / désactiver des utilisateurs        | admin         |
+| `roles.manage`              | Gérer les rôles                            | admin         |
+| `permissions.manage`        | Gérer le catalogue de permissions          | admin         |
+| `policies.manage`           | Gérer les politiques applicatives (GPO)    | admin         |
+| `audit.read`                | Consulter les audit logs                   | admin         |
+| `admin.full_access`         | Override complet                           | admin         |
+
+## Matrice par défaut
+
+Définie dans `supabase/seed.sql` — éditable depuis `/admin/roles` (qui écrit
+dans `public.role_permissions`).
+
+| Permission                  | client | architect | manager | admin |
+| --------------------------- | :----: | :-------: | :-----: | :---: |
+| `projects.read.own`         |   ✓    |           |         |   ✓   |
+| `projects.read.assigned`    |        |     ✓     |         |   ✓   |
+| `projects.read.all`         |        |           |    ✓    |   ✓   |
+| `projects.create`           |   ✓    |           |         |   ✓   |
+| `projects.update`           |        |           |    ✓    |   ✓   |
+| `projects.update.status`    |        |     ✓     |    ✓    |   ✓   |
+| `projects.assign`           |        |           |    ✓    |   ✓   |
+| `documents.upload`          |   ✓    |     ✓     |    ✓    |   ✓   |
+| `documents.read.assigned`   |        |     ✓     |         |   ✓   |
+| `documents.read.all`        |        |           |    ✓    |   ✓   |
+| `messages.send`             |   ✓    |     ✓     |    ✓    |   ✓   |
+| `quotes.read`               |   ✓    |           |    ✓    |   ✓   |
+| `quotes.create`             |        |           |    ✓    |   ✓   |
+| `quotes.update`             |        |           |    ✓    |   ✓   |
+| `quotes.approve`            |   ✓    |           |         |   ✓   |
+| `deliverables.read`         |   ✓    |     ✓     |    ✓    |   ✓   |
+| `deliverables.upload`       |        |     ✓     |    ✓    |   ✓   |
+| `deliverables.publish`      |        |           |    ✓    |   ✓   |
+| `users.read`                |        |           |    ✓    |   ✓   |
+| `users.manage`              |        |           |         |   ✓   |
+| `roles.manage`              |        |           |         |   ✓   |
+| `policies.manage`           |        |           |         |   ✓   |
+| `audit.read`                |        |           |         |   ✓   |
+
+## Helpers TypeScript
+
+```ts
+import { requireUser, requireRole, hasPermission } from "@/lib/auth";
+
+// Server Component / Server Action:
+const user = await requireRole("admin");          // redirects to /unauthorized
+const canCreate = await hasPermission("projects.create");
 ```
 
-## Modele cible
+`requireUser` redirige vers `/login`.
+`requireRole` redirige vers `/unauthorized?reason=role`.
+`hasPermission` consulte `role_permissions` et renvoie toujours `true` pour les admins.
 
-```mermaid
-flowchart LR
-  User["Utilisateur"] --> GlobalRole["Role global"]
-  GlobalRole --> Org["Organisation"]
-  Org --> ProjectRole["Role dans projet"]
-  ProjectRole --> Assignment["Assignation"]
-  Assignment --> Resource["Projet / fichier / message / livrable"]
-  Resource --> Policy["can(actor, action, resource)"]
-  Policy --> Audit["Journalisation V2"]
-```
+## Où vivent les vérifications
 
-## Regle non negociable
-
-Toute action sensible devra etre verifiee cote serveur en V2 : lecture fichier, upload, telechargement, message, livrable, devis, paiement et administration.
+| Couche                 | But                                                     |
+| ---------------------- | ------------------------------------------------------- |
+| `middleware.ts`        | Rejet précoce des non-authentifiés ; redirect par rôle  |
+| Page (`requireRole`)   | Défense en profondeur — RBAC au niveau page             |
+| Server Action          | Re-vérifie rôle / ownership à chaque mutation           |
+| **RLS Postgres**       | **Frontière de sécurité canonique** — même avec un cookie forgé, les requêtes renvoient zéro ligne |

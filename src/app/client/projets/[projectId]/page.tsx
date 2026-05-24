@@ -1,52 +1,46 @@
 import { notFound } from "next/navigation";
 
 import { AppShell } from "@/components/layout/AppShell";
-import { PremiumProjectDetail } from "@/components/project/PremiumProjectDetail";
-import {
-  mockProjectFiles,
-  mockProjectMessages,
-  mockProjects,
-  mockQuotePreviews,
-  mockRequests,
-} from "@/lib/mock-data";
+import { ProjectDetailView } from "@/components/project/ProjectDetailView";
+import { requireRole } from "@/lib/auth";
+import { getProjectDetail } from "@/lib/projects";
 import { routes } from "@/lib/routes";
-
-export function generateStaticParams() {
-  return mockProjects.map((project) => ({ projectId: project.id }));
-}
 
 export default async function ClientProjectDetailPage({
   params,
 }: {
   params: Promise<{ projectId: string }>;
 }) {
+  const user = await requireRole(["client", "manager", "admin"]);
   const { projectId } = await params;
-  const project = mockProjects.find((item) => item.id === projectId);
+  const { project, documents, messages, events } =
+    await getProjectDetail(projectId);
 
-  if (!project) {
+  if (!project) notFound();
+
+  // Client must own the project — defence in depth in addition to RLS.
+  if (
+    user.profile.role === "client" &&
+    project.client_id !== user.id
+  ) {
     notFound();
   }
-
-  const files = mockProjectFiles.filter((file) => file.projectId === project.id);
-  const messages = mockProjectMessages.filter(
-    (message) => message.projectId === project.id,
-  );
-  const requests = mockRequests.filter((request) => request.projectId === project.id);
-  const quote = mockQuotePreviews.find((item) => item.projectId === project.id);
 
   return (
     <AppShell
       activeHref={routes.roles.clientProjects}
-      description="Detail client mocke : documents, echanges, demandes de precision, prochaines actions et devis futur."
-      eyebrow="Espace client"
-      title={project.name}
+      eyebrow="Détail projet"
+      title={project.title}
+      description="Documents, conversation et activité du projet. Échangez avec l'équipe en direct."
     >
-      <PremiumProjectDetail
-        files={files}
-        messages={messages}
+      <ProjectDetailView
         project={project}
-        quote={quote}
-        requests={requests}
+        documents={documents}
+        messages={messages}
+        events={events}
+        currentUserId={user.id}
+        currentUserRole={user.profile.role}
+        canUpload={true}
       />
     </AppShell>
   );

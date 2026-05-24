@@ -1,5 +1,11 @@
-import { ProjectDepositFlow } from "@/components/chat/ProjectDepositFlow";
+import { NewProjectFlow } from "@/components/client/NewProjectFlow";
+import { requireRole } from "@/lib/auth";
 
-export default function ClientNewProjectPage() {
-  return <ProjectDepositFlow />;
+export const metadata = {
+  title: "Nouveau projet — PlanWork",
+};
+
+export default async function ClientNewProjectPage() {
+  await requireRole(["client", "manager", "admin"]);
+  return <NewProjectFlow />;
 }

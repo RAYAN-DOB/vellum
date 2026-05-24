@@ -1,103 +1,130 @@
-# PlanWork MVP
+# PlanWork
 
-Plateforme web B2B pour structurer des demandes liees a des plans techniques, DWG, PDF, croquis, documents projet et livrables techniques.
+B2B SaaS platform to capture, qualify, produce and deliver architectural
+projects (PDF, DWG, sketches, electrical/plumbing schemas).
 
-## Objectif V1
+Four roles cohabit on the same data:
 
-La V1 sert de demo front statique et mockee pour valider :
+- **Client** — deposits projects, uploads files, follows status, validates.
+- **Architect** — works on assigned projects, sends previews, publishes deliverables.
+- **Manager** *(chef de projet)* — qualifies intake, assigns architects, prepares quotes.
+- **Admin** — manages users, roles, permissions, application policies and audits.
 
-- le positionnement produit ;
-- les parcours principaux ;
-- les espaces par role ;
-- le suivi des demandes, projets et livrables ;
-- l'approche future de confidentialite et permissions.
+## Status
 
-> Important : cette V1 est uniquement front-end, statique et mockee. Elle ne contient pas d'auth reelle, pas de backend, pas d'upload reel, pas de base de donnees et pas de securite serveur.
+Live MVP on top of Supabase (Postgres + Auth + Storage). RLS is on for every
+sensitive table, all sensitive actions are journaled in `audit_logs`. Front
+remains premium / architectural (cream + graphite, fine grid, no SaaS blue).
 
 ## Stack
 
-- Next.js 16.2.6 avec App Router dans `src/app`
-- React 19.2.4
-- TypeScript strict
-- Tailwind CSS 4
-- ESLint 9
-- `lucide-react`
-- `clsx` et `tailwind-merge`
+- Next.js 16 (App Router, Server Components, Server Actions) — Turbopack build
+- React 19, TypeScript strict, Tailwind v4
+- Supabase Auth + Postgres + Storage via `@supabase/ssr`
+- lucide-react icons, class-variance-authority, tailwind-merge
 
-## Routes Disponibles
-
-- `/` : landing page publique
-- `/dashboard` : dashboard MVP
-- `/dashboard/demandes/nouvelle` : creation de demande mockee
-- `/dashboard/demandes/[requestId]` : detail demande
-- `/dashboard/projets/[projectId]` : detail projet
-- `/dashboard/livrables/[deliverableId]` : detail livrable
-- `/dashboard/permissions` : matrice de permissions mockee
-- `/client` : espace client
-- `/chef-projet` : espace chef de projet
-- `/dessinateur` : espace dessinateur
-- `/admin` : espace admin simple
-
-## Fonctionnalites Presentes
-
-- Landing page responsive et presentable
-- Navigation publique et workspace
-- Dashboard avec statistiques mockees
-- Listes de demandes, projets et livrables fictifs
-- Formulaire de nouvelle demande sans upload reel
-- Apercu dynamique de la demande cote front
-- Vues par role : client, chef de projet, dessinateur, admin
-- Pages de detail avec historique fictif
-- Matrice de permissions affichee comme non securisee serveur
-- Donnees mockees centralisees
-
-## Limites Actuelles
-
-- Pas d'authentification reelle
-- Pas de backend
-- Pas d'API
-- Pas de base de donnees
-- Pas d'upload reel
-- Pas de stockage de fichiers
-- Pas de permissions serveur effectives
-- Pas de fichiers sensibles reels
-- Pas de paiement, marketplace ou systeme d'encheres
-
-## Prochaines Etapes V2
-
-- Ajouter une authentification reelle
-- Modeliser utilisateurs, organisations, projets et roles
-- Ajouter une base de donnees
-- Implementer les permissions cote serveur
-- Preparer un stockage prive pour fichiers sensibles
-- Ajouter un upload securise
-- Ajouter journalisation et audit log
-- Brancher de vrais workflows de statut et validation
-
-## Commandes
-
-Installer les dependances :
+## Quick start
 
 ```bash
+cp .env.example .env.local
+# Fill in your Supabase URL / anon / service-role keys
+
 npm install
-```
-
-Lancer le projet :
-
-```bash
-npm run dev
-```
-
-Ouvrir :
-
-```txt
-http://localhost:3000
-```
-
-Verifier le projet :
-
-```bash
+npm run dev   # http://localhost:3000
+npm run build # production check
 npm run lint
-npm run build
 ```
 
+See [`docs/supabase-setup.md`](docs/supabase-setup.md) for the full provisioning
+walkthrough (create project, run migrations, seed demo data).
+
+## Environment variables
+
+| Name                              | Visibility       | Required |
+| --------------------------------- | ---------------- | -------- |
+| `NEXT_PUBLIC_SUPABASE_URL`        | browser + server | yes      |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY`   | browser + server | yes      |
+| `SUPABASE_SERVICE_ROLE_KEY`       | **server only**  | for admin invite flow |
+| `NEXT_PUBLIC_SITE_URL`            | browser          | recommended |
+| `TWENTY_FIRST_API_KEY`            | dev only         | optional |
+| `MAGIC_MCP_API_KEY`               | dev only         | optional |
+
+`.env*` is git-ignored except for `.env.example`.
+
+## Routes
+
+```
+/                     landing
+/login                public sign-in
+/register             public sign-up (client only)
+/unauthorized         403-style page with role-aware CTA
+
+/client               cockpit client (own projects, stats)
+/client/nouveau-projet         dépôt projet + upload Supabase Storage
+/client/projets                table de ses projets
+/client/projets/[id]           détail, messages, documents
+/client/messages               inbox cross-projet
+/client/parametres             profil
+
+/chef-projet                   intake → qualification → assignation
+/chef-projet/devis             quote builder
+
+/dessinateur                   projets assignés (architect)
+
+/admin                         dashboard admin
+/admin/users                   CRUD utilisateurs, rôles, désactivation
+/admin/roles                   matrice rôles × permissions
+/admin/permissions             catalogue
+/admin/policies                politiques applicatives (GPO)
+/admin/audit                   audit log
+```
+
+## Project layout
+
+```
+src/
+  app/                 routes (Next App Router)
+  components/          UI primitives + role workspaces
+    auth/              SignIn / SignUp / SignOut / shells
+    client/            cockpit + new-project flow
+    manager/           qualification & assignment cockpit
+    architect/         assigned projects cockpit
+    admin/             user table, permission matrix, policy editor
+    project/           project detail (shared client / manager / architect)
+    quotes/            quote list & line editor
+    ui/                Button, StatusPill, Card, etc.
+  lib/
+    auth.ts            requireUser, requireRole, hasPermission
+    supabase/          server, client, middleware
+    actions/           server actions (auth, projects, quotes, admin, profile)
+    client/upload.ts   browser-side Storage upload + signed URLs
+    project-display.ts shared display constants (status labels, tones)
+    projects.ts        server-only project queries
+  types/
+    database.ts        hand-written DB types
+middleware.ts          session refresh + role-based redirects
+supabase/
+  migrations/0001_init_schema.sql
+  migrations/0002_rls_policies.sql
+  migrations/0003_storage_buckets.sql
+  seed.sql             roles, permissions, demo projects
+```
+
+## Documentation
+
+- [`docs/supabase-setup.md`](docs/supabase-setup.md) — provision the backend
+- [`docs/security-rls.md`](docs/security-rls.md) — RLS policies & threat model
+- [`docs/deployment.md`](docs/deployment.md) — Vercel deploy + smoke tests
+- [`docs/roles-permissions.md`](docs/roles-permissions.md) — RBAC model
+- [`docs/data-model.md`](docs/data-model.md) — entities & relationships
+- [`docs/workflow.md`](docs/workflow.md) — project lifecycle & state machine
+
+## What is not in scope yet
+
+- Payment / Stripe / invoicing
+- Native virus scan on uploads
+- Real-time presence / typing indicators
+- Multi-organisation isolation (single tenant for now)
+- Native mobile apps
+
+See [`docs/v2-roadmap.md`](docs/v2-roadmap.md) for the next milestones.

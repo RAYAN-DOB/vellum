@@ -15,6 +15,7 @@ import type { ReactNode } from "react";
 import { CommandPalette } from "@/components/command/CommandPalette";
 import { Container } from "@/components/layout/Container";
 import { DemoRoleSwitcher } from "@/components/layout/DemoRoleSwitcher";
+import { UserMenu } from "@/components/layout/UserMenu";
 import { NotificationCenter } from "@/components/notifications/NotificationCenter";
 import { ArchitecturalGridBackground } from "@/components/ui/ArchitecturalGridBackground";
 import { cn } from "@/lib/utils";
@@ -85,6 +86,7 @@ export function AppShell({
           <div className="flex items-center gap-2">
             <CommandPalette />
             <NotificationCenter />
+            <UserMenu />
           </div>
         </Container>
       </header>
@@ -168,9 +170,9 @@ export function AppShell({
               })}
             </div>
 
-            <div className="mt-5 hidden rounded-[3px] border border-[#e4c887] bg-[#fbf2dd] p-3 text-xs leading-5 text-[#7a5213] lg:block">
-              V1 front statique : les vues simulent les futurs roles, sans auth
-              ni controle serveur.
+            <div className="mt-5 hidden rounded-[3px] border border-[#cee3d4] bg-[#eaf6ee] p-3 text-xs leading-5 text-[#1d5d35] lg:block">
+              Application live : auth Supabase, rôles RBAC et stockage privé
+              activés. Toutes les actions sensibles sont journalisées.
             </div>
 
             <div className="mt-4 hidden lg:block">
