@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader2, ReceiptText } from "lucide-react";
+import { Download, Loader2, ReceiptText } from "lucide-react";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 
@@ -18,7 +18,7 @@ import type {
   QuoteStatus,
 } from "@/types/database";
 
-type QuoteWithItems = QuoteRow & {
+export type QuoteWithItems = QuoteRow & {
   items: QuoteItemRow[];
   project: Pick<ProjectRow, "id" | "title" | "reference"> | null;
 };
@@ -264,6 +264,15 @@ export function QuoteList({ quotes, projects, canManage }: Props) {
               {canManage ? <AddItemForm quoteId={quote.id} /> : null}
 
               <div className="mt-4 flex items-center justify-end gap-2">
+                <a
+                  className="inline-flex h-8 items-center justify-center gap-1.5 rounded-[3px] border border-line-strong bg-paper px-3 text-xs font-medium text-ink transition hover:border-ink"
+                  href={`/api/quotes/${quote.id}/pdf`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Download className="size-3.5" aria-hidden="true" />
+                  PDF
+                </a>
                 <StatusForm
                   quoteId={quote.id}
                   current={quote.status}

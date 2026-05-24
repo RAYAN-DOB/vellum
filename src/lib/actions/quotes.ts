@@ -86,12 +86,30 @@ export async function updateQuoteStatusAction(
     return { error: "Statut invalide." };
   }
 
-  // Clients can only accept / refuse.
-  if (user.profile.role === "client" && !["accepted", "refused"].includes(status)) {
+  const supabase = await createSupabaseServerClient();
+  const { data: quote } = await supabase
+    .from("quotes")
+    .select("id, project:projects(client_id)")
+    .eq("id", quoteId)
+    .maybeSingle();
+
+  const projectClientId =
+    (quote as unknown as { project?: { client_id?: string } | null })?.project
+      ?.client_id ?? null;
+
+  if (!quote) return { error: "Devis introuvable." };
+
+  if (
+    user.profile.role === "client" &&
+    (projectClientId !== user.id || !["accepted", "refused"].includes(status))
+  ) {
     return { error: "Action non autorisée." };
   }
 
-  const supabase = await createSupabaseServerClient();
+  if (!["client", "manager", "admin"].includes(user.profile.role)) {
+    return { error: "Action non autorisée." };
+  }
+
   const { error } = await supabase
     .from("quotes")
     .update({ status })

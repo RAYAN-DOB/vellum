@@ -3,6 +3,7 @@ import { QuoteList } from "@/components/quotes/QuoteList";
 import { requireRole } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { routes } from "@/lib/routes";
+import type { QuoteWithItems } from "@/components/quotes/QuoteList";
 
 export const metadata = {
   title: "Devis — Vellum",
@@ -34,8 +35,7 @@ export default async function ProjectManagerQuotesPage() {
       description="Créez et envoyez les devis liés à vos projets. Le client peut accepter ou refuser depuis son cockpit."
     >
       <QuoteList
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        quotes={(quotes ?? []) as any}
+        quotes={(quotes ?? []) as unknown as QuoteWithItems[]}
         projects={projects ?? []}
         canManage={true}
       />

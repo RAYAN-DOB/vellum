@@ -109,8 +109,7 @@ export async function inviteUserAction(
   // Create the auth user with a random password the user will reset.
   const tempPassword =
     "Tmp-" + Math.random().toString(36).slice(2, 10) + "!Aa1";
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data, error } = await (admin.auth as any).admin.createUser({
+  const { data, error } = await admin.auth.admin.createUser({
     email,
     password: tempPassword,
     email_confirm: true,
