@@ -35,7 +35,7 @@ export async function createQuoteAction(
   });
 
   if (error) return { error: error.message };
-  revalidatePath("/chef-projet/devis");
+  revalidatePath("/manager/devis");
   return { success: "Devis créé." };
 }
 
@@ -70,7 +70,7 @@ export async function addQuoteItemAction(
     items?.reduce((sum, item) => sum + Number(item.total ?? 0), 0) ?? 0;
   await supabase.from("quotes").update({ total_amount: total }).eq("id", quoteId);
 
-  revalidatePath("/chef-projet/devis");
+  revalidatePath("/manager/devis");
   return { success: "Ligne ajoutée." };
 }
 
@@ -98,6 +98,6 @@ export async function updateQuoteStatusAction(
     .eq("id", quoteId);
   if (error) return { error: error.message };
 
-  revalidatePath("/chef-projet/devis");
+  revalidatePath("/manager/devis");
   return { success: "Statut mis à jour." };
 }

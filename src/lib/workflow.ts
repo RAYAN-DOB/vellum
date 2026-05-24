@@ -201,9 +201,9 @@ export const commandActions = [
   { label: "Nouveau projet", href: "/client/nouveau-projet", hint: "Client" },
   { label: "Rechercher un projet", href: "/client/projets", hint: "Global" },
   { label: "Ouvrir projet demo", href: "/client/projets/project-demo-001", hint: "Projet" },
-  { label: "Demandes entrantes", href: "/chef-projet", hint: "Manager" },
-  { label: "Devis mocke", href: "/chef-projet/devis", hint: "Manager" },
-  { label: "Espace architecte", href: "/dessinateur", hint: "Production" },
-  { label: "Permissions", href: "/dashboard/permissions", hint: "Admin" },
+  { label: "Demandes entrantes", href: "/manager", hint: "Manager" },
+  { label: "Devis mocke", href: "/manager/devis", hint: "Manager" },
+  { label: "Espace architecte", href: "/studio", hint: "Production" },
+  { label: "Permissions", href: "/admin/permissions", hint: "Admin" },
   { label: "Messages client", href: "/client/messages", hint: "Inbox" },
 ] as const;

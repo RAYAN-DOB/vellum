@@ -117,13 +117,13 @@ export async function createProjectAction(
         project_id: project.id,
         title: "Nouveau projet à qualifier",
         body: title,
-        link: `/chef-projet?focus=${project.id}`,
+        link: `/manager?focus=${project.id}`,
       })),
     );
   }
 
   revalidatePath("/client/projets");
-  revalidatePath("/chef-projet");
+  revalidatePath("/manager");
   return {
     success: "Projet créé.",
     projectId: project.id,
@@ -160,8 +160,8 @@ export async function sendProjectMessageAction(
   });
 
   revalidatePath(`/client/projets/${projectId}`);
-  revalidatePath(`/chef-projet/projets/${projectId}`);
-  revalidatePath(`/dessinateur/projets/${projectId}`);
+  revalidatePath(`/manager/projets/${projectId}`);
+  revalidatePath(`/studio/projets/${projectId}`);
   return { success: "Message envoyé." };
 }
 
@@ -203,7 +203,7 @@ export async function updateProjectStatusAction(
     link: `/client/projets/${project.id}`,
   });
 
-  revalidatePath(`/chef-projet`);
+  revalidatePath(`/manager`);
   revalidatePath(`/client/projets/${project.id}`);
   return { success: "Statut mis à jour." };
 }
@@ -245,10 +245,10 @@ export async function assignProjectAction(
     project_id: projectId,
     title: "Nouveau projet à prendre en charge",
     body: "Le chef de projet vous a assigné un nouveau projet.",
-    link: `/dessinateur/projets/${projectId}`,
+    link: `/studio/projets/${projectId}`,
   });
 
-  revalidatePath("/chef-projet");
-  revalidatePath("/dessinateur");
+  revalidatePath("/manager");
+  revalidatePath("/studio");
   return { success: "Architecte assigné." };
 }

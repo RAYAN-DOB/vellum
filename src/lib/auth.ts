@@ -92,18 +92,23 @@ export function defaultRouteForRole(role: AppRole): string {
     case "admin":
       return "/admin";
     case "manager":
-      return "/chef-projet";
+      return "/manager";
     case "architect":
-      return "/dessinateur";
+      return "/studio";
     case "client":
     default:
       return "/client";
   }
 }
 
+/**
+ * Alias kept for clarity. Same as defaultRouteForRole().
+ */
+export const getHomePathForRole = defaultRouteForRole;
+
 export const roleLabels: Record<AppRole, string> = {
   client: "Client",
-  architect: "Architecte",
+  architect: "Dessinateur",
   manager: "Chef de projet",
   admin: "Administrateur",
 };
