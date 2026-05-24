@@ -1,4 +1,4 @@
-# Supabase setup — PlanWork
+# Supabase setup — Vellum
 
 This guide walks you through provisioning a Supabase project, applying the
 schema, creating demo users and connecting the Next.js app.

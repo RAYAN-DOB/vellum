@@ -1,5 +1,5 @@
 -- ============================================================================
--- PlanWork — Seed data
+-- Vellum — Seed data
 -- Demo users, roles, permissions and a few sample projects.
 -- Run AFTER the migrations and AFTER you create the four demo accounts in
 -- the Supabase Auth dashboard (or via the SDK). Email addresses must match.
@@ -79,7 +79,7 @@ insert into public.app_policies (key, label, description, value) values
   ('projects.intake.auto_notify_manager', 'Notifier le manager à la création d''un projet', 'Envoie une notification à tous les managers à la création d''un projet.', 'true'::jsonb),
   ('documents.max_size_mb',   'Taille max d''un document', 'Limite côté UI pour l''upload (MB).', '50'::jsonb),
   ('confidentiality.default', 'Niveau de confidentialité par défaut', 'Niveau appliqué aux nouveaux projets.', '"standard"'::jsonb),
-  ('branding.product_name',   'Nom produit affiché',       'Affiché dans le header et les emails.', '"PlanWork"'::jsonb)
+  ('branding.product_name',   'Nom produit affiché',       'Affiché dans le header et les emails.', '"Vellum"'::jsonb)
 on conflict (key) do nothing;
 
 -- ----------------------------------------------------------------------------
@@ -108,9 +108,9 @@ begin
 
   -- Force the right role on demo accounts.
   update public.profiles set role = 'client',    full_name = coalesce(full_name, 'Claire Martin'),  company = coalesce(company, 'Atelier Démo') where id = v_client;
-  update public.profiles set role = 'manager',   full_name = coalesce(full_name, 'Samir Bernard'),  company = coalesce(company, 'PlanWork')     where id = v_manager;
-  update public.profiles set role = 'architect', full_name = coalesce(full_name, 'Nora Petit'),     company = coalesce(company, 'PlanWork')     where id = v_architect;
-  update public.profiles set role = 'admin',     full_name = coalesce(full_name, 'Alex Moreau'),    company = coalesce(company, 'PlanWork')     where id = v_admin;
+  update public.profiles set role = 'manager',   full_name = coalesce(full_name, 'Samir Bernard'),  company = coalesce(company, 'Vellum')     where id = v_manager;
+  update public.profiles set role = 'architect', full_name = coalesce(full_name, 'Nora Petit'),     company = coalesce(company, 'Vellum')     where id = v_architect;
+  update public.profiles set role = 'admin',     full_name = coalesce(full_name, 'Alex Moreau'),    company = coalesce(company, 'Vellum')     where id = v_admin;
 
   -- Projet à qualifier
   insert into public.projects (id, client_id, title, description, project_type, status, priority, confidentiality)

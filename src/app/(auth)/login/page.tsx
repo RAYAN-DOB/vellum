@@ -7,7 +7,7 @@ import { defaultRouteForRole, getCurrentUser } from "@/lib/auth";
 type SearchParams = Promise<{ redirect?: string }>;
 
 export const metadata = {
-  title: "Connexion — PlanWork",
+  title: "Connexion — Vellum",
 };
 
 export default async function LoginPage({
@@ -23,13 +23,13 @@ export default async function LoginPage({
 
   return (
     <AuthShell
-      eyebrow="Espace privé"
-      title="Reprenez la main sur vos projets techniques."
-      subtitle="Connectez-vous pour accéder à votre cockpit client, à la file de qualification chef de projet, à votre table de dessin ou à la console d'administration."
+      eyebrow="Connexion"
+      title="Reprenez le fil."
+      subtitle="Accédez à votre espace client, à la file de qualification chef de projet, à votre table de dessin ou à la console d'administration."
       footer={
         <span>
           Vos accès sont nominatifs et journalisés. Si vous avez perdu votre
-          mot de passe, contactez votre administrateur PlanWork.
+          mot de passe, contactez votre administrateur Vellum.
         </span>
       }
     >

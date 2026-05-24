@@ -6,7 +6,7 @@ import { listProjectsForClient } from "@/lib/projects";
 import { routes } from "@/lib/routes";
 
 export const metadata = {
-  title: "Cockpit client — PlanWork",
+  title: "Cockpit client — Vellum",
 };
 
 export default async function ClientWorkspacePage() {

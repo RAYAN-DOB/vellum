@@ -21,7 +21,7 @@ stateDiagram-v2
 ```mermaid
 sequenceDiagram
   participant C as Client
-  participant App as PlanWork V1/V2
+  participant App as Vellum V1/V2
   participant M as Manager
   participant A as Architecte
   C->>App: Depose projet dans le cockpit chat

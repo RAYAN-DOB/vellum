@@ -1,4 +1,4 @@
-# Application architecture — PlanWork
+# Application architecture — Vellum
 
 Next.js 16 App Router with React Server Components and Server Actions on top
 of Supabase (Postgres + Auth + Storage).

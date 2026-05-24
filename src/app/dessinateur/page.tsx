@@ -5,7 +5,7 @@ import { listProjectsForArchitect, listProjectsForManager } from "@/lib/projects
 import { routes } from "@/lib/routes";
 
 export const metadata = {
-  title: "Atelier architecte — PlanWork",
+  title: "Atelier architecte — Vellum",
 };
 
 export default async function DrafterWorkspacePage() {

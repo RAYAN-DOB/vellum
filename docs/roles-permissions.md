@@ -1,4 +1,4 @@
-# Rôles & permissions — PlanWork
+# Rôles & permissions — Vellum
 
 Quatre rôles, une seule plateforme, des permissions configurables.
 

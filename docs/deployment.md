@@ -1,4 +1,4 @@
-# Deployment — PlanWork
+# Deployment — Vellum
 
 The app targets Vercel + Supabase. Everything else (CDN, image optimisation,
 TLS) is handled by the platform.

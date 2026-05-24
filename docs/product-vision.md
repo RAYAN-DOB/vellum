@@ -1,6 +1,6 @@
 # Product Vision
 
-PlanWork est une plateforme B2B pour deposer, cadrer, suivre et piloter des demandes liees a des plans techniques : DWG, PDF, croquis, schemas electriques, plomberie, photos de site, notes projet, corrections et livrables.
+Vellum est une plateforme B2B pour deposer, cadrer, suivre et piloter des demandes liees a des plans techniques : DWG, PDF, croquis, schemas electriques, plomberie, photos de site, notes projet, corrections et livrables.
 
 La V1.5 reste une demonstration front statique. Elle sert a vendre la vision produit : un client depose un projet dans un cockpit/chat pleine page, l'equipe qualifie, un architecte ou dessinateur travaille, puis le client suit l'avancement.
 

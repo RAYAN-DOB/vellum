@@ -1,5 +1,5 @@
 -- ============================================================================
--- PlanWork — Row-Level Security policies
+-- Vellum — Row-Level Security policies
 -- See docs/security-rls.md for the full rationale.
 -- ============================================================================
 

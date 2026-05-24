@@ -1,5 +1,5 @@
 -- ============================================================================
--- PlanWork — Initial schema
+-- Vellum — Initial schema
 -- Tables, types, indexes for the B2B SaaS platform.
 -- RLS policies live in 0002_rls_policies.sql.
 -- ============================================================================

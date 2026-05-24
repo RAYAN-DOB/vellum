@@ -1,4 +1,4 @@
-# Security & RLS — PlanWork
+# Security & RLS — Vellum
 
 All sensitive data lives in Postgres tables protected by Row-Level Security.
 The middleware and route guards are UX (redirect early, render the right

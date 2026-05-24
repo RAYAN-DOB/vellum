@@ -2,7 +2,7 @@ import { NewProjectFlow } from "@/components/client/NewProjectFlow";
 import { requireRole } from "@/lib/auth";
 
 export const metadata = {
-  title: "Nouveau projet — PlanWork",
+  title: "Nouveau projet — Vellum",
 };
 
 export default async function ClientNewProjectPage() {

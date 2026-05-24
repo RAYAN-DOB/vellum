@@ -5,7 +5,7 @@ import { SignUpForm } from "@/components/auth/SignUpForm";
 import { defaultRouteForRole, getCurrentUser } from "@/lib/auth";
 
 export const metadata = {
-  title: "Créer un compte — PlanWork",
+  title: "Créer un compte — Vellum",
 };
 
 export default async function RegisterPage() {
@@ -14,13 +14,13 @@ export default async function RegisterPage() {
 
   return (
     <AuthShell
-      eyebrow="Nouveau client"
-      title="Ouvrez votre cockpit client en 60 secondes."
-      subtitle="Créez un compte client pour déposer un projet, suivre la qualification, échanger avec le chef de projet et valider vos livrables."
+      eyebrow="Inscription"
+      title="Ouvrez votre dossier."
+      subtitle="En 60 secondes : un compte client pour déposer un projet, suivre la qualification, échanger avec le chef de projet et valider vos livrables."
       footer={
         <span>
-          Les comptes architecte, chef de projet et administrateur sont créés
-          par votre administrateur PlanWork — l'inscription publique est
+          Les comptes dessinateur, chef de projet et administrateur sont créés
+          par votre administrateur Vellum — l&apos;inscription publique est
           réservée aux clients.
         </span>
       }

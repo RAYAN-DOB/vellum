@@ -1,8 +1,8 @@
-# Guide Demo V1 - PlanWork MVP
+# Guide Demo V1 - Vellum MVP
 
 ## Pitch Court
 
-PlanWork est une plateforme B2B pour centraliser les demandes liees aux plans techniques, DWG, PDF, croquis, documents projet et livrables.
+Vellum est une plateforme B2B pour centraliser les demandes liees aux plans techniques, DWG, PDF, croquis, documents projet et livrables.
 
 ## Probleme
 

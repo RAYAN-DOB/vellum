@@ -57,7 +57,7 @@ export async function signInAction(
     await supabase.auth.signOut();
     return {
       error:
-        "Votre compte est désactivé. Contactez un administrateur PlanWork.",
+        "Votre compte est désactivé. Contactez un administrateur Vellum.",
     };
   }
 

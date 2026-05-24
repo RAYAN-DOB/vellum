@@ -5,7 +5,7 @@ import { requireUser } from "@/lib/auth";
 import { routes } from "@/lib/routes";
 
 export const metadata = {
-  title: "Paramètres — PlanWork",
+  title: "Paramètres — Vellum",
 };
 
 export default async function ClientSettingsRoute() {
@@ -15,7 +15,7 @@ export default async function ClientSettingsRoute() {
     <AppShell
       activeHref={routes.roles.clientSettings}
       eyebrow="Paramètres"
-      title="Votre profil PlanWork"
+      title="Votre profil Vellum"
       description="Mettez à jour vos informations personnelles. Seul un administrateur peut modifier votre rôle ou désactiver votre compte."
     >
       <div className="grid gap-6 lg:grid-cols-[1fr_280px]">
@@ -26,7 +26,7 @@ export default async function ClientSettingsRoute() {
         <aside className="space-y-3">
           <div className="rounded-[6px] border border-[#d8d0bf] bg-[#f8f5ed] p-4 text-xs leading-5 text-[#6b665a]">
             Vos accès sont journalisés. Toute modification de rôle ou
-            désactivation passe par un administrateur PlanWork.
+            désactivation passe par un administrateur Vellum.
           </div>
           <div className="rounded-[6px] border border-[#d8d0bf] bg-white/95 p-4">
             <p className="text-xs uppercase tracking-[0.2em] text-[#8a7a5f]">

@@ -29,7 +29,7 @@ type ProjectWithMessages = {
 };
 
 export const metadata = {
-  title: "Messages projet — PlanWork",
+  title: "Messages projet — Vellum",
 };
 
 function formatDateTime(iso: string) {

@@ -4,7 +4,7 @@ import { requireRole } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { routes } from "@/lib/routes";
 
-export const metadata = { title: "Utilisateurs — Admin PlanWork" };
+export const metadata = { title: "Utilisateurs — Admin Vellum" };
 
 export default async function AdminUsersPage() {
   const user = await requireRole("admin");

@@ -1,4 +1,4 @@
-# Data model — PlanWork
+# Data model — Vellum
 
 Postgres (Supabase) — see `supabase/migrations/0001_init_schema.sql` for the
 authoritative DDL. This document is a human summary.

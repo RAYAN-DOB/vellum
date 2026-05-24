@@ -12,7 +12,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { routes } from "@/lib/routes";
 
 export const metadata = {
-  title: "Console admin — PlanWork",
+  title: "Console admin — Vellum",
 };
 
 export default async function AdminWorkspacePage() {
@@ -33,7 +33,7 @@ export default async function AdminWorkspacePage() {
     <AppShell
       activeHref={routes.roles.admin}
       eyebrow="Console admin"
-      title="Pilotage global PlanWork"
+      title="Pilotage global Vellum"
       description="Gérez les utilisateurs, rôles, permissions et politiques applicatives. Toutes les actions sensibles sont journalisées."
     >
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

@@ -4,7 +4,7 @@ import { requireRole } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { routes } from "@/lib/routes";
 
-export const metadata = { title: "Audit logs — Admin PlanWork" };
+export const metadata = { title: "Audit logs — Admin Vellum" };
 
 function formatDateTime(iso: string) {
   return new Date(iso).toLocaleString("fr-FR", {

@@ -5,7 +5,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { routes } from "@/lib/routes";
 
 export const metadata = {
-  title: "Devis — PlanWork",
+  title: "Devis — Vellum",
 };
 
 export default async function ProjectManagerQuotesPage() {

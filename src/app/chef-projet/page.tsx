@@ -6,7 +6,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { routes } from "@/lib/routes";
 
 export const metadata = {
-  title: "Cockpit chef de projet — PlanWork",
+  title: "Cockpit chef de projet — Vellum",
 };
 
 export default async function ProjectManagerWorkspacePage() {

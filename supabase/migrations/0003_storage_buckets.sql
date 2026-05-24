@@ -1,5 +1,5 @@
 -- ============================================================================
--- PlanWork — Storage buckets and policies
+-- Vellum — Storage buckets and policies
 -- ============================================================================
 -- All buckets are private. Access is controlled by RLS policies on
 -- storage.objects that reference public.can_access_project / public.is_admin.

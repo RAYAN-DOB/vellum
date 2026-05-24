@@ -3,7 +3,7 @@ import { requireRole } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { routes } from "@/lib/routes";
 
-export const metadata = { title: "Permissions — Admin PlanWork" };
+export const metadata = { title: "Permissions — Admin Vellum" };
 
 export default async function AdminPermissionsPage() {
   await requireRole("admin");
@@ -36,7 +36,7 @@ export default async function AdminPermissionsPage() {
       activeHref={routes.roles.admin}
       eyebrow="Administration"
       title="Catalogue des permissions"
-      description="Toutes les permissions reconnues par PlanWork. Utilisez la matrice rôles pour les affecter."
+      description="Toutes les permissions reconnues par Vellum. Utilisez la matrice rôles pour les affecter."
     >
       <div className="space-y-6">
         {Object.entries(byCategory).map(([category, perms]) => (

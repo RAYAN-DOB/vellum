@@ -13,7 +13,7 @@ import {
 import { routes } from "@/lib/routes";
 
 export const metadata = {
-  title: "Mes projets — PlanWork",
+  title: "Mes projets — Vellum",
 };
 
 function formatDate(iso: string) {
