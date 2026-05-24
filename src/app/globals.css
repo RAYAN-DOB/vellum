@@ -1,29 +1,69 @@
 @import "tailwindcss";
 
+/* ──────────────────────────────────────────────────────────────────────────
+   VELLUM — Design tokens
+   Premium B2B platform for technical plans & architectural workflows.
+   Palette inspired by drafting paper, ink and graphite.
+   ────────────────────────────────────────────────────────────────────────── */
+
 :root {
-  --background: #f4f1ea;
-  --foreground: #161512;
-  --surface: #fbfaf6;
-  --line: #ddd7c9;
-  --blueprint: #8f8777;
+  /* Surface system */
+  --paper: #faf9f5;         /* warm off-white, never pure white */
+  --vellum: #f1ede2;        /* translucent drafting paper */
+  --vellum-dim: #e9e4d6;    /* slightly deeper paper */
+  --line: #e5e0d2;          /* hairline borders */
+  --line-strong: #d4cdb9;   /* visible borders */
+
+  /* Ink system */
+  --ink: #0d0d0c;           /* near-black, body text */
+  --graphite: #2b2a26;      /* secondary text */
+  --mute: #6b6960;          /* tertiary text, labels */
+  --soft: #9d9a90;          /* placeholders, captions */
+
+  /* Action */
+  --iron: #141312;          /* primary CTA bg */
+  --iron-hover: #2a2826;    /* CTA hover */
+
+  /* Accent — used sparingly */
+  --sienna: #b6543a;        /* signature accent, seals */
+  --sienna-soft: #e9c9bd;
+  --moss: #5b6b3f;          /* positive states */
+  --amber: #b8893a;         /* warnings */
+  --crimson: #9b3636;       /* destructive */
+
+  /* Token aliases (compat existing components) */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --surface: var(--vellum);
+  --blueprint: var(--mute);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-paper: var(--paper);
+  --color-vellum: var(--vellum);
+  --color-vellum-dim: var(--vellum-dim);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-graphite: var(--graphite);
+  --color-mute: var(--mute);
+  --color-soft: var(--soft);
+  --color-iron: var(--iron);
+  --color-sienna: var(--sienna);
+  --color-moss: var(--moss);
+  --color-amber: var(--amber);
+  --color-crimson: var(--crimson);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #f5f7fb;
-    --foreground: #111827;
-  }
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-instrument-serif);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 * {
   box-sizing: border-box;
+  border-color: var(--line);
 }
 
 html {
@@ -32,95 +72,143 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-  text-rendering: geometricPrecision;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-feature-settings: "cv11", "ss01", "ss03";
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: #d7c6a4;
-  color: #161512;
+  background: var(--ink);
+  color: var(--paper);
 }
+
+/* Reduce motion globally if user prefers */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Utilities
+   ────────────────────────────────────────────────────────────────────────── */
 
 @layer utilities {
-  .technical-grid {
+  /* Fine drafting grid — barely visible, evokes paper calque */
+  .grid-paper {
     background-image:
-      linear-gradient(rgba(22, 21, 18, 0.055) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(22, 21, 18, 0.055) 1px, transparent 1px);
-    background-size: 32px 32px;
+      linear-gradient(rgba(13, 13, 12, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(13, 13, 12, 0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
   }
 
-  .technical-grid-dark {
+  .grid-paper-dense {
     background-image:
-      linear-gradient(rgba(244, 241, 234, 0.075) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(244, 241, 234, 0.075) 1px, transparent 1px);
-    background-size: 34px 34px;
+      linear-gradient(rgba(13, 13, 12, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(13, 13, 12, 0.05) 1px, transparent 1px);
+    background-size: 16px 16px;
   }
 
-  .premium-panel {
+  /* Dotted grid for surfaces — Linear/Vercel feel */
+  .grid-dots {
+    background-image: radial-gradient(rgba(13, 13, 12, 0.18) 0.6px, transparent 0.6px);
+    background-size: 18px 18px;
+  }
+
+  /* Cross-hairs (target/dimension mark) */
+  .crosshair {
+    background-image:
+      linear-gradient(rgba(13, 13, 12, 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(13, 13, 12, 0.12) 1px, transparent 1px);
+    background-size: 100% 100%;
+  }
+
+  /* Hairline divider above sections — editorial cue */
+  .rule-top {
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .rule-bottom {
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  /* Vellum sheet — for floating panels over hero */
+  .sheet {
+    background: var(--paper);
+    border: 1px solid var(--line);
     box-shadow:
-      0 24px 70px rgba(22, 21, 18, 0.08),
-      0 1px 0 rgba(255, 255, 255, 0.75) inset;
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 30px 60px -30px rgba(13, 13, 12, 0.18),
+      0 12px 24px -12px rgba(13, 13, 12, 0.08);
   }
 
-  .architectural-surface {
-    background-color: #171613;
-    background-image:
-      radial-gradient(circle at top left, rgba(255, 255, 255, 0.14), transparent 24rem),
-      linear-gradient(135deg, #171613 0%, #23211c 48%, #0f0f0d 100%);
+  .sheet-flat {
+    background: var(--paper);
+    border: 1px solid var(--line);
   }
 
-  .cinematic-hero {
-    background-image:
-      linear-gradient(115deg, rgba(248, 244, 234, 0.08), transparent 32%),
-      linear-gradient(180deg, #050504 0%, #11100d 48%, #090908 100%);
+  /* Mono caption — used for refs, labels, dimensions */
+  .caption {
+    font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mute);
   }
 
-  .drawing-line {
-    background-image:
-      linear-gradient(rgba(244, 241, 234, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(244, 241, 234, 0.06) 1px, transparent 1px),
-      linear-gradient(rgba(244, 241, 234, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(244, 241, 234, 0.03) 1px, transparent 1px);
-    background-size: 48px 48px, 48px 48px, 12px 12px, 12px 12px;
+  /* Display headline — Instrument Serif treatment */
+  .display {
+    font-family: var(--font-instrument-serif), ui-serif, Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
   }
 
-  .paper-grid {
-    background-image:
-      linear-gradient(rgba(22, 21, 18, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(22, 21, 18, 0.06) 1px, transparent 1px);
-    background-size: 24px 24px;
+  .display-italic {
+    font-style: italic;
   }
 
-  .hero-float {
-    animation: hero-float 8s ease-in-out infinite;
+  /* Underline that draws on hover, like a drafted line */
+  .draft-link {
+    background-image: linear-gradient(var(--ink), var(--ink));
+    background-size: 0 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 250ms ease;
   }
 
-  .hero-float:nth-of-type(2) {
-    animation-delay: -2.4s;
+  .draft-link:hover {
+    background-size: 100% 1px;
   }
 
-  .hero-float:nth-of-type(3) {
-    animation-delay: -4.8s;
+  /* Marquee / strip used for partners */
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
   }
 }
 
-@keyframes hero-float {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
+/* ──────────────────────────────────────────────────────────────────────────
+   Focus rings — accessible, brand-consistent
+   ────────────────────────────────────────────────────────────────────────── */
 
-  50% {
-    transform: translate3d(0, -12px, 0);
-  }
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-float {
-    animation: none;
-  }
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
 }

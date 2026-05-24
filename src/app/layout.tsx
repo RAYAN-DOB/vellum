@@ -1,21 +1,68 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
   subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
 });
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vellum.app";
 
 export const metadata: Metadata = {
-  title: "PlanWork - Plateforme B2B pour plans techniques",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Vellum — Le bureau de dépôt des projets techniques",
+    template: "%s · Vellum",
+  },
   description:
-    "Socle MVP pour structurer les demandes de plans, DWG, PDF, croquis et livrables techniques avec une approche orientee confidentialite.",
+    "Vellum est la plateforme de dépôt, qualification et livraison des projets de plans techniques. DWG, PDF, croquis, schémas — un seul fil, quatre rôles, une traçabilité totale.",
+  applicationName: "Vellum",
+  keywords: [
+    "vellum",
+    "plans techniques",
+    "DWG",
+    "architecture",
+    "bureau d'études",
+    "dépôt de projet",
+    "B2B SaaS",
+  ],
+  authors: [{ name: "Vellum" }],
+  openGraph: {
+    title: "Vellum — Le bureau de dépôt des projets techniques",
+    description:
+      "Déposez un DWG, annotez un PDF, validez un aperçu. Vellum aligne client, chef de projet et dessinateur sur un même fil.",
+    url: SITE_URL,
+    siteName: "Vellum",
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vellum",
+    description:
+      "Le bureau de dépôt des projets techniques. Calque, plans, livrables — tout au même endroit.",
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -26,9 +73,9 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-paper text-ink">{children}</body>
     </html>
   );
 }
