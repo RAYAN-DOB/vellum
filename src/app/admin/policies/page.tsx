@@ -1,4 +1,4 @@
-import { AppShell } from "@/components/layout/AppShell";
+import { AdminShell } from "@/components/shells/AdminShell";
 import { PolicyEditor } from "@/components/admin/PolicyEditor";
 import { requireRole } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -15,13 +15,13 @@ export default async function AdminPoliciesPage() {
     .order("key");
 
   return (
-    <AppShell
-      activeHref={routes.roles.admin}
+    <AdminShell
+      activeHref={routes.admin.home}
       eyebrow="Administration"
       title="Politiques applicatives (GPO)"
       description="Configurez les réglages globaux de la plateforme. Chaque valeur est un JSON validé côté serveur."
     >
       <PolicyEditor policies={policies ?? []} />
-    </AppShell>
+    </AdminShell>
   );
 }

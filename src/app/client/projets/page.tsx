@@ -1,6 +1,6 @@
 import { FilePlus2, FolderKanban, ShieldCheck } from "lucide-react";
 
-import { AppShell } from "@/components/layout/AppShell";
+import { ClientShell } from "@/components/shells/ClientShell";
 import { Button } from "@/components/ui/Button";
 import { StatusPill } from "@/components/ui/StatusPill";
 import { requireRole } from "@/lib/auth";
@@ -29,14 +29,14 @@ export default async function ClientProjectsPage() {
   const projects = await listProjectsForClient(user.id);
 
   return (
-    <AppShell
-      activeHref={routes.roles.clientProjects}
+    <ClientShell
+      activeHref={routes.client.projects}
       eyebrow="Vue client"
       title="Vos projets"
       description="Tous vos projets déposés, en production ou livrés. Cliquez pour ouvrir le détail."
       actions={
         <Button asChild icon={<FilePlus2 className="size-4" />}>
-          <a href={routes.roles.clientNewProject}>Nouveau projet</a>
+          <a href={routes.client.newProject}>Nouveau projet</a>
         </Button>
       }
     >
@@ -54,7 +54,7 @@ export default async function ClientProjectsPage() {
           </p>
           <div className="mt-4">
             <Button asChild icon={<FilePlus2 className="size-4" />}>
-              <a href={routes.roles.clientNewProject}>Déposer un projet</a>
+              <a href={routes.client.newProject}>Déposer un projet</a>
             </Button>
           </div>
         </div>
@@ -126,6 +126,6 @@ export default async function ClientProjectsPage() {
           </table>
         </div>
       )}
-    </AppShell>
+    </ClientShell>
   );
 }

@@ -1,4 +1,4 @@
-import { AppShell } from "@/components/layout/AppShell";
+import { ClientShell } from "@/components/shells/ClientShell";
 import { SignOutButton } from "@/components/auth/SignOutButton";
 import { ProfileSettingsForm } from "@/components/settings/ProfileSettingsForm";
 import { requireUser } from "@/lib/auth";
@@ -12,8 +12,8 @@ export default async function ClientSettingsRoute() {
   const user = await requireUser();
 
   return (
-    <AppShell
-      activeHref={routes.roles.clientSettings}
+    <ClientShell
+      activeHref={routes.client.settings}
       eyebrow="Paramètres"
       title="Votre profil Vellum"
       description="Mettez à jour vos informations personnelles. Seul un administrateur peut modifier votre rôle ou désactiver votre compte."
@@ -39,6 +39,6 @@ export default async function ClientSettingsRoute() {
           </div>
         </aside>
       </div>
-    </AppShell>
+    </ClientShell>
   );
 }

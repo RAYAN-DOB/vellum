@@ -155,7 +155,7 @@ export function PremiumProjectDetail({
             {files.map((file) => (
               <a
                 className="block min-w-0 rounded-[24px] transition hover:-translate-y-0.5"
-                href={`${routes.roles.clientProjects}/${project.id}/documents/${file.id}`}
+                href={`${routes.client.projects}/${project.id}/documents/${file.id}`}
                 key={file.id}
               >
                 <DocumentPreviewCard file={file} />

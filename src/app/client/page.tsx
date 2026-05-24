@@ -1,4 +1,4 @@
-import { AppShell } from "@/components/layout/AppShell";
+import { ClientShell } from "@/components/shells/ClientShell";
 import { ClientDashboard } from "@/components/client/ClientDashboard";
 import { requireRole } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -20,8 +20,8 @@ export default async function ClientWorkspacePage() {
     .is("read_at", null);
 
   return (
-    <AppShell
-      activeHref={routes.roles.client}
+    <ClientShell
+      activeHref={routes.client.home}
       description="Suivez vos projets en cours, échangez avec votre chef de projet et déposez de nouvelles demandes en quelques clics."
       eyebrow={`Connecté en tant que ${user.profile.full_name ?? user.email}`}
       title="Cockpit client"
@@ -31,6 +31,6 @@ export default async function ClientWorkspacePage() {
         projects={projects}
         unreadMessages={count ?? 0}
       />
-    </AppShell>
+    </ClientShell>
   );
 }

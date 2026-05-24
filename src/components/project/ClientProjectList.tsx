@@ -64,7 +64,7 @@ export function ClientProjectList() {
                 </div>
                 <div className="flex flex-col gap-2 sm:flex-row">
                   <Button asChild size="sm">
-                    <a href={`${routes.roles.clientProjects}/${project.id}`}>
+                    <a href={`${routes.client.projects}/${project.id}`}>
                       Ouvrir
                       <ArrowRight className="size-4" aria-hidden="true" />
                     </a>

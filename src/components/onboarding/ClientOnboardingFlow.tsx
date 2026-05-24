@@ -86,7 +86,7 @@ export function ClientOnboardingFlow() {
             </p>
           </div>
           <Button asChild className="rounded-full">
-            <a href={routes.roles.clientNewProject}>
+            <a href={routes.client.newProject}>
               Deposer mon premier projet
               <ArrowRight className="size-4" aria-hidden="true" />
             </a>

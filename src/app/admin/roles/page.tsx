@@ -1,4 +1,4 @@
-import { AppShell } from "@/components/layout/AppShell";
+import { AdminShell } from "@/components/shells/AdminShell";
 import { PermissionMatrix } from "@/components/admin/PermissionMatrix";
 import { requireRole } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -49,8 +49,8 @@ export default async function AdminRolesPage() {
   }
 
   return (
-    <AppShell
-      activeHref={routes.roles.admin}
+    <AdminShell
+      activeHref={routes.admin.home}
       eyebrow="Administration"
       title="Matrice rôles × permissions"
       description="Activez ou retirez les permissions par rôle. L'admin conserve toujours l'accès total."
@@ -60,6 +60,6 @@ export default async function AdminRolesPage() {
         permissions={permissions}
         matrix={matrix}
       />
-    </AppShell>
+    </AdminShell>
   );
 }

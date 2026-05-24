@@ -420,7 +420,7 @@ export function ProjectDetailView({
               <p>Vous regardez ce projet en tant que {currentUserRole}.</p>
               <a
                 className="mt-2 inline-block text-[#171613] underline-offset-2 hover:underline"
-                href="/chef-projet"
+                href="/manager"
               >
                 Ouvrir dans la file de qualification
               </a>

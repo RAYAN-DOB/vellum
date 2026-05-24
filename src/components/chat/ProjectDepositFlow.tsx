@@ -85,7 +85,7 @@ export function ProjectDepositFlow() {
     setStructured(true);
     setSending(true);
     window.setTimeout(() => {
-      router.push(`${routes.roles.clientProjects}/project-demo-001`);
+      router.push(`${routes.client.projects}/project-demo-001`);
     }, 2100);
   }
 
@@ -99,7 +99,7 @@ export function ProjectDepositFlow() {
       <header className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-5 sm:px-6 lg:px-8">
         <a
           className="inline-flex h-11 items-center gap-2 rounded-full border border-[#f8f4ea]/12 bg-[#f8f4ea]/6 px-4 text-sm font-medium text-[#d9d0bf] transition hover:bg-[#f8f4ea]/10 hover:text-white"
-          href={routes.roles.client}
+          href={routes.client.home}
         >
           <ArrowLeft className="size-4" aria-hidden="true" />
           Espace client
@@ -342,7 +342,7 @@ export function ProjectDepositFlow() {
             </div>
             <a
               className="mt-6 inline-flex h-11 items-center gap-2 rounded-full bg-[#f8f4ea] px-5 text-sm font-semibold text-[#171613]"
-              href={`${routes.roles.clientProjects}/project-demo-001`}
+              href={`${routes.client.projects}/project-demo-001`}
             >
               Voir le projet
               <ArrowRight className="size-4" aria-hidden="true" />

@@ -19,7 +19,7 @@ export function DocumentReviewViewer({ file, project }: DocumentReviewViewerProp
         <CardHeader>
           <a
             className="inline-flex items-center gap-2 text-sm font-medium text-[#d7c6a4]"
-            href={`${routes.roles.clientProjects}/${project.id}`}
+            href={`${routes.client.projects}/${project.id}`}
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
             Retour projet

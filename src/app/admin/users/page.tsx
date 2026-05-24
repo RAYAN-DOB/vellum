@@ -1,4 +1,4 @@
-import { AppShell } from "@/components/layout/AppShell";
+import { AdminShell } from "@/components/shells/AdminShell";
 import { UserTable } from "@/components/admin/UserTable";
 import { requireRole } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -15,13 +15,13 @@ export default async function AdminUsersPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <AppShell
-      activeHref={routes.roles.admin}
+    <AdminShell
+      activeHref={routes.admin.home}
       eyebrow="Administration"
       title="Utilisateurs"
       description="Gérez les comptes, leurs rôles et leur activation. Toutes les actions sont journalisées."
     >
       <UserTable users={users ?? []} currentUserId={user.id} />
-    </AppShell>
+    </AdminShell>
   );
 }

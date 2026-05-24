@@ -1,6 +1,6 @@
 import { MessageSquare } from "lucide-react";
 
-import { AppShell } from "@/components/layout/AppShell";
+import { ClientShell } from "@/components/shells/ClientShell";
 import { StatusPill } from "@/components/ui/StatusPill";
 import { requireRole } from "@/lib/auth";
 import {
@@ -57,8 +57,8 @@ export default async function ClientMessagesPage() {
   const projects = (data ?? []) as unknown as ProjectWithMessages[];
 
   return (
-    <AppShell
-      activeHref={routes.roles.clientMessages}
+    <ClientShell
+      activeHref={routes.client.messages}
       eyebrow="Inbox projet"
       title="Messages"
       description="Suivez toutes les conversations projet en un seul endroit."
@@ -132,6 +132,6 @@ export default async function ClientMessagesPage() {
           })}
         </ul>
       )}
-    </AppShell>
+    </ClientShell>
   );
 }

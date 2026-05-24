@@ -1,4 +1,4 @@
-import { AppShell } from "@/components/layout/AppShell";
+import { AdminShell } from "@/components/shells/AdminShell";
 import { requireRole } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { routes } from "@/lib/routes";
@@ -32,8 +32,8 @@ export default async function AdminPermissionsPage() {
   );
 
   return (
-    <AppShell
-      activeHref={routes.roles.admin}
+    <AdminShell
+      activeHref={routes.admin.home}
       eyebrow="Administration"
       title="Catalogue des permissions"
       description="Toutes les permissions reconnues par Vellum. Utilisez la matrice rôles pour les affecter."
@@ -64,6 +64,6 @@ export default async function AdminPermissionsPage() {
           </section>
         ))}
       </div>
-    </AppShell>
+    </AdminShell>
   );
 }

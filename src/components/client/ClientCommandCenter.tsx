@@ -71,7 +71,7 @@ export function ClientCommandCenter() {
           </CardHeader>
           <CardContent className="flex flex-col gap-3 sm:flex-row">
             <Button asChild className="rounded-full bg-[#f7f3ea] text-[#171613] hover:bg-white">
-              <a href={routes.roles.clientNewProject}>
+              <a href={routes.client.newProject}>
                 Deposer un projet
                 <ArrowRight className="size-4" aria-hidden="true" />
               </a>
@@ -81,7 +81,7 @@ export function ClientCommandCenter() {
               className="rounded-full border-[#f7f3ea]/18 bg-[#f7f3ea]/6 text-[#f7f3ea] hover:bg-[#f7f3ea]/10"
               variant="outline"
             >
-              <a href={routes.roles.clientMessages}>Voir les messages</a>
+              <a href={routes.client.messages}>Voir les messages</a>
             </Button>
           </CardContent>
         </Card>
@@ -168,7 +168,7 @@ export function ClientCommandCenter() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <Button asChild size="sm" className="rounded-full">
-                    <a href={`${routes.roles.clientProjects}/${project.id}`}>
+                    <a href={`${routes.client.projects}/${project.id}`}>
                       Ouvrir
                       <ArrowRight className="size-4" aria-hidden="true" />
                     </a>

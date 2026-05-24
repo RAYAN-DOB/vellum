@@ -1,7 +1,7 @@
 import { ArrowLeft, FileText } from "lucide-react";
 import { notFound } from "next/navigation";
 
-import { AppShell } from "@/components/layout/AppShell";
+import { ClientShell } from "@/components/shells/ClientShell";
 import { DocumentDownloadButton } from "@/components/files/DocumentDownloadButton";
 import { requireRole } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -28,8 +28,8 @@ export default async function ClientDocumentReviewPage({
   if (!document) notFound();
 
   return (
-    <AppShell
-      activeHref={routes.roles.clientProjects}
+    <ClientShell
+      activeHref={routes.client.projects}
       eyebrow="Document projet"
       title={document.file_name}
       description={`Aperçu du document associé au projet ${
@@ -69,6 +69,6 @@ export default async function ClientDocumentReviewPage({
           habituel.
         </p>
       </section>
-    </AppShell>
+    </ClientShell>
   );
 }

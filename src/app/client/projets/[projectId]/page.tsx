@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { AppShell } from "@/components/layout/AppShell";
+import { ClientShell } from "@/components/shells/ClientShell";
 import { ProjectDetailView } from "@/components/project/ProjectDetailView";
 import { requireRole } from "@/lib/auth";
 import { getProjectDetail } from "@/lib/projects";
@@ -27,8 +27,8 @@ export default async function ClientProjectDetailPage({
   }
 
   return (
-    <AppShell
-      activeHref={routes.roles.clientProjects}
+    <ClientShell
+      activeHref={routes.client.projects}
       eyebrow="Détail projet"
       title={project.title}
       description="Documents, conversation et activité du projet. Échangez avec l'équipe en direct."
@@ -42,6 +42,6 @@ export default async function ClientProjectDetailPage({
         currentUserRole={user.profile.role}
         canUpload={true}
       />
-    </AppShell>
+    </ClientShell>
   );
 }

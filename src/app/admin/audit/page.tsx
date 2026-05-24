@@ -1,4 +1,4 @@
-import { AppShell } from "@/components/layout/AppShell";
+import { AdminShell } from "@/components/shells/AdminShell";
 import { StatusPill } from "@/components/ui/StatusPill";
 import { requireRole } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -53,8 +53,8 @@ export default async function AdminAuditPage() {
   const entries = (data ?? []) as unknown as AuditEntry[];
 
   return (
-    <AppShell
-      activeHref={routes.roles.admin}
+    <AdminShell
+      activeHref={routes.admin.home}
       eyebrow="Administration"
       title="Audit logs"
       description="Les 200 dernières actions sensibles enregistrées dans la plateforme."
@@ -112,6 +112,6 @@ export default async function AdminAuditPage() {
           </p>
         )}
       </div>
-    </AppShell>
+    </AdminShell>
   );
 }

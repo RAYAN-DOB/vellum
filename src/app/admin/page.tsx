@@ -6,7 +6,7 @@ import {
   Users,
 } from "lucide-react";
 
-import { AppShell } from "@/components/layout/AppShell";
+import { AdminShell } from "@/components/shells/AdminShell";
 import { requireRole } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { routes } from "@/lib/routes";
@@ -30,8 +30,8 @@ export default async function AdminWorkspacePage() {
   ]);
 
   return (
-    <AppShell
-      activeHref={routes.roles.admin}
+    <AdminShell
+      activeHref={routes.admin.home}
       eyebrow="Console admin"
       title="Pilotage global Vellum"
       description="Gérez les utilisateurs, rôles, permissions et politiques applicatives. Toutes les actions sensibles sont journalisées."
@@ -94,13 +94,13 @@ export default async function AdminWorkspacePage() {
           {projects.count ?? 0}
         </p>
         <a
-          href="/chef-projet"
+          href="/manager"
           className="mt-3 inline-flex text-sm font-medium text-[#171613] hover:underline"
         >
           Ouvrir le cockpit chef de projet →
         </a>
       </section>
-    </AppShell>
+    </AdminShell>
   );
 }
 
