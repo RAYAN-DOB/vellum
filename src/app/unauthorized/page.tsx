@@ -1,12 +1,13 @@
-import { ShieldAlert } from "lucide-react";
+import { ArrowRight, ShieldOff } from "lucide-react";
 
+import { VellumLogo } from "@/components/brand/VellumLogo";
 import { SignOutButton } from "@/components/auth/SignOutButton";
 import { defaultRouteForRole, getCurrentUser, roleLabels } from "@/lib/auth";
 
 type SearchParams = Promise<{ reason?: string }>;
 
 export const metadata = {
-  title: "Accès refusé — PlanWork",
+  title: "Accès refusé",
 };
 
 export default async function UnauthorizedPage({
@@ -18,51 +19,81 @@ export default async function UnauthorizedPage({
   const { reason } = await searchParams;
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#070706] text-[#f7f3ea]">
+    <div className="relative min-h-screen overflow-hidden bg-paper text-ink">
       <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.14]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(248,244,234,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(248,244,234,0.2) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 grid-paper opacity-60"
       />
 
-      <main className="relative z-10 mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center px-6 text-center">
-        <span className="flex size-12 items-center justify-center rounded-full border border-[#d7c6a4]/40 bg-[#1c1a16]">
-          <ShieldAlert className="size-6 text-[#d7c6a4]" aria-hidden />
+      <header className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
+        <a
+          href="/"
+          className="inline-flex items-center gap-2.5"
+          aria-label="Vellum — retour à l'accueil"
+        >
+          <VellumLogo size="sm" tone="ink" />
+          <span className="font-display text-lg leading-none">Vellum</span>
+        </a>
+        <a
+          href="/"
+          className="caption text-mute transition-colors hover:text-ink"
+        >
+          ← Accueil
+        </a>
+      </header>
+
+      <main className="relative z-10 mx-auto flex min-h-[calc(100vh-5rem)] max-w-3xl flex-col items-start justify-center px-6 lg:px-10">
+        <span
+          aria-hidden="true"
+          className="inline-flex size-12 items-center justify-center rounded-full border border-line-strong bg-vellum/60"
+        >
+          <ShieldOff className="size-5 text-graphite" />
         </span>
-        <p className="mt-6 text-xs font-semibold uppercase tracking-[0.24em] text-[#d7c6a4]">
-          Accès refusé
-        </p>
-        <h1 className="mt-3 text-4xl font-semibold leading-tight tracking-tight">
-          Cette zone est réservée à un autre rôle.
-        </h1>
-        <p className="mt-4 max-w-xl text-sm leading-6 text-[#cfc6b5] sm:text-base">
-          {reason === "inactive"
-            ? "Votre compte a été désactivé. Contactez un administrateur PlanWork pour rétablir l'accès."
-            : "Votre rôle ne donne pas accès à cette section. Revenez à votre espace ou changez de compte."}
+
+        <p className="caption mt-8">
+          {reason === "inactive" ? "Compte désactivé" : "Accès refusé"}
         </p>
 
-        {user ? (
-          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
+        <h1 className="display mt-4 text-[clamp(2.5rem,5vw,4.25rem)] text-ink">
+          Cette zone n&apos;est pas
+          <br />
+          <span className="italic">pour ce rôle.</span>
+        </h1>
+
+        <p className="mt-6 max-w-xl text-[16px] leading-[1.7] text-graphite">
+          {reason === "inactive"
+            ? "Votre compte a été désactivé. Contactez un administrateur Vellum pour rétablir l'accès — la décision est tracée dans le journal d'audit."
+            : "Votre rôle ne donne pas accès à cette section. Revenez à votre espace, ou changez de compte si vous avez plusieurs identités."}
+        </p>
+
+        <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+          {user ? (
+            <>
+              <a
+                href={defaultRouteForRole(user.profile.role)}
+                className="group inline-flex h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-ink px-5 text-[14px] font-medium text-paper transition hover:bg-iron-hover"
+              >
+                Aller à mon espace {roleLabels[user.profile.role]}
+                <ArrowRight
+                  className="size-4 transition-transform group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
+              </a>
+              <SignOutButton variant="outline" />
+            </>
+          ) : (
             <a
-              href={defaultRouteForRole(user.profile.role)}
-              className="inline-flex h-11 items-center justify-center rounded-[3px] bg-[#f7f3ea] px-5 text-sm font-semibold text-[#171613] hover:bg-white"
+              href="/login"
+              className="group inline-flex h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-ink px-5 text-[14px] font-medium text-paper transition hover:bg-iron-hover"
             >
-              Aller à mon espace {roleLabels[user.profile.role]}
+              Se connecter
+              <ArrowRight
+                className="size-4 transition-transform group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
             </a>
-            <SignOutButton variant="ghost-light" />
-          </div>
-        ) : (
-          <a
-            href="/login"
-            className="mt-8 inline-flex h-11 items-center justify-center rounded-[3px] bg-[#f7f3ea] px-5 text-sm font-semibold text-[#171613] hover:bg-white"
-          >
-            Se connecter
-          </a>
-        )}
+          )}
+        </div>
       </main>
     </div>
   );

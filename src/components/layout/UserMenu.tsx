@@ -1,6 +1,5 @@
-import { roleLabels } from "@/lib/auth";
 import { SignOutButton } from "@/components/auth/SignOutButton";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser, roleLabels } from "@/lib/auth";
 
 export async function UserMenu() {
   const user = await getCurrentUser();
@@ -9,7 +8,7 @@ export async function UserMenu() {
     return (
       <a
         href="/login"
-        className="inline-flex h-9 items-center gap-1.5 rounded-[3px] border border-[#f7f3ea]/18 bg-[#f7f3ea]/5 px-3 text-xs font-medium text-[#d9d0bf] hover:bg-[#f7f3ea]/10 hover:text-[#f7f3ea]"
+        className="inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full border border-paper/15 px-3.5 text-[12px] font-medium text-paper/80 transition hover:border-paper/40 hover:text-paper"
       >
         Se connecter
       </a>
@@ -24,21 +23,24 @@ export async function UserMenu() {
     .slice(0, 2);
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2.5">
       <div className="hidden text-right sm:block">
-        <p className="text-xs font-medium text-[#f7f3ea]">
+        <p className="text-[12px] font-medium text-paper">
           {user.profile.full_name ?? user.email}
         </p>
-        <p className="text-[10px] uppercase tracking-[0.18em] text-[#8f8777]">
+        <p className="caption text-paper/55">
           {roleLabels[user.profile.role]}
         </p>
       </div>
-      <span className="flex size-9 items-center justify-center rounded-full border border-[#f7f3ea]/18 bg-[#24221d] text-xs font-semibold text-[#f7f3ea]">
+      <span
+        aria-hidden="true"
+        className="flex size-9 shrink-0 items-center justify-center rounded-full border border-paper/15 bg-paper/10 text-[11px] font-medium text-paper"
+      >
         {initials || "?"}
       </span>
       <SignOutButton
-        variant="ghost-light"
-        className="hidden sm:inline-flex"
+        variant="outline"
+        className="hidden border-paper/15 text-paper/70 hover:border-paper/40 hover:bg-transparent hover:text-paper sm:inline-flex"
         label="Quitter"
       />
     </div>

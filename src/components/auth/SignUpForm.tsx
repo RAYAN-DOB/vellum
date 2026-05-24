@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { Loader2 } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 
 import { signUpAction } from "@/lib/actions/auth";
 import { AuthInput } from "@/components/auth/AuthInput";
@@ -15,10 +15,22 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[3px] bg-[#f7f3ea] px-4 text-sm font-semibold text-[#171613] shadow-[0_18px_40px_rgba(248,243,234,0.18)] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
+      className="group inline-flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-ink px-4 text-[14px] font-medium text-paper transition hover:bg-iron-hover disabled:cursor-not-allowed disabled:opacity-60"
     >
-      {pending ? <Loader2 className="size-4 animate-spin" /> : null}
-      {pending ? "Création du compte…" : "Créer mon compte client"}
+      {pending ? (
+        <>
+          <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+          Création du compte…
+        </>
+      ) : (
+        <>
+          Créer mon compte client
+          <ArrowRight
+            className="size-4 transition-transform group-hover:translate-x-0.5"
+            aria-hidden="true"
+          />
+        </>
+      )}
     </button>
   );
 }
@@ -65,7 +77,7 @@ export function SignUpForm() {
       {state.error ? (
         <p
           role="alert"
-          className="rounded-[3px] border border-red-900/60 bg-red-950/40 px-3 py-2 text-sm text-red-200"
+          className="rounded-[3px] border border-crimson/30 bg-crimson/5 px-3 py-2 text-[13px] text-crimson"
         >
           {state.error}
         </p>
@@ -73,7 +85,7 @@ export function SignUpForm() {
       {state.success ? (
         <p
           role="status"
-          className="rounded-[3px] border border-emerald-900/60 bg-emerald-950/40 px-3 py-2 text-sm text-emerald-200"
+          className="rounded-[3px] border border-moss/30 bg-moss/5 px-3 py-2 text-[13px] text-moss"
         >
           {state.success}
         </p>
@@ -81,16 +93,19 @@ export function SignUpForm() {
 
       <SubmitButton />
 
-      <p className="text-center text-xs text-[#8f8777]">
+      <p className="text-center text-[13px] text-mute">
         Déjà inscrit ?{" "}
-        <a className="text-[#f7f3ea] underline-offset-4 hover:underline" href="/login">
+        <a
+          className="draft-link cursor-pointer font-medium text-ink"
+          href="/login"
+        >
           Se connecter
         </a>
       </p>
 
-      <p className="text-center text-[11px] leading-5 text-[#5e594d]">
+      <p className="text-center text-[11px] leading-5 text-soft">
         En créant un compte, vous acceptez les conditions de confidentialité
-        PlanWork et la journalisation des accès projet.
+        Vellum et la journalisation des accès projet.
       </p>
     </form>
   );

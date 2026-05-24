@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import type { ReactNode } from "react";
 
+import { VellumLogo } from "@/components/brand/VellumLogo";
 import { CommandPalette } from "@/components/command/CommandPalette";
 import { Container } from "@/components/layout/Container";
 import { DemoRoleSwitcher } from "@/components/layout/DemoRoleSwitcher";
@@ -65,14 +66,18 @@ export function AppShell({
     <div className="paper-grid min-h-screen bg-[#f4f1ea] text-[#171613]">
       <header className="border-b border-[#34312b] bg-[#171613] text-[#f7f3ea]">
         <Container className="flex min-h-16 items-center justify-between gap-4">
-          <a className="flex items-center gap-3" href={routes.public.home}>
-            <span className="flex size-9 items-center justify-center rounded-[3px] border border-[#f7f3ea]/18 bg-[#24221d] text-sm font-semibold text-[#f7f3ea] shadow-[0_0_28px_rgba(215,198,164,0.10)]">
-              PW
-            </span>
+          <a
+            className="flex items-center gap-3"
+            href={routes.public.home}
+            aria-label="Vellum — retour à l'accueil"
+          >
+            <VellumLogo size="sm" />
             <span>
-              <span className="block text-sm font-semibold">PlanWork</span>
-              <span className="hidden text-xs text-[#8f8777] sm:block">
-                Architectural project cockpit
+              <span className="block font-display text-base leading-none">
+                Vellum
+              </span>
+              <span className="caption mt-1 hidden sm:block">
+                Plans · Calques · Livrables
               </span>
             </span>
           </a>
