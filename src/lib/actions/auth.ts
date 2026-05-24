@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { defaultRouteForRole } from "@/lib/auth";
+import { getSiteUrl } from "@/lib/site-url";
 import type { AppRole } from "@/types/database";
 
 const ALLOWED_SIGNUP_ROLES: AppRole[] = ["client"];
@@ -134,8 +135,7 @@ export async function requestPasswordResetAction(
   }
 
   const supabase = await createSupabaseServerClient();
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const siteUrl = getSiteUrl();
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${siteUrl}/auth/callback?next=/client/parametres`,
