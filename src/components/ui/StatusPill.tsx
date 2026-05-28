@@ -1,44 +1,48 @@
 import { cn } from "@/lib/utils";
 
-type Tone = "neutral" | "amber" | "green" | "blue" | "red" | "violet";
+type Tone = "neutral" | "amber" | "green" | "gold" | "red" | "blue";
 
 const TONE_STYLES: Record<Tone, string> = {
-  neutral: "border-[#d8d0bf] bg-[#f0eadf] text-[#3c382f]",
-  amber: "border-amber-300 bg-amber-50 text-amber-900",
-  green: "border-emerald-300 bg-emerald-50 text-emerald-900",
-  blue: "border-sky-300 bg-sky-50 text-sky-900",
-  red: "border-red-300 bg-red-50 text-red-900",
-  violet: "border-violet-300 bg-violet-50 text-violet-900",
-};
-
-const DARK_TONE_STYLES: Record<Tone, string> = {
-  neutral: "border-[#34312b] bg-[#0a0908] text-[#cfc6b5]",
-  amber: "border-amber-500/50 bg-amber-950/40 text-amber-200",
-  green: "border-emerald-500/50 bg-emerald-950/40 text-emerald-200",
-  blue: "border-sky-500/50 bg-sky-950/40 text-sky-200",
-  red: "border-red-500/50 bg-red-950/40 text-red-200",
-  violet: "border-violet-500/50 bg-violet-950/40 text-violet-200",
+  neutral: "border-graphite bg-slate/50 text-silver",
+  gold: "border-gold/30 bg-gold/10 text-gold",
+  amber: "border-amber/30 bg-amber/10 text-amber",
+  green: "border-emerald/30 bg-emerald/10 text-emerald",
+  blue: "border-sky-500/30 bg-sky-500/10 text-sky-400",
+  red: "border-crimson/30 bg-crimson/10 text-crimson",
 };
 
 export function StatusPill({
   tone = "neutral",
   children,
-  dark = false,
   className,
+  dot = false,
 }: {
   tone?: Tone;
   children: React.ReactNode;
-  dark?: boolean;
   className?: string;
+  dot?: boolean;
 }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium",
-        dark ? DARK_TONE_STYLES[tone] : TONE_STYLES[tone],
+        "inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium",
+        TONE_STYLES[tone],
         className,
       )}
     >
+      {dot && (
+        <span 
+          className={cn(
+            "size-1.5 rounded-full animate-pulse",
+            tone === "gold" && "bg-gold",
+            tone === "amber" && "bg-amber",
+            tone === "green" && "bg-emerald",
+            tone === "blue" && "bg-sky-400",
+            tone === "red" && "bg-crimson",
+            tone === "neutral" && "bg-silver",
+          )}
+        />
+      )}
       {children}
     </span>
   );

@@ -27,15 +27,15 @@ export function SignOutButton({
       disabled={pending}
       onClick={() => startTransition(() => signOutAction())}
       className={cn(
-        "inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-full px-4 text-[13px] font-medium transition disabled:cursor-not-allowed disabled:opacity-60",
+        "inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-xl px-4 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60",
         variant === "ghost"
-          ? "text-mute hover:bg-vellum hover:text-ink"
-          : "border border-line-strong text-graphite hover:border-ink hover:text-ink",
+          ? "text-silver hover:bg-slate/50 hover:text-paper"
+          : "border border-graphite text-silver hover:border-silver/30 hover:text-paper",
         className,
       )}
     >
       {pending ? (
-        <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+        <Loader2 className="size-4 animate-spin text-gold" aria-hidden="true" />
       ) : (
         <LogOut className="size-4" aria-hidden="true" />
       )}

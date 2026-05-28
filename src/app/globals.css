@@ -1,58 +1,62 @@
 @import "tailwindcss";
 
 /* ──────────────────────────────────────────────────────────────────────────
-   VELLUM — Design tokens
-   Premium B2B platform for technical plans & architectural workflows.
-   Palette inspired by drafting paper, ink and graphite.
+   VELLUM — Premium Dark Theme
+   Luxury B2B platform with dramatic lighting, glass effects, and depth
    ────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  /* Surface system */
-  --paper: #faf9f5;         /* warm off-white, never pure white */
-  --vellum: #f1ede2;        /* translucent drafting paper */
-  --vellum-dim: #e9e4d6;    /* slightly deeper paper */
-  --line: #e5e0d2;          /* hairline borders */
-  --line-strong: #d4cdb9;   /* visible borders */
+  /* Deep dark surfaces */
+  --void: #050507;           /* true black, base */
+  --abyss: #0a0a0f;          /* primary dark surface */
+  --obsidian: #101015;       /* elevated surface */
+  --slate: #18181f;          /* cards, panels */
+  --graphite: #24242d;       /* borders, dividers */
+  
+  /* Light spectrum */
+  --paper: #fafafa;          /* primary text */
+  --mist: #e4e4e7;           /* secondary text */
+  --silver: #a1a1aa;         /* muted text */
+  --dim: #71717a;            /* placeholders */
 
-  /* Ink system */
-  --ink: #0d0d0c;           /* near-black, body text */
-  --graphite: #2b2a26;      /* secondary text */
-  --mute: #6b6960;          /* tertiary text, labels */
-  --soft: #9d9a90;          /* placeholders, captions */
+  /* Accent - warm gold/amber gradient feel */
+  --gold: #f5a623;           /* primary accent */
+  --gold-soft: #fcd28d;      /* light gold */
+  --gold-deep: #c98a12;      /* deep gold */
+  
+  /* Glow colors */
+  --glow-gold: rgba(245, 166, 35, 0.15);
+  --glow-gold-strong: rgba(245, 166, 35, 0.3);
+  --glow-white: rgba(255, 255, 255, 0.05);
+  
+  /* Status colors */
+  --emerald: #10b981;        /* success */
+  --amber: #f59e0b;          /* warning */
+  --crimson: #ef4444;        /* error */
 
-  /* Action */
-  --iron: #141312;          /* primary CTA bg */
-  --iron-hover: #2a2826;    /* CTA hover */
-
-  /* Accent — used sparingly */
-  --sienna: #b6543a;        /* signature accent, seals */
-  --sienna-soft: #e9c9bd;
-  --moss: #5b6b3f;          /* positive states */
-  --amber: #b8893a;         /* warnings */
-  --crimson: #9b3636;       /* destructive */
-
-  /* Token aliases (compat existing components) */
-  --background: var(--paper);
-  --foreground: var(--ink);
-  --surface: var(--vellum);
-  --blueprint: var(--mute);
+  /* Aliases */
+  --background: var(--abyss);
+  --foreground: var(--paper);
+  --surface: var(--obsidian);
+  --border: var(--graphite);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-paper: var(--paper);
-  --color-vellum: var(--vellum);
-  --color-vellum-dim: var(--vellum-dim);
-  --color-line: var(--line);
-  --color-line-strong: var(--line-strong);
-  --color-ink: var(--ink);
+  --color-void: var(--void);
+  --color-abyss: var(--abyss);
+  --color-obsidian: var(--obsidian);
+  --color-slate: var(--slate);
   --color-graphite: var(--graphite);
-  --color-mute: var(--mute);
-  --color-soft: var(--soft);
-  --color-iron: var(--iron);
-  --color-sienna: var(--sienna);
-  --color-moss: var(--moss);
+  --color-paper: var(--paper);
+  --color-mist: var(--mist);
+  --color-silver: var(--silver);
+  --color-dim: var(--dim);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-deep: var(--gold-deep);
+  --color-emerald: var(--emerald);
   --color-amber: var(--amber);
   --color-crimson: var(--crimson);
 
@@ -63,17 +67,18 @@
 
 * {
   box-sizing: border-box;
-  border-color: var(--line);
+  border-color: var(--graphite);
 }
 
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  background: var(--void);
 }
 
 body {
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--abyss);
+  color: var(--paper);
   font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   font-feature-settings: "cv11", "ss01", "ss03";
   text-rendering: optimizeLegibility;
@@ -83,8 +88,8 @@ body {
 }
 
 ::selection {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--gold);
+  color: var(--void);
 }
 
 /* Reduce motion globally if user prefers */
@@ -100,73 +105,191 @@ body {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Utilities
+   Dramatic Backgrounds & Effects
    ────────────────────────────────────────────────────────────────────────── */
 
 @layer utilities {
-  /* Fine drafting grid — barely visible, evokes paper calque */
-  .grid-paper {
-    background-image:
-      linear-gradient(rgba(13, 13, 12, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(13, 13, 12, 0.04) 1px, transparent 1px);
-    background-size: 28px 28px;
+  /* Noise texture overlay */
+  .noise {
+    position: relative;
+  }
+  .noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
   }
 
-  .grid-paper-dense {
+  /* Subtle grid pattern */
+  .grid-subtle {
     background-image:
-      linear-gradient(rgba(13, 13, 12, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(13, 13, 12, 0.05) 1px, transparent 1px);
-    background-size: 16px 16px;
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
   }
 
-  /* Dotted grid for surfaces — Linear/Vercel feel */
+  /* Dot pattern for depth */
   .grid-dots {
-    background-image: radial-gradient(rgba(13, 13, 12, 0.18) 0.6px, transparent 0.6px);
-    background-size: 18px 18px;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 
-  /* Cross-hairs (target/dimension mark) */
-  .crosshair {
-    background-image:
-      linear-gradient(rgba(13, 13, 12, 0.12) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(13, 13, 12, 0.12) 1px, transparent 1px);
-    background-size: 100% 100%;
+  /* Radial glow from top */
+  .glow-top {
+    background: radial-gradient(ellipse 80% 50% at 50% -20%, var(--glow-gold), transparent);
   }
 
-  /* Hairline divider above sections — editorial cue */
-  .rule-top {
-    border-top: 1px solid var(--line-strong);
+  /* Radial glow center */
+  .glow-center {
+    background: radial-gradient(ellipse 60% 40% at 50% 50%, var(--glow-gold), transparent);
   }
 
-  .rule-bottom {
-    border-bottom: 1px solid var(--line-strong);
+  /* Ambient orb effect */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4;
+    animation: orb-float 20s ease-in-out infinite;
   }
 
-  /* Vellum sheet — for floating panels over hero */
-  .sheet {
-    background: var(--paper);
-    border: 1px solid var(--line);
+  @keyframes orb-float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -30px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.95); }
+  }
+
+  /* Glass morphism card */
+  .glass {
+    background: rgba(16, 16, 21, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-light {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Premium card with depth */
+  .card-elevated {
+    background: linear-gradient(145deg, var(--slate), var(--obsidian));
+    border: 1px solid rgba(255, 255, 255, 0.06);
     box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.6) inset,
-      0 30px 60px -30px rgba(13, 13, 12, 0.18),
-      0 12px 24px -12px rgba(13, 13, 12, 0.08);
+      0 0 0 1px rgba(0, 0, 0, 0.3),
+      0 8px 40px -12px rgba(0, 0, 0, 0.5),
+      0 20px 60px -20px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
-  .sheet-flat {
-    background: var(--paper);
-    border: 1px solid var(--line);
+  .card-glow {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06),
+      0 8px 40px -12px rgba(245, 166, 35, 0.15),
+      0 25px 80px -20px rgba(0, 0, 0, 0.4);
   }
 
-  /* Mono caption — used for refs, labels, dimensions */
+  /* Shine effect on hover */
+  .shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .shine::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.03) 45%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.03) 55%,
+      transparent 60%
+    );
+    transform: translateX(-100%);
+    transition: transform 600ms ease;
+  }
+  .shine:hover::after {
+    transform: translateX(100%);
+  }
+
+  /* Text gradient */
+  .text-gradient {
+    background: linear-gradient(135deg, var(--paper) 0%, var(--gold-soft) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Border glow */
+  .border-glow {
+    position: relative;
+  }
+  .border-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.3), transparent 50%, rgba(245, 166, 35, 0.1));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Animated border */
+  .border-animated {
+    --border-angle: 0deg;
+    animation: border-rotate 4s linear infinite;
+  }
+  .border-animated::before {
+    background: conic-gradient(
+      from var(--border-angle),
+      transparent 60%,
+      var(--gold) 80%,
+      transparent 100%
+    );
+  }
+  @keyframes border-rotate {
+    to { --border-angle: 360deg; }
+  }
+
+  /* Mask for fading edges */
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .mask-fade-y {
+    mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  }
+
+  /* Caption style */
   .caption {
     font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
     font-size: 0.6875rem;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--mute);
+    color: var(--dim);
   }
 
-  /* Display headline — Instrument Serif treatment */
+  /* Display heading */
   .display {
     font-family: var(--font-instrument-serif), ui-serif, Georgia, serif;
     font-weight: 400;
@@ -174,41 +297,83 @@ body {
     line-height: 0.95;
   }
 
-  .display-italic {
-    font-style: italic;
-  }
-
-  /* Underline that draws on hover, like a drafted line */
-  .draft-link {
-    background-image: linear-gradient(var(--ink), var(--ink));
+  /* Underline animation */
+  .link-underline {
+    background-image: linear-gradient(var(--gold), var(--gold));
     background-size: 0 1px;
     background-position: 0 100%;
     background-repeat: no-repeat;
-    transition: background-size 250ms ease;
+    transition: background-size 300ms ease;
   }
-
-  .draft-link:hover {
+  .link-underline:hover {
     background-size: 100% 1px;
   }
 
-  /* Marquee / strip used for partners */
-  .mask-fade-x {
-    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  /* Pulse animation for badges */
+  .pulse-dot {
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+  }
+
+  /* Floating animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Shimmer loading effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Focus rings — accessible, brand-consistent
+   Focus & Interaction States
    ────────────────────────────────────────────────────────────────────────── */
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--gold);
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--obsidian);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--graphite);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dim);
 }

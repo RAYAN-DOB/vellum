@@ -18,7 +18,7 @@ export function AuthInput({
   const inputId = id ?? props.name;
   return (
     <label className="block" htmlFor={inputId}>
-      <span className="mb-2 flex items-center justify-between text-[11px] font-medium uppercase tracking-[0.12em] text-mute">
+      <span className="mb-2 flex items-center justify-between text-xs font-medium uppercase tracking-[0.1em] text-dim">
         <span>{label}</span>
         {rightSlot}
       </span>
@@ -26,13 +26,13 @@ export function AuthInput({
         {...props}
         id={inputId}
         className={cn(
-          "block h-11 w-full rounded-[3px] border border-line-strong bg-paper px-3.5 text-[14px] text-ink outline-none transition placeholder:text-soft hover:border-graphite focus:border-ink focus:ring-2 focus:ring-ink/15",
+          "block h-12 w-full rounded-xl border border-graphite bg-obsidian/50 px-4 text-sm text-paper outline-none transition placeholder:text-dim hover:border-silver/30 focus:border-gold focus:bg-obsidian focus:ring-2 focus:ring-gold/20",
           props.disabled && "cursor-not-allowed opacity-60",
           className,
         )}
       />
       {hint ? (
-        <span className="mt-2 block text-[12px] leading-5 text-mute">
+        <span className="mt-2 block text-xs leading-5 text-dim">
           {hint}
         </span>
       ) : null}

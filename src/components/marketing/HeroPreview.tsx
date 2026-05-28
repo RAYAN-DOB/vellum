@@ -1,111 +1,148 @@
+"use client";
+
 import { CheckCircle2, FileText, MessageSquare, Ruler } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 /**
- * Editorial mock of the project detail surface — drafted, calm, no fake data
- * pretending to be alive (no fake numbers, no fake faces).
+ * Premium glass-morphism preview card with dramatic lighting
  */
 export function HeroPreview() {
   return (
     <div className="relative">
-      {/* Crosshair corner marks — drafting cue */}
+      {/* Ambient glow behind card */}
+      <div 
+        className="absolute -inset-10 opacity-60 blur-3xl"
+        style={{ 
+          background: "radial-gradient(ellipse at center, rgba(245,166,35,0.15) 0%, transparent 70%)" 
+        }}
+      />
+      
+      {/* Corner decorations */}
       <CornerMark className="absolute -left-3 -top-3" />
       <CornerMark className="absolute -right-3 -top-3 rotate-90" />
       <CornerMark className="absolute -bottom-3 -left-3 -rotate-90" />
       <CornerMark className="absolute -bottom-3 -right-3 rotate-180" />
 
-      <div className="sheet relative rounded-[4px] p-5 sm:p-6">
+      {/* Main card */}
+      <div className="relative card-elevated rounded-2xl p-6 sm:p-8 shine">
         {/* Header strip */}
-        <div className="flex items-center justify-between border-b border-line pb-4">
+        <div className="flex items-center justify-between border-b border-graphite pb-5">
           <div className="flex items-center gap-3">
-            <span className="caption text-mute">PRJ–202605–0042</span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-vellum/60 px-2.5 py-1 text-[11px] font-medium text-graphite">
-              <span className="size-1.5 rounded-full bg-amber" />
-              À qualifier
+            <span className="caption text-dim">PRJ–202605–0042</span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-gold/20 bg-gold/10 px-3 py-1">
+              <span className="size-2 rounded-full bg-gold pulse-dot" />
+              <span className="text-xs font-medium text-gold">À qualifier</span>
             </span>
           </div>
-          <span className="caption hidden sm:inline">RÉV. 03 · 24.05.2026</span>
+          <span className="caption hidden sm:inline text-dim">RÉV. 03 · 24.05.2026</span>
         </div>
 
         {/* Project title */}
-        <h3 className="display mt-5 text-2xl text-ink sm:text-[28px]">
+        <h3 className="display mt-6 text-2xl sm:text-3xl text-paper">
           Réfection plancher R+1
         </h3>
-        <p className="mt-1.5 text-sm text-mute">
+        <p className="mt-2 text-sm text-silver">
           Immeuble haussmannien · Paris 11
         </p>
 
-        {/* Drafting surface */}
-        <div className="relative mt-6 overflow-hidden rounded-[3px] border border-line bg-vellum">
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 grid-paper opacity-80"
-          />
-          {/* Simplified plan SVG */}
+        {/* Blueprint surface */}
+        <div className="relative mt-6 overflow-hidden rounded-xl border border-graphite bg-obsidian">
+          {/* Grid overlay */}
+          <div className="absolute inset-0 grid-dots opacity-50" />
+          
+          {/* Simplified blueprint SVG */}
           <svg
-            viewBox="0 0 400 220"
+            viewBox="0 0 400 200"
             className="relative h-auto w-full"
             aria-hidden="true"
           >
-            {/* Walls */}
+            <defs>
+              <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#a1a1aa" />
+                <stop offset="100%" stopColor="#71717a" />
+              </linearGradient>
+            </defs>
+            
+            {/* Main walls */}
             <rect
               x="40"
               y="30"
               width="320"
-              height="160"
+              height="140"
               fill="none"
-              stroke="#2b2a26"
+              stroke="url(#lineGradient)"
               strokeWidth="1.5"
+              rx="2"
             />
-            <line x1="40" y1="110" x2="220" y2="110" stroke="#2b2a26" strokeWidth="1" />
-            <line x1="220" y1="30" x2="220" y2="190" stroke="#2b2a26" strokeWidth="1" />
-            <line x1="220" y1="140" x2="360" y2="140" stroke="#2b2a26" strokeWidth="1" />
+            
+            {/* Interior divisions */}
+            <line x1="40" y1="100" x2="200" y2="100" stroke="#71717a" strokeWidth="1" />
+            <line x1="200" y1="30" x2="200" y2="170" stroke="#71717a" strokeWidth="1" />
+            <line x1="200" y1="130" x2="360" y2="130" stroke="#71717a" strokeWidth="1" />
 
             {/* Dimension lines */}
-            <g stroke="#6b6960" strokeWidth="0.5">
-              <line x1="40" y1="15" x2="220" y2="15" />
-              <line x1="40" y1="12" x2="40" y2="18" />
-              <line x1="220" y1="12" x2="220" y2="18" />
+            <g stroke="#525252" strokeWidth="0.5" strokeDasharray="3,3">
+              <line x1="40" y1="18" x2="200" y2="18" />
+              <line x1="40" y1="15" x2="40" y2="21" />
+              <line x1="200" y1="15" x2="200" y2="21" />
             </g>
             <text
-              x="130"
-              y="11"
-              fontSize="7"
-              fill="#6b6960"
-              fontFamily="var(--font-jetbrains-mono), monospace"
+              x="120"
+              y="13"
+              fontSize="8"
+              fill="#71717a"
+              fontFamily="monospace"
               textAnchor="middle"
             >
               4.20 m
             </text>
 
-            {/* Annotation circle */}
-            <circle cx="290" cy="80" r="14" fill="none" stroke="#b6543a" strokeWidth="1.2" strokeDasharray="2,2" />
-            <line x1="290" y1="94" x2="290" y2="110" stroke="#b6543a" strokeWidth="0.8" />
+            {/* Annotation with gold accent */}
+            <circle 
+              cx="280" 
+              cy="70" 
+              r="12" 
+              fill="none" 
+              stroke="#f5a623" 
+              strokeWidth="1.5" 
+            />
+            <line x1="280" y1="82" x2="280" y2="100" stroke="#f5a623" strokeWidth="1" />
             <text
-              x="290"
-              y="120"
+              x="280"
+              y="112"
               fontSize="7"
-              fill="#b6543a"
-              fontFamily="var(--font-jetbrains-mono), monospace"
+              fill="#f5a623"
+              fontFamily="monospace"
               textAnchor="middle"
             >
               VOIR NOTE #3
             </text>
 
-            {/* Door swings */}
-            <path d="M 120 110 A 18 18 0 0 1 138 128" fill="none" stroke="#2b2a26" strokeWidth="0.8" />
-            <path d="M 300 140 A 18 18 0 0 1 282 158" fill="none" stroke="#2b2a26" strokeWidth="0.8" />
+            {/* Door arcs */}
+            <path 
+              d="M 110 100 A 16 16 0 0 1 126 116" 
+              fill="none" 
+              stroke="#71717a" 
+              strokeWidth="0.8" 
+            />
+            <path 
+              d="M 290 130 A 16 16 0 0 1 274 146" 
+              fill="none" 
+              stroke="#71717a" 
+              strokeWidth="0.8" 
+            />
           </svg>
         </div>
 
-        {/* Activity rows */}
-        <div className="mt-5 space-y-2.5">
+        {/* Activity timeline */}
+        <div className="mt-6 space-y-3">
           <ActivityRow
             icon={<MessageSquare className="size-3.5" />}
             who="Chef de projet"
             what="Brief reçu, qualification en cours"
             when="il y a 2 min"
+            highlight
           />
           <ActivityRow
             icon={<FileText className="size-3.5" />}
@@ -121,11 +158,11 @@ export function HeroPreview() {
           />
         </div>
 
-        {/* Footer signature */}
-        <div className="mt-5 flex items-center justify-between border-t border-line pt-4">
-          <span className="caption">CONFIDENTIEL · NDA REQUIS</span>
-          <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-moss">
-            <CheckCircle2 className="size-3.5" />
+        {/* Footer */}
+        <div className="mt-6 flex items-center justify-between border-t border-graphite pt-5">
+          <span className="caption text-dim">CONFIDENTIEL · NDA REQUIS</span>
+          <span className="inline-flex items-center gap-2 text-xs font-medium text-emerald">
+            <CheckCircle2 className="size-4" />
             Synchronisé
           </span>
         </div>
@@ -139,23 +176,33 @@ function ActivityRow({
   who,
   what,
   when,
+  highlight = false,
 }: {
   icon: React.ReactNode;
   who: string;
   what: string;
   when: string;
+  highlight?: boolean;
 }) {
   return (
-    <div className="flex items-start gap-3 border-l-2 border-line pl-3">
-      <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full border border-line bg-vellum/50 text-mute">
+    <div className={cn(
+      "flex items-start gap-3 rounded-lg border p-3 transition-colors",
+      highlight 
+        ? "border-gold/20 bg-gold/5" 
+        : "border-transparent hover:border-graphite hover:bg-obsidian/50"
+    )}>
+      <span className={cn(
+        "flex size-7 shrink-0 items-center justify-center rounded-full",
+        highlight ? "bg-gold/20 text-gold" : "bg-slate text-silver"
+      )}>
         {icon}
       </span>
       <div className="flex-1 min-w-0">
-        <p className="text-[13px] text-ink">
+        <p className="text-sm text-paper">
           <span className="font-medium">{who}</span>
-          <span className="text-mute"> — {what}</span>
+          <span className="text-silver"> — {what}</span>
         </p>
-        <p className="caption mt-0.5">{when}</p>
+        <p className="caption mt-1 text-dim">{when}</p>
       </div>
     </div>
   );
@@ -166,9 +213,9 @@ function CornerMark({ className }: { className?: string }) {
     <svg
       viewBox="0 0 16 16"
       aria-hidden="true"
-      className={cn("size-4 text-line-strong", className)}
+      className={cn("size-4 text-gold/30", className)}
     >
-      <path d="M0 0 L16 0 L16 1 L1 1 L1 16 L0 16 Z" fill="currentColor" />
+      <path d="M0 0 L16 0 L16 2 L2 2 L2 16 L0 16 Z" fill="currentColor" />
     </svg>
   );
 }

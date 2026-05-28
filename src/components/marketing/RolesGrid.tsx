@@ -1,6 +1,9 @@
+import { Briefcase, Crown, Pencil, Shield } from "lucide-react";
+
 const roles = [
   {
     name: "Client",
+    icon: Briefcase,
     pitch:
       "Dépose un dossier, suit l'avancement, valide les aperçus, télécharge les livrables signés.",
     rights: [
@@ -12,6 +15,7 @@ const roles = [
   },
   {
     name: "Chef de projet",
+    icon: Crown,
     pitch:
       "Qualifie le brief, assigne le dessinateur, prépare le devis, suit la production.",
     rights: [
@@ -23,6 +27,7 @@ const roles = [
   },
   {
     name: "Dessinateur",
+    icon: Pencil,
     pitch:
       "Travaille sur les fichiers natifs, dépose les aperçus, publie les livrables techniques.",
     rights: [
@@ -34,6 +39,7 @@ const roles = [
   },
   {
     name: "Admin",
+    icon: Shield,
     pitch:
       "Gère utilisateurs, rôles, permissions, politiques applicatives et journal d'audit.",
     rights: [
@@ -47,53 +53,72 @@ const roles = [
 
 export function RolesGrid() {
   return (
-    <section className="border-b border-line bg-paper">
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
-        <header className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-end">
+    <section className="relative border-b border-graphite overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 grid-subtle" />
+      
+      <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+        <header className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-end mb-16">
           <div>
-            <p className="caption">Quatre rôles</p>
-            <h2 className="display mt-5 text-[clamp(2rem,4.5vw,3.5rem)]">
-              Une seule plateforme.
+            <p className="caption text-gold">Quatre rôles</p>
+            <h2 className="display mt-5 text-[clamp(2rem,5vw,4rem)]">
+              <span className="text-paper">Une seule plateforme.</span>
               <br />
-              <span className="italic">Des accès cloisonnés.</span>
+              <span className="italic text-gradient">Des accès cloisonnés.</span>
             </h2>
           </div>
-          <p className="max-w-xl text-[16px] leading-[1.7] text-graphite lg:justify-self-end">
+          <p className="max-w-xl text-lg leading-relaxed text-silver lg:justify-self-end">
             Chaque rôle a sa vue, ses droits, ses obligations. La frontière de
             sécurité est dans Postgres (Row-Level Security) — pas un cookie
             forgé ne contourne la règle.
           </p>
         </header>
 
-        <div className="mt-16 grid gap-px overflow-hidden rounded-[4px] border border-line bg-line sm:grid-cols-2">
-          {roles.map((role) => (
-            <article
-              key={role.name}
-              className="flex flex-col gap-6 bg-paper p-8 sm:p-10"
-            >
-              <div className="flex items-center justify-between border-b border-line pb-4">
-                <h3 className="font-display text-2xl text-ink">{role.name}</h3>
-                <span className="caption">RÔLE</span>
-              </div>
-              <p className="text-[14px] leading-[1.65] text-graphite">
-                {role.pitch}
-              </p>
-              <ul className="space-y-2">
-                {role.rights.map((right) => (
-                  <li
-                    key={right}
-                    className="flex items-start gap-3 text-[13px] leading-[1.6] text-mute"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="mt-[7px] inline-block size-1 shrink-0 rounded-full bg-ink"
-                    />
-                    {right}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
+        <div className="grid gap-4 sm:grid-cols-2">
+          {roles.map((role, index) => {
+            const Icon = role.icon;
+            return (
+              <article
+                key={role.name}
+                className="group relative overflow-hidden rounded-2xl border border-graphite bg-obsidian/30 p-8 transition-all duration-300 hover:border-gold/30 hover:bg-obsidian/50"
+                style={{ transitionDelay: `${index * 50}ms` }}
+              >
+                {/* Hover glow */}
+                <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-gold/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                
+                <div className="relative">
+                  {/* Header */}
+                  <div className="flex items-center justify-between border-b border-graphite pb-5 mb-6">
+                    <div className="flex items-center gap-4">
+                      <div className="flex size-12 items-center justify-center rounded-xl bg-slate border border-graphite group-hover:border-gold/20 group-hover:bg-gold/10 transition-colors">
+                        <Icon className="size-5 text-silver group-hover:text-gold transition-colors" />
+                      </div>
+                      <h3 className="font-display text-2xl text-paper">{role.name}</h3>
+                    </div>
+                    <span className="caption text-dim">RÔLE</span>
+                  </div>
+                  
+                  {/* Description */}
+                  <p className="text-sm leading-relaxed text-silver mb-6">
+                    {role.pitch}
+                  </p>
+                  
+                  {/* Rights list */}
+                  <ul className="space-y-3">
+                    {role.rights.map((right) => (
+                      <li
+                        key={right}
+                        className="flex items-start gap-3 text-sm leading-relaxed text-dim"
+                      >
+                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-gold/60" />
+                        {right}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

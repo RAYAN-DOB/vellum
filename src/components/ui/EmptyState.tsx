@@ -12,8 +12,7 @@ type EmptyStateProps = {
 };
 
 /**
- * Editorial empty state used across role apps for stubbed/empty surfaces.
- * Keeps the same drafted feel as the marketing surface.
+ * Premium empty state with glass morphism and glow effects
  */
 export function EmptyState({
   icon: Icon,
@@ -26,27 +25,35 @@ export function EmptyState({
   return (
     <section
       className={cn(
-        "relative overflow-hidden rounded-[4px] border border-line bg-paper p-10 sm:p-14",
+        "relative overflow-hidden rounded-2xl border border-graphite bg-slate/30 p-10 sm:p-14",
         className,
       )}
     >
+      {/* Subtle grid background */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 grid-paper opacity-40"
+        className="pointer-events-none absolute inset-0 grid-subtle opacity-50"
       />
+      
+      {/* Ambient glow */}
+      <div 
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] opacity-20 blur-[80px] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse, rgba(245,166,35,0.3) 0%, transparent 70%)" }}
+      />
+      
       <div className="relative flex max-w-xl flex-col items-start gap-5">
-        {caption ? <p className="caption">{caption}</p> : null}
+        {caption ? <p className="caption text-gold">{caption}</p> : null}
         {Icon ? (
           <span
             aria-hidden="true"
-            className="inline-flex size-10 items-center justify-center rounded-full border border-line-strong bg-vellum/50"
+            className="inline-flex size-12 items-center justify-center rounded-xl border border-graphite bg-slate/50"
           >
-            <Icon className="size-5 text-graphite" />
+            <Icon className="size-5 text-silver" />
           </span>
         ) : null}
-        <h2 className="display text-3xl text-ink">{title}</h2>
+        <h2 className="display text-3xl text-paper">{title}</h2>
         {description ? (
-          <p className="max-w-md text-[15px] leading-[1.65] text-graphite">
+          <p className="max-w-md text-base leading-relaxed text-silver">
             {description}
           </p>
         ) : null}

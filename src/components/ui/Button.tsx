@@ -6,28 +6,28 @@ import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   [
-    "inline-flex min-w-0 items-center justify-center rounded-[3px] font-medium transition duration-200 active:translate-y-px",
+    "inline-flex min-w-0 items-center justify-center rounded-xl font-medium transition-all duration-200 active:scale-[0.98]",
     "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
-    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold",
   ],
   {
     variants: {
       variant: {
         primary:
-          "bg-[#171613] text-[#f7f3ea] shadow-[0_18px_40px_rgba(22,21,18,0.22)] hover:bg-[#2b2923] focus-visible:outline-[#171613]",
+          "relative overflow-hidden bg-gradient-to-r from-gold via-gold to-gold-deep text-void shadow-[0_0_20px_rgba(245,166,35,0.2)] hover:shadow-[0_0_30px_rgba(245,166,35,0.3)]",
         secondary:
-          "bg-[#f8f5ed] text-[#171613] shadow-sm ring-1 ring-[#d8d0bf] hover:bg-white focus-visible:outline-[#171613]",
+          "bg-slate text-paper ring-1 ring-graphite hover:bg-obsidian hover:ring-silver/30",
         outline:
-          "border border-[#d8d0bf] bg-[#fbfaf6]/70 text-[#171613] hover:bg-[#f0eadf] focus-visible:outline-[#171613]",
+          "border border-graphite bg-transparent text-paper hover:bg-slate/50 hover:border-silver/30",
         ghost:
-          "bg-transparent text-[#5e594d] hover:bg-[#ebe5d7] hover:text-[#171613] focus-visible:outline-[#171613]",
+          "bg-transparent text-silver hover:bg-slate/50 hover:text-paper",
         danger:
-          "bg-red-600 text-white shadow-sm hover:bg-red-700 focus-visible:outline-red-700",
+          "bg-crimson/20 text-crimson ring-1 ring-crimson/30 hover:bg-crimson/30",
       },
       size: {
-        sm: "h-8 gap-1.5 px-3 text-sm",
-        md: "h-10 gap-2 px-4 text-sm",
-        lg: "h-11 gap-2.5 px-5 text-base",
+        sm: "h-9 gap-1.5 px-4 text-sm",
+        md: "h-11 gap-2 px-5 text-sm",
+        lg: "h-12 gap-2.5 px-6 text-base",
       },
     },
     defaultVariants: {
@@ -83,8 +83,12 @@ export function Button({
       {...props}
     >
       {icon && iconPosition === "left" ? icon : null}
-      <span className="truncate">{children}</span>
+      <span className="truncate relative z-10">{children}</span>
       {icon && iconPosition === "right" ? icon : null}
+      {/* Shine effect for primary */}
+      {variant === "primary" && (
+        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none" />
+      )}
     </button>
   );
 }

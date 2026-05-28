@@ -35,39 +35,54 @@ export function ProductShowcase() {
   return (
     <section
       id="produit"
-      className="border-b border-line bg-paper"
+      className="relative border-b border-graphite overflow-hidden"
     >
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+      {/* Background */}
+      <div className="absolute inset-0 grid-subtle" />
+      
+      <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         <header className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-end">
           <div>
-            <p className="caption">Le produit</p>
-            <h2 className="display mt-5 text-[clamp(2rem,4.5vw,3.5rem)]">
-              Plus qu&apos;un drive.
+            <p className="caption text-gold">Le produit</p>
+            <h2 className="display mt-5 text-[clamp(2rem,5vw,4rem)]">
+              <span className="text-paper">Plus qu&apos;un drive.</span>
               <br />
-              <span className="italic">Un fil de production.</span>
+              <span className="italic text-gradient">Un fil de production.</span>
             </h2>
           </div>
-          <p className="max-w-xl text-[16px] leading-[1.7] text-graphite lg:justify-self-end">
+          <p className="max-w-xl text-lg leading-relaxed text-silver lg:justify-self-end">
             Vellum n&apos;est pas un partage de fichiers. C&apos;est l&apos;espace
             où un projet technique vit de son brief à son livrable signé —
             avec quatre rôles cloisonnés et une seule source de vérité.
           </p>
         </header>
 
-        <div className="mt-16 grid gap-px overflow-hidden rounded-[4px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-          {pillars.map(({ icon: Icon, eyebrow, title, body }) => (
+        <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {pillars.map(({ icon: Icon, eyebrow, title, body }, index) => (
             <article
               key={eyebrow}
-              className="group flex flex-col gap-6 bg-paper p-8 transition-colors hover:bg-vellum/40"
+              className="group relative overflow-hidden rounded-2xl border border-graphite bg-obsidian/50 p-8 transition-all duration-500 hover:border-gold/30 hover:bg-obsidian shine"
+              style={{ transitionDelay: `${index * 50}ms` }}
             >
-              <div className="flex items-start justify-between">
-                <span className="caption">{eyebrow}</span>
-                <Icon className="size-5 text-graphite" aria-hidden="true" />
+              {/* Hover glow */}
+              <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              
+              <div className="relative">
+                <div className="flex items-start justify-between mb-6">
+                  <span className="caption text-gold">{eyebrow}</span>
+                  <div className="flex size-10 items-center justify-center rounded-xl bg-slate border border-graphite group-hover:border-gold/20 group-hover:bg-gold/10 transition-colors">
+                    <Icon className="size-5 text-silver group-hover:text-gold transition-colors" aria-hidden="true" />
+                  </div>
+                </div>
+                
+                <h3 className="font-display text-2xl leading-tight text-paper mb-4">
+                  {title}
+                </h3>
+                
+                <p className="text-sm leading-relaxed text-silver">
+                  {body}
+                </p>
               </div>
-              <h3 className="font-display text-2xl leading-[1.1] text-ink">
-                {title}
-              </h3>
-              <p className="text-[14px] leading-[1.65] text-mute">{body}</p>
             </article>
           ))}
         </div>

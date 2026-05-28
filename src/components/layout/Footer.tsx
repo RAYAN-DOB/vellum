@@ -18,21 +18,34 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line bg-paper">
+    <footer className="relative border-t border-graphite bg-void">
+      {/* Subtle top glow */}
+      <div 
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent"
+      />
+      
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-10 lg:px-10">
+        {/* Brand column */}
         <div className="max-w-sm">
           <a
             href={routes.public.home}
-            className="inline-flex items-center gap-2.5"
+            className="inline-flex items-center gap-3 group"
             aria-label="Vellum — accueil"
           >
-            <VellumLogo size="sm" tone="ink" />
-            <span className="font-display text-xl text-ink">Vellum</span>
+            <VellumLogo size="sm" tone="gold" />
+            <span className="font-display text-xl text-paper">Vellum</span>
           </a>
-          <p className="mt-5 text-[14px] leading-[1.65] text-mute">
+          <p className="mt-6 text-sm leading-relaxed text-silver">
             Le bureau de dépôt des projets techniques. DWG, PDF, croquis,
             schémas — un seul fil, quatre rôles, une traçabilité native.
           </p>
+          
+          {/* Social links placeholder */}
+          <div className="mt-6 flex items-center gap-3">
+            <SocialIcon label="Twitter" />
+            <SocialIcon label="LinkedIn" />
+            <SocialIcon label="GitHub" />
+          </div>
         </div>
 
         <FooterColumn title="Produit" links={[...productLinks]} />
@@ -40,10 +53,15 @@ export function Footer() {
         <FooterColumn title="Légal" links={[...legalLinks]} />
       </div>
 
-      <div className="border-t border-line">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-3 px-6 py-6 text-[12px] text-mute sm:flex-row sm:items-center lg:px-10">
-          <p>© {year} Vellum. Tous droits réservés.</p>
-          <p className="caption">v1 · Built with Next.js &amp; Supabase</p>
+      {/* Bottom bar */}
+      <div className="border-t border-graphite">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 px-6 py-6 sm:flex-row sm:items-center lg:px-10">
+          <p className="text-xs text-dim">© {year} Vellum. Tous droits réservés.</p>
+          <div className="flex items-center gap-4">
+            <span className="caption text-dim">v1</span>
+            <span className="h-3 w-px bg-graphite" />
+            <span className="text-xs text-dim">Built with Next.js & Supabase</span>
+          </div>
         </div>
       </div>
     </footer>
@@ -59,13 +77,13 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <p className="caption">{title}</p>
-      <ul className="mt-5 space-y-2.5">
+      <p className="caption text-gold">{title}</p>
+      <ul className="mt-6 space-y-3">
         {links.map((link) => (
           <li key={link.href}>
             <a
               href={link.href}
-              className="draft-link text-[14px] text-graphite transition-colors hover:text-ink"
+              className="text-sm text-silver transition-colors hover:text-paper link-underline"
             >
               {link.label}
             </a>
@@ -73,5 +91,17 @@ function FooterColumn({
         ))}
       </ul>
     </div>
+  );
+}
+
+function SocialIcon({ label }: { label: string }) {
+  return (
+    <a
+      href="#"
+      className="flex size-9 items-center justify-center rounded-lg border border-graphite bg-obsidian/50 text-silver transition-all hover:border-gold/30 hover:text-gold"
+      aria-label={label}
+    >
+      <span className="text-xs font-medium">{label[0]}</span>
+    </a>
   );
 }

@@ -29,51 +29,64 @@ export function WorkflowStrip() {
   return (
     <section
       id="workflow"
-      className="relative overflow-hidden border-b border-line bg-vellum"
+      className="relative overflow-hidden border-b border-graphite"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 grid-paper opacity-50"
-      />
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-obsidian/50 via-abyss to-abyss" />
+      <div className="absolute inset-0 grid-subtle" />
+      
+      {/* Decorative line connecting steps */}
+      <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-graphite to-transparent hidden lg:block" />
 
       <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
-        <header className="max-w-2xl">
-          <p className="caption">Workflow</p>
-          <h2 className="display mt-5 text-[clamp(2rem,4.5vw,3.5rem)]">
-            Quatre étapes,
+        <header className="max-w-2xl mb-16">
+          <p className="caption text-gold">Workflow</p>
+          <h2 className="display mt-5 text-[clamp(2rem,5vw,4rem)]">
+            <span className="text-paper">Quatre étapes,</span>
             <br />
-            <span className="italic">aucune zone grise.</span>
+            <span className="italic text-gradient">aucune zone grise.</span>
           </h2>
-          <p className="mt-6 text-[16px] leading-[1.7] text-graphite">
+          <p className="mt-6 text-lg leading-relaxed text-silver">
             Chaque transition est explicite. Chaque acteur sait ce qu&apos;il
             doit faire — et ce qu&apos;il n&apos;a pas le droit de faire.
           </p>
         </header>
 
-        <ol className="mt-16 grid gap-px overflow-hidden rounded-[4px] border border-line-strong bg-line-strong lg:grid-cols-4">
+        <ol className="grid gap-6 lg:grid-cols-4">
           {steps.map(({ n, title, body }, i) => (
             <li
               key={n}
-              className="relative flex flex-col gap-6 bg-paper p-8 sm:p-10"
+              className="group relative"
             >
-              <div className="flex items-baseline justify-between">
-                <span className="font-display text-5xl leading-none text-ink">
+              {/* Connection line to next step */}
+              {i < steps.length - 1 && (
+                <div className="hidden lg:block absolute top-12 left-full w-6 h-px bg-gradient-to-r from-graphite to-gold/30 z-10" />
+              )}
+              
+              <div className="relative h-full overflow-hidden rounded-2xl border border-graphite bg-slate/30 p-8 transition-all duration-300 hover:border-gold/30 hover:bg-slate/50">
+                {/* Number highlight on hover */}
+                <div className="absolute -right-4 -top-4 font-display text-[120px] leading-none text-graphite/20 group-hover:text-gold/10 transition-colors select-none">
                   {n}
-                </span>
-                {i < steps.length - 1 && (
-                  <span
-                    aria-hidden="true"
-                    className="caption hidden lg:inline"
-                  >
-                    →
-                  </span>
-                )}
-              </div>
-              <div>
-                <h3 className="font-display text-2xl text-ink">{title}</h3>
-                <p className="mt-3 text-[14px] leading-[1.65] text-mute">
-                  {body}
-                </p>
+                </div>
+                
+                <div className="relative">
+                  {/* Step number badge */}
+                  <div className="inline-flex items-center justify-center size-12 rounded-xl bg-obsidian border border-graphite group-hover:border-gold/30 group-hover:bg-gold/10 transition-colors mb-6">
+                    <span className="font-display text-xl text-paper group-hover:text-gold transition-colors">{n}</span>
+                  </div>
+                  
+                  {/* Arrow to next step */}
+                  {i < steps.length - 1 && (
+                    <span className="absolute top-3 right-0 text-dim group-hover:text-gold transition-colors hidden lg:inline">
+                      →
+                    </span>
+                  )}
+                  
+                  <h3 className="font-display text-2xl text-paper mb-4">{title}</h3>
+                  <p className="text-sm leading-relaxed text-silver">
+                    {body}
+                  </p>
+                </div>
               </div>
             </li>
           ))}

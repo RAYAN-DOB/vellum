@@ -131,81 +131,92 @@ export function NotificationBell() {
       <button
         aria-label={`Notifications${unreadCount ? `, ${unreadCount} non lues` : ""}`}
         aria-expanded={open}
-        className="relative inline-flex size-10 cursor-pointer items-center justify-center rounded-full border border-paper/15 bg-paper/5 text-paper transition hover:bg-paper/10"
+        className="relative inline-flex size-10 cursor-pointer items-center justify-center rounded-xl border border-graphite bg-slate/50 text-silver transition-colors hover:border-silver/30 hover:bg-slate hover:text-paper"
         onClick={() => setOpen((value) => !value)}
         type="button"
       >
         <Bell className="size-4" aria-hidden="true" />
         {unreadCount > 0 ? (
-          <span className="absolute -right-1 -top-1 inline-flex min-w-5 items-center justify-center rounded-full bg-sienna px-1.5 py-0.5 text-[10px] font-semibold text-paper">
+          <span className="absolute -right-1 -top-1 inline-flex min-w-5 items-center justify-center rounded-full bg-gold px-1.5 py-0.5 text-[10px] font-semibold text-void">
             {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         ) : null}
       </button>
 
       {open ? (
-        <div className="fixed inset-x-4 top-16 z-50 overflow-hidden rounded-[4px] border border-line-strong bg-paper text-ink shadow-[0_30px_90px_rgba(13,13,12,0.22)] sm:absolute sm:inset-x-auto sm:right-0 sm:top-12 sm:w-[25rem]">
-          <div className="border-b border-line px-4 py-3">
-            <p className="text-sm font-semibold">Notifications</p>
-            <p className="mt-1 text-xs text-mute">
-              Flux temps réel des dossiers, messages, devis et livrables.
-            </p>
-          </div>
+        <>
+          <button
+            aria-label="Fermer les notifications"
+            className="fixed inset-0 z-40 cursor-default bg-void/60 backdrop-blur-sm"
+            onClick={() => setOpen(false)}
+            type="button"
+          />
+          <div className="fixed inset-x-4 top-20 z-50 overflow-hidden rounded-2xl border border-graphite bg-obsidian/95 text-paper shadow-[0_25px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl sm:absolute sm:inset-x-auto sm:right-0 sm:top-14 sm:w-[26rem]">
+            {/* Top glow line */}
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+            
+            <div className="border-b border-graphite px-4 py-4">
+              <p className="text-sm font-semibold text-paper">Notifications</p>
+              <p className="mt-1 text-xs text-dim">
+                Flux temps réel des dossiers, messages, devis et livrables.
+              </p>
+            </div>
 
-          {loading ? (
-            <div className="flex items-center gap-2 px-4 py-5 text-sm text-mute">
-              <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-              Chargement du flux...
-            </div>
-          ) : items.length === 0 ? (
-            <div className="px-4 py-8 text-center text-sm text-mute">
-              Aucune notification pour le moment.
-            </div>
-          ) : (
-            <div className="max-h-[26rem] overflow-y-auto p-2">
-              {items.map((notification) => {
-                const isRead = Boolean(notification.read_at);
-                return (
-                  <button
-                    className="group flex w-full cursor-pointer gap-3 rounded-[3px] px-3 py-3 text-left transition hover:bg-vellum/70"
-                    disabled={pending}
-                    key={notification.id}
-                    onClick={() => openNotification(notification)}
-                    type="button"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={`mt-1.5 size-2 shrink-0 rounded-full ${
-                        isRead ? "bg-line-strong" : "bg-sienna"
-                      }`}
-                    />
-                    <span className="min-w-0 flex-1">
-                      <span className="flex items-start justify-between gap-3">
-                        <span className="text-sm font-medium text-ink">
-                          {notification.title}
+            {loading ? (
+              <div className="flex items-center gap-2 px-4 py-6 text-sm text-dim">
+                <Loader2 className="size-4 animate-spin text-gold" aria-hidden="true" />
+                Chargement du flux...
+              </div>
+            ) : items.length === 0 ? (
+              <div className="px-4 py-8 text-center text-sm text-dim">
+                Aucune notification pour le moment.
+              </div>
+            ) : (
+              <div className="max-h-[26rem] overflow-y-auto p-2">
+                {items.map((notification) => {
+                  const isRead = Boolean(notification.read_at);
+                  return (
+                    <button
+                      className="group flex w-full cursor-pointer gap-3 rounded-xl px-3 py-3 text-left transition-colors hover:bg-slate/50"
+                      disabled={pending}
+                      key={notification.id}
+                      onClick={() => openNotification(notification)}
+                      type="button"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className={`mt-1.5 size-2 shrink-0 rounded-full ${
+                          isRead ? "bg-graphite" : "bg-gold animate-pulse"
+                        }`}
+                      />
+                      <span className="min-w-0 flex-1">
+                        <span className="flex items-start justify-between gap-3">
+                          <span className="text-sm font-medium text-paper">
+                            {notification.title}
+                          </span>
+                          {isRead ? (
+                            <Check className="size-3.5 shrink-0 text-emerald" />
+                          ) : null}
                         </span>
-                        {isRead ? (
-                          <Check className="size-3.5 shrink-0 text-moss" />
+                        {notification.body ? (
+                          <span className="mt-1 line-clamp-2 block text-xs leading-5 text-silver">
+                            {notification.body}
+                          </span>
                         ) : null}
-                      </span>
-                      {notification.body ? (
-                        <span className="mt-1 line-clamp-2 block text-xs leading-5 text-graphite">
-                          {notification.body}
+                        <span className="mt-2 flex items-center gap-2 text-[11px] text-dim">
+                          {formatTime(notification.created_at)}
+                          {notification.link ? (
+                            <ExternalLink className="size-3" aria-hidden="true" />
+                          ) : null}
                         </span>
-                      ) : null}
-                      <span className="mt-2 flex items-center gap-2 text-[11px] text-mute">
-                        {formatTime(notification.created_at)}
-                        {notification.link ? (
-                          <ExternalLink className="size-3" aria-hidden="true" />
-                        ) : null}
                       </span>
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          )}
-        </div>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </>
       ) : null}
     </div>
   );

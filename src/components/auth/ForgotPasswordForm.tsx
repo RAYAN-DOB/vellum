@@ -15,7 +15,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="group inline-flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-ink px-4 text-[14px] font-medium text-paper transition hover:bg-iron-hover disabled:cursor-not-allowed disabled:opacity-60"
+      className="group relative inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-gold via-gold to-gold-deep px-4 text-sm font-semibold text-void transition-all hover:shadow-[0_0_30px_rgba(245,166,35,0.3)] disabled:cursor-not-allowed disabled:opacity-60"
     >
       {pending ? (
         <>
@@ -24,11 +24,12 @@ function SubmitButton() {
         </>
       ) : (
         <>
-          Envoyer le lien
+          <span className="relative z-10">Envoyer le lien</span>
           <ArrowRight
-            className="size-4 transition-transform group-hover:translate-x-0.5"
+            className="relative z-10 size-4 transition-transform group-hover:translate-x-0.5"
             aria-hidden="true"
           />
+          <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
         </>
       )}
     </button>
@@ -56,7 +57,7 @@ export function ForgotPasswordForm() {
       {state.error ? (
         <p
           role="alert"
-          className="rounded-[3px] border border-crimson/30 bg-crimson/5 px-3 py-2 text-[13px] text-crimson"
+          className="rounded-lg border border-crimson/30 bg-crimson/10 px-4 py-3 text-sm text-crimson"
         >
           {state.error}
         </p>
@@ -64,7 +65,7 @@ export function ForgotPasswordForm() {
       {state.success ? (
         <p
           role="status"
-          className="rounded-[3px] border border-moss/30 bg-moss/5 px-3 py-2 text-[13px] text-moss"
+          className="rounded-lg border border-emerald/30 bg-emerald/10 px-4 py-3 text-sm text-emerald"
         >
           {state.success}
         </p>
@@ -72,9 +73,9 @@ export function ForgotPasswordForm() {
 
       <SubmitButton />
 
-      <p className="text-center text-[13px] text-mute">
+      <p className="text-center text-sm text-silver">
         <a
-          className="draft-link cursor-pointer font-medium text-ink"
+          className="font-medium text-gold transition-colors hover:text-gold-soft link-underline"
           href="/login"
         >
           ← Retour à la connexion
