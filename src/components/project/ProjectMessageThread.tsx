@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { sendProjectMessageAction } from "@/lib/actions/projects";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { roleLabels } from "@/lib/project-display";
 import { cn } from "@/lib/utils";
 import type { ProjectMessageWithSender } from "@/components/project/project-detail-types";
 
@@ -168,7 +169,9 @@ export function ProjectMessageThread({
                 >
                   <span className="font-medium">
                     {message.sender?.full_name ?? "Système"}
-                    {message.sender?.role ? ` · ${message.sender.role}` : null}
+                    {message.sender?.role
+                      ? ` · ${roleLabels[message.sender.role] ?? message.sender.role}`
+                      : null}
                   </span>
                   <span>{formatDateTime(message.created_at)}</span>
                 </div>

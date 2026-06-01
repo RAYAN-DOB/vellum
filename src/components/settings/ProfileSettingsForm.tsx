@@ -35,47 +35,47 @@ export function ProfileSettingsForm({ profile }: Props) {
     <form action={formAction} className="space-y-5">
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block">
-          <span className="mb-1.5 block text-xs font-medium uppercase tracking-[0.18em] text-[#8a7a5f]">
+          <span className="mb-1.5 block text-xs font-medium uppercase tracking-[0.18em] text-mute">
             Nom complet
           </span>
           <input
             name="full_name"
             defaultValue={profile.full_name ?? ""}
             required
-            className="block h-11 w-full rounded-[3px] border border-[#d8d0bf] bg-white px-3 text-sm outline-none transition focus:border-[#171613] focus:ring-2 focus:ring-[#171613]/15"
+            className="block h-11 w-full rounded-[3px] border border-line-strong bg-paper px-3 text-sm outline-none transition focus:border-ink focus:ring-2 focus:ring-ink/15"
           />
         </label>
         <label className="block">
-          <span className="mb-1.5 block text-xs font-medium uppercase tracking-[0.18em] text-[#8a7a5f]">
+          <span className="mb-1.5 block text-xs font-medium uppercase tracking-[0.18em] text-mute">
             Entreprise
           </span>
           <input
             name="company"
             defaultValue={profile.company ?? ""}
-            className="block h-11 w-full rounded-[3px] border border-[#d8d0bf] bg-white px-3 text-sm outline-none transition focus:border-[#171613] focus:ring-2 focus:ring-[#171613]/15"
+            className="block h-11 w-full rounded-[3px] border border-line-strong bg-paper px-3 text-sm outline-none transition focus:border-ink focus:ring-2 focus:ring-ink/15"
           />
         </label>
       </div>
       <label className="block">
-        <span className="mb-1.5 block text-xs font-medium uppercase tracking-[0.18em] text-[#8a7a5f]">
+        <span className="mb-1.5 block text-xs font-medium uppercase tracking-[0.18em] text-mute">
           Téléphone
         </span>
         <input
           name="phone"
           defaultValue={profile.phone ?? ""}
-          className="block h-11 w-full rounded-[3px] border border-[#d8d0bf] bg-white px-3 text-sm outline-none transition focus:border-[#171613] focus:ring-2 focus:ring-[#171613]/15"
+          className="block h-11 w-full rounded-[3px] border border-line-strong bg-paper px-3 text-sm outline-none transition focus:border-ink focus:ring-2 focus:ring-ink/15"
         />
       </label>
 
-      <div className="rounded-[4px] border border-[#d8d0bf] bg-[#f8f5ed] p-4 text-xs leading-5 text-[#6b665a]">
+      <div className="rounded-[4px] border border-line-strong bg-vellum/60 p-4 text-xs leading-5 text-mute">
         Email :{" "}
-        <strong className="font-medium text-[#171613]">{profile.email}</strong>
+        <strong className="font-medium text-ink">{profile.email}</strong>
       </div>
 
       {state.error ? (
         <p
           role="alert"
-          className="rounded-[3px] border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
+          className="rounded-[3px] border border-crimson/30 bg-crimson/5 px-3 py-2 text-sm text-crimson"
         >
           {state.error}
         </p>
@@ -83,7 +83,7 @@ export function ProfileSettingsForm({ profile }: Props) {
       {state.success ? (
         <p
           role="status"
-          className="rounded-[3px] border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-800"
+          className="rounded-[3px] border border-moss/30 bg-moss/10 px-3 py-2 text-sm text-moss"
         >
           {state.success}
         </p>

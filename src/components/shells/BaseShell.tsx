@@ -70,7 +70,13 @@ export function BaseShell({
           </a>
 
           <div className="flex items-center gap-2">
-            <CommandPalette />
+            <CommandPalette
+              items={navigation.map((item) => ({
+                label: item.label,
+                href: item.href,
+                hint: meta.eyebrow,
+              }))}
+            />
             <NotificationBell />
             <UserMenu />
           </div>

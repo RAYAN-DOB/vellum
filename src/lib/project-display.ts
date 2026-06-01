@@ -56,3 +56,15 @@ export const priorityLabels: Record<ProjectPriority, string> = {
   high: "Élevée",
   urgent: "Urgente",
 };
+
+/**
+ * Client-facing labels for the internal role enums. Used wherever a message
+ * author or actor is shown to a client, so they never see raw values like
+ * "architect" or "manager".
+ */
+export const roleLabels: Record<string, string> = {
+  client: "Client",
+  architect: "Dessinateur",
+  manager: "Chef de projet",
+  admin: "Équipe Vellum",
+};

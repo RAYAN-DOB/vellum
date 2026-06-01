@@ -19,20 +19,20 @@ export default async function ClientSettingsRoute() {
       description="Mettez à jour vos informations de contact pour faciliter le suivi de vos dossiers."
     >
       <div className="grid gap-6 lg:grid-cols-[1fr_280px]">
-        <section className="rounded-[6px] border border-[#d8d0bf] bg-white/95 p-5 sm:p-6">
+        <section className="rounded-[4px] border border-line-strong bg-paper/95 p-5 sm:p-6">
           <ProfileSettingsForm profile={user.profile} />
         </section>
 
         <aside className="space-y-3">
-          <div className="rounded-[6px] border border-[#d8d0bf] bg-[#f8f5ed] p-4 text-xs leading-5 text-[#6b665a]">
+          <div className="rounded-[4px] border border-line-strong bg-vellum/60 p-4 text-xs leading-5 text-mute">
             Ces informations aident l'équipe à vous recontacter si une pièce ou
             une précision manque au dossier.
           </div>
-          <div className="rounded-[6px] border border-[#d8d0bf] bg-white/95 p-4">
-            <p className="text-xs uppercase tracking-[0.2em] text-[#8a7a5f]">
+          <div className="rounded-[4px] border border-line-strong bg-paper/95 p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-mute">
               Session
             </p>
-            <p className="mt-2 text-sm text-[#171613]">{user.email}</p>
+            <p className="mt-2 text-sm text-ink">{user.email}</p>
             <div className="mt-3">
               <SignOutButton />
             </div>

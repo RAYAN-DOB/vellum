@@ -41,15 +41,15 @@ export default async function ClientProjectsPage() {
       }
     >
       {projects.length === 0 ? (
-        <div className="rounded-[6px] border border-dashed border-[#d8d0bf] bg-white/70 p-10 text-center">
+        <div className="rounded-[4px] border border-dashed border-line-strong bg-paper/70 p-10 text-center">
           <FolderKanban
-            className="mx-auto size-8 text-[#8a7a5f]"
+            className="mx-auto size-8 text-mute"
             aria-hidden
           />
-          <p className="mt-3 text-sm font-medium text-[#171613]">
+          <p className="mt-3 text-sm font-medium text-ink">
             Aucun projet pour le moment
           </p>
-          <p className="mx-auto mt-1 max-w-md text-xs text-[#6b665a]">
+          <p className="mx-auto mt-1 max-w-md text-xs text-mute">
             Démarrez votre premier projet en quelques minutes.
           </p>
           <div className="mt-4">
@@ -59,9 +59,9 @@ export default async function ClientProjectsPage() {
           </div>
         </div>
       ) : (
-        <div className="overflow-hidden rounded-[6px] border border-[#d8d0bf] bg-white/95">
-          <table className="min-w-full divide-y divide-[#e8e0d0] text-sm">
-            <thead className="bg-[#f8f5ed] text-left text-xs uppercase tracking-[0.18em] text-[#8a7a5f]">
+        <div className="overflow-hidden rounded-[4px] border border-line-strong bg-paper/95">
+          <table className="min-w-full divide-y divide-line text-sm">
+            <thead className="bg-vellum/60 text-left text-xs uppercase tracking-[0.18em] text-mute">
               <tr>
                 <th className="px-4 py-3 font-medium">Référence</th>
                 <th className="px-4 py-3 font-medium">Titre</th>
@@ -71,21 +71,21 @@ export default async function ClientProjectsPage() {
                 <th className="px-4 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#eee8dc]">
+            <tbody className="divide-y divide-line">
               {projects.map((project) => (
-                <tr key={project.id} className="transition hover:bg-[#fdfaf3]">
-                  <td className="px-4 py-3 align-top font-mono text-xs text-[#6b665a]">
+                <tr key={project.id} className="transition hover:bg-vellum/40">
+                  <td className="px-4 py-3 align-top font-mono text-xs text-mute">
                     {project.reference}
                   </td>
                   <td className="px-4 py-3 align-top">
                     <a
-                      className="font-medium text-[#171613] hover:underline"
+                      className="font-medium text-ink hover:underline"
                       href={`/client/projets/${project.id}`}
                     >
                       {project.title}
                     </a>
                     {project.description ? (
-                      <p className="mt-1 line-clamp-1 text-xs text-[#6b665a]">
+                      <p className="mt-1 line-clamp-1 text-xs text-mute">
                         {project.description}
                       </p>
                     ) : null}
@@ -109,12 +109,12 @@ export default async function ClientProjectsPage() {
                       {confidentialityLabels[project.confidentiality]}
                     </StatusPill>
                   </td>
-                  <td className="px-4 py-3 align-top text-xs text-[#6b665a]">
+                  <td className="px-4 py-3 align-top text-xs text-mute">
                     {formatDate(project.updated_at)}
                   </td>
                   <td className="px-4 py-3 align-top">
                     <a
-                      className="text-xs font-medium text-[#171613] hover:underline"
+                      className="text-xs font-medium text-ink hover:underline"
                       href={`/client/projets/${project.id}`}
                     >
                       Ouvrir →

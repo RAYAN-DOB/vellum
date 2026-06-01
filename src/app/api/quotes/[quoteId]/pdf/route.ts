@@ -93,7 +93,7 @@ function buildPdf(quote: QuotePdfRow) {
     },
     {
       size: 9,
-      text: "Document genere par Vellum. Paiement en ligne prevu en V2.",
+      text: "Document genere par Vellum.",
       x: 72,
       y: 84,
     },

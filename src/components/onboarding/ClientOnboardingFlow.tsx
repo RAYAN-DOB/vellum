@@ -6,14 +6,14 @@ import { routes } from "@/lib/routes";
 
 const steps = [
   {
-    title: "Type de client",
+    title: "Votre profil",
     icon: UserRound,
-    choices: ["Particulier", "Entreprise", "Bureau d'etudes", "Architecte", "Collectivite"],
+    choices: ["Particulier", "Entreprise", "Bureau d'études", "Architecte", "Collectivité"],
   },
   {
-    title: "Type de besoin",
+    title: "Votre besoin",
     icon: Building2,
-    choices: ["Reprise plan", "Creation DWG", "Correction", "Schema electrique", "Livrable technique"],
+    choices: ["Reprise de plan", "Création DWG", "Correction", "Schéma électrique", "Livrable technique"],
   },
   {
     title: "Documents disponibles",
@@ -21,25 +21,26 @@ const steps = [
     choices: ["PDF", "DWG", "Croquis", "Photo", "Note"],
   },
   {
-    title: "Urgence",
+    title: "Niveau d'urgence",
     icon: Clock,
-    choices: ["Standard", "Prioritaire", "A planifier"],
+    choices: ["Standard", "Prioritaire", "À planifier"],
   },
 ] as const;
 
 export function ClientOnboardingFlow() {
   return (
     <div className="grid gap-6">
-      <Card tone="dark" className="rounded-[32px]">
+      <Card tone="dark" className="rounded-[4px]">
         <CardHeader>
-          <CardTitle className="max-w-3xl text-3xl leading-tight text-[#f7f3ea]">
-            Configurer le premier depot sans creer de vraie auth.
+          <CardTitle className="max-w-3xl text-3xl leading-tight text-paper">
+            Préparez votre premier dépôt en toute sérénité.
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="max-w-2xl text-sm leading-7 text-[#cfc6b5]">
-            Ce parcours aide le client a comprendre quels documents preparer et
-            comment formuler sa premiere demande. Tout reste mocke.
+          <p className="max-w-2xl text-sm leading-7 text-paper/75">
+            Ce guide vous aide à savoir quels documents préparer et comment
+            formuler votre première demande, étape par étape. Vous gardez la main
+            à chaque moment.
           </p>
         </CardContent>
       </Card>
@@ -49,9 +50,9 @@ export function ClientOnboardingFlow() {
           const Icon = step.icon;
 
           return (
-            <Card className="rounded-[30px]" key={step.title}>
+            <Card className="rounded-[4px]" key={step.title}>
               <CardHeader>
-                <span className="flex size-11 items-center justify-center rounded-full bg-[#171613] text-[#f7f3ea]">
+                <span className="flex size-11 items-center justify-center rounded-full bg-ink text-paper">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
                 <CardTitle>
@@ -63,8 +64,8 @@ export function ClientOnboardingFlow() {
                   <span
                     className={
                       choiceIndex === 0
-                        ? "rounded-full bg-[#171613] px-3 py-2 text-xs font-semibold text-[#f7f3ea]"
-                        : "rounded-full border border-[#d8d0bf] bg-[#fbfaf6] px-3 py-2 text-xs font-semibold text-[#6b665a]"
+                        ? "rounded-full bg-ink px-3 py-2 text-xs font-semibold text-paper"
+                        : "rounded-full border border-line-strong bg-paper px-3 py-2 text-xs font-semibold text-mute"
                     }
                     key={choice}
                   >
@@ -77,17 +78,17 @@ export function ClientOnboardingFlow() {
         })}
       </section>
 
-      <Card className="rounded-[32px]">
+      <Card className="rounded-[4px]">
         <CardContent className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <CheckCircle2 className="size-5 text-emerald-700" aria-hidden="true" />
-            <p className="text-sm font-semibold text-[#171613]">
-              Resume pret : client entreprise, reprise plan, PDF + DWG, priorite standard.
+            <CheckCircle2 className="size-5 text-moss" aria-hidden="true" />
+            <p className="text-sm font-semibold text-ink">
+              Récapitulatif type : entreprise, reprise de plan, PDF + DWG, priorité standard.
             </p>
           </div>
           <Button asChild className="rounded-full">
             <a href={routes.client.newProject}>
-              Deposer mon premier projet
+              Déposer mon premier projet
               <ArrowRight className="size-4" aria-hidden="true" />
             </a>
           </Button>

@@ -3,9 +3,17 @@
 import { Command, Search, Sparkles } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { commandActions } from "@/lib/workflow";
+export type CommandPaletteItem = {
+  label: string;
+  href: string;
+  hint?: string;
+};
 
-export function CommandPalette() {
+export function CommandPalette({
+  items = [],
+}: {
+  items?: ReadonlyArray<CommandPaletteItem>;
+}) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -32,12 +40,12 @@ export function CommandPalette() {
 
   const actions = useMemo(() => {
     const normalized = query.trim().toLowerCase();
-    if (!normalized) return commandActions;
+    if (!normalized) return items;
 
-    return commandActions.filter((action) =>
-      `${action.label} ${action.hint}`.toLowerCase().includes(normalized),
+    return items.filter((action) =>
+      `${action.label} ${action.hint ?? ""}`.toLowerCase().includes(normalized),
     );
-  }, [query]);
+  }, [items, query]);
 
   return (
     <div className="relative">

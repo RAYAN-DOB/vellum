@@ -62,18 +62,18 @@ function CreateForm({ projects }: { projects: Props["projects"] }) {
   return (
     <form
       action={formAction}
-      className="rounded-[4px] border border-[#d8d0bf] bg-[#f8f5ed] p-4"
+      className="rounded-[4px] border border-line-strong bg-vellum/60 p-4"
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8a7a5f]">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-mute">
         Nouveau devis
       </p>
       <div className="mt-3 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
         <label className="block">
-          <span className="mb-1 block text-xs text-[#6b665a]">Projet</span>
+          <span className="mb-1 block text-xs text-mute">Projet</span>
           <select
             name="project_id"
             required
-            className="h-10 w-full rounded-[3px] border border-[#d8d0bf] bg-white px-2 text-sm"
+            className="h-10 w-full rounded-[3px] border border-line-strong bg-paper px-2 text-sm"
           >
             <option value="" disabled>
               Sélectionner…
@@ -88,7 +88,7 @@ function CreateForm({ projects }: { projects: Props["projects"] }) {
         <Submit label="Créer le devis" />
       </div>
       {state.error ? (
-        <p className="mt-2 text-xs text-red-700">{state.error}</p>
+        <p className="mt-2 text-xs text-crimson">{state.error}</p>
       ) : null}
     </form>
   );
@@ -97,20 +97,20 @@ function CreateForm({ projects }: { projects: Props["projects"] }) {
 function AddItemForm({ quoteId }: { quoteId: string }) {
   const [state, formAction] = useActionState(addQuoteItemAction, initialState);
   return (
-    <form action={formAction} className="grid gap-2 border-t border-[#e8e0d0] pt-3 sm:grid-cols-[2fr_60px_100px_auto] sm:items-end">
+    <form action={formAction} className="grid gap-2 border-t border-line pt-3 sm:grid-cols-[2fr_60px_100px_auto] sm:items-end">
       <input type="hidden" name="quote_id" value={quoteId} />
       <label className="block">
-        <span className="mb-1 block text-[10px] uppercase tracking-[0.18em] text-[#8a7a5f]">
+        <span className="mb-1 block text-[10px] uppercase tracking-[0.18em] text-mute">
           Désignation
         </span>
         <input
           name="label"
           required
-          className="h-9 w-full rounded-[3px] border border-[#d8d0bf] bg-white px-2 text-sm"
+          className="h-9 w-full rounded-[3px] border border-line-strong bg-paper px-2 text-sm"
         />
       </label>
       <label className="block">
-        <span className="mb-1 block text-[10px] uppercase tracking-[0.18em] text-[#8a7a5f]">
+        <span className="mb-1 block text-[10px] uppercase tracking-[0.18em] text-mute">
           Qté
         </span>
         <input
@@ -119,11 +119,11 @@ function AddItemForm({ quoteId }: { quoteId: string }) {
           min="0"
           step="0.5"
           defaultValue={1}
-          className="h-9 w-full rounded-[3px] border border-[#d8d0bf] bg-white px-2 text-sm"
+          className="h-9 w-full rounded-[3px] border border-line-strong bg-paper px-2 text-sm"
         />
       </label>
       <label className="block">
-        <span className="mb-1 block text-[10px] uppercase tracking-[0.18em] text-[#8a7a5f]">
+        <span className="mb-1 block text-[10px] uppercase tracking-[0.18em] text-mute">
           PU (€)
         </span>
         <input
@@ -132,12 +132,12 @@ function AddItemForm({ quoteId }: { quoteId: string }) {
           min="0"
           step="0.01"
           defaultValue={0}
-          className="h-9 w-full rounded-[3px] border border-[#d8d0bf] bg-white px-2 text-sm"
+          className="h-9 w-full rounded-[3px] border border-line-strong bg-paper px-2 text-sm"
         />
       </label>
       <Submit label="Ajouter" />
       {state.error ? (
-        <p className="col-span-full text-xs text-red-700">{state.error}</p>
+        <p className="col-span-full text-xs text-crimson">{state.error}</p>
       ) : null}
     </form>
   );
@@ -164,7 +164,7 @@ function StatusForm({
       <select
         name="status"
         defaultValue={current}
-        className="h-8 rounded-[3px] border border-[#d8d0bf] bg-white px-2 text-xs"
+        className="h-8 rounded-[3px] border border-line-strong bg-paper px-2 text-xs"
       >
         {options.map((status) => (
           <option key={status} value={status}>
@@ -174,7 +174,7 @@ function StatusForm({
       </select>
       <Submit label="OK" />
       {state.error ? (
-        <span className="text-xs text-red-700">{state.error}</span>
+        <span className="text-xs text-crimson">{state.error}</span>
       ) : null}
     </form>
   );
@@ -193,8 +193,8 @@ export function QuoteList({ quotes, projects, canManage }: Props) {
       {canManage ? <CreateForm projects={projects} /> : null}
 
       {quotes.length === 0 ? (
-        <p className="rounded-[6px] border border-dashed border-[#d8d0bf] bg-white/70 p-10 text-center text-sm text-[#6b665a]">
-          <ReceiptText className="mx-auto size-8 text-[#8a7a5f]" aria-hidden />
+        <p className="rounded-[4px] border border-dashed border-line-strong bg-vellum/30 p-10 text-center text-sm text-mute">
+          <ReceiptText className="mx-auto size-8 text-mute" aria-hidden />
           <span className="mt-3 block">Aucun devis pour le moment.</span>
         </p>
       ) : (
@@ -202,11 +202,11 @@ export function QuoteList({ quotes, projects, canManage }: Props) {
           {quotes.map((quote) => (
             <li
               key={quote.id}
-              className="rounded-[6px] border border-[#d8d0bf] bg-white/95 p-4"
+              className="rounded-[4px] border border-line-strong bg-paper p-4"
             >
               <header className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-2 text-xs text-[#6b665a]">
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-mute">
                     <ReceiptText className="size-3.5" aria-hidden />
                     <span className="font-mono">
                       {quote.project?.reference ?? "—"}
@@ -215,24 +215,24 @@ export function QuoteList({ quotes, projects, canManage }: Props) {
                       {quoteStatusLabels[quote.status]}
                     </StatusPill>
                   </div>
-                  <p className="mt-1 font-medium text-[#171613]">
+                  <p className="mt-1 font-medium text-ink">
                     {quote.project?.title ?? "Projet"}
                   </p>
                   {quote.notes ? (
-                    <p className="mt-1 text-xs text-[#6b665a]">{quote.notes}</p>
+                    <p className="mt-1 text-xs text-mute">{quote.notes}</p>
                   ) : null}
                 </div>
                 <div className="text-right">
-                  <p className="text-xs text-[#6b665a]">Total</p>
-                  <p className="text-lg font-semibold text-[#171613]">
+                  <p className="text-xs text-mute">Total</p>
+                  <p className="text-lg font-semibold text-ink">
                     {formatCurrency(quote.total_amount, quote.currency)}
                   </p>
                 </div>
               </header>
 
               {quote.items.length > 0 ? (
-                <table className="mt-3 min-w-full divide-y divide-[#e8e0d0] text-sm">
-                  <thead className="text-left text-[10px] uppercase tracking-[0.18em] text-[#8a7a5f]">
+                <table className="mt-3 min-w-full divide-y divide-line text-sm">
+                  <thead className="text-left text-[10px] uppercase tracking-[0.18em] text-mute">
                     <tr>
                       <th className="py-2">Désignation</th>
                       <th className="py-2 text-right">Qté</th>
@@ -240,7 +240,7 @@ export function QuoteList({ quotes, projects, canManage }: Props) {
                       <th className="py-2 text-right">Total</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#eee8dc]">
+                  <tbody className="divide-y divide-line">
                     {quote.items.map((item) => (
                       <tr key={item.id}>
                         <td className="py-2">{item.label}</td>
@@ -248,7 +248,7 @@ export function QuoteList({ quotes, projects, canManage }: Props) {
                         <td className="py-2 text-right">
                           {formatCurrency(item.unit_price, quote.currency)}
                         </td>
-                        <td className="py-2 text-right font-medium text-[#171613]">
+                        <td className="py-2 text-right font-medium text-ink">
                           {formatCurrency(item.total, quote.currency)}
                         </td>
                       </tr>
@@ -256,7 +256,7 @@ export function QuoteList({ quotes, projects, canManage }: Props) {
                   </tbody>
                 </table>
               ) : (
-                <p className="mt-3 text-xs text-[#6b665a]">
+                <p className="mt-3 text-xs text-mute">
                   Aucune ligne — ajoutez une première prestation.
                 </p>
               )}

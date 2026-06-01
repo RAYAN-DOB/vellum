@@ -49,21 +49,21 @@ export default async function ClientDocumentReviewPage({
     >
       <a
         href={`/client/projets/${projectId}`}
-        className="inline-flex items-center gap-1 text-sm text-[#6b665a] hover:text-[#171613]"
+        className="inline-flex items-center gap-1 text-sm text-mute hover:text-ink"
       >
         <ArrowLeft className="size-3.5" aria-hidden />
         Retour au projet
       </a>
 
-      <section className="mt-6 rounded-[6px] border border-[#d8d0bf] bg-white/95 p-6">
+      <section className="mt-6 rounded-[4px] border border-line-strong bg-paper/95 p-6">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="flex items-center gap-3">
-            <FileText className="size-6 text-[#8a7a5f]" aria-hidden />
+            <FileText className="size-6 text-mute" aria-hidden />
             <div>
-              <p className="font-medium text-[#171613]">
+              <p className="font-medium text-ink">
                 {documentWithProject.file_name}
               </p>
-              <p className="text-xs text-[#6b665a]">
+              <p className="text-xs text-mute">
                 {documentWithProject.file_type ?? "Type inconnu"} ·{" "}
                 {documentWithProject.file_size
                   ? `${(documentWithProject.file_size / 1024 / 1024).toFixed(2)} MB`

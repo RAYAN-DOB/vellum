@@ -16,7 +16,7 @@ const buttonVariants = cva(
         primary:
           "bg-[#171613] text-[#f7f3ea] shadow-[0_18px_40px_rgba(22,21,18,0.22)] hover:bg-[#2b2923] focus-visible:outline-[#171613]",
         secondary:
-          "bg-[#f8f5ed] text-[#171613] shadow-sm ring-1 ring-[#d8d0bf] hover:bg-white focus-visible:outline-[#171613]",
+          "bg-[#f8f5ed] text-[#171613] shadow-sm ring-1 ring-[#d8d0bf] hover:bg-paper focus-visible:outline-[#171613]",
         outline:
           "border border-[#d8d0bf] bg-[#fbfaf6]/70 text-[#171613] hover:bg-[#f0eadf] focus-visible:outline-[#171613]",
         ghost:

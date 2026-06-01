@@ -6,9 +6,9 @@ export default function ClientOnboardingPage() {
   return (
     <ClientShell
       activeHref={routes.client.onboarding}
-      description="Parcours mocke pour preparer le premier depot : profil, besoin, documents disponibles, urgence et resume."
-      eyebrow="Espace client"
-      title="Onboarding client"
+      description="Préparez votre premier dépôt en quelques étapes : votre profil, votre besoin, les documents disponibles, le niveau d'urgence et un récapitulatif."
+      eyebrow="Bienvenue"
+      title="Prise en main"
     >
       <ClientOnboardingFlow />
     </ClientShell>

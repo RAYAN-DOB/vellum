@@ -7,6 +7,11 @@ export const metadata = {
 };
 
 export default function MentionsLegalesPage() {
+  // TODO(legal): remplacer les champs entre crochets [ ... ] ci-dessous par
+  // l'identité légale réelle de l'exploitant (raison sociale, forme juridique,
+  // SIREN/RCS, siège social, directeur de la publication, e-mail de contact)
+  // avant la mise en production. Tant qu'ils ne sont pas remplis, les crochets
+  // signalent visuellement l'information manquante.
   return (
     <LegalDoc
       eyebrow="Informations légales"
