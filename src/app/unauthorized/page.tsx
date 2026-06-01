@@ -57,13 +57,13 @@ export default async function UnauthorizedPage({
         <h1 className="display mt-4 text-[clamp(2.5rem,5vw,4.25rem)] text-ink">
           Cette zone n&apos;est pas
           <br />
-          <span className="italic">pour ce rôle.</span>
+          <span className="italic">accessible ici.</span>
         </h1>
 
         <p className="mt-6 max-w-xl text-[16px] leading-[1.7] text-graphite">
           {reason === "inactive"
-            ? "Votre compte a été désactivé. Contactez un administrateur Vellum pour rétablir l'accès — la décision est tracée dans le journal d'audit."
-            : "Votre rôle ne donne pas accès à cette section. Revenez à votre espace, ou changez de compte si vous avez plusieurs identités."}
+            ? "Votre accès a été suspendu. Contactez l'équipe Vellum pour le rétablir."
+            : "Cette section n'est pas accessible depuis votre espace. Revenez à votre espace, ou changez de compte si vous en avez plusieurs."}
         </p>
 
         <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center">

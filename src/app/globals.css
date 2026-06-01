@@ -26,6 +26,7 @@
 
   /* Accent — used sparingly */
   --sienna: #9f4f38;        /* signature accent, seals */
+  --sienna-dark: #7b3828;   /* sienna hover / pressed */
   --sienna-soft: #d9b1a1;
   --moss: #5f6f55;          /* positive states */
   --amber: #b46a4c;         /* drafting/electric accent */
@@ -52,6 +53,7 @@
   --color-soft: var(--soft);
   --color-iron: var(--iron);
   --color-sienna: var(--sienna);
+  --color-sienna-dark: var(--sienna-dark);
   --color-clay: #b46a4c;
   --color-blueprint: #55758a;
   --color-moss: var(--moss);

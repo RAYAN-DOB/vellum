@@ -47,9 +47,9 @@ function Hero() {
         className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-paper via-paper/80 to-transparent"
       />
 
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-16 pt-32 sm:pb-20 sm:pt-36 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16 lg:px-10 lg:pb-24 lg:pt-40">
+      <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-16 pt-32 sm:pb-20 sm:pt-36 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-16 lg:px-10 lg:pb-24 lg:pt-40">
         <div className="max-w-2xl">
-          <h1 className="display text-[clamp(2.75rem,7vw,5.45rem)] text-ink">
+          <h1 className="display text-balance text-[clamp(2.5rem,4.7vw,4rem)] text-ink">
             Déposez vos plans.
             <br />
             Suivez chaque correction
@@ -66,7 +66,7 @@ function Hero() {
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <a
               href={routes.public.deposit}
-              className="group inline-flex h-12 cursor-pointer items-center gap-2 rounded-full bg-sienna px-6 text-[14px] font-medium text-paper transition hover:bg-[#7b3828]"
+              className="group inline-flex h-12 cursor-pointer items-center gap-2 rounded-full bg-sienna px-6 text-[14px] font-medium text-paper transition hover:bg-sienna-dark"
             >
               Déposer un projet
               <ArrowRight
@@ -90,7 +90,7 @@ function Hero() {
               >
                 <span
                   aria-hidden="true"
-                  className="size-1.5 shrink-0 rounded-full bg-[#9f4f38]"
+                  className="size-1.5 shrink-0 rounded-full bg-sienna"
                 />
                 {point}
               </li>
@@ -162,7 +162,7 @@ function FinalCta() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-end lg:flex-col lg:items-stretch">
           <a
             href={routes.public.deposit}
-            className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-[#9f4f38] px-7 text-[14px] font-medium text-paper transition hover:bg-[#7b3828]"
+            className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-sienna px-7 text-[14px] font-medium text-paper transition hover:bg-sienna-dark"
           >
             Déposer un projet
             <ArrowRight
