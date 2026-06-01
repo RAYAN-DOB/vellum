@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">Vellum plumbing plan synthetic drawing</title>
+  <desc id="desc">Original synthetic plumbing plan generated for Vellum marketing visuals.</desc>
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#eee7db" stroke-width="0.45"/></pattern>
+    <style>
+      .bg{fill:#fbfaf6}.sheet{fill:#fffdf8;stroke:#171613;stroke-width:2}.grid{fill:url(#grid)}.wall{stroke:#171613;stroke-width:7;fill:none;stroke-linecap:square}.thin{stroke:#171613;stroke-width:1.8;fill:none}.hair{stroke:#171613;stroke-width:1;fill:none}.cold{stroke:#255f8f;stroke-width:2.2;fill:none}.hot{stroke:#b6543a;stroke-width:2.2;fill:none}.waste{stroke:#171613;stroke-width:2.4;fill:none;stroke-dasharray:12 7}.txt{font-family:Arial,Helvetica,sans-serif;fill:#171613}.mono{font-family:Courier New,monospace;fill:#171613}.small{font-size:10px;letter-spacing:.15em}.note{font-size:12px;letter-spacing:.12em}.room{font-size:16px;font-weight:700;letter-spacing:.08em}.muted{fill:#706a60}.cart{font-size:11px;letter-spacing:.12em}.title{font-size:20px;font-weight:700}.light{fill:#f2eee5;stroke:#d8d0bf}.fixture{fill:#fffdf8;stroke:#171613;stroke-width:1.8}.sienna{fill:#b6543a;stroke:#b6543a}
+    </style>
+  </defs>
+  <rect class="bg" width="1400" height="900"/><rect x="24" y="24" width="1352" height="852" class="sheet"/><rect x="54" y="54" width="1048" height="784" class="grid"/>
+  <rect x="1118" y="54" width="230" height="784" fill="#fffdf8" stroke="#171613" stroke-width="1.6"/>
+  <rect x="1118" y="54" width="230" height="92" class="light"/><text x="1138" y="88" class="mono title">VELLUM</text><text x="1138" y="116" class="mono small muted">PLUMBING LAYER</text>
+  <line x1="1118" y1="146" x2="1348" y2="146" class="thin"/><text x="1138" y="178" class="mono cart">TYPE</text><text x="1215" y="178" class="txt">Schéma plomberie</text>
+  <text x="1138" y="210" class="mono cart">REF</text><text x="1215" y="210" class="mono cart">VLM-PLB-202605-0042</text>
+  <text x="1138" y="242" class="mono cart">REV</text><text x="1215" y="242" class="mono cart">01</text>
+  <text x="1138" y="274" class="mono cart">STATUT</text><text x="1215" y="274" class="mono cart">À COMPLÉTER</text>
+  <line x1="1118" y1="310" x2="1348" y2="310" class="hair"/><text x="1138" y="344" class="mono cart">LÉGENDE</text>
+  <path d="M1140 382h42" class="cold"/><text x="1198" y="387" class="txt note">Eau froide</text>
+  <path d="M1140 426h42" class="hot"/><text x="1198" y="431" class="txt note">Eau chaude</text>
+  <path d="M1140 470h42" class="waste"/><text x="1198" y="475" class="txt note">Évacuation</text>
+  <rect x="1142" y="512" width="38" height="24" class="fixture"/><text x="1198" y="530" class="txt note">Appareil</text>
+  <line x1="1118" y1="585" x2="1348" y2="585" class="hair"/><text x="1138" y="624" class="mono cart">NOTES</text><text x="1138" y="655" class="txt small">P-01 · Ajouter arrivée EF</text><text x="1138" y="680" class="txt small">P-02 · Vérifier pente EU</text><text x="1138" y="705" class="txt small">P-03 · Déplacer évacuation</text>
+  <text x="1138" y="805" class="mono small muted">Plan synthétique original</text>
+
+  <path class="wall" d="M136 162H980V724H136Z"/><path class="wall" d="M136 385H392M454 385H650M720 385H980"/><path class="wall" d="M392 162V300M392 462V724"/><path class="wall" d="M650 162V385M650 476V724"/><path class="wall" d="M805 385V724"/><path class="wall" d="M136 545H392M392 565H650M805 540H980"/><path class="thin" d="M136 300H392M250 162V300M720 162V385"/>
+  <text x="480" y="245" class="txt room muted">CUISINE</text><text x="855" y="465" class="txt room muted">CHAMBRE</text><text x="840" y="705" class="txt room muted">SALLE D'EAU</text><text x="200" y="468" class="txt room muted">WC</text>
+
+  <!-- fixtures -->
+  <rect x="490" y="222" width="120" height="48" class="fixture"/><circle cx="522" cy="246" r="10" class="fixture"/><circle cx="575" cy="246" r="10" class="fixture"/><text x="510" y="205" class="mono small muted">ÉVIER</text>
+  <rect x="836" y="585" width="58" height="38" class="fixture"/><circle cx="865" cy="604" r="13" class="hair"/><text x="838" y="568" class="mono small muted">VASQUE</text>
+  <rect x="925" y="578" width="42" height="70" rx="18" class="fixture"/><path d="M936 610h20" class="hair"/><text x="925" y="666" class="mono small muted">WC</text>
+  <rect x="835" y="660" width="128" height="42" class="fixture"/><path d="M846 682h104" class="hair"/><text x="850" y="725" class="mono small muted">DOUCHE</text>
+  <rect x="188" y="420" width="42" height="66" rx="18" class="fixture"/><text x="175" y="505" class="mono small muted">WC EXISTANT</text>
+
+  <!-- riser -->
+  <rect x="742" y="512" width="42" height="42" fill="#fffdf8" stroke="#b6543a" stroke-width="2"/><text x="724" y="500" class="mono small" fill="#b6543a">COLONNE</text>
+  <text x="722" y="570" class="mono small muted">EF/EC/EU</text>
+
+  <!-- plumbing routes -->
+  <path d="M763 533H575V246" class="cold"/>
+  <path d="M763 543H522V246" class="hot"/>
+  <path d="M763 533H865V604" class="cold"/>
+  <path d="M763 543H865V604" class="hot"/>
+  <path d="M763 533H946V610" class="cold"/>
+  <path d="M763 553H210V453" class="cold"/>
+  <path d="M763 553H900V682" class="cold"/>
+  <path d="M763 563H900V682" class="hot"/>
+  <path d="M575 270C575 340 680 445 763 533" class="waste"/>
+  <path d="M865 624C836 635 790 560 763 548" class="waste"/>
+  <path d="M946 648C905 642 810 590 763 548" class="waste"/>
+  <path d="M900 702C850 682 800 590 763 548" class="waste"/>
+  <path d="M210 486C330 570 610 595 763 548" class="waste"/>
+
+  <!-- callouts -->
+  <circle cx="763" cy="533" r="30" fill="none" stroke="#b6543a" stroke-width="2" stroke-dasharray="6 5"/>
+  <path d="M793 524L920 445" stroke="#b6543a" stroke-width="1.5" fill="none"/><text x="928" y="446" class="mono small" fill="#b6543a">P-01 · NOUVELLE ARRIVÉE</text>
+  <circle cx="575" cy="270" r="22" fill="none" stroke="#b6543a" stroke-width="2"/><text x="605" y="292" class="mono small" fill="#b6543a">P-02 · PENTE À CONFIRMER</text>
+  <circle cx="900" cy="682" r="24" fill="none" stroke="#b6543a" stroke-width="2" stroke-dasharray="5 5"/><text x="792" y="756" class="mono small" fill="#b6543a">P-03 · DOUCHE À RECALER</text>
+</svg>
