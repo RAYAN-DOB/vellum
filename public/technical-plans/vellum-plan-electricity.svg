@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">Vellum electrical plan synthetic drawing</title>
+  <desc id="desc">Original synthetic electrical plan generated for Vellum marketing visuals.</desc>
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#eee7db" stroke-width="0.45"/></pattern>
+    <style>
+      .bg{fill:#fbfaf6}.sheet{fill:#fffdf8;stroke:#171613;stroke-width:2}.grid{fill:url(#grid)}.wall{stroke:#171613;stroke-width:7;fill:none;stroke-linecap:square}.thin{stroke:#171613;stroke-width:1.8;fill:none}.hair{stroke:#171613;stroke-width:1;fill:none}.wire{stroke:#b6543a;stroke-width:2.1;fill:none;stroke-dasharray:10 7}.wire2{stroke:#5b5a50;stroke-width:1.6;fill:none;stroke-dasharray:3 6}.txt{font-family:Arial,Helvetica,sans-serif;fill:#171613}.mono{font-family:Courier New,monospace;fill:#171613}.small{font-size:10px;letter-spacing:.15em}.note{font-size:12px;letter-spacing:.12em}.room{font-size:16px;font-weight:700;letter-spacing:.08em}.muted{fill:#706a60}.sienna{fill:#b6543a;stroke:#b6543a}.symbol{stroke:#171613;stroke-width:1.6;fill:#fffdf8}.cart{font-size:11px;letter-spacing:.12em}.title{font-size:20px;font-weight:700}.light{fill:#f2eee5;stroke:#d8d0bf}
+    </style>
+  </defs>
+  <rect class="bg" width="1400" height="900"/><rect x="24" y="24" width="1352" height="852" class="sheet"/><rect x="54" y="54" width="1048" height="784" class="grid"/>
+  <rect x="1118" y="54" width="230" height="784" fill="#fffdf8" stroke="#171613" stroke-width="1.6"/>
+  <rect x="1118" y="54" width="230" height="92" class="light"/><text x="1138" y="88" class="mono title">VELLUM</text><text x="1138" y="116" class="mono small muted">ELECTRICAL LAYER</text>
+  <line x1="1118" y1="146" x2="1348" y2="146" class="thin"/><text x="1138" y="178" class="mono cart">TYPE</text><text x="1215" y="178" class="txt">Schéma électrique</text>
+  <text x="1138" y="210" class="mono cart">REF</text><text x="1215" y="210" class="mono cart">VLM-ELEC-202605-0042</text>
+  <text x="1138" y="242" class="mono cart">REV</text><text x="1215" y="242" class="mono cart">02</text>
+  <text x="1138" y="274" class="mono cart">STATUT</text><text x="1215" y="274" class="mono cart">EN ANALYSE</text>
+  <line x1="1118" y1="310" x2="1348" y2="310" class="hair"/><text x="1138" y="344" class="mono cart">LÉGENDE</text>
+  <circle cx="1155" cy="382" r="12" class="symbol"/><path d="M1146 382h18M1155 373v18" class="hair"/><text x="1188" y="388" class="txt note">Luminaire</text>
+  <rect x="1143" y="420" width="24" height="18" class="symbol"/><text x="1188" y="435" class="txt note">Prise double</text>
+  <path d="M1144 480h28M1158 480v-25" class="symbol"/><text x="1188" y="483" class="txt note">Interrupteur</text>
+  <path d="M1145 520c25 0 25 25 0 25" class="wire"/><text x="1188" y="538" class="txt note">Circuit</text>
+  <line x1="1118" y1="585" x2="1348" y2="585" class="hair"/><text x="1138" y="624" class="mono cart">NOTES</text><text x="1138" y="655" class="txt small">E-01 · Vérifier tableau</text><text x="1138" y="680" class="txt small">E-02 · Ajouter sortie RJ45</text><text x="1138" y="705" class="txt small">E-03 · Déplacer applique</text>
+  <text x="1138" y="805" class="mono small muted">Plan synthétique original</text>
+
+  <path class="wall" d="M136 162H980V724H136Z"/><path class="wall" d="M136 385H392M454 385H650M720 385H980"/><path class="wall" d="M392 162V300M392 462V724"/><path class="wall" d="M650 162V385M650 476V724"/><path class="wall" d="M805 385V724"/><path class="wall" d="M136 545H392M392 565H650M805 540H980"/><path class="thin" d="M136 300H392M250 162V300M720 162V385"/>
+  <text x="205" y="245" class="txt room muted">BUREAU</text><text x="480" y="245" class="txt room muted">CUISINE</text><text x="770" y="255" class="txt room muted">SÉJOUR</text><text x="855" y="465" class="txt room muted">CHAMBRE</text><text x="840" y="705" class="txt room muted">SALLE D'EAU</text>
+
+  <!-- electrical symbols -->
+  <g id="lights">
+    <circle cx="250" cy="250" r="15" class="symbol"/><path d="M239 250h22M250 239v22" class="hair"/>
+    <circle cx="520" cy="255" r="15" class="symbol"/><path d="M509 255h22M520 244v22" class="hair"/>
+    <circle cx="820" cy="265" r="15" class="symbol"/><path d="M809 265h22M820 254v22" class="hair"/>
+    <circle cx="520" cy="480" r="15" class="symbol"/><path d="M509 480h22M520 469v22" class="hair"/>
+    <circle cx="885" cy="640" r="15" class="symbol"/><path d="M874 640h22M885 629v22" class="hair"/>
+  </g>
+  <g id="outlets">
+    <rect x="150" y="210" width="24" height="18" class="symbol"/><rect x="360" y="200" width="24" height="18" class="symbol"/><rect x="610" y="200" width="24" height="18" class="symbol"/><rect x="940" y="250" width="24" height="18" class="symbol"/>
+    <rect x="158" y="500" width="24" height="18" class="symbol"/><rect x="942" y="465" width="24" height="18" class="symbol"/><rect x="835" y="690" width="24" height="18" class="symbol"/>
+  </g>
+  <g id="switches"><path d="M395 330h28M409 330v-26" class="symbol"/><path d="M655 410h28M669 410v-26" class="symbol"/><path d="M807 505h28M821 505v-26" class="symbol"/><path d="M250 548h28M264 548v-26" class="symbol"/></g>
+
+  <!-- circuits -->
+  <path d="M250 250C310 220 455 218 520 255C590 295 735 305 820 265" class="wire"/>
+  <path d="M520 480C610 430 730 438 885 640" class="wire"/>
+  <path d="M409 304C420 265 465 255 520 255" class="wire2"/>
+  <path d="M669 384C700 330 755 290 820 265" class="wire2"/>
+  <path d="M821 479C842 520 862 575 885 640" class="wire2"/>
+  <path d="M172 219C260 140 480 130 622 209" class="wire"/>
+  <path d="M952 259C950 350 940 415 954 474" class="wire"/>
+
+  <!-- electrical board and callouts -->
+  <rect x="165" y="615" width="92" height="62" fill="#fffdf8" stroke="#b6543a" stroke-width="2"/><text x="184" y="650" class="mono small" fill="#b6543a">TABLEAU</text><text x="180" y="668" class="mono small muted">TGBT R+1</text>
+  <path d="M257 644C385 610 515 585 885 640" class="wire"/>
+  <circle cx="932" cy="335" r="28" fill="none" stroke="#b6543a" stroke-width="2" stroke-dasharray="6 5"/><text x="878" y="386" class="mono small" fill="#b6543a">E-03 · APPLIQUE À DÉPLACER</text>
+  <circle cx="612" cy="210" r="21" fill="none" stroke="#b6543a" stroke-width="2"/><text x="640" y="208" class="mono small" fill="#b6543a">E-02 RJ45</text>
+</svg>
