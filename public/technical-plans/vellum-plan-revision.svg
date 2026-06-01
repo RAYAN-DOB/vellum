@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">Vellum revision plan synthetic drawing</title>
+  <desc id="desc">Original synthetic revision and annotation plan generated for Vellum marketing visuals.</desc>
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#eee7db" stroke-width="0.45"/></pattern>
+    <style>
+      .bg{fill:#fbfaf6}.sheet{fill:#fffdf8;stroke:#171613;stroke-width:2}.grid{fill:url(#grid)}.wall{stroke:#171613;stroke-width:7;fill:none;stroke-linecap:square}.thin{stroke:#171613;stroke-width:1.8;fill:none}.hair{stroke:#171613;stroke-width:1;fill:none}.dash{stroke:#171613;stroke-width:1.4;stroke-dasharray:8 6;fill:none}.txt{font-family:Arial,Helvetica,sans-serif;fill:#171613}.mono{font-family:Courier New,monospace;fill:#171613}.small{font-size:10px;letter-spacing:.15em}.note{font-size:12px;letter-spacing:.12em}.room{font-size:16px;font-weight:700;letter-spacing:.08em}.muted{fill:#706a60}.sienna{fill:#b6543a;stroke:#b6543a}.redline{stroke:#b6543a;stroke-width:2.2;fill:none}.redfill{fill:#b6543a}.cart{font-size:11px;letter-spacing:.12em}.title{font-size:20px;font-weight:700}.light{fill:#f2eee5;stroke:#d8d0bf}.bubble{fill:#fffdf8;stroke:#b6543a;stroke-width:2}.revision{fill:#f8eee8;stroke:#b6543a;stroke-width:1.8}
+    </style>
+  </defs>
+  <rect class="bg" width="1400" height="900"/><rect x="24" y="24" width="1352" height="852" class="sheet"/><rect x="54" y="54" width="1048" height="784" class="grid"/>
+  <rect x="1118" y="54" width="230" height="784" fill="#fffdf8" stroke="#171613" stroke-width="1.6"/>
+  <rect x="1118" y="54" width="230" height="92" class="light"/><text x="1138" y="88" class="mono title">VELLUM</text><text x="1138" y="116" class="mono small muted">REVISION OVERLAY</text>
+  <line x1="1118" y1="146" x2="1348" y2="146" class="thin"/><text x="1138" y="178" class="mono cart">TYPE</text><text x="1215" y="178" class="txt">Aperçu annoté</text>
+  <text x="1138" y="210" class="mono cart">REF</text><text x="1215" y="210" class="mono cart">VLM-REV-202605-0042</text>
+  <text x="1138" y="242" class="mono cart">REV</text><text x="1215" y="242" class="mono cart">03</text>
+  <text x="1138" y="274" class="mono cart">STATUT</text><text x="1215" y="274" class="mono cart">VALIDATION CLIENT</text>
+  <line x1="1118" y1="310" x2="1348" y2="310" class="hair"/>
+  <text x="1138" y="344" class="mono cart">CORRECTIONS</text>
+  <text x="1138" y="376" class="txt small">R1 · Corriger cote chambre</text>
+  <text x="1138" y="401" class="txt small">R2 · Déplacer cloison</text>
+  <text x="1138" y="426" class="txt small">R3 · Ajouter arrivée</text>
+  <text x="1138" y="451" class="txt small">R4 · Valider trémie</text>
+  <line x1="1118" y1="500" x2="1348" y2="500" class="hair"/>
+  <rect x="1140" y="535" width="170" height="78" class="revision"/><text x="1160" y="566" class="mono small" fill="#b6543a">APERÇU INTERMÉDIAIRE</text><text x="1160" y="592" class="mono small muted">En attente validation</text>
+  <text x="1138" y="805" class="mono small muted">Plan synthétique original</text>
+
+  <path class="wall" d="M136 162H980V724H136Z"/><path class="wall" d="M136 385H392M454 385H650M720 385H980"/><path class="wall" d="M392 162V300M392 462V724"/><path class="wall" d="M650 162V385M650 476V724"/><path class="wall" d="M805 385V724"/><path class="wall" d="M136 545H392M392 565H650M805 540H980"/><path class="thin" d="M136 300H392M250 162V300M720 162V385"/>
+  <text x="205" y="245" class="txt room muted">BUREAU</text><text x="480" y="245" class="txt room muted">CUISINE</text><text x="770" y="255" class="txt room muted">SÉJOUR</text><text x="855" y="465" class="txt room muted">CHAMBRE</text><text x="840" y="705" class="txt room muted">SALLE D'EAU</text>
+
+  <!-- proposed changes -->
+  <path d="M805 385V540" class="redline" stroke-dasharray="12 8"/><path d="M768 385V540" class="redline"/><text x="735" y="360" class="mono small redfill">R2 · CLOISON DÉPLACÉE</text>
+  <rect x="468" y="206" width="160" height="92" class="revision" opacity=".65"/><text x="480" y="323" class="mono small redfill">R3 · ZONE TECHNIQUE À AJOUTER</text>
+  <circle cx="890" cy="316" r="36" class="bubble" stroke-dasharray="7 6"/><path d="M890 352v58" class="redline"/><text x="842" y="435" class="mono small redfill">VOIR NOTE CLIENT</text>
+  <path d="M136 545H392" class="redline" stroke-dasharray="10 8"/><text x="145" y="525" class="mono small redfill">R4 · VALIDER LARGEUR ACCÈS</text>
+  <path d="M430 590H610V682H430Z" class="redline"/><text x="440" y="575" class="mono small redfill">TRÉMIE À CONFIRMER</text>
+
+  <!-- bubbles -->
+  <g>
+    <circle cx="702" cy="363" r="18" class="bubble"/><text x="696" y="369" class="mono note redfill">1</text>
+    <path d="M720 363H880" class="redline"/><rect x="880" y="338" width="170" height="52" class="bubble"/><text x="894" y="360" class="mono small redfill">CORRIGER COTE</text><text x="894" y="379" class="mono small muted">chambre / cloison</text>
+  </g>
+  <g>
+    <circle cx="548" cy="300" r="18" class="bubble"/><text x="542" y="306" class="mono note redfill">2</text>
+    <path d="M548 318v92H350" class="redline"/><rect x="210" y="395" width="140" height="52" class="bubble"/><text x="224" y="418" class="mono small redfill">AJOUTER ARRIVÉE</text><text x="224" y="437" class="mono small muted">selon schéma P-01</text>
+  </g>
+  <g>
+    <circle cx="520" cy="638" r="18" class="bubble"/><text x="514" y="644" class="mono note redfill">3</text>
+    <path d="M538 638H730" class="redline"/><rect x="730" y="613" width="150" height="52" class="bubble"/><text x="744" y="636" class="mono small redfill">VALIDER TRÉMIE</text><text x="744" y="655" class="mono small muted">avant livraison</text>
+  </g>
+
+  <!-- revision stamp -->
+  <g transform="translate(210 760) rotate(-7)">
+    <rect x="0" y="0" width="260" height="62" rx="2" fill="none" stroke="#b6543a" stroke-width="3"/>
+    <text x="22" y="28" class="mono note redfill">APERÇU INTERMÉDIAIRE</text>
+    <text x="22" y="49" class="mono small redfill">EN ATTENTE VALIDATION CLIENT</text>
+  </g>
+</svg>
