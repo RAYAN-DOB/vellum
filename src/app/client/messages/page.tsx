@@ -73,8 +73,8 @@ export default async function ClientMessagesPage() {
             Pas encore de message
           </p>
           <p className="mx-auto mt-1 max-w-md text-xs text-[#6b665a]">
-            Dès qu'un de vos projets est ouvert, vous pourrez échanger avec
-            l'équipe ici.
+            Dès qu'un de vos projets est ouvert, vous pourrez échanger avec le
+            dessinateur ici.
           </p>
         </div>
       ) : (

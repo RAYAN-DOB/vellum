@@ -31,12 +31,12 @@ export default async function ClientProjectsPage() {
   return (
     <ClientShell
       activeHref={routes.client.projects}
-      eyebrow="Vue client"
+      eyebrow="Dossiers projet"
       title="Vos projets"
-      description="Tous vos projets déposés, en production ou livrés. Cliquez pour ouvrir le détail."
+      description="Tous vos dossiers déposés, en correction ou livrés. Cliquez pour ouvrir le détail."
       actions={
         <Button asChild icon={<FilePlus2 className="size-4" />}>
-          <a href={routes.client.newProject}>Nouveau projet</a>
+          <a href={routes.client.newProject}>Nouveau dépôt</a>
         </Button>
       }
     >

@@ -9,6 +9,8 @@ import { AuthInput } from "@/components/auth/AuthInput";
 
 const initialState = {} as { error?: string; success?: string };
 
+type Props = { redirectTo?: string };
+
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
@@ -35,12 +37,13 @@ function SubmitButton() {
   );
 }
 
-export function SignUpForm() {
+export function SignUpForm({ redirectTo }: Props) {
   const [state, formAction] = useActionState(signUpAction, initialState);
 
   return (
     <form action={formAction} className="space-y-5">
       <input type="hidden" name="role" value="client" />
+      <input type="hidden" name="redirect" value={redirectTo ?? ""} />
       <div className="grid gap-5 sm:grid-cols-2">
         <AuthInput
           label="Nom complet"
@@ -104,8 +107,8 @@ export function SignUpForm() {
       </p>
 
       <p className="text-center text-[11px] leading-5 text-soft">
-        En créant un compte, vous acceptez les conditions de confidentialité
-        Vellum et la journalisation des accès projet.
+        En créant un compte, vous pourrez envoyer votre dossier, suivre les
+        échanges et récupérer les livrables depuis votre espace.
       </p>
     </form>
   );

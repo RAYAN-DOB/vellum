@@ -8,28 +8,28 @@
 
 :root {
   /* Surface system */
-  --paper: #faf9f5;         /* warm off-white, never pure white */
-  --vellum: #f1ede2;        /* translucent drafting paper */
-  --vellum-dim: #e9e4d6;    /* slightly deeper paper */
-  --line: #e5e0d2;          /* hairline borders */
-  --line-strong: #d4cdb9;   /* visible borders */
+  --paper: #fbfaf6;         /* warm off-white, never pure white */
+  --vellum: #f1eadf;        /* translucent drafting paper */
+  --vellum-dim: #e8dfd1;    /* slightly deeper paper */
+  --line: #e3ddd0;          /* hairline borders */
+  --line-strong: #d8d0bf;   /* visible borders */
 
   /* Ink system */
-  --ink: #0d0d0c;           /* near-black, body text */
-  --graphite: #2b2a26;      /* secondary text */
-  --mute: #6b6960;          /* tertiary text, labels */
-  --soft: #9d9a90;          /* placeholders, captions */
+  --ink: #151410;           /* near-black, body text */
+  --graphite: #25231f;      /* secondary text */
+  --mute: #746d62;          /* tertiary text, labels */
+  --soft: #a39a8c;          /* placeholders, captions */
 
   /* Action */
-  --iron: #141312;          /* primary CTA bg */
-  --iron-hover: #2a2826;    /* CTA hover */
+  --iron: #151410;          /* primary CTA bg */
+  --iron-hover: #25231f;    /* CTA hover */
 
   /* Accent — used sparingly */
-  --sienna: #b6543a;        /* signature accent, seals */
-  --sienna-soft: #e9c9bd;
-  --moss: #5b6b3f;          /* positive states */
-  --amber: #b8893a;         /* warnings */
-  --crimson: #9b3636;       /* destructive */
+  --sienna: #9f4f38;        /* signature accent, seals */
+  --sienna-soft: #d9b1a1;
+  --moss: #5f6f55;          /* positive states */
+  --amber: #b46a4c;         /* drafting/electric accent */
+  --crimson: #7b3828;       /* destructive */
 
   /* Token aliases (compat existing components) */
   --background: var(--paper);
@@ -52,6 +52,8 @@
   --color-soft: var(--soft);
   --color-iron: var(--iron);
   --color-sienna: var(--sienna);
+  --color-clay: #b46a4c;
+  --color-blueprint: #55758a;
   --color-moss: var(--moss);
   --color-amber: var(--amber);
   --color-crimson: var(--crimson);
@@ -170,7 +172,7 @@ body {
   .display {
     font-family: var(--font-instrument-serif), ui-serif, Georgia, serif;
     font-weight: 400;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
     line-height: 0.95;
   }
 
@@ -195,6 +197,138 @@ body {
   .mask-fade-x {
     mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  }
+
+  .vellum-plan-showcase:hover .plan-layer-back,
+  .vellum-plan-showcase:hover .plan-layer-main,
+  .vellum-plan-showcase:hover .plan-layer-trace,
+  .vellum-plan-showcase:hover .plan-layer-revision,
+  .vellum-plan-showcase:hover .plan-hero-art,
+  .vellum-plan-showcase:hover .plan-mini-card,
+  .vellum-plan-showcase:hover .annotation-pin {
+    animation-play-state: paused;
+  }
+
+  .plan-hero-art {
+    animation: hero-art-drift 18s ease-in-out infinite;
+    filter: saturate(0.84) contrast(0.94) sepia(0.04);
+  }
+
+  .plan-layer-back {
+    animation: plan-depth 12s ease-in-out infinite;
+  }
+
+  .plan-layer-main {
+    animation: plan-breathe 14s ease-in-out infinite;
+  }
+
+  .plan-layer-trace {
+    animation: plan-trace 10s ease-in-out infinite;
+  }
+
+  .plan-layer-delay {
+    animation-delay: 3s;
+  }
+
+  .plan-layer-revision {
+    animation: revision-sheet 11s ease-in-out infinite;
+  }
+
+  .plan-mini-card {
+    animation: mini-card-float 8s ease-in-out infinite;
+  }
+
+  .annotation-pin {
+    animation: annotation-pop 7s ease-in-out infinite;
+  }
+
+  .annotation-pin-delay {
+    animation-delay: 2.4s;
+  }
+}
+
+@keyframes plan-depth {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(5deg) scale(0.985);
+  }
+  50% {
+    transform: translate3d(-12px, 10px, 0) rotate(3deg) scale(1.015);
+  }
+}
+
+@keyframes plan-breathe {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4px, -6px, 0) scale(1.018);
+  }
+}
+
+@keyframes plan-trace {
+  0%,
+  18%,
+  100% {
+    opacity: 0;
+    transform: translate3d(-18px, 8px, 0) rotate(-2deg);
+  }
+  32%,
+  70% {
+    opacity: 0.82;
+    transform: translate3d(0, 0, 0) rotate(-1deg);
+  }
+  84% {
+    opacity: 0;
+    transform: translate3d(18px, -8px, 0) rotate(2deg);
+  }
+}
+
+@keyframes revision-sheet {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-3deg);
+  }
+  45% {
+    transform: translate3d(10px, -8px, 0) rotate(-1deg);
+  }
+  70% {
+    transform: translate3d(-4px, 4px, 0) rotate(-4deg);
+  }
+}
+
+@keyframes mini-card-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes annotation-pop {
+  0%,
+  20%,
+  100% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+  32%,
+  78% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes hero-art-drift {
+  0%,
+  100% {
+    transform: scale(1.01) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.035) translate3d(-8px, -5px, 0);
   }
 }
 

@@ -28,11 +28,11 @@ const SITE_URL = getSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Vellum — Le bureau de dépôt des projets techniques",
+    default: "Vellum — Dépôt et suivi de plans techniques",
     template: "%s · Vellum",
   },
   description:
-    "Vellum est la plateforme de dépôt, qualification et livraison des projets de plans techniques. DWG, PDF, croquis, schémas — un seul fil, quatre rôles, une traçabilité totale.",
+    "Déposez vos PDF, DWG, croquis ou photos. Un dessinateur analyse votre dossier, prépare les aperçus et livre les fichiers finaux.",
   applicationName: "Vellum",
   keywords: [
     "vellum",
@@ -45,9 +45,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Vellum" }],
   openGraph: {
-    title: "Vellum — Le bureau de dépôt des projets techniques",
+    title: "Vellum — Dépôt et suivi de plans techniques",
     description:
-      "Déposez un DWG, annotez un PDF, validez un aperçu. Vellum aligne client, chef de projet et dessinateur sur un même fil.",
+      "Déposez vos plans, suivez les questions, les devis, les corrections, les aperçus et les livrables.",
     url: SITE_URL,
     siteName: "Vellum",
     locale: "fr_FR",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Vellum",
     description:
-      "Le bureau de dépôt des projets techniques. Calque, plans, livrables — tout au même endroit.",
+      "Déposez vos plans et suivez chaque correction jusqu'au livrable.",
   },
   icons: {
     icon: [

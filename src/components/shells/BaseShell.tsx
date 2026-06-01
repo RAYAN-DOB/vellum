@@ -17,7 +17,7 @@ export type NavItem = {
 type ShellAccent = "client" | "studio" | "manager" | "admin";
 
 const accentMap: Record<ShellAccent, { eyebrow: string; tagline: string }> = {
-  client: { eyebrow: "Espace client", tagline: "Dépôt · Suivi · Validation" },
+  client: { eyebrow: "Espace client", tagline: "Plans · Suivi · Livrables" },
   studio: { eyebrow: "Atelier", tagline: "Production · Livrables" },
   manager: { eyebrow: "Chef de projet", tagline: "Cockpit · Pilotage" },
   admin: { eyebrow: "Administration", tagline: "Contrôle · Audit" },

@@ -7,6 +7,7 @@
 export const routes = {
   public: {
     home: "/",
+    deposit: "/deposer-un-projet",
     services: "/services",
     security: "/securite-confidentialite",
     contact: "/contact",
@@ -68,13 +69,13 @@ export const publicNavigation = [
   { label: "Produit", href: "#produit" },
   { label: "Workflow", href: "#workflow" },
   { label: "Sécurité", href: "#securite" },
-  { label: "Tarifs", href: "#tarifs" },
+  { label: "Déposer", href: routes.public.deposit },
 ] as const;
 
 /** Client app — minimal, guided. */
 export const clientNavigation = [
   { label: "Vue d'ensemble", href: routes.client.home },
-  { label: "Nouveau projet", href: routes.client.newProject, emphasis: true },
+  { label: "Nouveau dépôt", href: routes.client.newProject, emphasis: true },
   { label: "Mes projets", href: routes.client.projects },
   { label: "Documents", href: routes.client.documents },
   { label: "Devis", href: routes.client.quotes },

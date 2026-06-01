@@ -16,7 +16,7 @@ export default async function ClientSettingsRoute() {
       activeHref={routes.client.settings}
       eyebrow="Paramètres"
       title="Votre profil Vellum"
-      description="Mettez à jour vos informations personnelles. Seul un administrateur peut modifier votre rôle ou désactiver votre compte."
+      description="Mettez à jour vos informations de contact pour faciliter le suivi de vos dossiers."
     >
       <div className="grid gap-6 lg:grid-cols-[1fr_280px]">
         <section className="rounded-[6px] border border-[#d8d0bf] bg-white/95 p-5 sm:p-6">
@@ -25,8 +25,8 @@ export default async function ClientSettingsRoute() {
 
         <aside className="space-y-3">
           <div className="rounded-[6px] border border-[#d8d0bf] bg-[#f8f5ed] p-4 text-xs leading-5 text-[#6b665a]">
-            Vos accès sont journalisés. Toute modification de rôle ou
-            désactivation passe par un administrateur Vellum.
+            Ces informations aident l'équipe à vous recontacter si une pièce ou
+            une précision manque au dossier.
           </div>
           <div className="rounded-[6px] border border-[#d8d0bf] bg-white/95 p-4">
             <p className="text-xs uppercase tracking-[0.2em] text-[#8a7a5f]">

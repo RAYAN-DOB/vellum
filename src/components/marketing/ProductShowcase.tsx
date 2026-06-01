@@ -1,73 +1,74 @@
-import { FileArchive, Inbox, Layers3, ShieldCheck } from "lucide-react";
+import { FileArchive, MessageSquareText, PenTool, Sparkles } from "lucide-react";
 
 const pillars = [
   {
-    icon: Inbox,
-    eyebrow: "01",
-    title: "Un dépôt structuré",
-    body:
-      "Chaque projet commence par un brief clair et des pièces typées. Plus de fil d'email perdu, plus de version sans contexte.",
-  },
-  {
-    icon: Layers3,
-    eyebrow: "02",
-    title: "Un calque commun",
-    body:
-      "Client, chef de projet et dessinateur lisent le même état. Statut, révision, prochaine action — tout est explicite.",
-  },
-  {
     icon: FileArchive,
-    eyebrow: "03",
-    title: "Des livrables signés",
+    eyebrow: "01",
+    title: "Déposez votre demande",
     body:
-      "Aperçus, validation client, version publiée. La traçabilité est native, l'historique conservé sans manipulation.",
+      "Décrivez votre besoin, ajoutez vos plans, croquis, photos ou schémas. Vellum prépare un dossier clair à transmettre.",
   },
   {
-    icon: ShieldCheck,
-    eyebrow: "04",
-    title: "Une sécurité Postgres",
+    icon: PenTool,
+    eyebrow: "02",
+    title: "Un dessinateur analyse vos fichiers",
     body:
-      "Row-Level Security sur chaque table sensible. Vos plans ne fuient pas — la frontière est dans la base, pas dans l'UI.",
+      "Un dessinateur prend connaissance de votre demande, vérifie les pièces reçues et vous indique les éléments manquants si nécessaire.",
+  },
+  {
+    icon: MessageSquareText,
+    eyebrow: "03",
+    title: "Vous échangez et validez les aperçus",
+    body:
+      "Questions, corrections, maquettes intermédiaires et validations restent au même endroit.",
+  },
+  {
+    icon: Sparkles,
+    eyebrow: "04",
+    title: "Vous récupérez vos livrables",
+    body:
+      "Une fois validé, vous téléchargez les fichiers finaux depuis votre espace client.",
   },
 ] as const;
 
 export function ProductShowcase() {
   return (
-    <section
-      id="produit"
-      className="border-b border-line bg-paper"
-    >
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
-        <header className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-end">
+    <section id="produit" className="border-b border-line bg-paper">
+      <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+        <header className="grid gap-8 lg:grid-cols-[0.9fr_1.2fr] lg:items-end">
           <div>
-            <p className="caption">Le produit</p>
-            <h2 className="display mt-5 text-[clamp(2rem,4.5vw,3.5rem)]">
-              Plus qu&apos;un drive.
+            <h2 className="display text-[clamp(2rem,4.5vw,3.5rem)]">
+              Un dossier clair,
               <br />
-              <span className="italic">Un fil de production.</span>
+              <span className="italic">du premier fichier au dernier plan.</span>
             </h2>
           </div>
           <p className="max-w-xl text-[16px] leading-[1.7] text-graphite lg:justify-self-end">
-            Vellum n&apos;est pas un partage de fichiers. C&apos;est l&apos;espace
-            où un projet technique vit de son brief à son livrable signé —
-            avec quatre rôles cloisonnés et une seule source de vérité.
+            Vellum remplace les pièces jointes dispersées par un parcours
+            simple : dépôt, questions, devis, aperçus, corrections et livraison.
+            Le client sait toujours ce qui manque, ce qui avance et ce qui est
+            prêt à valider.
           </p>
         </header>
 
-        <div className="mt-16 grid gap-px overflow-hidden rounded-[4px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-px overflow-hidden rounded-[6px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
           {pillars.map(({ icon: Icon, eyebrow, title, body }) => (
             <article
               key={eyebrow}
-              className="group flex flex-col gap-6 bg-paper p-8 transition-colors hover:bg-vellum/40"
+              className="group flex min-h-[260px] flex-col justify-between gap-7 bg-paper p-7 transition-colors hover:bg-vellum/50 sm:p-8"
             >
               <div className="flex items-start justify-between">
                 <span className="caption">{eyebrow}</span>
-                <Icon className="size-5 text-graphite" aria-hidden="true" />
+                <Icon className="size-5 text-sienna" aria-hidden="true" />
               </div>
-              <h3 className="font-display text-2xl leading-[1.1] text-ink">
-                {title}
-              </h3>
-              <p className="text-[14px] leading-[1.65] text-mute">{body}</p>
+              <div>
+                <h3 className="font-display text-2xl leading-[1.12] text-ink">
+                  {title}
+                </h3>
+                <p className="mt-4 text-[14px] leading-[1.65] text-mute">
+                  {body}
+                </p>
+              </div>
             </article>
           ))}
         </div>

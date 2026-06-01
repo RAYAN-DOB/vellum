@@ -17,14 +17,14 @@ import type { ProjectStatus } from "@/types/database";
 const initialState = {} as { error?: string; success?: string };
 
 const nextActionByStatus: Record<ProjectStatus, string> = {
-  draft: "Compléter le brief avant transmission.",
-  intake: "Le manager qualifie la demande et confirme le scope.",
-  qualified: "Préparer le devis ou assigner le studio.",
-  assigned: "Le studio analyse les documents et prépare les questions.",
-  in_progress: "Production en cours, prochain jalon: aperçu client.",
-  review: "Le client valide l'aperçu ou demande une correction.",
-  delivered: "Livrables publiés, dossier prêt à archiver.",
-  archived: "Historique conservé dans l'audit.",
+  draft: "Compléter la demande avant envoi.",
+  intake: "L'équipe analyse les fichiers et confirme les éléments manquants.",
+  qualified: "Un devis ou une estimation est en préparation.",
+  assigned: "Un dessinateur prend le dossier en main.",
+  in_progress: "Production en cours, prochain jalon : aperçu à consulter.",
+  review: "Validez l'aperçu ou demandez une correction.",
+  delivered: "Livrables publiés, disponibles au téléchargement.",
+  archived: "Historique du dossier conservé dans votre espace.",
   cancelled: "Dossier interrompu.",
 };
 
@@ -110,12 +110,16 @@ export function ProjectActionsPanel({
           Devis & livraison
         </p>
         <p className="mt-3 text-sm leading-6 text-graphite">
-          Les devis et paiements restent contrôlés côté serveur. Le paiement en
-          ligne sera activé en V2 après validation du workflow.
+          Les devis liés au dossier apparaissent ici dès qu'ils sont prêts. Vous
+          pouvez les consulter depuis votre espace client.
         </p>
         <a
           className="mt-4 inline-flex h-9 items-center justify-center rounded-full border border-line-strong px-4 text-xs font-medium text-ink transition hover:border-ink"
-          href={routes.manager.quotes}
+          href={
+            currentUserRole === "client"
+              ? routes.client.quotes
+              : routes.manager.quotes
+          }
         >
           Ouvrir les devis
         </a>

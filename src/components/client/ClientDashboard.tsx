@@ -49,15 +49,16 @@ export function ClientDashboard({ user, projects, unreadMessages }: Props) {
         />
         <div className="relative grid gap-8 p-8 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end">
           <div className="max-w-xl">
-            <p className="caption">Action principale</p>
+            <p className="caption">Nouveau dépôt</p>
             <h2 className="display mt-4 text-3xl text-ink sm:text-[2.5rem]">
               Bonjour {firstName},
               <br />
-              <span className="italic">déposons un projet.</span>
+              <span className="italic">déposons vos plans.</span>
             </h2>
             <p className="mt-5 text-[15px] leading-[1.6] text-graphite">
-              Décrivez votre besoin, joignez vos plans. Votre chef de projet
-              vous répond sous 24 h ouvrées avec une qualification.
+              Décrivez votre besoin, joignez vos plans et suivez ensuite les
+              questions, le devis, les aperçus, les corrections et les
+              livrables.
             </p>
           </div>
           <a
@@ -65,7 +66,7 @@ export function ClientDashboard({ user, projects, unreadMessages }: Props) {
             className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 self-start rounded-full bg-ink px-6 text-[14px] font-medium text-paper transition hover:bg-iron-hover lg:self-end"
           >
             <FilePlus2 className="size-4" aria-hidden="true" />
-            Nouveau projet
+            Nouveau dépôt
             <ArrowRight
               className="size-4 transition-transform group-hover:translate-x-0.5"
               aria-hidden="true"
@@ -76,9 +77,9 @@ export function ClientDashboard({ user, projects, unreadMessages }: Props) {
 
       {/* Stat row */}
       <section className="grid gap-px overflow-hidden rounded-[4px] border border-line bg-line sm:grid-cols-3">
-        <StatCell label="Projets actifs" value={activeProjects.length} hint="En qualification, production ou validation" />
-        <StatCell label="Messages non lus" value={unreadMessages} hint="Notifications projets entrantes" />
-        <StatCell label="Total projets" value={projects.length} hint="Toutes phases confondues" />
+        <StatCell label="Projets actifs" value={activeProjects.length} hint="Dossiers en analyse, correction ou validation" />
+        <StatCell label="Messages du dessinateur" value={unreadMessages} hint="Questions et réponses à traiter" />
+        <StatCell label="Dossiers projet" value={projects.length} hint="Demandes déposées dans votre espace" />
       </section>
 
       {/* Recent projects */}

@@ -14,7 +14,7 @@ export default async function ClientDocumentsPage() {
     <ClientShell
       activeHref={routes.client.documents}
       title="Vos documents"
-      description="Tous les fichiers déposés sur vos projets — plans, photos, croquis, schémas — accessibles ici. Les documents sont privés et signés."
+      description="Tous les fichiers déposés sur vos projets — plans, photos, croquis, schémas — accessibles ici depuis vos dossiers."
     >
       <EmptyState
         icon={FileText}

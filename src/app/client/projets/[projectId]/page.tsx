@@ -18,7 +18,7 @@ export default async function ClientProjectDetailPage({
 
   if (!project) notFound();
 
-  // Client must own the project — defence in depth in addition to RLS.
+  // Client must own the project; data rules enforce the same constraint.
   if (
     user.profile.role === "client" &&
     project.client_id !== user.id
@@ -31,7 +31,7 @@ export default async function ClientProjectDetailPage({
       activeHref={routes.client.projects}
       eyebrow="Détail projet"
       title={project.title}
-      description="Documents, conversation et activité du projet. Échangez avec l'équipe en direct."
+      description="Résumé de la demande, fichiers envoyés, messages, devis, aperçus, corrections et livrables du dossier."
     >
       <ProjectDetailView
         project={project}

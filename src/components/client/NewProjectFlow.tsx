@@ -2,6 +2,7 @@
 
 import {
   ArrowLeft,
+  ArrowRight,
   CheckCircle2,
   FileArchive,
   FileText,
@@ -9,346 +10,475 @@ import {
   Paperclip,
   Send,
   Sparkles,
+  Trash2,
 } from "lucide-react";
-import { useActionState, useMemo, useRef, useState, useTransition } from "react";
+import {
+  useActionState,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import { useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
 
-import { Button } from "@/components/ui/Button";
 import { createProjectAction } from "@/lib/actions/projects";
 import { uploadProjectDocumentsClient } from "@/lib/client/upload";
+import {
+  PUBLIC_PROJECT_DRAFT_KEY,
+  type PublicProjectDraft,
+} from "@/lib/intake-draft";
 import { cn } from "@/lib/utils";
 
-const documentChips = [
-  "DWG",
-  "PDF",
-  "Croquis",
+const needTypes = [
+  "Reprise de plan",
+  "Correction DWG/PDF",
   "Schéma électrique",
   "Schéma plomberie",
-  "Photo de site",
-  "Note",
-  "Correction",
-  "Livrable attendu",
+  "Mise au propre croquis",
+  "Aperçu 3D / maquette",
+  "Autre demande technique",
+] as const;
+
+const deliverables = [
+  "DWG propre",
+  "PDF corrigé",
+  "Schéma technique",
+  "Aperçu 3D",
+  "Dossier complet",
 ] as const;
 
 const initialState = {} as { error?: string; success?: string; projectId?: string };
 
 function SubmitButton({ disabled }: { disabled?: boolean }) {
   const { pending } = useFormStatus();
+
   return (
-    <Button
+    <button
       type="submit"
-      variant="primary"
-      size="lg"
       disabled={pending || disabled}
-      icon={pending ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />}
-      iconPosition="right"
-      className="bg-[#f7f3ea] text-[#171613] hover:bg-white"
+      className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#9f4f38] px-6 text-sm font-semibold text-[#fbfaf6] transition hover:bg-[#7b3828] disabled:cursor-not-allowed disabled:opacity-60"
     >
-      {pending ? "Création du projet…" : "Envoyer au chef de projet"}
-    </Button>
+      {pending ? (
+        <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+      ) : (
+        <Send className="size-4" aria-hidden="true" />
+      )}
+      {pending ? "Création du dossier..." : "Envoyer le dossier"}
+    </button>
   );
+}
+
+function formatBytes(size: number) {
+  if (size < 1024) return `${size} B`;
+  if (size < 1024 * 1024) return `${(size / 1024).toFixed(0)} KB`;
+  return `${(size / 1024 / 1024).toFixed(2)} MB`;
 }
 
 export function NewProjectFlow() {
   const router = useRouter();
-  const formRef = useRef<HTMLFormElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [selectedChips, setSelectedChips] = useState<string[]>(["PDF", "DWG"]);
-  const [files, setFiles] = useState<File[]>([]);
-  const [text, setText] = useState("");
+  const [title, setTitle] = useState("");
+  const [projectType, setProjectType] = useState<string>(needTypes[0]);
+  const [deliverable, setDeliverable] = useState<string>(deliverables[0]);
+  const [description, setDescription] = useState("");
+  const [deadline, setDeadline] = useState("");
+  const [notes, setNotes] = useState("");
+  const [priority, setPriority] = useState<"normal" | "high" | "urgent">("normal");
   const [confidentiality, setConfidentiality] = useState<
     "standard" | "nda_required" | "restricted"
   >("standard");
-  const [priority, setPriority] = useState<"normal" | "high" | "urgent">("normal");
-  const [uploading, startUpload] = useTransition();
+  const [files, setFiles] = useState<File[]>([]);
+  const [draftFiles, setDraftFiles] = useState<PublicProjectDraft["files"]>([]);
+  const [draftRestored, setDraftRestored] = useState(false);
+  const postCreateHandledRef = useRef(false);
   const [uploadProgress, setUploadProgress] = useState<string | null>(null);
-
+  const [uploading, startUpload] = useTransition();
   const [state, formAction] = useActionState(createProjectAction, initialState);
 
-  const summary = useMemo(() => {
-    const trimmed = text.trim();
-    return [
-      {
-        label: "Besoin",
-        value: trimmed
-          ? trimmed.slice(0, 64) + (trimmed.length > 64 ? "…" : "")
-          : "À préciser dans le brief",
-      },
-      {
-        label: "Documents",
-        value:
-          files.length > 0
-            ? `${files.length} fichier${files.length > 1 ? "s" : ""} prêt${files.length > 1 ? "s" : ""}`
-            : "Aucun fichier",
-      },
-      {
-        label: "Confidentialité",
-        value:
-          confidentiality === "standard"
-            ? "Standard"
-            : confidentiality === "nda_required"
-              ? "NDA requis"
-              : "Restreint",
-      },
-    ];
-  }, [confidentiality, files.length, text]);
+  useEffect(() => {
+    const raw = window.localStorage.getItem(PUBLIC_PROJECT_DRAFT_KEY);
+    if (!raw) return;
 
-  function toggleChip(chip: string) {
-    setSelectedChips((current) =>
-      current.includes(chip)
-        ? current.filter((c) => c !== chip)
-        : [...current, chip],
-    );
-  }
-
-  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const list = Array.from(e.target.files ?? []);
-    setFiles((prev) => [...prev, ...list]);
-    e.target.value = "";
-  }
-
-  function removeFile(index: number) {
-    setFiles((prev) => prev.filter((_, i) => i !== index));
-  }
-
-  async function handleSubmit(formData: FormData) {
-    // Combine brief text with selected chips so the action persists everything.
-    const briefHeader =
-      selectedChips.length > 0 ? `Types : ${selectedChips.join(", ")}\n\n` : "";
-    formData.set("description", briefHeader + text);
-    formData.set("confidentiality", confidentiality);
-    formData.set("priority", priority);
-    // If a title wasn't typed, derive one from the chips.
-    if (!String(formData.get("title") ?? "").trim()) {
-      const generated =
-        selectedChips.length > 0
-          ? `Demande ${selectedChips.slice(0, 2).join(" + ")}`
-          : "Nouveau projet";
-      formData.set("title", generated);
+    try {
+      const draft = JSON.parse(raw) as PublicProjectDraft;
+      queueMicrotask(() => {
+        setTitle(draft.title || `Demande ${draft.projectType}`);
+        setProjectType(draft.projectType || needTypes[0]);
+        setDeliverable(draft.deliverable || deliverables[0]);
+        setDeadline(draft.deadline || "");
+        setNotes(draft.notes || "");
+        setPriority(draft.urgency || "normal");
+        setDraftFiles(draft.files || []);
+        setDescription(
+          [
+            draft.description,
+            draft.needs3d ? "Besoin d'un aperçu 3D : oui" : "",
+            draft.workMode === "creation"
+              ? "Type de travail : création complète"
+              : "Type de travail : correction ou reprise",
+            draft.contactName || draft.email || draft.phone || draft.company
+              ? `Contact : ${[
+                  draft.contactName,
+                  draft.email,
+                  draft.phone,
+                  draft.company,
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}`
+              : "",
+            draft.files?.length
+              ? `Fichiers annoncés : ${draft.files.map((file) => file.name).join(", ")}`
+              : "",
+          ]
+            .filter(Boolean)
+            .join("\n\n"),
+        );
+        setDraftRestored(true);
+      });
+    } catch {
+      window.localStorage.removeItem(PUBLIC_PROJECT_DRAFT_KEY);
     }
-    formAction(formData);
-  }
+  }, []);
 
-  // The server action creates the project and returns its ID. We then
-  // run the upload from the browser (works with the storage RLS that keys
-  // on auth.uid()), and finally navigate to the project page.
-  const [postCreateState, setPostCreateState] = useState<{
-    handled: boolean;
-    projectId?: string;
-  }>({ handled: false });
+  useEffect(() => {
+    if (!state.success || !state.projectId || postCreateHandledRef.current) return;
 
-  if (
-    state.success &&
-    state.projectId &&
-    !postCreateState.handled &&
-    !uploading
-  ) {
-    setPostCreateState({ handled: true, projectId: state.projectId });
+    postCreateHandledRef.current = true;
+    window.localStorage.removeItem(PUBLIC_PROJECT_DRAFT_KEY);
+
     if (files.length > 0) {
       startUpload(async () => {
-        setUploadProgress(`Téléversement de ${files.length} fichier${files.length > 1 ? "s" : ""}…`);
-        await uploadProjectDocumentsClient(state.projectId!, files);
+        setUploadProgress(
+          `Téléversement de ${files.length} fichier${files.length > 1 ? "s" : ""}...`,
+        );
+        await uploadProjectDocumentsClient(state.projectId!, files, "source");
         setUploadProgress(null);
         router.push(`/client/projets/${state.projectId}`);
       });
-    } else {
-      router.push(`/client/projets/${state.projectId}`);
+      return;
     }
+
+    router.push(`/client/projets/${state.projectId}`);
+  }, [
+    files,
+    router,
+    startUpload,
+    state.projectId,
+    state.success,
+  ]);
+
+  const summary = useMemo(
+    () => [
+      { label: "Besoin", value: projectType },
+      { label: "Livrable", value: deliverable },
+      {
+        label: "Fichiers",
+        value:
+          files.length > 0
+            ? `${files.length} fichier${files.length > 1 ? "s" : ""} prêt${files.length > 1 ? "s" : ""}`
+            : draftFiles.length > 0
+              ? `${draftFiles.length} fichier${draftFiles.length > 1 ? "s" : ""} à joindre`
+              : "À ajouter si disponible",
+      },
+      {
+        label: "Prochaine étape",
+        value:
+          priority === "urgent"
+            ? "Analyse prioritaire"
+            : "Analyse du dossier",
+      },
+    ],
+    [deliverable, draftFiles.length, files.length, priority, projectType],
+  );
+
+  function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const list = Array.from(event.target.files ?? []);
+    setFiles((current) => [...current, ...list]);
+    event.target.value = "";
+  }
+
+  function removeFile(index: number) {
+    setFiles((current) => current.filter((_, itemIndex) => itemIndex !== index));
+  }
+
+  async function handleSubmit(formData: FormData) {
+    const fullDescription = [
+      description,
+      deadline ? `Délai souhaité : ${deadline}` : "",
+      notes ? `Remarques : ${notes}` : "",
+      files.length > 0
+        ? `Fichiers joints : ${files.map((file) => file.name).join(", ")}`
+        : draftFiles.length > 0
+          ? `Fichiers à joindre : ${draftFiles.map((file) => file.name).join(", ")}`
+          : "",
+    ]
+      .filter(Boolean)
+      .join("\n\n");
+
+    formData.set("title", title || `${projectType} - ${deliverable}`);
+    formData.set("description", fullDescription);
+    formData.set("project_type", projectType);
+    formData.set("priority", priority);
+    formData.set("confidentiality", confidentiality);
+    formAction(formData);
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#070706] text-[#f8f4ea]">
+    <div className="relative min-h-screen overflow-hidden bg-[#151410] text-[#fbfaf6]">
       <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.16]"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.14]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(248,244,234,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(248,244,234,0.18) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
+            "linear-gradient(rgba(251,250,246,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(251,250,246,0.16) 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
         }}
       />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-60 bg-gradient-to-b from-black via-black/70 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-black via-black/70 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_22%_0%,rgba(180,106,76,0.24),transparent_38%),linear-gradient(180deg,rgba(21,20,16,0.2),rgba(21,20,16,0))]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-[#0c0b09] to-transparent" />
 
       <header className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-5 sm:px-6 lg:px-8">
         <a
           href="/client"
-          className="inline-flex items-center gap-2 text-sm font-medium text-[#cfc6b5] transition hover:text-[#f7f3ea]"
+          className="inline-flex items-center gap-2 text-sm font-medium text-[#d8d0bf] transition hover:text-[#fbfaf6]"
         >
-          <ArrowLeft className="size-4" aria-hidden />
-          Retour cockpit
+          <ArrowLeft className="size-4" aria-hidden="true" />
+          Retour espace client
         </a>
-        <span className="hidden text-xs uppercase tracking-[0.24em] text-[#8f8777] sm:inline">
-          Nouvelle demande projet
+        <span className="hidden text-xs uppercase tracking-[0.22em] text-[#9b9183] sm:inline">
+          Dossier projet
         </span>
       </header>
 
-      <main className="relative z-10 mx-auto grid w-full max-w-7xl gap-8 px-4 pb-16 pt-2 sm:px-6 lg:grid-cols-[1fr_360px] lg:px-8">
+      <main className="relative z-10 mx-auto grid w-full max-w-7xl gap-8 px-4 pb-16 pt-2 sm:px-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:px-8">
         <form
-          ref={formRef}
           action={handleSubmit}
-          className="rounded-[8px] border border-[#34312b] bg-[#0f0e0c]/85 p-5 shadow-[0_28px_80px_rgba(0,0,0,0.55)] backdrop-blur sm:p-8"
+          className="rounded-[8px] border border-[#3b352e] bg-[#1c1a16]/88 p-5 shadow-[0_30px_90px_rgba(0,0,0,0.42)] backdrop-blur sm:p-8"
         >
-          <h1 className="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
-            Décrivez votre projet, on s'occupe de la suite.
+          <h1 className="display text-[clamp(2.3rem,5vw,4rem)] text-[#fbfaf6]">
+            Vérifiez votre dossier avant envoi.
           </h1>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-[#cfc6b5]">
-            Joignez vos plans, PDF ou croquis. Notre chef de projet qualifie
-            votre demande et vous assigne un architecte sous 24h ouvrées.
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-[#d8d0bf]">
+            Complétez le besoin, ajoutez les fichiers réels si vous les avez,
+            puis envoyez le dossier. Un dessinateur pourra ensuite poser les
+            questions utiles, préparer un devis et partager les aperçus.
           </p>
 
-          <div className="mt-8 space-y-6">
-            <div>
-              <label
-                htmlFor="title"
-                className="mb-1.5 block text-xs font-medium uppercase tracking-[0.18em] text-[#cfc6b5]"
-              >
-                Titre court (optionnel)
-              </label>
+          {draftRestored ? (
+            <div className="mt-6 rounded-[5px] border border-[#b46a4c]/35 bg-[#b46a4c]/10 px-4 py-3 text-sm leading-6 text-[#ead8cb]">
+              Votre brouillon commencé sans compte a été repris ici.
+            </div>
+          ) : null}
+
+          <div className="mt-8 grid gap-6">
+            <label className="block">
+              <span className="text-xs font-medium uppercase tracking-[0.16em] text-[#b9ad9d]">
+                Titre du dossier
+              </span>
               <input
-                id="title"
                 name="title"
-                className="block h-11 w-full rounded-[3px] border border-[#34312b] bg-[#0a0908] px-3 text-sm text-[#f7f3ea] outline-none transition placeholder:text-[#5e594d] focus:border-[#d7c6a4] focus:ring-2 focus:ring-[#d7c6a4]/30"
+                value={title}
+                onChange={(event) => setTitle(event.target.value)}
+                className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
                 placeholder="Ex. Reprise PDF d'un bureau open-space"
               />
-            </div>
+            </label>
 
             <div>
-              <label className="mb-2 block text-xs font-medium uppercase tracking-[0.18em] text-[#cfc6b5]">
-                Type de documents concernés
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {documentChips.map((chip) => (
+              <span className="text-xs font-medium uppercase tracking-[0.16em] text-[#b9ad9d]">
+                Type de besoin
+              </span>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {needTypes.map((type) => (
                   <button
                     type="button"
-                    key={chip}
-                    onClick={() => toggleChip(chip)}
+                    key={type}
+                    onClick={() => setProjectType(type)}
                     className={cn(
-                      "inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs transition",
-                      selectedChips.includes(chip)
-                        ? "border-[#d7c6a4] bg-[#d7c6a4] text-[#171613]"
-                        : "border-[#34312b] bg-[#0a0908] text-[#cfc6b5] hover:border-[#d7c6a4]/60",
+                      "min-h-14 rounded-[4px] border px-4 py-3 text-left text-sm transition",
+                      projectType === type
+                        ? "border-[#b46a4c] bg-[#9f4f38] text-[#fbfaf6]"
+                        : "border-[#3b352e] bg-[#100f0d] text-[#d8d0bf] hover:border-[#746d62] hover:bg-[#201d18]",
                     )}
                   >
-                    {chip}
+                    {type}
                   </button>
                 ))}
               </div>
             </div>
 
-            <div>
-              <label
-                htmlFor="brief"
-                className="mb-1.5 block text-xs font-medium uppercase tracking-[0.18em] text-[#cfc6b5]"
-              >
-                Décrivez votre besoin
-              </label>
+            <label className="block">
+              <span className="text-xs font-medium uppercase tracking-[0.16em] text-[#b9ad9d]">
+                Description
+              </span>
               <textarea
-                id="brief"
-                rows={6}
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="Ex. PDF à reprendre, ajouter arrivées électriques, corriger cotes, livrer un DWG propre + aperçu."
-                className="block w-full rounded-[3px] border border-[#34312b] bg-[#0a0908] px-3 py-3 text-sm leading-6 text-[#f7f3ea] outline-none transition placeholder:text-[#5e594d] focus:border-[#d7c6a4] focus:ring-2 focus:ring-[#d7c6a4]/30"
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
+                rows={7}
+                className="mt-2 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-sm leading-6 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
+                placeholder="Expliquez les corrections, contraintes, dimensions connues, formats attendus."
               />
-            </div>
+            </label>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <label className="mb-1.5 block text-xs font-medium uppercase tracking-[0.18em] text-[#cfc6b5]">
-                  Confidentialité
-                </label>
+            <div className="grid gap-4 sm:grid-cols-3">
+              <label className="block">
+                <span className="text-xs font-medium uppercase tracking-[0.16em] text-[#b9ad9d]">
+                  Livrable
+                </span>
                 <select
-                  value={confidentiality}
-                  onChange={(e) =>
-                    setConfidentiality(
-                      e.target.value as typeof confidentiality,
-                    )
-                  }
-                  className="h-11 w-full rounded-[3px] border border-[#34312b] bg-[#0a0908] px-3 text-sm text-[#f7f3ea] outline-none focus:border-[#d7c6a4] focus:ring-2 focus:ring-[#d7c6a4]/30"
+                  value={deliverable}
+                  onChange={(event) => setDeliverable(event.target.value)}
+                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
                 >
-                  <option value="standard">Standard</option>
-                  <option value="nda_required">NDA requis</option>
-                  <option value="restricted">Restreint</option>
+                  {deliverables.map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
                 </select>
-              </div>
-              <div>
-                <label className="mb-1.5 block text-xs font-medium uppercase tracking-[0.18em] text-[#cfc6b5]">
+              </label>
+
+              <label className="block">
+                <span className="text-xs font-medium uppercase tracking-[0.16em] text-[#b9ad9d]">
                   Urgence
-                </label>
+                </span>
                 <select
                   value={priority}
-                  onChange={(e) =>
-                    setPriority(e.target.value as typeof priority)
+                  onChange={(event) =>
+                    setPriority(event.target.value as typeof priority)
                   }
-                  className="h-11 w-full rounded-[3px] border border-[#34312b] bg-[#0a0908] px-3 text-sm text-[#f7f3ea] outline-none focus:border-[#d7c6a4] focus:ring-2 focus:ring-[#d7c6a4]/30"
+                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
                 >
                   <option value="normal">Standard</option>
                   <option value="high">Élevée</option>
                   <option value="urgent">Urgente</option>
                 </select>
-              </div>
+              </label>
+
+              <label className="block">
+                <span className="text-xs font-medium uppercase tracking-[0.16em] text-[#b9ad9d]">
+                  Confidentialité
+                </span>
+                <select
+                  value={confidentiality}
+                  onChange={(event) =>
+                    setConfidentiality(event.target.value as typeof confidentiality)
+                  }
+                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
+                >
+                  <option value="standard">Standard</option>
+                  <option value="nda_required">Accès limité</option>
+                  <option value="restricted">Très confidentiel</option>
+                </select>
+              </label>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <label className="block">
+                <span className="text-xs font-medium uppercase tracking-[0.16em] text-[#b9ad9d]">
+                  Délai souhaité
+                </span>
+                <input
+                  value={deadline}
+                  onChange={(event) => setDeadline(event.target.value)}
+                  className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
+                  placeholder="Ex. fin de semaine, 10 jours"
+                />
+              </label>
+
+              <label className="block">
+                <span className="text-xs font-medium uppercase tracking-[0.16em] text-[#b9ad9d]">
+                  Remarques
+                </span>
+                <input
+                  value={notes}
+                  onChange={(event) => setNotes(event.target.value)}
+                  className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
+                  placeholder="Format, contraintes, éléments manquants"
+                />
+              </label>
             </div>
 
             <div>
-              <label className="mb-1.5 block text-xs font-medium uppercase tracking-[0.18em] text-[#cfc6b5]">
+              <span className="text-xs font-medium uppercase tracking-[0.16em] text-[#b9ad9d]">
                 Pièces jointes
-              </label>
+              </span>
               <input
                 ref={fileInputRef}
                 type="file"
                 multiple
-                onChange={handleFileChange}
                 className="hidden"
+                onChange={handleFileChange}
               />
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="flex w-full items-center justify-center gap-2 rounded-[3px] border border-dashed border-[#34312b] bg-[#0a0908] px-4 py-6 text-sm text-[#cfc6b5] transition hover:border-[#d7c6a4] hover:text-[#f7f3ea]"
+                className="mt-2 flex w-full items-center justify-center gap-3 rounded-[5px] border border-dashed border-[#4c4339] bg-[#100f0d] px-4 py-7 text-sm text-[#d8d0bf] transition hover:border-[#b46a4c] hover:bg-[#201d18]"
               >
-                <Paperclip className="size-4" aria-hidden />
-                Ajouter des fichiers (PDF, DWG, image…)
+                <Paperclip className="size-4 text-[#b46a4c]" aria-hidden="true" />
+                Ajouter des fichiers PDF, DWG, images ou croquis
               </button>
+
               {files.length > 0 ? (
-                <ul className="mt-3 space-y-1.5">
-                  {files.map((file, idx) => (
+                <ul className="mt-3 space-y-2">
+                  {files.map((file, index) => (
                     <li
-                      key={`${file.name}-${idx}`}
-                      className="flex items-center justify-between rounded-[3px] border border-[#34312b] bg-[#0a0908] px-3 py-2 text-xs"
+                      key={`${file.name}-${index}`}
+                      className="flex items-center justify-between gap-3 rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-3 py-2 text-xs"
                     >
-                      <span className="flex min-w-0 items-center gap-2 text-[#cfc6b5]">
-                        {file.name.endsWith(".dwg") ? (
-                          <FileArchive className="size-4 shrink-0 text-[#d7c6a4]" />
+                      <span className="flex min-w-0 items-center gap-2 text-[#d8d0bf]">
+                        {file.name.toLowerCase().endsWith(".dwg") ? (
+                          <FileArchive className="size-4 shrink-0 text-[#b46a4c]" />
                         ) : (
-                          <FileText className="size-4 shrink-0 text-[#d7c6a4]" />
+                          <FileText className="size-4 shrink-0 text-[#b46a4c]" />
                         )}
                         <span className="truncate">{file.name}</span>
-                        <span className="ml-2 shrink-0 text-[#5e594d]">
-                          {(file.size / 1024 / 1024).toFixed(2)} MB
+                        <span className="shrink-0 text-[#746d62]">
+                          {formatBytes(file.size)}
                         </span>
                       </span>
                       <button
                         type="button"
-                        onClick={() => removeFile(idx)}
-                        className="text-[#8f8777] hover:text-red-300"
+                        onClick={() => removeFile(index)}
+                        className="flex size-8 shrink-0 items-center justify-center rounded-full text-[#9b9183] transition hover:bg-[#2a251f] hover:text-[#e8b4a1]"
+                        aria-label={`Retirer ${file.name}`}
                       >
-                        retirer
+                        <Trash2 className="size-4" aria-hidden="true" />
                       </button>
                     </li>
                   ))}
                 </ul>
               ) : null}
-              <p className="mt-2 text-[11px] leading-5 text-[#5e594d]">
-                Les fichiers sont stockés de manière privée et accessibles
-                uniquement à l'équipe assignée à votre projet.
+
+              {files.length === 0 && draftFiles.length > 0 ? (
+                <ul className="mt-3 space-y-2">
+                  {draftFiles.map((file, index) => (
+                    <li
+                      key={`${file.name}-${index}`}
+                      className="flex items-center justify-between gap-3 rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-3 py-2 text-xs"
+                    >
+                      <span className="flex min-w-0 items-center gap-2 text-[#d8d0bf]">
+                        <FileText className="size-4 shrink-0 text-[#b46a4c]" />
+                        <span className="truncate">{file.name}</span>
+                      </span>
+                      <span className="shrink-0 text-[#9b9183]">à joindre</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+
+              <p className="mt-2 text-[11px] leading-5 text-[#9b9183]">
+                Vos pièces restent attachées au dossier et visibles uniquement
+                par les personnes qui travaillent sur votre demande.
               </p>
             </div>
 
             {state.error ? (
               <p
                 role="alert"
-                className="rounded-[3px] border border-red-900/60 bg-red-950/40 px-3 py-2 text-sm text-red-200"
+                className="rounded-[4px] border border-[#8f3d31]/70 bg-[#411b16]/45 px-3 py-2 text-sm text-[#f1c4b5]"
               >
                 {state.error}
               </p>
@@ -357,49 +487,58 @@ export function NewProjectFlow() {
             {uploadProgress ? (
               <p
                 role="status"
-                className="rounded-[3px] border border-[#34312b] bg-[#0a0908] px-3 py-2 text-sm text-[#cfc6b5]"
+                className="rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-3 py-2 text-sm text-[#d8d0bf]"
               >
                 {uploadProgress}
               </p>
             ) : null}
 
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-xs text-[#8f8777]">
-                Vous pourrez compléter votre projet et discuter avec le chef de
-                projet dès la prochaine étape.
+            <div className="flex flex-col gap-4 border-t border-[#3b352e] pt-6 sm:flex-row sm:items-center sm:justify-between">
+              <p className="max-w-md text-xs leading-5 text-[#9b9183]">
+                Vous pourrez répondre aux questions du dessinateur, recevoir les
+                aperçus et demander des corrections dans le fil du projet.
               </p>
               <SubmitButton disabled={uploading} />
             </div>
           </div>
         </form>
 
-        <aside className="rounded-[8px] border border-[#34312b] bg-[#0f0e0c]/85 p-6 shadow-[0_28px_80px_rgba(0,0,0,0.55)] backdrop-blur">
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#d7c6a4]">
-            <Sparkles className="size-4" aria-hidden />
-            Récapitulatif intelligent
+        <aside className="min-w-0 rounded-[8px] border border-[#3b352e] bg-[#1c1a16]/88 p-5 shadow-[0_30px_90px_rgba(0,0,0,0.34)] backdrop-blur lg:sticky lg:top-8 lg:self-start">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#c58a73]">
+            <Sparkles className="size-4" aria-hidden="true" />
+            Dossier prêt
           </div>
-          <dl className="mt-4 space-y-3 text-sm">
+
+          <dl className="mt-5 grid gap-3">
             {summary.map((row) => (
               <div
                 key={row.label}
-                className="rounded-[4px] border border-[#34312b] bg-[#0a0908] p-3"
+                className="rounded-[5px] border border-[#3b352e] bg-[#100f0d] p-3"
               >
-                <dt className="text-[11px] uppercase tracking-[0.2em] text-[#8f8777]">
+                <dt className="text-[11px] uppercase tracking-[0.18em] text-[#9b9183]">
                   {row.label}
                 </dt>
-                <dd className="mt-1 text-[#cfc6b5]">{row.value}</dd>
+                <dd className="mt-1 text-sm text-[#fbfaf6]">{row.value}</dd>
               </div>
             ))}
           </dl>
 
-          <div className="mt-6 border-t border-[#34312b] pt-5 text-xs leading-5 text-[#8f8777]">
-            <p className="mb-2 flex items-center gap-1 text-[#cfc6b5]">
-              <CheckCircle2 className="size-4 text-emerald-400" aria-hidden />
-              Sous 24h ouvrées
+          <div className="mt-6 rounded-[5px] border border-[#5f6f55]/35 bg-[#5f6f55]/10 p-4 text-xs leading-5 text-[#cbd4c2]">
+            <p className="mb-2 flex items-center gap-2 text-[#e5eddc]">
+              <CheckCircle2 className="size-4 text-[#8ba07d]" aria-hidden="true" />
+              Analyse après envoi
             </p>
-            Le chef de projet qualifie votre demande, sélectionne l'architecte
-            adapté et vous propose un devis si nécessaire.
+            L'équipe vérifie les pièces reçues, confirme les éléments manquants
+            et prépare un devis si nécessaire.
           </div>
+
+          <a
+            href="/client"
+            className="mt-5 inline-flex h-10 w-full items-center justify-center gap-2 rounded-full border border-[#4c4339] text-sm font-medium text-[#d8d0bf] transition hover:border-[#b46a4c] hover:text-[#fbfaf6]"
+          >
+            Revenir à l'espace client
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </a>
         </aside>
       </main>
     </div>

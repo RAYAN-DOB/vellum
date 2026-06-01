@@ -8,6 +8,7 @@ const legalLinks = [
 ] as const;
 
 const productLinks = [
+  { label: "Déposer un projet", href: routes.public.deposit },
   { label: "Connexion", href: routes.public.login },
   { label: "Créer un compte", href: routes.public.register },
   { label: "Workflow", href: "#workflow" },
@@ -30,8 +31,9 @@ export function Footer() {
             <span className="font-display text-xl text-ink">Vellum</span>
           </a>
           <p className="mt-5 text-[14px] leading-[1.65] text-mute">
-            Le bureau de dépôt des projets techniques. DWG, PDF, croquis,
-            schémas — un seul fil, quatre rôles, une traçabilité native.
+            Le bureau de dépôt des projets techniques. Ajoutez vos plans,
+            échangez avec un dessinateur, validez les aperçus et récupérez vos
+            livrables.
           </p>
         </div>
 
@@ -43,7 +45,7 @@ export function Footer() {
       <div className="border-t border-line">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-3 px-6 py-6 text-[12px] text-mute sm:flex-row sm:items-center lg:px-10">
           <p>© {year} Vellum. Tous droits réservés.</p>
-          <p className="caption">v1 · Built with Next.js &amp; Supabase</p>
+          <p className="caption">Plans · Corrections · Livrables</p>
         </div>
       </div>
     </footer>

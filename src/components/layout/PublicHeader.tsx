@@ -43,8 +43,8 @@ export function PublicHeader() {
             Connexion
           </a>
           <a
-            className="group inline-flex h-10 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-full bg-paper px-4 text-[13px] font-semibold text-ink transition hover:bg-white"
-            href={routes.public.register}
+            className="group inline-flex h-10 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-full bg-[#9f4f38] px-4 text-[13px] font-semibold text-paper transition hover:bg-[#7b3828]"
+            href={routes.public.deposit}
           >
             <span>Déposer un projet</span>
             <ArrowRight

@@ -8,6 +8,7 @@ type AuthShellProps = {
   subtitle: string;
   children: ReactNode;
   footer?: ReactNode;
+  benefits?: readonly string[];
 };
 
 export function AuthShell({
@@ -16,6 +17,12 @@ export function AuthShell({
   subtitle,
   children,
   footer,
+  benefits = [
+    "Suivre l'avancement de votre demande",
+    "Répondre aux questions du dessinateur",
+    "Recevoir les aperçus et demander des corrections",
+    "Télécharger les livrables finaux",
+  ],
 }: AuthShellProps) {
   return (
     <div className="relative min-h-screen overflow-hidden bg-paper text-ink">
@@ -57,34 +64,15 @@ export function AuthShell({
           </p>
 
           <ul className="mt-12 space-y-4 border-t border-line pt-8 text-[14px] text-mute">
-            <li className="flex items-start gap-3">
-              <span
-                aria-hidden="true"
-                className="mt-[7px] inline-block size-1 shrink-0 rounded-full bg-ink"
-              />
-              <span>
-                Comptes nominatifs par rôle : client, dessinateur, chef de
-                projet, admin.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span
-                aria-hidden="true"
-                className="mt-[7px] inline-block size-1 shrink-0 rounded-full bg-ink"
-              />
-              <span>
-                Cloisonnement strict par projet — Row-Level Security Postgres.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span
-                aria-hidden="true"
-                className="mt-[7px] inline-block size-1 shrink-0 rounded-full bg-ink"
-              />
-              <span>
-                Audit complet des actions sensibles et journal des accès.
-              </span>
-            </li>
+            {benefits.map((benefit) => (
+              <li key={benefit} className="flex items-start gap-3">
+                <span
+                  aria-hidden="true"
+                  className="mt-[7px] inline-block size-1 shrink-0 rounded-full bg-ink"
+                />
+                <span>{benefit}</span>
+              </li>
+            ))}
           </ul>
         </section>
 

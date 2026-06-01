@@ -142,7 +142,7 @@ export function ProjectMessageThread({
         <EmptyState
           icon={MessageSquare}
           title="Le fil est prêt"
-          description="Posez une question, ajoutez une précision ou confirmez une décision. Le message apparaît en temps réel aux participants du projet."
+          description="Posez une question, ajoutez une précision ou confirmez une décision. Le message reste dans le fil du projet."
           className="mt-4"
         />
       ) : (
@@ -188,7 +188,7 @@ export function ProjectMessageThread({
           ref={textareaRef}
           rows={3}
           required
-          placeholder="Écrire un message à l'équipe..."
+          placeholder="Écrire un message au dessinateur..."
           className="block w-full rounded-[3px] border border-line-strong bg-paper px-3 py-2 text-sm text-ink outline-none transition placeholder:text-soft focus:border-ink focus:ring-2 focus:ring-ink/15"
         />
         {error ? (

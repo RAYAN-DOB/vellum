@@ -81,6 +81,7 @@ export async function signUpAction(
   const fullName = String(formData.get("full_name") ?? "").trim();
   const company = String(formData.get("company") ?? "").trim();
   const requestedRole = String(formData.get("role") ?? "client") as AppRole;
+  const redirectTo = safeRedirect(formData.get("redirect"));
 
   if (!email || !password || !fullName) {
     return { error: "Nom, email et mot de passe sont obligatoires." };
@@ -122,7 +123,7 @@ export async function signUpAction(
     };
   }
 
-  redirect(defaultRouteForRole(requestedRole));
+  redirect(redirectTo ?? defaultRouteForRole(requestedRole));
 }
 
 export async function requestPasswordResetAction(

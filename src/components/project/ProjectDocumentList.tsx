@@ -179,7 +179,7 @@ export function ProjectDocumentList({
         <EmptyState
           icon={Paperclip}
           title="Aucune pièce jointe"
-          description="Ajoutez PDF, DWG, croquis ou photo de site pour donner au manager assez de contexte."
+          description="Ajoutez PDF, DWG, croquis ou photo de site pour donner à l'équipe de dessin assez de contexte."
           className="mt-4"
         />
       ) : (

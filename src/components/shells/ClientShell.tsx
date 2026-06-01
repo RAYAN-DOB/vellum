@@ -16,7 +16,7 @@ import { routes } from "@/lib/routes";
 const navigation: ReadonlyArray<NavItem> = [
   { label: "Vue d'ensemble", href: routes.client.home, icon: LayoutDashboard },
   {
-    label: "Nouveau projet",
+    label: "Nouveau dépôt",
     href: routes.client.newProject,
     icon: FilePlus2,
     emphasis: true,

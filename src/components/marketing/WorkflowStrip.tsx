@@ -1,27 +1,27 @@
 const steps = [
   {
     n: "01",
-    title: "Déposer",
+    title: "Vous déposez les plans",
     body:
-      "Le client raconte son besoin, joint ses documents. Vellum génère une référence projet (PRJ–YYYYMM–XXXX) et un dossier privé.",
+      "Choisissez le type de besoin, décrivez le résultat attendu et ajoutez PDF, DWG, croquis, photos ou notes.",
   },
   {
     n: "02",
-    title: "Qualifier",
+    title: "Le dossier est relu",
     body:
-      "Le chef de projet précise scope, priorité, confidentialité, délai. Il assigne le dessinateur, prépare le devis.",
+      "Un dessinateur vérifie les fichiers, repère les informations manquantes et prépare les questions utiles.",
   },
   {
     n: "03",
-    title: "Produire",
+    title: "Vous recevez un devis et des aperçus",
     body:
-      "Le dessinateur travaille sur les fichiers natifs. Il dépose aperçus, calques, versions intermédiaires.",
+      "Les échanges, maquettes intermédiaires, corrections demandées et validations restent dans le même fil.",
   },
   {
     n: "04",
-    title: "Livrer",
+    title: "Vous téléchargez les livrables",
     body:
-      "Le client valide l'aperçu, le livrable final est signé et archivé. L'historique reste accessible, pas modifiable.",
+      "Après validation, les fichiers finaux restent disponibles dans votre espace client avec l'historique du dossier.",
   },
 ] as const;
 
@@ -36,39 +36,28 @@ export function WorkflowStrip() {
         className="pointer-events-none absolute inset-0 grid-paper opacity-50"
       />
 
-      <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+      <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
         <header className="max-w-2xl">
-          <p className="caption">Workflow</p>
-          <h2 className="display mt-5 text-[clamp(2rem,4.5vw,3.5rem)]">
-            Quatre étapes,
+          <h2 className="display text-[clamp(2rem,4.5vw,3.5rem)]">
+            De la demande au livrable,
             <br />
-            <span className="italic">aucune zone grise.</span>
+            <span className="italic">chaque étape est visible.</span>
           </h2>
           <p className="mt-6 text-[16px] leading-[1.7] text-graphite">
-            Chaque transition est explicite. Chaque acteur sait ce qu&apos;il
-            doit faire — et ce qu&apos;il n&apos;a pas le droit de faire.
+            Vellum rend le suivi concret : ce qui a été envoyé, ce qui est en
+            attente, ce qui doit être validé et ce que vous pouvez télécharger.
           </p>
         </header>
 
-        <ol className="mt-16 grid gap-px overflow-hidden rounded-[4px] border border-line-strong bg-line-strong lg:grid-cols-4">
-          {steps.map(({ n, title, body }, i) => (
+        <ol className="mt-14 grid gap-px overflow-hidden rounded-[6px] border border-line-strong bg-line-strong lg:grid-cols-4">
+          {steps.map(({ n, title, body }) => (
             <li
               key={n}
-              className="relative flex flex-col gap-6 bg-paper p-8 sm:p-10"
+              className="relative flex min-h-[250px] flex-col justify-between gap-6 bg-paper p-8 sm:p-9"
             >
-              <div className="flex items-baseline justify-between">
-                <span className="font-display text-5xl leading-none text-ink">
-                  {n}
-                </span>
-                {i < steps.length - 1 && (
-                  <span
-                    aria-hidden="true"
-                    className="caption hidden lg:inline"
-                  >
-                    →
-                  </span>
-                )}
-              </div>
+              <span className="font-display text-5xl leading-none text-ink">
+                {n}
+              </span>
               <div>
                 <h3 className="font-display text-2xl text-ink">{title}</h3>
                 <p className="mt-3 text-[14px] leading-[1.65] text-mute">

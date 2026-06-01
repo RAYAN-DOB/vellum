@@ -78,14 +78,14 @@ export function ProjectHeader({
         <div className="mt-8 grid gap-px overflow-hidden rounded-[3px] border border-line bg-line sm:grid-cols-3">
           <MetaCell
             icon={UsersRound}
-            label="Responsables"
+            label="Suivi du dossier"
             value={[
               project.manager?.full_name
-                ? `Manager: ${project.manager.full_name}`
-                : "Manager à assigner",
+                ? `Référent: ${project.manager.full_name}`
+                : "Référent à confirmer",
               project.architect?.full_name
-                ? `Studio: ${project.architect.full_name}`
-                : "Studio à assigner",
+                ? `Dessinateur: ${project.architect.full_name}`
+                : "Dessinateur à confirmer",
             ].join(" · ")}
           />
           <MetaCell

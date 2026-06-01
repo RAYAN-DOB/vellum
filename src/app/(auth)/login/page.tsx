@@ -15,21 +15,23 @@ export default async function LoginPage({
 }: {
   searchParams: SearchParams;
 }) {
-  const user = await getCurrentUser();
-  if (user) redirect(defaultRouteForRole(user.profile.role));
-
   const params = await searchParams;
-  const redirectTo = params.redirect;
+  const redirectTo =
+    params.redirect?.startsWith("/") && !params.redirect.startsWith("//")
+      ? params.redirect
+      : undefined;
+  const user = await getCurrentUser();
+  if (user) redirect(redirectTo ?? defaultRouteForRole(user.profile.role));
 
   return (
     <AuthShell
       eyebrow="Connexion"
-      title="Reprenez le fil."
-      subtitle="Accédez à votre espace client, à la file de qualification chef de projet, à votre table de dessin ou à la console d'administration."
+      title="Retrouvez vos projets."
+      subtitle="Connectez-vous pour suivre vos demandes, répondre aux messages et récupérer vos livrables."
       footer={
         <span>
-          Vos accès sont nominatifs et journalisés. Si vous avez perdu votre
-          mot de passe, contactez votre administrateur Vellum.
+          Votre espace rassemble les demandes en cours, les devis, les aperçus,
+          les corrections et les fichiers finaux.
         </span>
       }
     >

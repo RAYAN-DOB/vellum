@@ -22,9 +22,9 @@ export default async function ClientWorkspacePage() {
   return (
     <ClientShell
       activeHref={routes.client.home}
-      description="Suivez vos projets en cours, échangez avec votre chef de projet et déposez de nouvelles demandes en quelques clics."
+      description="Suivez vos projets en cours, échangez avec l'équipe de dessin et déposez de nouvelles demandes en quelques clics."
       eyebrow={`Connecté en tant que ${user.profile.full_name ?? user.email}`}
-      title="Cockpit client"
+      title="Espace client"
     >
       <ClientDashboard
         user={user}

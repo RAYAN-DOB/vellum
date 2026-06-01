@@ -1,29 +1,29 @@
-import { FileLock2, Fingerprint, KeyRound, ShieldCheck } from "lucide-react";
+import { Archive, FileLock2, History, UsersRound } from "lucide-react";
 
 const guarantees = [
   {
-    icon: ShieldCheck,
-    title: "Row-Level Security native",
-    body:
-      "Chaque requête SQL est filtrée par les politiques RLS de Postgres. Le contrôle d'accès ne dépend pas du code applicatif.",
-  },
-  {
     icon: FileLock2,
-    title: "Buckets privés signés",
+    title: "Vos fichiers restent privés",
     body:
-      "Aucun fichier n'est public. Les téléchargements passent par des URLs signées éphémères, vérifiées projet par projet.",
+      "Les plans, photos, croquis et notes de votre dossier ne sont pas visibles publiquement.",
   },
   {
-    icon: Fingerprint,
-    title: "Audit log immuable",
+    icon: UsersRound,
+    title: "Accès limité au dossier",
     body:
-      "Connexion, désactivation, modification de rôle, export — chaque action sensible laisse une trace horodatée.",
+      "Seules les personnes qui travaillent sur votre demande peuvent consulter les pièces utiles.",
   },
   {
-    icon: KeyRound,
-    title: "Service role isolé",
+    icon: History,
+    title: "Échanges conservés",
     body:
-      "La clé d'administration ne quitte jamais le serveur. Aucun composant client ne peut l'utiliser pour bypasser RLS.",
+      "Questions, réponses, corrections et validations restent dans l'historique du projet.",
+  },
+  {
+    icon: Archive,
+    title: "Livrables disponibles",
+    body:
+      "Les fichiers finaux restent accessibles depuis votre espace client après livraison.",
   },
 ] as const;
 
@@ -43,29 +43,25 @@ export function SecurityBlock() {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
-        <header className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-end">
+      <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+        <header className="grid gap-8 lg:grid-cols-[0.9fr_1.2fr] lg:items-end">
           <div>
-            <p className="caption text-paper/55">Sécurité</p>
-            <h2 className="display mt-5 text-[clamp(2rem,4.5vw,3.5rem)] text-paper">
-              Vos plans
+            <h2 className="display text-[clamp(2rem,4.5vw,3.5rem)] text-paper">
+              Vos plans restent
               <br />
-              <span className="italic">ne sortent pas.</span>
+              <span className="italic">dans votre dossier.</span>
             </h2>
           </div>
           <p className="max-w-xl text-[16px] leading-[1.7] text-paper/70 lg:justify-self-end">
-            Vellum est construit autour d&apos;une règle : la sécurité
-            n&apos;est pas une fonctionnalité, c&apos;est la frontière. Tout ce
-            qui peut être contrôlé en base l&apos;est en base — pas dans l&apos;UI.
+            La confidentialité est intégrée au fonctionnement du service :
+            chaque dossier garde ses fichiers, ses messages et ses livrables au
+            même endroit, sans exposer votre projet à des personnes extérieures.
           </p>
         </header>
 
-        <div className="mt-16 grid gap-px overflow-hidden rounded-[4px] border border-paper/10 bg-paper/10 sm:grid-cols-2">
+        <div className="mt-14 grid gap-px overflow-hidden rounded-[6px] border border-paper/10 bg-paper/10 sm:grid-cols-2">
           {guarantees.map(({ icon: Icon, title, body }) => (
-            <article
-              key={title}
-              className="flex flex-col gap-5 bg-ink p-8 sm:p-10"
-            >
+            <article key={title} className="flex flex-col gap-5 bg-ink p-8 sm:p-9">
               <Icon
                 className="size-6 text-paper/80"
                 aria-hidden="true"

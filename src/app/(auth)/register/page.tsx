@@ -4,28 +4,34 @@ import { AuthShell } from "@/components/auth/AuthShell";
 import { SignUpForm } from "@/components/auth/SignUpForm";
 import { defaultRouteForRole, getCurrentUser } from "@/lib/auth";
 
+type SearchParams = Promise<{ redirect?: string }>;
+
 export const metadata = {
   title: "Créer un compte — Vellum",
 };
 
-export default async function RegisterPage() {
+export default async function RegisterPage({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
   const user = await getCurrentUser();
   if (user) redirect(defaultRouteForRole(user.profile.role));
+  const params = await searchParams;
 
   return (
     <AuthShell
       eyebrow="Inscription"
-      title="Ouvrez votre dossier."
-      subtitle="En 60 secondes : un compte client pour déposer un projet, suivre la qualification, échanger avec le chef de projet et valider vos livrables."
+      title="Créez votre espace de suivi."
+      subtitle="Votre espace vous permet de retrouver votre dossier, d'échanger avec le dessinateur, de recevoir les devis, les aperçus et les livrables."
       footer={
         <span>
-          Les comptes dessinateur, chef de projet et administrateur sont créés
-          par votre administrateur Vellum — l&apos;inscription publique est
-          réservée aux clients.
+          Si vous avez commencé un dépôt sans compte, votre brouillon sera
+          repris après création de l&apos;espace.
         </span>
       }
     >
-      <SignUpForm />
+      <SignUpForm redirectTo={params.redirect} />
     </AuthShell>
   );
 }

@@ -15,12 +15,12 @@ const settings = [
   },
   {
     title: "Notifications",
-    detail: "Email projet, question architecte, devis pret, livrable disponible.",
+    detail: "Email projet, question du dessinateur, devis prêt, livrable disponible.",
     icon: Bell,
   },
   {
     title: "Confidentialite",
-    detail: "NDA, cloisonnement projet et audit seront geres cote serveur.",
+    detail: "Vos fichiers restent attachés aux dossiers concernés.",
     icon: LockKeyhole,
   },
   {

@@ -27,7 +27,7 @@ export default async function ClientQuotesPage() {
     <ClientShell
       activeHref={routes.client.quotes}
       title="Vos devis"
-      description="Les devis émis par le chef de projet apparaissent ici. Vous pouvez les accepter, refuser ou demander une révision."
+      description="Les devis liés à vos dossiers apparaissent ici. Vous pouvez les accepter, les refuser ou demander une précision."
     >
       <QuoteList
         quotes={(quotes ?? []) as unknown as QuoteWithItems[]}

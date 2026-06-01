@@ -20,7 +20,7 @@ export default async function ClientDeliverablesPage() {
         icon={Sparkles}
         caption="Livraison finale"
         title="Aucun livrable publié."
-        description="Vos livrables apparaissent ici une fois validés et signés par le chef de projet. L'historique reste consultable, jamais modifié."
+        description="Vos livrables apparaissent ici une fois validés. L'historique du dossier reste consultable."
       />
     </ClientShell>
   );

@@ -69,10 +69,7 @@ export function ProfileSettingsForm({ profile }: Props) {
 
       <div className="rounded-[4px] border border-[#d8d0bf] bg-[#f8f5ed] p-4 text-xs leading-5 text-[#6b665a]">
         Email :{" "}
-        <strong className="font-medium text-[#171613]">{profile.email}</strong>{" "}
-        — Rôle :{" "}
-        <strong className="font-medium text-[#171613]">{profile.role}</strong>{" "}
-        (modifiable uniquement par un administrateur).
+        <strong className="font-medium text-[#171613]">{profile.email}</strong>
       </div>
 
       {state.error ? (
