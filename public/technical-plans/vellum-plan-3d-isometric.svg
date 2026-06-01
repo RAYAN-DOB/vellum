@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+<defs>
+<linearGradient id="f" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ead8b8"/><stop offset="1" stop-color="#c49d62"/></linearGradient>
+<linearGradient id="w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#faf7ef"/><stop offset="1" stop-color="#d3c8b6"/></linearGradient>
+<filter id="s" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#171613" flood-opacity=".22"/></filter>
+<style>.bg{fill:#fbfaf6}.floor{fill:url(#f);stroke:#171613;stroke-width:3}.wall{fill:url(#w);stroke:#171613;stroke-width:2}.glass{fill:#cbd8d6;stroke:white;stroke-width:2;opacity:.55}.fur{fill:#ede7dc;stroke:#171613;stroke-width:1.5}.cab{fill:#b79b68;stroke:#171613;stroke-width:1.4}.dark{fill:#393a36;stroke:#171613;stroke-width:1.4}.garden{fill:#9fb27b;stroke:#171613;stroke-width:2}.deck{fill:#c7a56f;stroke:#171613;stroke-width:2}.line{stroke:#171613;stroke-width:1.4;fill:none}.red{stroke:#b6543a;stroke-width:2;fill:none}.mono{font-family:Courier New,monospace;fill:#171613}.label{font-size:12px;letter-spacing:.16em}.small{font-size:11px;letter-spacing:.12em}.stamp{fill:#b6543a}</style>
+</defs>
+<rect class="bg" width="1600" height="1000"/>
+<g filter="url(#s)" transform="translate(80 80)">
+<polygon points="120,650 880,850 1350,575 590,380" class="garden"/>
+<polygon points="120,650 365,718 615,552 365,490" class="deck"/>
+<polygon points="360,440 1000,600 1300,420 660,260" class="floor"/>
+<g opacity=".2" class="line"><path d="M410 452 1045 612M460 428 1090 588M510 404 1135 564M560 380 1180 540M610 356 1225 516"/><path d="M430 462 700 285M540 490 810 312M650 518 920 338M760 546 1030 365M870 574 1140 392M980 602 1250 418"/></g>
+<polygon points="360,440 360,315 660,140 660,260" class="wall"/>
+<polygon points="660,260 660,140 1300,295 1300,420" class="wall"/>
+<polygon points="1300,420 1300,295 1000,475 1000,600" class="wall"/>
+<polygon points="635,512 635,365 690,333 690,480" class="wall"/>
+<polygon points="690,480 690,333 1025,415 1025,562" class="wall"/>
+<polygon points="890,585 890,430 945,398 945,555" class="wall"/>
+<polygon points="800,330 800,205 850,175 850,300" class="wall"/>
+<polygon points="850,300 850,175 1110,240 1110,365" class="wall"/>
+<polygon points="1110,365 1110,240 1210,300 1210,425" class="wall"/>
+<polygon points="440,462 440,340 520,360 520,482" class="glass"/><polygon points="555,492 555,370 635,390 635,512" class="glass"/><polygon points="1025,590 1025,470 1130,405 1130,525" class="glass"/><polygon points="1140,522 1140,405 1275,320 1275,437" class="glass"/>
+<polygon points="490,530 610,560 670,525 550,495" class="fur"/><polygon points="610,560 610,525 670,490 670,525" class="dark"/><polygon points="690,575 760,592 800,568 730,550" class="fur"/><polygon points="785,520 860,540 900,515 825,496" class="fur"/>
+<polygon points="930,315 1110,360 1150,337 970,292" class="cab"/><polygon points="930,315 930,270 1110,315 1110,360" fill="#9f8150" stroke="#171613" stroke-width="1.4"/><polygon points="1005,430 1120,458 1180,420 1065,392" class="cab"/><polygon points="1028,435 1095,452 1138,425 1070,408" fill="#566c45" stroke="#171613" stroke-width="1.2"/>
+<polygon points="900,530 1010,558 1055,530 945,502" class="fur"/><polygon points="1130,400 1230,425 1268,402 1168,377" class="fur"/>
+<polygon points="1160,500 1210,512 1236,496 1186,484" fill="#fffdf8" stroke="#171613" stroke-width="1.3"/><ellipse cx="1215" cy="472" rx="30" ry="13" fill="#fffdf8" stroke="#171613" stroke-width="1.3"/>
+<circle cx="1060" cy="420" r="28" class="red" stroke-dasharray="6 5"/><path d="M1088 414 1300 210" class="red"/><rect x="1295" y="176" width="205" height="65" fill="#fffdf8" stroke="#b6543a" stroke-width="2"/><text x="1312" y="202" class="mono small stamp">APERÇU VELLUM</text><text x="1312" y="226" class="mono small">Cuisine revision 03</text>
+<circle cx="670" cy="525" r="26" class="red"/><path d="M660 550 330 635" class="red"/><rect x="130" y="612" width="210" height="55" fill="#fffdf8" stroke="#b6543a" stroke-width="2"/><text x="148" y="636" class="mono small stamp">ZONE A VALIDER</text><text x="148" y="658" class="mono small">cloison vitree</text>
+<ellipse cx="1335" cy="620" rx="56" ry="32" fill="#fffdf8" stroke="#171613" stroke-width="1.5"/><g fill="#332a22" stroke="#171613" stroke-width="1"><ellipse cx="1285" cy="608" rx="18" ry="12"/><ellipse cx="1388" cy="638" rx="18" ry="12"/><ellipse cx="1356" cy="572" rx="16" ry="12"/><ellipse cx="1310" cy="667" rx="16" ry="12"/></g>
+<text x="490" y="640" class="mono label">SEJOUR HSP 2.72 M</text><text x="990" y="500" class="mono label">CUISINE HSP 2.48 M</text><text x="910" y="625" class="mono label">SUITE HSP 2.72 M</text><text x="1120" y="468" class="mono label">CHAMBRE 02</text><text x="1070" y="230" class="mono small">REF VLM-3D-202606-0128</text>
+</g>
+<text x="70" y="70" class="mono label">VELLUM - APERCU 3D ISOMETRIQUE - DOSSIER PROJET</text>
+</svg>
