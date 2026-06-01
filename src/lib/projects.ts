@@ -14,8 +14,8 @@ export type { ProjectListItem };
 const PROJECT_RELATIONS = `
   *,
   client:profiles!projects_client_id_fkey(id, full_name, email, company),
-  manager:profiles!projects_manager_id_fkey(id, full_name, email),
-  architect:profiles!projects_architect_id_fkey(id, full_name, email)
+  manager:profiles!projects_manager_id_fkey(id, full_name),
+  architect:profiles!projects_architect_id_fkey(id, full_name)
 `;
 
 export async function listProjectsForClient(clientId: string) {

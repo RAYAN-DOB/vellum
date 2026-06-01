@@ -13,8 +13,8 @@ import type {
 
 export type ProjectListItem = ProjectRow & {
   client: Pick<ProfileRow, "id" | "full_name" | "email" | "company"> | null;
-  manager: Pick<ProfileRow, "id" | "full_name" | "email"> | null;
-  architect: Pick<ProfileRow, "id" | "full_name" | "email"> | null;
+  manager: Pick<ProfileRow, "id" | "full_name"> | null;
+  architect: Pick<ProfileRow, "id" | "full_name"> | null;
 };
 
 export const projectStatusLabels: Record<ProjectStatus, string> = {
