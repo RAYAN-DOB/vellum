@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">Vellum architectural plan synthetic drawing</title>
+  <desc id="desc">Original synthetic architectural floor plan generated for Vellum marketing visuals.</desc>
+  <defs>
+    <pattern id="paperGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#e8e0d2" stroke-width="0.55"/>
+    </pattern>
+    <pattern id="minorGrid" width="6" height="6" patternUnits="userSpaceOnUse">
+      <path d="M6 0H0V6" fill="none" stroke="#f2ede3" stroke-width="0.35"/>
+    </pattern>
+    <style>
+      .bg{fill:#fbfaf6}.sheet{fill:#fffdf8;stroke:#171613;stroke-width:2}.grid{fill:url(#paperGrid)}.minor{fill:url(#minorGrid)}
+      .wall{stroke:#171613;stroke-width:8;fill:none;stroke-linecap:square;stroke-linejoin:miter}.thin{stroke:#171613;stroke-width:2;fill:none}.hair{stroke:#171613;stroke-width:1;fill:none}.dash{stroke:#171613;stroke-width:1.4;stroke-dasharray:9 7;fill:none}.dim{stroke:#5f5a50;stroke-width:1.1;fill:none}.txt{font-family:Arial, Helvetica, sans-serif;fill:#171613}.mono{font-family:Courier New, monospace;fill:#171613}.muted{fill:#6e685e}.sienna{stroke:#b6543a;fill:none}.stamp{fill:#b6543a}.light{fill:#f3efe6;stroke:#d8d0bf}.room{font-size:17px;font-weight:700;letter-spacing:.08em}.note{font-size:12px;letter-spacing:.12em}.small{font-size:10px;letter-spacing:.14em}.title{font-size:20px;font-weight:700}.cart{font-size:11px;letter-spacing:.12em}.label{font-size:9px;letter-spacing:.16em;fill:#6e685e}
+    </style>
+  </defs>
+  <rect class="bg" width="1400" height="900"/>
+  <rect x="24" y="22" width="1352" height="856" class="sheet"/>
+  <rect x="54" y="52" width="1048" height="784" class="minor" opacity=".8"/>
+  <rect x="54" y="52" width="1048" height="784" class="grid" opacity=".9"/>
+
+  <!-- title block -->
+  <rect x="1118" y="52" width="230" height="784" fill="#fffdf8" stroke="#171613" stroke-width="1.6"/>
+  <rect x="1118" y="52" width="230" height="94" class="light"/>
+  <text x="1138" y="88" class="mono title">VELLUM</text>
+  <text x="1138" y="115" class="mono small muted">TECHNICAL PROJECT OFFICE</text>
+  <line x1="1118" y1="146" x2="1348" y2="146" class="thin"/>
+  <text x="1138" y="181" class="mono cart">PROJECT</text>
+  <text x="1138" y="205" class="txt title">Réfection plancher R+1</text>
+  <line x1="1118" y1="228" x2="1348" y2="228" class="hair"/>
+  <text x="1138" y="257" class="mono cart">CLIENT</text>
+  <text x="1138" y="279" class="txt">Immeuble haussmannien</text>
+  <text x="1138" y="302" class="txt muted">Paris 11</text>
+  <line x1="1118" y1="326" x2="1348" y2="326" class="hair"/>
+  <text x="1138" y="356" class="mono cart">DRAWING</text>
+  <text x="1138" y="381" class="txt">Main floor plan</text>
+  <text x="1138" y="404" class="txt muted">Working detail</text>
+  <line x1="1118" y1="430" x2="1348" y2="430" class="hair"/>
+  <text x="1138" y="462" class="mono cart">REF</text><text x="1210" y="462" class="mono cart">VLM-202605-0042</text>
+  <text x="1138" y="491" class="mono cart">REV</text><text x="1210" y="491" class="mono cart">03</text>
+  <text x="1138" y="520" class="mono cart">DATE</text><text x="1210" y="520" class="mono cart">24.05.2026</text>
+  <text x="1138" y="549" class="mono cart">STATUS</text><text x="1210" y="549" class="mono cart">À QUALIFIER</text>
+  <line x1="1118" y1="580" x2="1348" y2="580" class="hair"/>
+  <text x="1138" y="615" class="mono cart">REVISION NOTES</text>
+  <text x="1138" y="645" class="txt small">03 · Ajouter cotes plancher</text>
+  <text x="1138" y="670" class="txt small">02 · Vérifier accès trémie</text>
+  <text x="1138" y="695" class="txt small">01 · Plan client reçu</text>
+  <line x1="1118" y1="730" x2="1348" y2="730" class="hair"/>
+  <text x="1138" y="765" class="mono cart">CONFIDENTIEL · NDA REQUIS</text>
+  <text x="1138" y="804" class="mono small muted">Generated synthetic plan</text>
+
+  <!-- main dimensions -->
+  <line x1="96" y1="110" x2="1020" y2="110" class="dim"/><path d="M96 98v24M1020 98v24" class="dim"/>
+  <text x="530" y="98" class="mono small muted">18.40 m</text>
+  <line x1="78" y1="132" x2="78" y2="740" class="dim"/><path d="M66 132h24M66 740h24" class="dim"/>
+  <text x="52" y="455" class="mono small muted" transform="rotate(-90 52 455)">12.10 m</text>
+
+  <!-- plan outer walls -->
+  <path class="wall" d="M136 162H980V724H136Z"/>
+  <!-- internal walls -->
+  <path class="wall" d="M136 385H392M454 385H650M720 385H980"/>
+  <path class="wall" d="M392 162V300M392 462V724"/>
+  <path class="wall" d="M650 162V385M650 476V724"/>
+  <path class="wall" d="M805 385V724"/>
+  <path class="wall" d="M136 545H392M392 565H650M805 540H980"/>
+  <path class="wall" d="M250 545V724M505 565V724M805 385H980"/>
+  <path class="thin" d="M136 300H392M250 162V300M720 162V385"/>
+
+  <!-- doors arcs -->
+  <path class="thin" d="M392 300A86 86 0 0 1 478 386"/>
+  <path class="thin" d="M392 462A78 78 0 0 0 470 385"/>
+  <path class="thin" d="M650 476A90 90 0 0 1 740 386"/>
+  <path class="thin" d="M805 540A74 74 0 0 0 879 466"/>
+  <path class="thin" d="M250 545A74 74 0 0 1 324 619"/>
+  <path class="thin" d="M505 565A70 70 0 0 0 575 635"/>
+
+  <!-- windows -->
+  <path class="thin" d="M202 158v-18h130v18M742 158v-18h142v18M982 250h22v130h-22M134 220h-22v110h22M134 630h-22v64h22"/>
+
+  <!-- stairs -->
+  <rect x="430" y="590" width="180" height="92" fill="none" stroke="#171613" stroke-width="2"/>
+  <g class="hair">
+    <path d="M430 604H610M430 618H610M430 632H610M430 646H610M430 660H610M430 674H610"/>
+    <path d="M505 682l45-78M550 604l-15 30"/>
+  </g>
+  <text x="462" y="716" class="mono small muted">ESCALIER EXISTANT</text>
+
+  <!-- kitchen island / fixtures / cars -->
+  <rect x="492" y="222" width="100" height="46" class="light"/><rect x="520" y="278" width="48" height="70" fill="none" stroke="#171613" stroke-width="2"/>
+  <rect x="165" y="585" width="60" height="100" rx="14" fill="none" stroke="#171613" stroke-width="2"/><path d="M175 607h40M175 662h40" class="hair"/>
+  <rect x="270" y="585" width="60" height="100" rx="14" fill="none" stroke="#171613" stroke-width="2"/><path d="M280 607h40M280 662h40" class="hair"/>
+  <circle cx="880" cy="620" r="20" class="thin"/><rect x="842" y="585" width="32" height="48" class="thin"/><rect x="920" y="585" width="32" height="48" class="thin"/>
+
+  <!-- room labels -->
+  <text x="205" y="245" class="txt room">BUREAU</text><text x="215" y="270" class="mono small muted">12.4 m²</text>
+  <text x="480" y="245" class="txt room">CUISINE</text><text x="490" y="270" class="mono small muted">16.1 m²</text>
+  <text x="770" y="255" class="txt room">SÉJOUR</text><text x="780" y="280" class="mono small muted">32.8 m²</text>
+  <text x="185" y="470" class="txt room">ENTRÉE</text><text x="195" y="495" class="mono small muted">8.9 m²</text>
+  <text x="470" y="475" class="txt room">PALIER</text><text x="480" y="500" class="mono small muted">7.2 m²</text>
+  <text x="855" y="465" class="txt room">CHAMBRE 01</text><text x="865" y="490" class="mono small muted">14.6 m²</text>
+  <text x="165" y="705" class="txt room">GARAGE</text><text x="175" y="730" class="mono small muted">28.0 m²</text>
+  <text x="520" y="705" class="txt room">RANGEMENT</text><text x="530" y="730" class="mono small muted">6.5 m²</text>
+  <text x="840" y="705" class="txt room">SALLE D'EAU</text><text x="850" y="730" class="mono small muted">9.3 m²</text>
+
+  <!-- interior dimensions -->
+  <g class="dim">
+    <path d="M136 780H392M392 780H650M650 780H805M805 780H980"/>
+    <path d="M136 770v20M392 770v20M650 770v20M805 770v20M980 770v20"/>
+    <path d="M1110 52v784" opacity=".35"/>
+  </g>
+  <text x="232" y="804" class="mono small muted">5.20 m</text><text x="496" y="804" class="mono small muted">5.10 m</text><text x="708" y="804" class="mono small muted">3.10 m</text><text x="872" y="804" class="mono small muted">3.70 m</text>
+
+  <!-- annotation -->
+  <circle cx="874" cy="326" r="25" class="sienna" stroke-width="2" stroke-dasharray="6 5"/>
+  <path d="M874 352v40" class="sienna" stroke-width="2"/>
+  <text x="835" y="414" class="mono small stamp">VOIR NOTE F3</text>
+  <path d="M830 115h160M1020 112l-28-12M1020 112l-28 12" class="dim"/>
+  <text x="858" y="103" class="mono small muted">façade principale</text>
+</svg>
