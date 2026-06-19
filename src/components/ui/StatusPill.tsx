@@ -2,22 +2,47 @@ import { cn } from "@/lib/utils";
 
 type Tone = "neutral" | "amber" | "green" | "blue" | "red" | "violet";
 
+/**
+ * Status tones, redrawn as desaturated brand-world paper tints. Every pill is a
+ * ~10-12% wash of a single brand accent laid over warm paper, a hairline border
+ * in the same family, and dark ink-ish text — so they all read as ink-on-paper
+ * rather than stock candy colors.
+ *
+ *   green  -> moss     (positive)
+ *   amber  -> clay/amber (attention)
+ *   red    -> crimson  (danger)
+ *   blue   -> graphite/ink tint (informational, off-brand recolor)
+ *   violet -> vellum/graphite tint (off-brand recolor)
+ *   neutral-> vellum/mute
+ */
 const TONE_STYLES: Record<Tone, string> = {
-  neutral: "border-[#d8d0bf] bg-[#f0eadf] text-[#3c382f]",
-  amber: "border-amber-300 bg-amber-50 text-amber-900",
-  green: "border-emerald-300 bg-emerald-50 text-emerald-900",
-  blue: "border-sky-300 bg-sky-50 text-sky-900",
-  red: "border-red-300 bg-red-50 text-red-900",
-  violet: "border-violet-300 bg-violet-50 text-violet-900",
+  neutral:
+    "border-line-strong bg-vellum text-graphite",
+  amber:
+    "border-[color-mix(in_srgb,var(--amber)_28%,var(--paper))] bg-[color-mix(in_srgb,var(--amber)_12%,var(--paper))] text-[color-mix(in_srgb,var(--amber)_45%,var(--ink))]",
+  green:
+    "border-[color-mix(in_srgb,var(--moss)_30%,var(--paper))] bg-[color-mix(in_srgb,var(--moss)_12%,var(--paper))] text-[color-mix(in_srgb,var(--moss)_45%,var(--ink))]",
+  blue:
+    "border-[color-mix(in_srgb,var(--graphite)_22%,var(--paper))] bg-[color-mix(in_srgb,var(--graphite)_10%,var(--paper))] text-graphite",
+  red:
+    "border-[color-mix(in_srgb,var(--crimson)_30%,var(--paper))] bg-[color-mix(in_srgb,var(--crimson)_11%,var(--paper))] text-[color-mix(in_srgb,var(--crimson)_55%,var(--ink))]",
+  violet:
+    "border-[color-mix(in_srgb,var(--mute)_28%,var(--paper))] bg-[color-mix(in_srgb,var(--vellum-dim)_70%,var(--paper))] text-[color-mix(in_srgb,var(--mute)_40%,var(--ink))]",
 };
 
 const DARK_TONE_STYLES: Record<Tone, string> = {
-  neutral: "border-[#34312b] bg-[#0a0908] text-[#cfc6b5]",
-  amber: "border-amber-500/50 bg-amber-950/40 text-amber-200",
-  green: "border-emerald-500/50 bg-emerald-950/40 text-emerald-200",
-  blue: "border-sky-500/50 bg-sky-950/40 text-sky-200",
-  red: "border-red-500/50 bg-red-950/40 text-red-200",
-  violet: "border-violet-500/50 bg-violet-950/40 text-violet-200",
+  neutral:
+    "border-graphite bg-ink text-soft",
+  amber:
+    "border-[color-mix(in_srgb,var(--amber)_45%,var(--ink))] bg-[color-mix(in_srgb,var(--amber)_18%,var(--ink))] text-[color-mix(in_srgb,var(--amber)_55%,var(--paper))]",
+  green:
+    "border-[color-mix(in_srgb,var(--moss)_45%,var(--ink))] bg-[color-mix(in_srgb,var(--moss)_18%,var(--ink))] text-[color-mix(in_srgb,var(--moss)_55%,var(--paper))]",
+  blue:
+    "border-[color-mix(in_srgb,var(--soft)_30%,var(--ink))] bg-[color-mix(in_srgb,var(--graphite)_60%,var(--ink))] text-[color-mix(in_srgb,var(--soft)_70%,var(--paper))]",
+  red:
+    "border-[color-mix(in_srgb,var(--crimson)_50%,var(--ink))] bg-[color-mix(in_srgb,var(--crimson)_22%,var(--ink))] text-[color-mix(in_srgb,var(--crimson)_55%,var(--paper))]",
+  violet:
+    "border-[color-mix(in_srgb,var(--mute)_38%,var(--ink))] bg-[color-mix(in_srgb,var(--mute)_18%,var(--ink))] text-[color-mix(in_srgb,var(--soft)_65%,var(--paper))]",
 };
 
 export function StatusPill({

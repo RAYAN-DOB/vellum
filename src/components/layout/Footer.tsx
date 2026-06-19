@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { VellumLogo } from "@/components/brand/VellumLogo";
 import { publicNavigation, routes } from "@/lib/routes";
 
@@ -22,14 +24,14 @@ export function Footer() {
     <footer className="border-t border-line bg-paper">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-10 lg:px-10">
         <div className="max-w-sm">
-          <a
+          <Link
             href={routes.public.home}
             className="inline-flex items-center gap-2.5"
             aria-label="Vellum — accueil"
           >
             <VellumLogo size="sm" tone="ink" />
             <span className="font-display text-xl text-ink">Vellum</span>
-          </a>
+          </Link>
           <p className="mt-5 text-[14px] leading-[1.65] text-mute">
             Le bureau de dépôt des projets techniques. Ajoutez vos plans,
             échangez avec un dessinateur, validez les aperçus et récupérez vos
@@ -65,12 +67,12 @@ function FooterColumn({
       <ul className="mt-5 space-y-2.5">
         {links.map((link) => (
           <li key={link.href}>
-            <a
+            <Link
               href={link.href}
               className="draft-link text-[14px] text-graphite transition-colors hover:text-ink"
             >
               {link.label}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

@@ -1,4 +1,5 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 import { Footer } from "@/components/layout/Footer";
 import { PublicHeader } from "@/components/layout/PublicHeader";
@@ -73,7 +74,7 @@ function Hero() {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
-            <a
+            <Link
               href={routes.public.deposit}
               className="group inline-flex h-12 cursor-pointer items-center gap-2 rounded-full bg-sienna px-6 text-[14px] font-medium text-paper transition hover:bg-sienna-dark"
             >
@@ -82,7 +83,7 @@ function Hero() {
                 className="size-4 transition-transform group-hover:translate-x-0.5"
                 aria-hidden="true"
               />
-            </a>
+            </Link>
             <a
               href="#demo"
               className="group inline-flex h-12 cursor-pointer items-center gap-2 rounded-full border border-line-strong bg-paper/70 px-6 text-[14px] font-medium text-graphite transition hover:border-graphite hover:bg-vellum/70 hover:text-ink"
@@ -169,7 +170,7 @@ function FinalCta() {
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-end lg:flex-col lg:items-stretch">
-          <a
+          <Link
             href={routes.public.deposit}
             className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-sienna px-7 text-[14px] font-medium text-paper transition hover:bg-sienna-dark"
           >
@@ -178,8 +179,8 @@ function FinalCta() {
               className="size-4 transition-transform group-hover:translate-x-0.5"
               aria-hidden="true"
             />
-          </a>
-          <a
+          </Link>
+          <Link
             href={routes.public.login}
             className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full border border-paper/20 px-7 text-[14px] font-medium text-paper transition hover:border-paper/50"
           >
@@ -188,7 +189,7 @@ function FinalCta() {
               className="size-4 transition-transform group-hover:translate-x-0.5"
               aria-hidden="true"
             />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

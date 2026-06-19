@@ -6,23 +6,23 @@ import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   [
-    "inline-flex min-w-0 items-center justify-center rounded-[3px] font-medium transition duration-200 active:translate-y-px",
+    "inline-flex min-w-0 items-center justify-center rounded-[2px] font-medium transition duration-200 active:translate-y-px",
     "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
-    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
   ],
   {
     variants: {
       variant: {
         primary:
-          "bg-[#171613] text-[#f7f3ea] shadow-[0_18px_40px_rgba(22,21,18,0.22)] hover:bg-[#2b2923] focus-visible:outline-[#171613]",
+          "bg-ink text-paper shadow-sm hover:bg-graphite",
         secondary:
-          "bg-[#f8f5ed] text-[#171613] shadow-sm ring-1 ring-[#d8d0bf] hover:bg-paper focus-visible:outline-[#171613]",
+          "bg-vellum text-ink ring-1 ring-line-strong hover:bg-paper",
         outline:
-          "border border-[#d8d0bf] bg-[#fbfaf6]/70 text-[#171613] hover:bg-[#f0eadf] focus-visible:outline-[#171613]",
+          "border border-line-strong bg-paper/70 text-ink hover:bg-vellum",
         ghost:
-          "bg-transparent text-[#5e594d] hover:bg-[#ebe5d7] hover:text-[#171613] focus-visible:outline-[#171613]",
+          "bg-transparent text-mute hover:bg-vellum-dim hover:text-ink",
         danger:
-          "bg-red-600 text-white shadow-sm hover:bg-red-700 focus-visible:outline-red-700",
+          "bg-crimson text-paper shadow-sm hover:bg-sienna-dark focus-visible:outline-crimson",
       },
       size: {
         sm: "h-8 gap-1.5 px-3 text-sm",

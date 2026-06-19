@@ -37,6 +37,18 @@
   --foreground: var(--ink);
   --surface: var(--vellum);
   --blueprint: var(--mute);
+
+  /* Radius scale */
+  --r-sm: 2px;
+  --r-md: 4px;
+  --r-lg: 8px;
+  --r-pill: 9999px;
+
+  /* Elevation scale — soft shadows tuned to warm ink (#151410) */
+  --e1: 0 1px 2px rgba(21, 20, 16, 0.06);
+  --e2: 0 4px 10px -4px rgba(21, 20, 16, 0.1);
+  --e3: 0 12px 24px -12px rgba(21, 20, 16, 0.14);
+  --e4: 0 30px 60px -30px rgba(21, 20, 16, 0.18);
 }
 
 @theme inline {
@@ -63,6 +75,17 @@
   --font-sans: var(--font-inter);
   --font-display: var(--font-instrument-serif);
   --font-mono: var(--font-jetbrains-mono);
+
+  /* Radius tokens → rounded-* utilities */
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+
+  /* Elevation tokens → shadow-* utilities */
+  --shadow-e1: var(--e1);
+  --shadow-e2: var(--e2);
+  --shadow-e3: var(--e3);
+  --shadow-e4: var(--e4);
 }
 
 * {
@@ -71,8 +94,15 @@
 }
 
 html {
-  scroll-behavior: smooth;
   overflow-x: hidden;
+}
+
+/* Smooth scroll only when the user has no reduced-motion preference,
+   so we never hijack focus jumps for people who opt out of motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
