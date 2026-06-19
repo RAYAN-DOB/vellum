@@ -1,8 +1,9 @@
 "use client";
 
 import { Download, Loader2, ReceiptText } from "lucide-react";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/Button";
 import { StatusPill } from "@/components/ui/StatusPill";
@@ -59,6 +60,12 @@ function Submit({ label }: { label: string }) {
 
 function CreateForm({ projects }: { projects: Props["projects"] }) {
   const [state, formAction] = useActionState(createQuoteAction, initialState);
+
+  useEffect(() => {
+    if (state.error) toast.error(state.error);
+    if (state.success) toast.success(state.success);
+  }, [state]);
+
   return (
     <form
       action={formAction}
@@ -87,15 +94,18 @@ function CreateForm({ projects }: { projects: Props["projects"] }) {
         </label>
         <Submit label="Créer le devis" />
       </div>
-      {state.error ? (
-        <p className="mt-2 text-xs text-crimson">{state.error}</p>
-      ) : null}
     </form>
   );
 }
 
 function AddItemForm({ quoteId }: { quoteId: string }) {
   const [state, formAction] = useActionState(addQuoteItemAction, initialState);
+
+  useEffect(() => {
+    if (state.error) toast.error(state.error);
+    if (state.success) toast.success(state.success);
+  }, [state]);
+
   return (
     <form action={formAction} className="grid gap-2 border-t border-line pt-3 sm:grid-cols-[2fr_60px_100px_auto] sm:items-end">
       <input type="hidden" name="quote_id" value={quoteId} />
@@ -136,9 +146,6 @@ function AddItemForm({ quoteId }: { quoteId: string }) {
         />
       </label>
       <Submit label="Ajouter" />
-      {state.error ? (
-        <p className="col-span-full text-xs text-crimson">{state.error}</p>
-      ) : null}
     </form>
   );
 }
@@ -153,6 +160,11 @@ function StatusForm({
   canManage: boolean;
 }) {
   const [state, formAction] = useActionState(updateQuoteStatusAction, initialState);
+
+  useEffect(() => {
+    if (state.error) toast.error(state.error);
+    if (state.success) toast.success(state.success);
+  }, [state]);
 
   const options: QuoteStatus[] = canManage
     ? ["draft", "sent", "accepted", "refused", "expired"]
@@ -173,9 +185,6 @@ function StatusForm({
         ))}
       </select>
       <Submit label="OK" />
-      {state.error ? (
-        <span className="text-xs text-crimson">{state.error}</span>
-      ) : null}
     </form>
   );
 }

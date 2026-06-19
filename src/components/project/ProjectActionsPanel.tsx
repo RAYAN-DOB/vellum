@@ -1,8 +1,9 @@
 "use client";
 
 import { Loader2, ReceiptText, Sparkles } from "lucide-react";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
+import { toast } from "sonner";
 
 import { StatusPill } from "@/components/ui/StatusPill";
 import { updateProjectStatusAction } from "@/lib/actions/projects";
@@ -55,6 +56,15 @@ export function ProjectActionsPanel({
   );
   const canUpdate = ["manager", "admin", "architect"].includes(currentUserRole);
 
+  useEffect(() => {
+    if (state.error) {
+      toast.error(state.error);
+    }
+    if (state.success) {
+      toast.success(state.success);
+    }
+  }, [state]);
+
   return (
     <aside className="space-y-4">
       <section className="rounded-[4px] border border-line bg-vellum/45 p-5">
@@ -94,12 +104,6 @@ export function ProjectActionsPanel({
               </select>
             </label>
             <StatusSubmit />
-            {state.error ? (
-              <p className="text-xs text-crimson">{state.error}</p>
-            ) : null}
-            {state.success ? (
-              <p className="text-xs text-moss">{state.success}</p>
-            ) : null}
           </form>
         </section>
       ) : null}

@@ -2,6 +2,7 @@
 
 import { Loader2, MessageSquare, Send } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -36,7 +37,6 @@ export function ProjectMessageThread({
   const supabase = useMemo(() => createSupabaseBrowserClient(), []);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [items, setItems] = useState(messages);
-  const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
   useEffect(() => {
@@ -93,8 +93,6 @@ export function ProjectMessageThread({
     const body = textareaRef.current?.value.trim() ?? "";
     if (!body) return;
 
-    setError(null);
-
     const optimistic: ProjectMessageWithSender = {
       id: `temp-${Date.now()}`,
       project_id: projectId,
@@ -119,7 +117,7 @@ export function ProjectMessageThread({
       formData.set("body", body);
       const result = await sendProjectMessageAction(initialState, formData);
       if (result.error) {
-        setError(result.error);
+        toast.error(result.error);
         setItems((current) =>
           current.filter((message) => message.id !== optimistic.id),
         );
@@ -194,14 +192,6 @@ export function ProjectMessageThread({
           placeholder="Écrire un message au dessinateur..."
           className="block w-full rounded-[3px] border border-line-strong bg-paper px-3 py-2 text-sm text-ink outline-none transition placeholder:text-soft focus:border-ink focus:ring-2 focus:ring-ink/15"
         />
-        {error ? (
-          <p
-            role="alert"
-            className="mt-2 rounded-[3px] border border-crimson/30 bg-crimson/5 px-3 py-2 text-sm text-crimson"
-          >
-            {error}
-          </p>
-        ) : null}
         <div className="mt-3 flex justify-end">
           <Button
             type="submit"

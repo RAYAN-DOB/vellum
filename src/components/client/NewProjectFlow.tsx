@@ -22,6 +22,7 @@ import {
 } from "react";
 import { useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 import { createProjectAction } from "@/lib/actions/projects";
 import { uploadProjectDocumentsClient } from "@/lib/client/upload";
@@ -93,9 +94,13 @@ export function NewProjectFlow() {
   const [draftFiles, setDraftFiles] = useState<PublicProjectDraft["files"]>([]);
   const [draftRestored, setDraftRestored] = useState(false);
   const postCreateHandledRef = useRef(false);
-  const [uploadProgress, setUploadProgress] = useState<string | null>(null);
   const [uploading, startUpload] = useTransition();
   const [state, formAction] = useActionState(createProjectAction, initialState);
+
+  useEffect(() => {
+    if (state.error) toast.error(state.error);
+    if (state.success) toast.success(state.success);
+  }, [state]);
 
   useEffect(() => {
     const raw = window.localStorage.getItem(PUBLIC_PROJECT_DRAFT_KEY);
@@ -150,11 +155,10 @@ export function NewProjectFlow() {
 
     if (files.length > 0) {
       startUpload(async () => {
-        setUploadProgress(
+        toast.success(
           `Téléversement de ${files.length} fichier${files.length > 1 ? "s" : ""}...`,
         );
         await uploadProjectDocumentsClient(state.projectId!, files, "source");
-        setUploadProgress(null);
         router.push(`/client/projets/${state.projectId}`);
       });
       return;
@@ -474,24 +478,6 @@ export function NewProjectFlow() {
                 par les personnes qui travaillent sur votre demande.
               </p>
             </div>
-
-            {state.error ? (
-              <p
-                role="alert"
-                className="rounded-[4px] border border-[#8f3d31]/70 bg-[#411b16]/45 px-3 py-2 text-sm text-[#f1c4b5]"
-              >
-                {state.error}
-              </p>
-            ) : null}
-
-            {uploadProgress ? (
-              <p
-                role="status"
-                className="rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-3 py-2 text-sm text-[#d8d0bf]"
-              >
-                {uploadProgress}
-              </p>
-            ) : null}
 
             <div className="flex flex-col gap-4 border-t border-[#3b352e] pt-6 sm:flex-row sm:items-center sm:justify-between">
               <p className="max-w-md text-xs leading-5 text-[#9b9183]">
