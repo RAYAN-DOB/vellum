@@ -10,8 +10,10 @@ import {
   Image as ImageIcon,
   Paperclip,
   PenTool,
+  Sparkles,
   Trash2,
 } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import {
@@ -26,9 +28,8 @@ const steps = [
   { label: "Besoin", title: "Quel type de travail faut-il préparer ?" },
   { label: "Description", title: "Expliquez ce que vous voulez obtenir." },
   { label: "Fichiers", title: "Ajoutez les pièces disponibles." },
-  { label: "Attentes", title: "Précisez les livrables et le délai." },
-  { label: "Coordonnées", title: "Où l'équipe peut-elle vous répondre ?" },
-  { label: "Confirmation", title: "Votre dossier est prêt à être envoyé." },
+  { label: "Détails", title: "Précisez les livrables et le délai." },
+  { label: "Envoi", title: "Votre dossier est prêt." },
 ] as const;
 
 const needTypes = [
@@ -64,8 +65,9 @@ function iconForFile(file: PublicDraftFile) {
 
 export function PublicProjectDepositFlow() {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const reduceMotion = useReducedMotion();
   const [step, setStep] = useState(0);
-  const [saved, setSaved] = useState(false);
+  const [direction, setDirection] = useState(1);
   const [projectType, setProjectType] = useState<string>(needTypes[0]);
   const [description, setDescription] = useState("");
   const [files, setFiles] = useState<PublicDraftFile[]>([]);
@@ -76,10 +78,8 @@ export function PublicProjectDepositFlow() {
   const [needs3d, setNeeds3d] = useState(false);
   const [workMode, setWorkMode] =
     useState<PublicProjectDraft["workMode"]>("correction");
-  const [contactName, setContactName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [company, setCompany] = useState("");
+
+  const lastStep = steps.length - 1;
 
   useEffect(() => {
     const raw = window.localStorage.getItem(PUBLIC_PROJECT_DRAFT_KEY);
@@ -97,10 +97,6 @@ export function PublicProjectDepositFlow() {
         setNotes(draft.notes || "");
         setNeeds3d(Boolean(draft.needs3d));
         setWorkMode(draft.workMode || "correction");
-        setContactName(draft.contactName || "");
-        setEmail(draft.email || "");
-        setPhone(draft.phone || "");
-        setCompany(draft.company || "");
       });
     } catch {
       window.localStorage.removeItem(PUBLIC_PROJECT_DRAFT_KEY);
@@ -118,55 +114,51 @@ export function PublicProjectDepositFlow() {
       notes,
       needs3d,
       workMode,
-      contactName,
-      email,
-      phone,
-      company,
+      contactName: "",
+      email: "",
       files,
       createdAt: new Date().toISOString(),
     }),
     [
-      company,
-      contactName,
       deadline,
       deliverable,
       description,
-      email,
       files,
       needs3d,
       notes,
-      phone,
       projectType,
       urgency,
       workMode,
     ],
   );
 
-  const canContinue =
-    step === 0
-      ? Boolean(projectType)
-      : step === 1
-        ? description.trim().length >= 20
-        : step === 4
-          ? Boolean(contactName.trim()) && /\S+@\S+\.\S+/.test(email)
-          : true;
+  // The account is NEVER required up front. As soon as the client reaches the
+  // final step, the draft is persisted locally so they can create their space
+  // (or sign in) in one click — the project is created from the draft inside
+  // the authenticated workspace.
+  useEffect(() => {
+    if (step === lastStep) {
+      window.localStorage.setItem(
+        PUBLIC_PROJECT_DRAFT_KEY,
+        JSON.stringify(draft),
+      );
+    }
+  }, [step, lastStep, draft]);
 
-  function persistDraft() {
-    window.localStorage.setItem(PUBLIC_PROJECT_DRAFT_KEY, JSON.stringify(draft));
-    setSaved(true);
+  const canContinue =
+    step === 1 ? description.trim().length >= 20 : true;
+
+  function goTo(target: number) {
+    setDirection(target > step ? 1 : -1);
+    setStep(Math.max(0, Math.min(target, lastStep)));
   }
 
   function next() {
-    if (step === steps.length - 1) {
-      persistDraft();
-      return;
-    }
-    setStep((current) => Math.min(current + 1, steps.length - 1));
+    if (step < lastStep) goTo(step + 1);
   }
 
   function back() {
-    setSaved(false);
-    setStep((current) => Math.max(current - 1, 0));
+    if (step > 0) goTo(step - 1);
   }
 
   function handleFiles(event: React.ChangeEvent<HTMLInputElement>) {
@@ -180,6 +172,19 @@ export function PublicProjectDepositFlow() {
   }
 
   const authRedirect = encodeURIComponent(routes.client.newProject);
+  const progress = (step / lastStep) * 100;
+
+  const variants = {
+    enter: (dir: number) => ({
+      opacity: 0,
+      x: reduceMotion ? 0 : dir * 28,
+    }),
+    center: { opacity: 1, x: 0 },
+    exit: (dir: number) => ({
+      opacity: 0,
+      x: reduceMotion ? 0 : dir * -28,
+    }),
+  };
 
   return (
     <section className="relative overflow-hidden bg-[#151410] text-[#fbfaf6]">
@@ -187,16 +192,30 @@ export function PublicProjectDepositFlow() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 grid-paper-dense opacity-55"
       />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_18%_-10%,rgba(159,79,56,0.28),transparent_42%)]"
+      />
       <div className="relative mx-auto grid min-h-screen max-w-7xl gap-8 px-6 pb-16 pt-32 lg:grid-cols-[minmax(0,1fr)_390px] lg:px-10 lg:pt-36">
         <div className="min-w-0">
+          {/* Progress line */}
+          <div className="mb-6 h-px w-full overflow-hidden bg-[#3b352e]">
+            <motion.div
+              className="h-full bg-gradient-to-r from-[#9f4f38] to-[#b46a4c]"
+              initial={false}
+              animate={{ width: `${Math.max(progress, 4)}%` }}
+              transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeOut" }}
+            />
+          </div>
+
           <div className="mb-8 flex flex-wrap items-center gap-2">
             {steps.map((item, index) => (
               <button
                 key={item.label}
                 type="button"
-                onClick={() => setStep(index)}
-                  className={cn(
-                  "inline-flex h-9 items-center gap-2 rounded-full border px-3 text-[12px] font-medium transition",
+                onClick={() => goTo(index)}
+                className={cn(
+                  "inline-flex h-9 cursor-pointer items-center gap-2 rounded-full border px-3 text-[12px] font-medium transition",
                   index === step
                     ? "border-[#b46a4c] bg-[#9f4f38] text-[#fbfaf6]"
                     : index < step
@@ -220,321 +239,289 @@ export function PublicProjectDepositFlow() {
               className="pointer-events-none absolute inset-0 grid-paper opacity-35"
             />
             <div className="relative">
-              <h1 className="display max-w-3xl text-[clamp(2.2rem,5.5vw,4.25rem)] text-[#fbfaf6]">
-                {steps[step].title}
-              </h1>
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={step}
+                  custom={direction}
+                  variants={variants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: reduceMotion ? 0 : 0.32, ease: "easeOut" }}
+                >
+                  <h1 className="display max-w-3xl text-[clamp(2.2rem,5.5vw,4.25rem)] text-[#fbfaf6]">
+                    {steps[step].title}
+                  </h1>
 
-              <div className="mt-8">
-                {step === 0 ? (
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {needTypes.map((type) => (
-                      <button
-                        key={type}
-                        type="button"
-                        onClick={() => setProjectType(type)}
-                        className={cn(
-                          "min-h-20 rounded-[4px] border p-4 text-left transition",
-                          projectType === type
-                            ? "border-[#b46a4c] bg-[#9f4f38] text-[#fbfaf6]"
-                            : "border-[#3b352e] bg-[#100f0d] text-[#d8d0bf] hover:border-[#746d62] hover:bg-[#201d18]",
-                        )}
-                      >
-                        <span className="text-[15px] font-semibold">{type}</span>
-                      </button>
-                    ))}
-                  </div>
-                ) : null}
-
-                {step === 1 ? (
-                  <label className="block">
-                    <span className="caption">Description du projet</span>
-                    <textarea
-                      value={description}
-                      onChange={(event) => setDescription(event.target.value)}
-                      rows={9}
-                      className="mt-3 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-[15px] leading-7 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
-                      placeholder="Expliquez ce que vous voulez obtenir, les contraintes, les corrections à faire, les dimensions connues, les fichiers disponibles."
-                    />
-                    <span className="mt-2 block text-[12px] text-[#b9ad9d]">
-                      Quelques lignes suffisent. Vous pourrez compléter après
-                      échange avec le dessinateur.
-                    </span>
-                  </label>
-                ) : null}
-
-                {step === 2 ? (
-                  <div>
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      multiple
-                      accept=".pdf,.dwg,.dxf,image/*,.txt,.doc,.docx"
-                      className="hidden"
-                      onChange={handleFiles}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => fileInputRef.current?.click()}
-                      className="flex min-h-44 w-full flex-col items-center justify-center gap-3 rounded-[6px] border border-dashed border-[#4c4339] bg-[#100f0d] px-6 text-center transition hover:border-[#b46a4c] hover:bg-[#201d18]"
-                    >
-                      <Paperclip className="size-7 text-[#b46a4c]" aria-hidden="true" />
-                      <span className="font-display text-2xl text-[#fbfaf6]">
-                        Ajouter PDF, DWG, images, croquis ou notes
-                      </span>
-                      <span className="max-w-md text-[13px] leading-5 text-[#b9ad9d]">
-                        Les fichiers seront joints après création de votre
-                        espace. Pour l'instant, Vellum garde la liste de ce que
-                        vous voulez transmettre.
-                      </span>
-                    </button>
-
-                    {files.length > 0 ? (
-                      <ul className="mt-4 grid gap-2">
-                        {files.map((file, index) => {
-                          const Icon = iconForFile(file);
-                          return (
-                            <li
-                              key={`${file.name}-${index}`}
-                              className="flex items-center justify-between gap-3 rounded-[4px] border border-[#3b352e] bg-[#100f0d] p-3"
-                            >
-                              <span className="flex min-w-0 items-center gap-3">
-                                <Icon
-                                  className="size-4 shrink-0 text-[#b46a4c]"
-                                  aria-hidden="true"
-                                />
-                                <span className="min-w-0">
-                                  <span className="block truncate text-sm font-medium text-[#fbfaf6]">
-                                    {file.name}
-                                  </span>
-                                  <span className="text-[11px] text-[#9b9183]">
-                                    {formatBytes(file.size)}
-                                  </span>
-                                </span>
-                              </span>
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  setFiles((current) =>
-                                    current.filter((_, itemIndex) => itemIndex !== index),
-                                  )
-                                }
-                                className="flex size-8 shrink-0 items-center justify-center rounded-full text-[#9b9183] transition hover:bg-[#2a251f] hover:text-[#e8b4a1]"
-                                aria-label={`Retirer ${file.name}`}
-                              >
-                                <Trash2 className="size-4" aria-hidden="true" />
-                              </button>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    ) : null}
-                  </div>
-                ) : null}
-
-                {step === 3 ? (
-                  <div className="grid gap-5">
-                    <label className="block">
-                      <span className="caption">Livrable attendu</span>
-                      <select
-                        value={deliverable}
-                        onChange={(event) => setDeliverable(event.target.value)}
-                        className="mt-3 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
-                      >
-                        {deliverables.map((item) => (
-                          <option key={item} value={item}>
-                            {item}
-                          </option>
+                  <div className="mt-8">
+                    {step === 0 ? (
+                      <div className="grid gap-3 sm:grid-cols-2">
+                        {needTypes.map((type) => (
+                          <button
+                            key={type}
+                            type="button"
+                            onClick={() => setProjectType(type)}
+                            className={cn(
+                              "min-h-20 cursor-pointer rounded-[4px] border p-4 text-left transition",
+                              projectType === type
+                                ? "border-[#b46a4c] bg-[#9f4f38] text-[#fbfaf6]"
+                                : "border-[#3b352e] bg-[#100f0d] text-[#d8d0bf] hover:border-[#746d62] hover:bg-[#201d18]",
+                            )}
+                          >
+                            <span className="text-[15px] font-semibold">{type}</span>
+                          </button>
                         ))}
-                      </select>
-                    </label>
+                      </div>
+                    ) : null}
 
-                    <div className="grid gap-4 sm:grid-cols-2">
+                    {step === 1 ? (
                       <label className="block">
-                        <span className="caption">Délai souhaité</span>
-                        <input
-                          value={deadline}
-                          onChange={(event) => setDeadline(event.target.value)}
-                          className="mt-3 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
-                          placeholder="Ex. fin de semaine, 10 jours, urgent"
+                        <span className="caption">Description du projet</span>
+                        <textarea
+                          value={description}
+                          onChange={(event) => setDescription(event.target.value)}
+                          rows={9}
+                          autoFocus
+                          className="mt-3 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-[15px] leading-7 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
+                          placeholder="Expliquez ce que vous voulez obtenir, les contraintes, les corrections à faire, les dimensions connues, les fichiers disponibles."
                         />
+                        <span className="mt-2 block text-[12px] text-[#b9ad9d]">
+                          Quelques lignes suffisent. Vous pourrez compléter après
+                          échange avec le dessinateur.
+                        </span>
                       </label>
-                      <label className="block">
-                        <span className="caption">Niveau d'urgence</span>
-                        <select
-                          value={urgency}
-                          onChange={(event) =>
-                            setUrgency(
-                              event.target.value as PublicProjectDraft["urgency"],
-                            )
-                          }
-                          className="mt-3 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
+                    ) : null}
+
+                    {step === 2 ? (
+                      <div>
+                        <input
+                          ref={fileInputRef}
+                          type="file"
+                          multiple
+                          accept=".pdf,.dwg,.dxf,image/*,.txt,.doc,.docx"
+                          className="hidden"
+                          onChange={handleFiles}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => fileInputRef.current?.click()}
+                          className="flex min-h-44 w-full cursor-pointer flex-col items-center justify-center gap-3 rounded-[6px] border border-dashed border-[#4c4339] bg-[#100f0d] px-6 text-center transition hover:border-[#b46a4c] hover:bg-[#201d18]"
                         >
-                          <option value="normal">Standard</option>
-                          <option value="high">Élevé</option>
-                          <option value="urgent">Urgent</option>
-                        </select>
-                      </label>
-                    </div>
+                          <Paperclip className="size-7 text-[#b46a4c]" aria-hidden="true" />
+                          <span className="font-display text-2xl text-[#fbfaf6]">
+                            Ajouter PDF, DWG, images, croquis ou notes
+                          </span>
+                          <span className="max-w-md text-[13px] leading-5 text-[#b9ad9d]">
+                            Optionnel à cette étape. Les fichiers seront joints en
+                            sécurité dans votre espace — Vellum garde la liste de
+                            ce que vous voulez transmettre.
+                          </span>
+                        </button>
 
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      <ToggleCard
-                        active={needs3d}
-                        label="Besoin d'un aperçu 3D"
-                        onClick={() => setNeeds3d((value) => !value)}
-                      />
-                      <ToggleCard
-                        active={workMode === "creation"}
-                        label="Création complète"
-                        onClick={() =>
-                          setWorkMode((value) =>
-                            value === "creation" ? "correction" : "creation",
-                          )
-                        }
-                      />
-                    </div>
+                        {files.length > 0 ? (
+                          <ul className="mt-4 grid gap-2">
+                            {files.map((file, index) => {
+                              const Icon = iconForFile(file);
+                              return (
+                                <li
+                                  key={`${file.name}-${index}`}
+                                  className="flex items-center justify-between gap-3 rounded-[4px] border border-[#3b352e] bg-[#100f0d] p-3"
+                                >
+                                  <span className="flex min-w-0 items-center gap-3">
+                                    <Icon
+                                      className="size-4 shrink-0 text-[#b46a4c]"
+                                      aria-hidden="true"
+                                    />
+                                    <span className="min-w-0">
+                                      <span className="block truncate text-sm font-medium text-[#fbfaf6]">
+                                        {file.name}
+                                      </span>
+                                      <span className="text-[11px] text-[#9b9183]">
+                                        {formatBytes(file.size)}
+                                      </span>
+                                    </span>
+                                  </span>
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      setFiles((current) =>
+                                        current.filter((_, itemIndex) => itemIndex !== index),
+                                      )
+                                    }
+                                    className="flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full text-[#9b9183] transition hover:bg-[#2a251f] hover:text-[#e8b4a1]"
+                                    aria-label={`Retirer ${file.name}`}
+                                  >
+                                    <Trash2 className="size-4" aria-hidden="true" />
+                                  </button>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        ) : null}
+                      </div>
+                    ) : null}
 
-                    <label className="block">
-                      <span className="caption">Remarques</span>
-                      <textarea
-                        value={notes}
-                        onChange={(event) => setNotes(event.target.value)}
-                        rows={4}
-                        className="mt-3 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-sm leading-6 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
-                        placeholder="Contraintes, formats finaux, pièces manquantes, précisions utiles."
-                      />
-                    </label>
-                  </div>
-                ) : null}
+                    {step === 3 ? (
+                      <div className="grid gap-5">
+                        <label className="block">
+                          <span className="caption">Livrable attendu</span>
+                          <select
+                            value={deliverable}
+                            onChange={(event) => setDeliverable(event.target.value)}
+                            className="mt-3 h-12 w-full cursor-pointer rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
+                          >
+                            {deliverables.map((item) => (
+                              <option key={item} value={item}>
+                                {item}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
 
-                {step === 4 ? (
-                  <div className="grid gap-5">
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <label className="block">
-                        <span className="caption">Nom</span>
-                        <input
-                          value={contactName}
-                          onChange={(event) => setContactName(event.target.value)}
-                          className="mt-3 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
-                          placeholder="Prénom Nom"
-                        />
-                      </label>
-                      <label className="block">
-                        <span className="caption">Email</span>
-                        <input
-                          value={email}
-                          onChange={(event) => setEmail(event.target.value)}
-                          type="email"
-                          className="mt-3 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
-                          placeholder="vous@entreprise.com"
-                        />
-                      </label>
-                    </div>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <label className="block">
-                        <span className="caption">Téléphone optionnel</span>
-                        <input
-                          value={phone}
-                          onChange={(event) => setPhone(event.target.value)}
-                          className="mt-3 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
-                          placeholder="+33..."
-                        />
-                      </label>
-                      <label className="block">
-                        <span className="caption">Entreprise optionnelle</span>
-                        <input
-                          value={company}
-                          onChange={(event) => setCompany(event.target.value)}
-                          className="mt-3 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
-                          placeholder="Atelier ou société"
-                        />
-                      </label>
-                    </div>
-                  </div>
-                ) : null}
+                        <div className="grid gap-4 sm:grid-cols-2">
+                          <label className="block">
+                            <span className="caption">Délai souhaité</span>
+                            <input
+                              value={deadline}
+                              onChange={(event) => setDeadline(event.target.value)}
+                              className="mt-3 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
+                              placeholder="Ex. fin de semaine, 10 jours, urgent"
+                            />
+                          </label>
+                          <label className="block">
+                            <span className="caption">Niveau d&apos;urgence</span>
+                            <select
+                              value={urgency}
+                              onChange={(event) =>
+                                setUrgency(
+                                  event.target.value as PublicProjectDraft["urgency"],
+                                )
+                              }
+                              className="mt-3 h-12 w-full cursor-pointer rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
+                            >
+                              <option value="normal">Standard</option>
+                              <option value="high">Élevé</option>
+                              <option value="urgent">Urgent</option>
+                            </select>
+                          </label>
+                        </div>
 
-                {step === 5 ? (
-                  <div className="grid gap-5">
-                    <div className="rounded-[6px] border border-[#3b352e] bg-[#100f0d] p-5">
-                      <p className="caption">Récapitulatif</p>
-                      <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
-                        <Summary label="Besoin" value={projectType} />
-                        <Summary label="Livrable" value={deliverable} />
-                        <Summary
-                          label="Fichiers"
-                          value={
-                            files.length > 0
-                              ? `${files.length} pièce${files.length > 1 ? "s" : ""} à joindre`
-                              : "À joindre après connexion"
-                          }
-                        />
-                        <Summary
-                          label="Contact"
-                          value={contactName || "À renseigner"}
-                        />
-                      </dl>
-                    </div>
+                        <div className="grid gap-3 sm:grid-cols-2">
+                          <ToggleCard
+                            active={needs3d}
+                            label="Besoin d'un aperçu 3D"
+                            onClick={() => setNeeds3d((value) => !value)}
+                          />
+                          <ToggleCard
+                            active={workMode === "creation"}
+                            label="Création complète"
+                            onClick={() =>
+                              setWorkMode((value) =>
+                                value === "creation" ? "correction" : "creation",
+                              )
+                            }
+                          />
+                        </div>
 
-                    <div className="rounded-[6px] border border-[#9f4f38]/35 bg-[#9f4f38]/10 p-5">
-                      <h2 className="font-display text-2xl text-[#fbfaf6]">
-                        Créez votre espace pour envoyer ce projet, échanger avec
-                        le dessinateur, recevoir les aperçus et télécharger les
-                        livrables.
-                      </h2>
-                      <p className="mt-3 text-[14px] leading-6 text-[#d8d0bf]">
-                        Votre brouillon est conservé dans ce navigateur. Après
-                        inscription ou connexion, il sera repris dans l'espace
-                        client pour créer le projet réel.
-                      </p>
-                    </div>
+                        <label className="block">
+                          <span className="caption">Remarques</span>
+                          <textarea
+                            value={notes}
+                            onChange={(event) => setNotes(event.target.value)}
+                            rows={4}
+                            className="mt-3 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-sm leading-6 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#b46a4c] focus:ring-2 focus:ring-[#b46a4c]/20"
+                            placeholder="Contraintes, formats finaux, pièces manquantes, précisions utiles."
+                          />
+                        </label>
+                      </div>
+                    ) : null}
 
-                    {saved ? (
-                      <div className="flex flex-col gap-3 sm:flex-row">
-                        <a
-                          href={`${routes.public.register}?redirect=${authRedirect}`}
-                          className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#9f4f38] px-6 text-sm font-medium text-[#fbfaf6] transition hover:bg-[#7b3828]"
-                        >
-                          Créer mon espace
-                          <ArrowRight className="size-4" aria-hidden="true" />
-                        </a>
-                        <a
-                          href={`${routes.public.login}?redirect=${authRedirect}`}
-                          className="inline-flex h-12 items-center justify-center rounded-full border border-[#4c4339] px-6 text-sm font-medium text-[#d8d0bf] transition hover:border-[#b46a4c] hover:text-[#fbfaf6]"
-                        >
-                          J'ai déjà un compte
-                        </a>
+                    {step === 4 ? (
+                      <div className="grid gap-5">
+                        <div className="rounded-[6px] border border-[#3b352e] bg-[#100f0d] p-5">
+                          <p className="caption">Récapitulatif</p>
+                          <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+                            <Summary label="Besoin" value={projectType} />
+                            <Summary label="Livrable" value={deliverable} />
+                            <Summary
+                              label="Fichiers"
+                              value={
+                                files.length > 0
+                                  ? `${files.length} pièce${files.length > 1 ? "s" : ""} à joindre`
+                                  : "À joindre dans votre espace"
+                              }
+                            />
+                            <Summary
+                              label="Délai"
+                              value={deadline || "À définir ensemble"}
+                            />
+                          </dl>
+                        </div>
+
+                        <div className="rounded-[6px] border border-[#9f4f38]/35 bg-[#9f4f38]/10 p-5">
+                          <p className="caption flex items-center gap-2 text-[#e8b4a1]">
+                            <Sparkles className="size-3.5" aria-hidden="true" />
+                            Dernière étape
+                          </p>
+                          <h2 className="mt-3 font-display text-2xl text-[#fbfaf6]">
+                            Créez votre espace pour envoyer ce dossier, échanger
+                            avec le dessinateur, recevoir les aperçus et
+                            télécharger les livrables.
+                          </h2>
+                          <p className="mt-3 flex items-center gap-2 text-[13px] leading-6 text-[#d8d0bf]">
+                            <CheckCircle2 className="size-4 shrink-0 text-[#8ba07d]" aria-hidden="true" />
+                            Votre brouillon est conservé dans ce navigateur et
+                            repris automatiquement après connexion.
+                          </p>
+                        </div>
+
+                        <div className="flex flex-col gap-3 sm:flex-row">
+                          <a
+                            href={`${routes.public.register}?redirect=${authRedirect}`}
+                            className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-[#9f4f38] px-6 text-sm font-medium text-[#fbfaf6] transition hover:bg-[#7b3828]"
+                          >
+                            Créer mon espace et envoyer
+                            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                          </a>
+                          <a
+                            href={`${routes.public.login}?redirect=${authRedirect}`}
+                            className="inline-flex h-12 cursor-pointer items-center justify-center rounded-full border border-[#4c4339] px-6 text-sm font-medium text-[#d8d0bf] transition hover:border-[#b46a4c] hover:text-[#fbfaf6]"
+                          >
+                            J&apos;ai déjà un compte
+                          </a>
+                        </div>
                       </div>
                     ) : null}
                   </div>
-                ) : null}
-              </div>
+                </motion.div>
+              </AnimatePresence>
 
-              <div className="mt-10 flex flex-col gap-3 border-t border-[#3b352e] pt-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="mt-10 flex items-center justify-between gap-3 border-t border-[#3b352e] pt-6">
                 <button
                   type="button"
                   onClick={back}
                   disabled={step === 0}
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-[#4c4339] px-5 text-sm font-medium text-[#d8d0bf] transition hover:border-[#b46a4c] hover:text-[#fbfaf6] disabled:pointer-events-none disabled:opacity-35"
+                  className="inline-flex h-11 cursor-pointer items-center justify-center gap-2 rounded-full border border-[#4c4339] px-5 text-sm font-medium text-[#d8d0bf] transition hover:border-[#b46a4c] hover:text-[#fbfaf6] disabled:pointer-events-none disabled:opacity-35"
                 >
                   <ArrowLeft className="size-4" aria-hidden="true" />
                   Retour
                 </button>
-                <button
-                  type="button"
-                  onClick={next}
-                  disabled={!canContinue}
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[#9f4f38] px-6 text-sm font-medium text-[#fbfaf6] transition hover:bg-[#7b3828] disabled:pointer-events-none disabled:opacity-50"
-                >
-                  {step === steps.length - 1
-                    ? saved
-                      ? "Brouillon enregistré"
-                      : "Enregistrer le brouillon"
-                    : "Continuer"}
-                  {saved && step === steps.length - 1 ? (
+                {step < lastStep ? (
+                  <button
+                    type="button"
+                    onClick={next}
+                    disabled={!canContinue}
+                    className="group inline-flex h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-[#9f4f38] px-6 text-sm font-medium text-[#fbfaf6] transition hover:bg-[#7b3828] disabled:pointer-events-none disabled:opacity-50"
+                  >
+                    Continuer
+                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                  </button>
+                ) : (
+                  <span className="inline-flex items-center gap-2 text-[12px] font-medium text-[#8ba07d]">
                     <CheckCircle2 className="size-4" aria-hidden="true" />
-                  ) : (
-                    <ArrowRight className="size-4" aria-hidden="true" />
-                  )}
-                </button>
+                    Brouillon enregistré
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -560,17 +547,36 @@ export function PublicProjectDepositFlow() {
                 <span className="caption text-paper/55">Parcours guidé</span>
               </div>
               <p className="mt-4 font-display text-2xl leading-tight text-paper">
-                Commencez maintenant. Le compte n'est demandé qu'à l'envoi.
+                Commencez maintenant. Le compte n&apos;est demandé qu&apos;à
+                l&apos;envoi.
               </p>
               <p className="mt-3 text-[13px] leading-6 text-paper/65">
-                Vous pouvez préparer votre demande sans friction. Les fichiers
+                Aucune friction : préparez votre demande librement. Les fichiers
                 réels seront ajoutés dans votre espace sécurisé après connexion.
               </p>
+
+              <dl className="mt-5 grid gap-2 border-t border-paper/10 pt-4 text-[13px]">
+                <MiniRow label="Besoin" value={projectType} />
+                <MiniRow label="Livrable" value={deliverable} />
+                <MiniRow
+                  label="Pièces"
+                  value={files.length > 0 ? `${files.length} listée${files.length > 1 ? "s" : ""}` : "—"}
+                />
+              </dl>
             </div>
           </div>
         </aside>
       </div>
     </section>
+  );
+}
+
+function MiniRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-baseline justify-between gap-3">
+      <dt className="caption text-paper/45">{label}</dt>
+      <dd className="truncate text-right text-paper/85">{value}</dd>
+    </div>
   );
 }
 
@@ -588,7 +594,7 @@ function ToggleCard({
       type="button"
       onClick={onClick}
       className={cn(
-        "flex min-h-16 items-center justify-between gap-3 rounded-[4px] border p-4 text-left transition",
+        "flex min-h-16 cursor-pointer items-center justify-between gap-3 rounded-[4px] border p-4 text-left transition",
         active
           ? "border-[#b46a4c] bg-[#9f4f38] text-[#fbfaf6]"
           : "border-[#3b352e] bg-[#100f0d] text-[#d8d0bf] hover:border-[#746d62]",
