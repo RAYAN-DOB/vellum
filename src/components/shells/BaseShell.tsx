@@ -1,4 +1,5 @@
 import type { ComponentType, ReactNode, SVGProps } from "react";
+import Link from "next/link";
 
 import { VellumLogo } from "@/components/brand/VellumLogo";
 import { CommandPalette } from "@/components/command/CommandPalette";
@@ -35,8 +36,10 @@ type BaseShellProps = {
 };
 
 /**
- * Shared chrome for every role-specific shell.
- * Each role app wraps this with its own navigation array + accent + content.
+ * Shared chrome for every role-specific shell. Each role app wraps this with
+ * its own navigation array + accent + content. The main header is treated as a
+ * drawing's title-block (cartouche): mono references frame the edges and a
+ * sienna datum edge anchors the title — the drafting language made structural.
  */
 export function BaseShell({
   accent,
@@ -52,10 +55,10 @@ export function BaseShell({
 
   return (
     <div className="min-h-screen bg-paper text-ink">
-      {/* Top bar — dark ink, identity + role switcher slot */}
+      {/* Top bar — dark ink, identity + actions */}
       <header className="relative z-30 border-b border-line-strong/40 bg-ink text-paper">
         <Container className="flex min-h-16 items-center justify-between gap-4">
-          <a
+          <Link
             href="/"
             className="flex items-center gap-2.5"
             aria-label="Vellum — accueil"
@@ -67,7 +70,7 @@ export function BaseShell({
                 {meta.tagline}
               </span>
             </span>
-          </a>
+          </Link>
 
           <div className="flex items-center gap-2">
             <CommandPalette
@@ -96,12 +99,12 @@ export function BaseShell({
                 activeHref === item.href ||
                 (item.href !== "/" && activeHref.startsWith(item.href + "/"));
               return (
-                <a
+                <Link
                   key={item.href}
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "group flex min-w-0 cursor-pointer items-center gap-2.5 rounded-[3px] border px-3 py-2 text-[13px] font-medium transition-colors",
+                    "group flex min-w-0 cursor-pointer items-center gap-2.5 rounded-[2px] border px-3 py-2 text-[13px] font-medium transition-colors",
                     isActive
                       ? "border-ink bg-ink text-paper"
                       : item.emphasis
@@ -110,10 +113,7 @@ export function BaseShell({
                   )}
                 >
                   {item.icon ? (
-                    <item.icon
-                      className="size-4 shrink-0"
-                      aria-hidden="true"
-                    />
+                    <item.icon className="size-4 shrink-0" aria-hidden="true" />
                   ) : (
                     <span
                       aria-hidden="true"
@@ -124,7 +124,7 @@ export function BaseShell({
                     />
                   )}
                   <span className="truncate">{item.label}</span>
-                </a>
+                </Link>
               );
             })}
           </nav>
@@ -132,10 +132,22 @@ export function BaseShell({
 
         {/* Main */}
         <main className="min-w-0">
-          <header className="border-b border-line pb-8">
-            <p className="caption">{eyebrow ?? meta.eyebrow}</p>
-            <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-              <div className="min-w-0 max-w-3xl">
+          {/* Title block (cartouche) */}
+          <header className="relative">
+            <div className="flex items-center justify-between gap-4 border-t border-line-strong pt-2.5">
+              <span className="caption">{eyebrow ?? meta.eyebrow}</span>
+              <span className="caption hidden text-soft sm:inline">
+                Vellum · {meta.tagline}
+              </span>
+            </div>
+
+            <div className="mt-7 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+              {/* sienna datum edge + serif title */}
+              <div className="relative min-w-0 max-w-3xl pl-4">
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 top-1.5 h-[calc(100%-0.5rem)] w-px bg-sienna/50"
+                />
                 <h1 className="display text-[clamp(2rem,4.5vw,3.25rem)] text-ink">
                   {title}
                 </h1>
@@ -149,6 +161,8 @@ export function BaseShell({
                 <div className="flex shrink-0 flex-wrap gap-2">{actions}</div>
               ) : null}
             </div>
+
+            <div className="mt-8 border-b border-line" />
           </header>
 
           <div className="pt-10">{children}</div>

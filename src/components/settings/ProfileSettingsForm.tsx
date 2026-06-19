@@ -1,8 +1,9 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/Button";
 import { updateOwnProfileAction } from "@/lib/actions/profile";
@@ -30,6 +31,11 @@ export function ProfileSettingsForm({ profile }: Props) {
     updateOwnProfileAction,
     initialState,
   );
+
+  useEffect(() => {
+    if (state.error) toast.error(state.error);
+    if (state.success) toast.success(state.success);
+  }, [state]);
 
   return (
     <form action={formAction} className="space-y-5">
@@ -71,23 +77,6 @@ export function ProfileSettingsForm({ profile }: Props) {
         Email :{" "}
         <strong className="font-medium text-ink">{profile.email}</strong>
       </div>
-
-      {state.error ? (
-        <p
-          role="alert"
-          className="rounded-[3px] border border-crimson/30 bg-crimson/5 px-3 py-2 text-sm text-crimson"
-        >
-          {state.error}
-        </p>
-      ) : null}
-      {state.success ? (
-        <p
-          role="status"
-          className="rounded-[3px] border border-moss/30 bg-moss/10 px-3 py-2 text-sm text-moss"
-        >
-          {state.success}
-        </p>
-      ) : null}
 
       <SubmitButton />
     </form>
