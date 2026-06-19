@@ -2,9 +2,11 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { Footer } from "@/components/layout/Footer";
 import { PublicHeader } from "@/components/layout/PublicHeader";
+import { LivingBlueprintHero } from "@/components/marketing/LivingBlueprintHero";
+import { MotionSection } from "@/components/marketing/MotionSection";
+import { ProductDemoFilm } from "@/components/marketing/ProductDemoFilm";
 import { ProductShowcase } from "@/components/marketing/ProductShowcase";
 import { SecurityBlock } from "@/components/marketing/SecurityBlock";
-import { VellumPlanShowcase } from "@/components/marketing/VellumPlanShowcase";
 import { WorkflowStrip } from "@/components/marketing/WorkflowStrip";
 import { routes } from "@/lib/routes";
 
@@ -23,10 +25,17 @@ export function LandingPage() {
 
       <main>
         <Hero />
+        <ProductDemoFilm />
         <TrustStrip />
-        <ProductShowcase />
-        <WorkflowStrip />
-        <SecurityBlock />
+        <MotionSection>
+          <ProductShowcase />
+        </MotionSection>
+        <MotionSection>
+          <WorkflowStrip />
+        </MotionSection>
+        <MotionSection>
+          <SecurityBlock />
+        </MotionSection>
         <FinalCta />
       </main>
 
@@ -75,8 +84,8 @@ function Hero() {
               />
             </a>
             <a
-              href="#workflow"
-              className="group inline-flex h-12 cursor-pointer items-center gap-2 rounded-full border border-line-strong bg-paper/70 px-6 text-[14px] font-medium text-graphite transition hover:border-graphite hover:bg-white/70 hover:text-ink"
+              href="#demo"
+              className="group inline-flex h-12 cursor-pointer items-center gap-2 rounded-full border border-line-strong bg-paper/70 px-6 text-[14px] font-medium text-graphite transition hover:border-graphite hover:bg-vellum/70 hover:text-ink"
             >
               Voir comment ça marche
             </a>
@@ -99,7 +108,7 @@ function Hero() {
         </div>
 
         <div className="relative min-w-0">
-          <VellumPlanShowcase />
+          <LivingBlueprintHero />
         </div>
       </div>
     </section>
