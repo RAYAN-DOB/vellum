@@ -4,8 +4,8 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { InstantEstimate } from "@/components/marketing/InstantEstimate";
-import { LivingBlueprintHero } from "@/components/marketing/LivingBlueprintHero";
 import { MotionSection } from "@/components/marketing/MotionSection";
+import { Hero3D } from "@/components/three/Hero3D";
 import { ProductDemoFilm } from "@/components/marketing/ProductDemoFilm";
 import { ProductShowcase } from "@/components/marketing/ProductShowcase";
 import { SecurityBlock } from "@/components/marketing/SecurityBlock";
@@ -80,7 +80,7 @@ function Hero() {
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Link
               href={routes.public.deposit}
-              className="group inline-flex h-12 cursor-pointer items-center gap-2 rounded-full bg-sienna px-6 text-[14px] font-medium text-paper transition hover:bg-sienna-dark"
+              className="group inline-flex h-12 cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-pine to-canard px-6 text-[14px] font-medium text-paper shadow-[0_10px_30px_-8px_rgba(15,118,110,0.5)] transition hover:shadow-[0_16px_40px_-8px_rgba(15,118,110,0.65)] hover:brightness-105"
             >
               Déposer un projet
               <ArrowRight
@@ -113,7 +113,7 @@ function Hero() {
         </div>
 
         <div className="relative min-w-0">
-          <LivingBlueprintHero />
+          <Hero3D />
         </div>
       </div>
     </section>
