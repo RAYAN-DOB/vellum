@@ -25,6 +25,8 @@ import {
   STRIPE_READY,
   type PaymentChoice,
 } from "@/lib/payments";
+import { BlueprintGrid } from "@/components/atelier/BlueprintGrid";
+import { StampBadge } from "@/components/atelier/StampBadge";
 import { cn } from "@/lib/utils";
 import type { QuoteStatus } from "@/types/database";
 
@@ -101,10 +103,12 @@ export function QuoteSheet({ quote }: { quote: QuoteSheetData }) {
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_360px] lg:gap-8">
+    <div className="relative">
+      <BlueprintGrid className="opacity-50" />
+      <div className="relative grid gap-6 lg:grid-cols-[1fr_360px] lg:gap-8">
       {/* The quote planche */}
       <div className="min-w-0 space-y-6">
-        <article className="overflow-hidden rounded-[4px] border border-line-strong bg-paper">
+        <article className="sheet relative overflow-hidden rounded-[4px] border border-line-strong bg-paper">
           {/* Cartouche */}
           <header className="flex items-center justify-between gap-4 border-b border-line-strong bg-vellum/40 px-6 py-3">
             <span className="caption">
@@ -123,8 +127,8 @@ export function QuoteSheet({ quote }: { quote: QuoteSheetData }) {
                   {quote.projectTitle}
                 </h1>
               </div>
-              {accepted ? <Stamp label="Accepté" tone="moss" /> : null}
-              {expired ? <Stamp label="Clôturé" tone="crimson" /> : null}
+              {accepted ? <StampBadge label="Accepté" tone="pine" /> : null}
+              {expired ? <StampBadge label="Clôturé" tone="crimson" /> : null}
             </div>
 
             {/* Line items */}
@@ -337,6 +341,7 @@ export function QuoteSheet({ quote }: { quote: QuoteSheetData }) {
           </p>
         </div>
       </aside>
+      </div>
     </div>
   );
 }
@@ -368,17 +373,3 @@ function Row({
   );
 }
 
-function Stamp({ label, tone }: { label: string; tone: "moss" | "crimson" }) {
-  return (
-    <span
-      className={cn(
-        "inline-flex shrink-0 -rotate-6 items-center gap-1.5 rounded-[3px] border-2 px-3 py-1 font-mono text-[12px] font-semibold uppercase tracking-[0.12em]",
-        tone === "moss"
-          ? "border-[color-mix(in_srgb,var(--moss)_55%,var(--paper))] text-[color-mix(in_srgb,var(--moss)_60%,var(--ink))]"
-          : "border-[color-mix(in_srgb,var(--crimson)_45%,var(--paper))] text-[color-mix(in_srgb,var(--crimson)_60%,var(--ink))]",
-      )}
-    >
-      {label}
-    </span>
-  );
-}
