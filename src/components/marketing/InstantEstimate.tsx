@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import {
   COMPLEXITY_OPTIONS,
@@ -129,15 +129,13 @@ export function InstantEstimate() {
             <span className="caption text-soft">EST-30S</span>
           </div>
 
-          <AnimatePresence mode="wait">
-            {result ? (
-              <motion.div
-                key={`${kind}-${complexity}-${urgency}`}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.35, ease: EASE }}
-              >
+          {result ? (
+            <motion.div
+              key={`${kind}-${complexity}-${urgency}`}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, ease: EASE }}
+            >
                 <p className="mt-5 font-display text-[clamp(2rem,4vw,2.75rem)] leading-none text-ink">
                   {formatEuro(result.low)}
                   <span className="px-2 text-mute">–</span>
@@ -159,18 +157,11 @@ export function InstantEstimate() {
                 </dl>
               </motion.div>
             ) : (
-              <motion.p
-                key="empty"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="mt-6 text-[14px] leading-[1.6] text-mute"
-              >
+              <p className="mt-6 text-[14px] leading-[1.6] text-mute">
                 Choisissez un type de projet pour afficher votre fourchette de
                 prix et le délai estimé.
-              </motion.p>
+              </p>
             )}
-          </AnimatePresence>
 
           <Link
             href={routes.public.deposit}
