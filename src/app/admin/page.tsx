@@ -10,6 +10,7 @@ import {
   Workflow,
 } from "lucide-react";
 
+import { AdminRevenueCockpit } from "@/components/admin/AdminRevenueCockpit";
 import { AdminShell } from "@/components/shells/AdminShell";
 import { requireRole } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -38,6 +39,46 @@ export default async function AdminWorkspacePage() {
   ]);
 
   const inactiveUsers = (users.count ?? 0) - (activeUsers.count ?? 0);
+
+  const [quotesRes, projectsDataRes] = await Promise.all([
+    supabase.from("quotes").select("status, total_amount"),
+    supabase.from("projects").select("status, expected_delivery_date"),
+  ]);
+  const quoteRows = (quotesRes.data ?? []) as {
+    status: string;
+    total_amount: number | null;
+  }[];
+  const projectRows = (projectsDataRes.data ?? []) as {
+    status: string;
+    expected_delivery_date: string | null;
+  }[];
+
+  const acceptedQuotes = quoteRows.filter((q) => q.status === "accepted");
+  const sentQuotes = quoteRows.filter((q) => q.status !== "draft");
+  const revenue = acceptedQuotes.reduce(
+    (sum, q) => sum + Number(q.total_amount ?? 0),
+    0,
+  );
+  const now = Date.now();
+  const lateProjects = projectRows.filter(
+    (p) =>
+      p.expected_delivery_date &&
+      new Date(p.expected_delivery_date).getTime() < now &&
+      !["delivered", "archived", "cancelled"].includes(p.status),
+  ).length;
+  const statusLabels: Record<string, string> = {
+    sent: "Envoyé",
+    accepted: "Accepté",
+    refused: "Refusé",
+    expired: "Expiré",
+    draft: "Brouillon",
+  };
+  const byStatus = ["sent", "accepted", "refused", "expired", "draft"].map(
+    (s) => ({
+      label: statusLabels[s] ?? s,
+      value: quoteRows.filter((q) => q.status === s).length,
+    }),
+  );
 
   return (
     <AdminShell
@@ -77,6 +118,17 @@ export default async function AdminWorkspacePage() {
             hint="Actions sensibles journalisées"
           />
         </section>
+
+        <AdminRevenueCockpit
+          revenue={revenue}
+          quotesSent={sentQuotes.length}
+          quotesAccepted={acceptedQuotes.length}
+          averageBasket={
+            acceptedQuotes.length > 0 ? revenue / acceptedQuotes.length : 0
+          }
+          lateProjects={lateProjects}
+          byStatus={byStatus}
+        />
 
         {/* Quick access */}
         <section>
