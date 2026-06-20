@@ -63,18 +63,23 @@ function Hero() {
 
       <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-16 pt-32 sm:pb-20 sm:pt-36 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-16 lg:px-10 lg:pb-24 lg:pt-40">
         <div className="max-w-2xl">
-          <h1 className="display text-balance text-[clamp(2.5rem,4.7vw,4rem)] text-ink">
-            Déposez vos plans.
+          <span className="inline-flex items-center gap-2 rounded-full border border-pine/30 bg-pine-tint px-3 py-1 text-[12px] font-medium text-pine-active">
+            <span aria-hidden="true" className="size-1.5 rounded-full bg-pine" />
+            Plans techniques · Schémas · Rendus 3D
+          </span>
+
+          <h1 className="display mt-5 text-balance text-[clamp(2.5rem,4.7vw,4rem)] text-ink">
+            De votre croquis
             <br />
-            Suivez chaque correction
+            au plan professionnel.
             <br />
-            <span className="italic text-graphite">jusqu&apos;au livrable.</span>
+            <span className="italic text-graphite">2D, 3D, livré.</span>
           </h1>
 
           <p className="mt-7 max-w-xl text-[17px] leading-[1.65] text-graphite">
-            Ajoutez vos PDF, DWG, croquis ou photos. Un dessinateur analyse
-            votre demande, vous pose les bonnes questions, prépare les aperçus
-            et vous livre les fichiers finaux.
+            Un dessinateur réalise vos plans techniques, schémas et aperçus 3D à
+            partir d&apos;un simple croquis, d&apos;une photo ou d&apos;un cahier
+            des charges. Devis clair, corrections suivies, fichiers livrés.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -162,14 +167,14 @@ function FinalCta() {
       <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:px-10 lg:py-24">
         <div>
           <h2 className="display text-[clamp(2.25rem,5.5vw,4rem)]">
-            Commencez par vos plans.
+            Un croquis suffit pour commencer.
             <br />
-            <span className="italic">Vellum organise la suite.</span>
+            <span className="italic">Vellum vous livre le plan.</span>
           </h2>
           <p className="mt-6 max-w-lg text-[16px] leading-[1.7] text-paper/70">
-            Décrivez votre besoin maintenant. Votre espace client sera demandé
-            seulement au moment d&apos;envoyer le dossier et de suivre les
-            échanges.
+            Décrivez votre besoin, joignez un croquis ou une photo. Un
+            dessinateur s&apos;occupe du reste — le compte n&apos;est demandé
+            qu&apos;au moment d&apos;envoyer le dossier.
           </p>
         </div>
 
