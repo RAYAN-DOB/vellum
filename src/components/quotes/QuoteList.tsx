@@ -1,6 +1,6 @@
 "use client";
 
-import { Download, Loader2, ReceiptText } from "lucide-react";
+import { ArrowRight, Download, Loader2, ReceiptText } from "lucide-react";
 import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 import { toast } from "sonner";
@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
 import { StatusPill } from "@/components/ui/StatusPill";
+import { routes } from "@/lib/routes";
 import {
   addQuoteItemAction,
   createQuoteAction,
@@ -276,6 +277,18 @@ export function QuoteList({ quotes, projects, canManage }: Props) {
               {canManage ? <AddItemForm quoteId={quote.id} /> : null}
 
               <div className="mt-4 flex items-center justify-end gap-2">
+                {!canManage ? (
+                  <a
+                    href={routes.client.quote(quote.id)}
+                    className="group inline-flex h-8 items-center justify-center gap-1.5 rounded-[3px] bg-pine px-3 text-xs font-medium text-paper transition hover:bg-pine-hover"
+                  >
+                    Voir le devis
+                    <ArrowRight
+                      className="size-3.5 transition-transform group-hover:translate-x-0.5"
+                      aria-hidden="true"
+                    />
+                  </a>
+                ) : null}
                 <a
                   className="inline-flex h-8 items-center justify-center gap-1.5 rounded-[3px] border border-line-strong bg-paper px-3 text-xs font-medium text-ink transition hover:border-ink"
                   href={`/api/quotes/${quote.id}/pdf`}

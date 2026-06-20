@@ -26,6 +26,7 @@ export const routes = {
     messages: "/client/messages",
     documents: "/client/documents",
     quotes: "/client/devis",
+    quote: (id: string) => `/client/devis/${id}`,
     deliverables: "/client/livrables",
     settings: "/client/parametres",
     onboarding: "/client/onboarding",
