@@ -22,7 +22,7 @@ const buttonVariants = cva(
         ghost:
           "bg-transparent text-mute hover:bg-vellum-dim hover:text-ink",
         danger:
-          "bg-crimson text-paper shadow-sm hover:bg-sienna-dark focus-visible:outline-crimson",
+          "bg-crimson text-paper shadow-sm hover:bg-[#7a2f2f] focus-visible:outline-crimson",
       },
       size: {
         sm: "h-8 gap-1.5 px-3 text-sm",

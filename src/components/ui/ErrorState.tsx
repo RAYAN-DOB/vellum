@@ -27,7 +27,7 @@ export function ErrorState({
         />
         <div className="relative">
           <span className="mx-auto flex size-12 items-center justify-center rounded-full border border-line-strong bg-vellum/70">
-            <AlertTriangle className="size-6 text-sienna" aria-hidden="true" />
+            <AlertTriangle className="size-6 text-crimson" aria-hidden="true" />
           </span>
           <p className="caption mt-6">Incident d'affichage</p>
           <h1 className="display mt-3 text-4xl text-ink">{title}</h1>
