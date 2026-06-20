@@ -13,9 +13,12 @@ import {
   Sparkles,
   Trash2,
 } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { BriefQualityMeter } from "@/components/intake/BriefQualityMeter";
+import { scoreBrief } from "@/lib/brief-score";
+import { estimate, formatEuro, type ProjectKind } from "@/lib/estimator";
 import {
   PUBLIC_PROJECT_DRAFT_KEY,
   type PublicDraftFile,
@@ -61,6 +64,16 @@ function iconForFile(file: PublicDraftFile) {
   if (lower.endsWith(".dwg") || lower.endsWith(".dxf")) return FileArchive;
   if (file.type.startsWith("image/")) return ImageIcon;
   return FileText;
+}
+
+/** Map the deposit need type to the estimator's project kind for a live price. */
+function depositKind(projectType: string): ProjectKind {
+  if (projectType.includes("Schéma")) return "schema";
+  if (projectType.includes("3D")) return "apercu3d";
+  if (projectType.includes("Mise au propre")) return "mise_au_propre";
+  if (projectType.includes("Correction") || projectType.includes("Reprise"))
+    return "correction";
+  return "plan2d";
 }
 
 export function PublicProjectDepositFlow() {
@@ -174,6 +187,19 @@ export function PublicProjectDepositFlow() {
   const authRedirect = encodeURIComponent(routes.client.newProject);
   const progress = (step / lastStep) * 100;
 
+  const briefScore = scoreBrief({
+    title: projectType,
+    description,
+    fileCount: files.length,
+    hasDeadline: deadline.trim().length > 0,
+    hasBudget: false,
+  });
+  const priceEst = estimate(
+    depositKind(projectType),
+    workMode === "creation" ? "detaille" : "standard",
+    urgency === "urgent" ? "urgent" : urgency === "high" ? "semaine" : "flexible",
+  );
+
   const variants = {
     enter: (dir: number) => ({
       opacity: 0,
@@ -239,16 +265,14 @@ export function PublicProjectDepositFlow() {
               className="pointer-events-none absolute inset-0 grid-paper opacity-35"
             />
             <div className="relative">
-              <AnimatePresence mode="wait" custom={direction}>
-                <motion.div
-                  key={step}
-                  custom={direction}
-                  variants={variants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{ duration: reduceMotion ? 0 : 0.32, ease: "easeOut" }}
-                >
+              <motion.div
+                key={step}
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                transition={{ duration: reduceMotion ? 0 : 0.32, ease: "easeOut" }}
+              >
                   <h1 className="display max-w-3xl text-[clamp(2.2rem,5.5vw,4.25rem)] text-[#fbfaf6]">
                     {steps[step].title}
                   </h1>
@@ -493,8 +517,7 @@ export function PublicProjectDepositFlow() {
                       </div>
                     ) : null}
                   </div>
-                </motion.div>
-              </AnimatePresence>
+              </motion.div>
 
               <div className="mt-10 flex items-center justify-between gap-3 border-t border-[#3b352e] pt-6">
                 <button
@@ -563,6 +586,28 @@ export function PublicProjectDepositFlow() {
                   value={files.length > 0 ? `${files.length} listée${files.length > 1 ? "s" : ""}` : "—"}
                 />
               </dl>
+
+              <div className="mt-5 border-t border-paper/10 pt-4">
+                <div className="flex items-baseline justify-between">
+                  <span className="caption text-paper/45">
+                    Estimation indicative
+                  </span>
+                  <span className="font-mono text-[13px] text-paper/90">
+                    {formatEuro(priceEst.low)} – {formatEuro(priceEst.high)}
+                  </span>
+                </div>
+                <p className="mt-1 text-[11px] leading-4 text-paper/45">
+                  Fourchette indicative · ~ {priceEst.days} j. Le devis exact est
+                  établi par le dessinateur.
+                </p>
+              </div>
+
+              <BriefQualityMeter
+                score={briefScore.score}
+                label={briefScore.label}
+                tips={briefScore.tips}
+                className="mt-5 border-t border-paper/10 pt-4"
+              />
             </div>
           </div>
         </aside>
