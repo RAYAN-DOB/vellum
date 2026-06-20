@@ -39,7 +39,7 @@ type BaseShellProps = {
  * Shared chrome for every role-specific shell. Each role app wraps this with
  * its own navigation array + accent + content. The main header is treated as a
  * drawing's title-block (cartouche): mono references frame the edges and a
- * sienna datum edge anchors the title — the drafting language made structural.
+ * pine datum edge anchors the title — the drafting language made structural.
  */
 export function BaseShell({
   accent,
@@ -52,6 +52,21 @@ export function BaseShell({
   children,
 }: BaseShellProps) {
   const meta = accentMap[accent];
+
+  // Only the most specific matching nav item is "active", so a section root
+  // (e.g. /client) doesn't also light up on its sub-routes (/client/projets/…).
+  const activeItemHref =
+    navigation
+      .filter(
+        (item) =>
+          activeHref === item.href ||
+          (item.href !== "/" && activeHref.startsWith(item.href + "/")),
+      )
+      .reduce<string | null>(
+        (best, item) =>
+          !best || item.href.length > best.length ? item.href : best,
+        null,
+      ) ?? activeHref;
 
   return (
     <div className="min-h-screen bg-paper text-ink">
@@ -95,9 +110,7 @@ export function BaseShell({
             className="grid grid-cols-2 gap-1.5 lg:grid-cols-1"
           >
             {navigation.map((item) => {
-              const isActive =
-                activeHref === item.href ||
-                (item.href !== "/" && activeHref.startsWith(item.href + "/"));
+              const isActive = item.href === activeItemHref;
               return (
                 <Link
                   key={item.href}
@@ -142,11 +155,11 @@ export function BaseShell({
             </div>
 
             <div className="mt-7 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-              {/* sienna datum edge + serif title */}
+              {/* pine datum edge + serif title */}
               <div className="relative min-w-0 max-w-3xl pl-4">
                 <span
                   aria-hidden="true"
-                  className="absolute left-0 top-1.5 h-[calc(100%-0.5rem)] w-px bg-sienna/50"
+                  className="absolute left-0 top-1.5 h-[calc(100%-0.5rem)] w-px bg-pine/50"
                 />
                 <h1 className="display text-[clamp(2rem,4.5vw,3.25rem)] text-ink">
                   {title}
