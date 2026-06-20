@@ -40,7 +40,7 @@ export function VellumPlanShowcase() {
     <div className="vellum-plan-showcase group relative mx-auto w-full max-w-[680px]">
       <div
         aria-hidden="true"
-        className="absolute -inset-8 rounded-[10px] bg-[radial-gradient(circle_at_70%_12%,rgba(159,79,56,0.14),transparent_34%),linear-gradient(135deg,rgba(251,250,246,0.8),rgba(241,234,223,0.24))]"
+        className="absolute -inset-8 rounded-[10px] bg-[radial-gradient(circle_at_70%_12%,rgba(31,107,71,0.14),transparent_34%),linear-gradient(135deg,rgba(251,250,246,0.8),rgba(241,234,223,0.24))]"
       />
 
       <div className="relative overflow-hidden rounded-[8px] border border-[#d8d0bf] bg-ink shadow-[0_34px_90px_rgba(21,20,16,0.22)]">
@@ -70,7 +70,7 @@ export function VellumPlanShowcase() {
           <div className="annotation-pin absolute left-4 top-4 rounded-full border border-paper/20 bg-[#151410]/68 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-paper shadow-[0_12px_28px_rgba(21,20,16,0.24)] backdrop-blur sm:left-6 sm:top-6">
             calques actifs
           </div>
-          <div className="annotation-pin annotation-pin-delay absolute right-4 top-[52%] rounded-full border border-[#9f4f38]/30 bg-[#fbfaf6]/88 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#7b3828] shadow-[0_12px_28px_rgba(21,20,16,0.14)] backdrop-blur sm:right-6">
+          <div className="annotation-pin annotation-pin-delay absolute right-4 top-[52%] rounded-full border border-[#1f6b47]/30 bg-[#fbfaf6]/88 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#154c31] shadow-[0_12px_28px_rgba(21,20,16,0.14)] backdrop-blur sm:right-6">
             à vérifier
           </div>
 
@@ -81,7 +81,7 @@ export function VellumPlanShowcase() {
                 className="plan-mini-card flex min-w-0 flex-col items-center gap-1 rounded-[5px] border border-[#fbfaf6]/18 bg-[#151410]/64 px-1.5 py-2 text-center text-paper shadow-[0_14px_30px_rgba(21,20,16,0.18)] backdrop-blur sm:flex-row sm:gap-2 sm:px-3 sm:text-left"
                 style={{ animationDelay: `${index * 160}ms` }}
               >
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-[3px] bg-[#fbfaf6]/92 text-[#7b3828] sm:size-8">
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-[3px] bg-[#fbfaf6]/92 text-[#154c31] sm:size-8">
                   <Icon className="size-3.5" aria-hidden="true" />
                 </span>
                 <span className="min-w-0">

@@ -14,9 +14,9 @@ const badgeVariants = cva(
       tone: {
         neutral: "bg-[#eee8dc] text-[#5e594d] ring-[#d8d0bf]",
         blue: "bg-[#e9edf0] text-[#47515a] ring-[#cbd3d8]",
-        green: "bg-emerald-50 text-emerald-800 ring-emerald-200",
-        amber: "bg-[#f4ead7] text-[#8a5b15] ring-[#e4c887]",
-        red: "bg-red-50 text-red-700 ring-red-200",
+        green: "bg-[#e7efe3] text-[#3a4a34] ring-[#c3d2bb]",
+        amber: "bg-[#e4f0e9] text-[#154c31] ring-[#bcdac9]",
+        red: "bg-[#f3e4e3] text-[#7a2e2e] ring-[#e0bdbb]",
       },
     },
     defaultVariants: {

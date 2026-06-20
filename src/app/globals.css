@@ -7,36 +7,50 @@
    ────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  /* Surface system */
-  --paper: #fbfaf6;         /* warm off-white, never pure white */
-  --vellum: #f1eadf;        /* translucent drafting paper */
-  --vellum-dim: #e8dfd1;    /* slightly deeper paper */
-  --line: #e3ddd0;          /* hairline borders */
-  --line-strong: #d8d0bf;   /* visible borders */
+  /* Surface system — cooled bone (Atelier), off-yellow */
+  --paper: #f8f8f4;         /* cooled off-white, never pure white */
+  --vellum: #efefe8;        /* drafting paper panel */
+  --vellum-dim: #e5e5db;    /* slightly deeper paper */
+  --line: #e0e1d6;          /* hairline borders */
+  --line-strong: #d1d2c4;   /* visible borders */
 
   /* Ink system */
-  --ink: #151410;           /* near-black, body text */
-  --graphite: #25231f;      /* secondary text */
-  --mute: #746d62;          /* tertiary text, labels */
-  --soft: #a39a8c;          /* placeholders, captions */
+  --ink: #16191a;           /* near-black, body text */
+  --graphite: #2b2f2e;      /* secondary text */
+  --mute: #5e665f;          /* tertiary text, labels */
+  --soft: #99a09a;          /* placeholders, captions */
 
   /* Action */
-  --iron: #151410;          /* primary CTA bg */
-  --iron-hover: #25231f;    /* CTA hover */
+  --iron: #16191a;          /* primary CTA bg */
+  --iron-hover: #2b2f2e;    /* CTA hover */
 
-  /* Accent — used sparingly */
-  --sienna: #9f4f38;        /* signature accent, seals */
-  --sienna-dark: #7b3828;   /* sienna hover / pressed */
-  --sienna-soft: #d9b1a1;
-  --moss: #5f6f55;          /* positive states */
-  --amber: #b46a4c;         /* drafting/electric accent */
-  --crimson: #7b3828;       /* destructive */
+  /* Accent — ATELIER pine green, used sparingly
+     (links, active nav/selection, focus companion, logo tick, status) */
+  --pine: #1f6b47;          /* signature accent */
+  --pine-hover: #1a5c3c;    /* accent hover */
+  --pine-active: #154c31;   /* accent pressed */
+  --pine-tint: #e4f0e9;     /* selected rows / soft washes */
+  --sage: #6e8c76;          /* validated / positive secondary */
+  --sage-soft: #dde7de;
+
+  /* Semantic */
+  --moss: #5f6f55;          /* positive states (done / delivered) */
+  --crimson: #8f3a3a;       /* destructive — desaturated red, no orange */
+
+  /* Backward-compat aliases → repointed into the pine world so legacy
+     bg-sienna / text-amber / var(--sienna) call-sites stay valid and
+     render on-brand until each is migrated to the pine/sage tokens. */
+  --sienna: var(--pine);
+  --sienna-dark: var(--pine-hover);
+  --sienna-soft: var(--sage-soft);
+  --amber: var(--pine);
+  --clay: var(--pine);
 
   /* Token aliases (compat existing components) */
   --background: var(--paper);
   --foreground: var(--ink);
   --surface: var(--vellum);
-  --blueprint: var(--mute);
+  --blueprint: var(--pine);
 
   /* Radius scale */
   --r-sm: 2px;
@@ -44,11 +58,11 @@
   --r-lg: 8px;
   --r-pill: 9999px;
 
-  /* Elevation scale — soft shadows tuned to warm ink (#151410) */
-  --e1: 0 1px 2px rgba(21, 20, 16, 0.06);
-  --e2: 0 4px 10px -4px rgba(21, 20, 16, 0.1);
-  --e3: 0 12px 24px -12px rgba(21, 20, 16, 0.14);
-  --e4: 0 30px 60px -30px rgba(21, 20, 16, 0.18);
+  /* Elevation scale — soft shadows tuned to ink (#16191a) */
+  --e1: 0 1px 2px rgba(22, 25, 26, 0.06);
+  --e2: 0 4px 10px -4px rgba(22, 25, 26, 0.1);
+  --e3: 0 12px 24px -12px rgba(22, 25, 26, 0.14);
+  --e4: 0 30px 60px -30px rgba(22, 25, 26, 0.18);
 }
 
 @theme inline {
@@ -64,13 +78,20 @@
   --color-mute: var(--mute);
   --color-soft: var(--soft);
   --color-iron: var(--iron);
+  --color-pine: var(--pine);
+  --color-pine-hover: var(--pine-hover);
+  --color-pine-active: var(--pine-active);
+  --color-pine-tint: var(--pine-tint);
+  --color-sage: var(--sage);
+  --color-sage-soft: var(--sage-soft);
+  --color-moss: var(--moss);
+  --color-crimson: var(--crimson);
+  /* legacy aliases (resolve to pine) — keep until call-sites migrate */
   --color-sienna: var(--sienna);
   --color-sienna-dark: var(--sienna-dark);
-  --color-clay: #b46a4c;
-  --color-blueprint: #55758a;
-  --color-moss: var(--moss);
+  --color-clay: var(--clay);
   --color-amber: var(--amber);
-  --color-crimson: var(--crimson);
+  --color-blueprint: var(--blueprint);
 
   --font-sans: var(--font-inter);
   --font-display: var(--font-instrument-serif);

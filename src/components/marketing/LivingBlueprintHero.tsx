@@ -56,7 +56,7 @@ export function LivingBlueprintHero() {
       {/* faint sienna radial wash — the only allowed gradient */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -inset-8 rounded-[12px] bg-[radial-gradient(circle_at_72%_14%,rgba(159,79,56,0.12),transparent_40%)]"
+        className="pointer-events-none absolute -inset-8 rounded-[12px] bg-[radial-gradient(circle_at_72%_14%,rgba(31,107,71,0.12),transparent_40%)]"
       />
 
       <motion.div
