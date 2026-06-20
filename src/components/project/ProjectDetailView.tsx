@@ -3,6 +3,7 @@ import { ProjectDocumentList } from "@/components/project/ProjectDocumentList";
 import { ProjectEventLog } from "@/components/project/ProjectEventLog";
 import { ProjectHeader } from "@/components/project/ProjectHeader";
 import { ProjectMessageThread } from "@/components/project/ProjectMessageThread";
+import { ProjectTracker } from "@/components/project/ProjectTracker";
 import { routes } from "@/lib/routes";
 import type {
   ProjectDocumentWithUploader,
@@ -39,6 +40,11 @@ export function ProjectDetailView({
   return (
     <div className="space-y-6">
       <ProjectHeader project={project} backHref={backHrefForRole(currentUserRole)} />
+
+      <ProjectTracker
+        status={project.status}
+        audience={currentUserRole === "client" ? "client" : "internal"}
+      />
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
         <div className="min-w-0 space-y-6">

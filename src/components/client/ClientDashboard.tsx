@@ -41,6 +41,14 @@ export function ClientDashboard({ user, projects, unreadMessages }: Props) {
   const lastProject = projects[0];
   const firstName = (user.profile.full_name ?? user.email).split(" ")[0];
 
+  const actionNeeded = projects.filter(
+    (p) => p.status === "review" || p.status === "draft",
+  );
+  const atVellumCount = projects.filter((p) =>
+    ["intake", "qualified", "assigned", "in_progress"].includes(p.status),
+  ).length;
+  const hasTodo = actionNeeded.length > 0 || unreadMessages > 0;
+
   return (
     <div className="space-y-12">
       {/* Hero band — primary CTA */}
@@ -75,6 +83,95 @@ export function ClientDashboard({ user, projects, unreadMessages }: Props) {
             />
           </a>
         </div>
+      </section>
+
+      {/* À traiter — what needs the client right now (never-blocked cockpit) */}
+      <section>
+        <header className="flex items-baseline justify-between border-b border-line pb-4">
+          <h2 className="display text-2xl text-ink">À traiter</h2>
+          {atVellumCount > 0 ? (
+            <span className="caption">
+              {atVellumCount}{" "}
+              {atVellumCount > 1 ? "projets en cours" : "projet en cours"} chez
+              Vellum
+            </span>
+          ) : null}
+        </header>
+
+        {hasTodo ? (
+          <Reveal as="ul" stagger className="mt-6 grid gap-3">
+            {unreadMessages > 0 ? (
+              <Reveal as="li" item>
+                <a
+                  href={routes.client.messages}
+                  className="lift group flex items-center justify-between gap-3 rounded-[3px] border border-line bg-paper p-5 transition-colors hover:border-ink hover:bg-vellum/40"
+                >
+                  <span className="flex min-w-0 items-center gap-3">
+                    <MessageSquare
+                      className="size-5 shrink-0 text-pine"
+                      aria-hidden="true"
+                    />
+                    <span className="min-w-0">
+                      <span className="block font-display text-lg text-ink">
+                        {unreadMessages} message{unreadMessages > 1 ? "s" : ""} à
+                        lire
+                      </span>
+                      <span className="block text-[13px] text-mute">
+                        Le dessinateur attend peut-être votre réponse.
+                      </span>
+                    </span>
+                  </span>
+                  <span className="caption inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[color-mix(in_srgb,var(--pine)_35%,var(--paper))] bg-pine-tint px-3 py-1 text-pine-active">
+                    Répondre
+                  </span>
+                </a>
+              </Reveal>
+            ) : null}
+            {actionNeeded.map((project) => {
+              const isReview = project.status === "review";
+              return (
+                <Reveal as="li" item key={project.id}>
+                  <a
+                    href={routes.client.project(project.id)}
+                    className="lift group flex flex-col gap-3 rounded-[3px] border border-line bg-paper p-5 transition-colors hover:border-ink hover:bg-vellum/40 sm:flex-row sm:items-center sm:justify-between"
+                  >
+                    <span className="min-w-0">
+                      <span className="font-mono text-[11px] text-mute">
+                        {project.reference ?? "—"}
+                      </span>
+                      <span className="mt-1 block truncate font-display text-lg text-ink">
+                        {project.title}
+                      </span>
+                      <span className="block text-[13px] text-mute">
+                        {isReview
+                          ? "Un aperçu vous attend : à valider ou à corriger."
+                          : "Dépôt incomplet : finalisez-le pour démarrer."}
+                      </span>
+                    </span>
+                    <span className="caption inline-flex shrink-0 items-center gap-1.5 self-start rounded-full border border-[color-mix(in_srgb,var(--pine)_35%,var(--paper))] bg-pine-tint px-3 py-1 text-pine-active sm:self-center">
+                      {isReview ? "Valider l'aperçu" : "Compléter le dépôt"}
+                      <ArrowRight className="size-3.5" aria-hidden="true" />
+                    </span>
+                  </a>
+                </Reveal>
+              );
+            })}
+          </Reveal>
+        ) : (
+          <div className="mt-6 rounded-[3px] border border-dashed border-line-strong bg-vellum/30 p-8 text-center">
+            <ShieldCheck
+              className="mx-auto size-6 text-pine"
+              aria-hidden="true"
+            />
+            <p className="mt-3 font-display text-xl text-ink">
+              Rien à traiter pour l'instant.
+            </p>
+            <p className="mx-auto mt-2 max-w-md text-[13px] leading-[1.6] text-mute">
+              Vous êtes à jour. Nous vous prévenons dès qu'une action vous
+              attend de votre côté.
+            </p>
+          </div>
+        )}
       </section>
 
       {/* Stat row */}
