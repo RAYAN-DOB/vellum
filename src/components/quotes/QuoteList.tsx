@@ -11,9 +11,12 @@ import { StatusPill } from "@/components/ui/StatusPill";
 import { routes } from "@/lib/routes";
 import {
   addQuoteItemAction,
+  applyQuoteTemplateAction,
   createQuoteAction,
   updateQuoteStatusAction,
 } from "@/lib/actions/quotes";
+import { formatEuro } from "@/lib/business-config";
+import { QUOTE_TEMPLATES, templateTotal } from "@/lib/designer-presets";
 import type {
   ProjectRow,
   QuoteItemRow,
@@ -152,6 +155,41 @@ function AddItemForm({ quoteId }: { quoteId: string }) {
   );
 }
 
+function TemplatesRow({ quoteId }: { quoteId: string }) {
+  const [state, formAction] = useActionState(
+    applyQuoteTemplateAction,
+    initialState,
+  );
+
+  useEffect(() => {
+    if (state.error) toast.error(state.error);
+    if (state.success) toast.success(state.success);
+  }, [state]);
+
+  return (
+    <div className="border-t border-line pt-3">
+      <p className="text-[10px] uppercase tracking-[0.18em] text-mute">
+        Modèles de devis
+      </p>
+      <div className="mt-2 flex flex-wrap gap-2">
+        {QUOTE_TEMPLATES.map((template) => (
+          <form action={formAction} key={template.id}>
+            <input type="hidden" name="quote_id" value={quoteId} />
+            <input type="hidden" name="template_id" value={template.id} />
+            <button
+              type="submit"
+              title={`${template.description} · dès ${formatEuro(templateTotal(template))}`}
+              className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-line-strong bg-paper px-3 py-1.5 text-xs font-medium text-graphite transition hover:border-pine hover:text-ink"
+            >
+              + {template.label}
+            </button>
+          </form>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function StatusForm({
   quoteId,
   current,
@@ -274,6 +312,7 @@ export function QuoteList({ quotes, projects, canManage }: Props) {
                 </p>
               )}
 
+              {canManage ? <TemplatesRow quoteId={quote.id} /> : null}
               {canManage ? <AddItemForm quoteId={quote.id} /> : null}
 
               <div className="mt-4 flex items-center justify-end gap-2">

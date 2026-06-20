@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { requireRole, requireUser } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { QUOTE_TEMPLATES } from "@/lib/designer-presets";
 import type { QuoteStatus } from "@/types/database";
 
 const VALID_QUOTE_STATUS = new Set<QuoteStatus>([
@@ -118,4 +119,39 @@ export async function updateQuoteStatusAction(
 
   revalidatePath("/manager/devis");
   return { success: "Statut mis à jour." };
+}
+
+export async function applyQuoteTemplateAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  await requireRole(["manager", "admin"]);
+  const quoteId = String(formData.get("quote_id") ?? "");
+  const templateId = String(formData.get("template_id") ?? "");
+  const template = QUOTE_TEMPLATES.find((t) => t.id === templateId);
+
+  if (!quoteId || !template) return { error: "Modèle introuvable." };
+
+  const supabase = await createSupabaseServerClient();
+  const { error: insertError } = await supabase.from("quote_items").insert(
+    template.lines.map((line) => ({
+      quote_id: quoteId,
+      label: line.label,
+      quantity: 1,
+      unit_price: line.unitPrice,
+    })),
+  );
+
+  if (insertError) return { error: insertError.message };
+
+  const { data: items } = await supabase
+    .from("quote_items")
+    .select("total")
+    .eq("quote_id", quoteId);
+  const total =
+    items?.reduce((sum, item) => sum + Number(item.total ?? 0), 0) ?? 0;
+  await supabase.from("quotes").update({ total_amount: total }).eq("id", quoteId);
+
+  revalidatePath("/manager/devis");
+  return { success: `Modèle « ${template.label} » ajouté.` };
 }

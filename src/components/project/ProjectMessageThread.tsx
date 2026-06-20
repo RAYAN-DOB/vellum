@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { sendProjectMessageAction } from "@/lib/actions/projects";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { QUICK_REPLIES } from "@/lib/designer-presets";
 import { roleLabels } from "@/lib/project-display";
 import { cn } from "@/lib/utils";
 import type { ProjectMessageWithSender } from "@/components/project/project-detail-types";
@@ -181,6 +182,25 @@ export function ProjectMessageThread({
       )}
 
       <form className="mt-5" onSubmit={handleSubmit}>
+        {currentUserRole !== "client" ? (
+          <div className="mb-3 flex flex-wrap gap-1.5">
+            {QUICK_REPLIES.map((reply) => (
+              <button
+                key={reply}
+                type="button"
+                onClick={() => {
+                  if (textareaRef.current) {
+                    textareaRef.current.value = reply;
+                    textareaRef.current.focus();
+                  }
+                }}
+                className="cursor-pointer rounded-full border border-line bg-vellum/40 px-2.5 py-1 text-[11px] text-graphite transition hover:border-pine hover:text-ink"
+              >
+                {reply}
+              </button>
+            ))}
+          </div>
+        ) : null}
         <label htmlFor="message-body" className="sr-only">
           Votre message
         </label>
