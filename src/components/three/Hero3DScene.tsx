@@ -2,84 +2,79 @@
 
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float } from "@react-three/drei";
 import * as THREE from "three";
 
 /**
- * Hero3DScene — a real WebGL scene: an emerald gem with floating drafting forms
- * (rule, compass arc, set-square shard) that drift, rotate and follow the
- * pointer. Deliberately ROBUST: physical materials lit by colored lights, no
- * EffectComposer, no environment HDR, no poster overlay (that overlay hiding
- * the canvas was the cause of the earlier blank render). Transparent canvas so
- * the emerald glow + paper show through.
+ * Hero3DScene — the product made desirable: a small emerald BUILDING MASSING
+ * (a plan become a 3D volume) on its base plate, turning slowly and following
+ * the pointer. Uses the proven robust setup (on-axis camera, emerald physical
+ * materials that read on the light paper, no EffectComposer / no environment /
+ * no poster overlay — the causes of earlier blanks).
  */
 
-function Tools() {
+function Building() {
   const group = useRef<THREE.Group>(null);
 
   useFrame((state, delta) => {
     const g = group.current;
     if (!g) return;
-    g.rotation.y += delta * 0.22;
-    g.rotation.x = THREE.MathUtils.lerp(g.rotation.x, state.pointer.y * 0.18, 0.05);
-    g.rotation.z = THREE.MathUtils.lerp(g.rotation.z, -state.pointer.x * 0.12, 0.05);
+    g.rotation.y += delta * 0.25;
+    g.rotation.x = THREE.MathUtils.lerp(
+      g.rotation.x,
+      -0.22 + state.pointer.y * 0.1,
+      0.05,
+    );
   });
 
   return (
-    <group ref={group}>
-      {/* The emerald gem */}
-      <Float speed={1.6} rotationIntensity={0.5} floatIntensity={0.9}>
-        <mesh>
-          <icosahedronGeometry args={[1.4, 0]} />
-          <meshPhysicalMaterial
-            color="#0e8d7d"
-            roughness={0.08}
-            metalness={0.3}
-            clearcoat={1}
-            clearcoatRoughness={0.08}
-            emissive="#0c6b5f"
-            emissiveIntensity={0.55}
-            reflectivity={0.85}
-          />
-        </mesh>
-      </Float>
+    <group ref={group} rotation={[-0.22, 0.5, 0]}>
+      {/* Plan base plate (the 2D plan) */}
+      <mesh position={[0, -1.05, 0]}>
+        <boxGeometry args={[3.6, 0.14, 2.7]} />
+        <meshStandardMaterial
+          color="#0c5b53"
+          roughness={0.5}
+          metalness={0.2}
+          emissive="#082f2b"
+          emissiveIntensity={0.25}
+        />
+      </mesh>
 
-      {/* Rule */}
-      <Float speed={1.4} rotationIntensity={0.8} floatIntensity={1.3}>
-        <mesh position={[2.3, 0.9, -1]} rotation={[0.5, 0.3, 0.7]}>
-          <boxGeometry args={[2.4, 0.2, 0.07]} />
-          <meshStandardMaterial
-            color="#0e7490"
-            roughness={0.3}
-            metalness={0.6}
-            emissive="#0a3a45"
-            emissiveIntensity={0.2}
-          />
-        </mesh>
-      </Float>
+      {/* Ground floor */}
+      <mesh position={[0, -0.4, 0]}>
+        <boxGeometry args={[2.4, 1, 1.8]} />
+        <meshStandardMaterial
+          color="#0f766e"
+          roughness={0.32}
+          metalness={0.25}
+          emissive="#0a4f49"
+          emissiveIntensity={0.28}
+        />
+      </mesh>
 
-      {/* Compass arc */}
-      <Float speed={1.9} rotationIntensity={0.6} floatIntensity={1.1}>
-        <mesh position={[-2.4, -1, -0.4]} rotation={[0.3, -0.4, -0.3]}>
-          <torusGeometry args={[0.75, 0.07, 20, 64, Math.PI * 1.35]} />
-          <meshStandardMaterial color="#6f8f86" roughness={0.35} metalness={0.4} />
-        </mesh>
-      </Float>
+      {/* Upper floor, offset (massing) */}
+      <mesh position={[0.42, 0.58, -0.2]}>
+        <boxGeometry args={[1.6, 0.95, 1.3]} />
+        <meshStandardMaterial
+          color="#10897b"
+          roughness={0.28}
+          metalness={0.25}
+          emissive="#0c6b5f"
+          emissiveIntensity={0.32}
+        />
+      </mesh>
 
-      {/* Set-square shard */}
-      <Float speed={1.7} floatIntensity={1}>
-        <mesh position={[1.6, -1.4, 0.6]} rotation={[0.2, 0.5, 0.9]}>
-          <tetrahedronGeometry args={[0.5, 0]} />
-          <meshPhysicalMaterial
-            color="#10b981"
-            roughness={0.15}
-            metalness={0.2}
-            clearcoat={1}
-            emissive="#0a5c44"
-            emissiveIntensity={0.3}
-          />
-        </mesh>
-      </Float>
+      {/* Bright emerald roof edge — the signature accent */}
+      <mesh position={[0.42, 1.08, -0.2]}>
+        <boxGeometry args={[1.72, 0.07, 1.42]} />
+        <meshStandardMaterial
+          color="#34d399"
+          roughness={0.22}
+          metalness={0.5}
+          emissive="#10b981"
+          emissiveIntensity={0.5}
+        />
+      </mesh>
     </group>
   );
 }
@@ -92,11 +87,10 @@ export default function Hero3DScene() {
       gl={{ antialias: true, alpha: true }}
     >
       <ambientLight intensity={0.7} />
-      <directionalLight position={[5, 6, 5]} intensity={2.6} />
+      <directionalLight position={[5, 6, 5]} intensity={2.4} />
       <pointLight position={[2, 3, 5]} color="#ffffff" intensity={1.6} decay={0} />
-      <pointLight position={[-5, 2, 4]} color="#10b981" intensity={2.8} decay={0} />
-      <pointLight position={[4, -3, 3]} color="#0e7490" intensity={2.2} decay={0} />
-      <Tools />
+      <pointLight position={[-5, 2, 4]} color="#10b981" intensity={2.6} decay={0} />
+      <Building />
     </Canvas>
   );
 }

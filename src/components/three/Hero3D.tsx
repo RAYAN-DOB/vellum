@@ -32,10 +32,10 @@ export function Hero3D() {
     <div className="relative mx-auto aspect-square w-full max-w-[560px]">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -inset-12 rounded-[48px]"
+        className="pointer-events-none absolute -inset-10 rounded-[44px]"
         style={{
           background:
-            "radial-gradient(circle at 55% 42%, rgba(16,185,129,0.30), rgba(14,116,144,0.14) 38%, transparent 66%)",
+            "radial-gradient(circle at 55% 42%, rgba(16,185,129,0.22), rgba(14,116,144,0.10) 40%, transparent 66%)",
         }}
       />
       {reduce ? <Glow /> : <Hero3DScene />}
