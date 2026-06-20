@@ -4,6 +4,8 @@ import { ArrowUpRight, Loader2, ShieldCheck, UserCheck } from "lucide-react";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 
+import { CountUp } from "@/components/motion/CountUp";
+import { Reveal } from "@/components/motion/Reveal";
 import { StatusPill } from "@/components/ui/StatusPill";
 import {
   assignProjectAction,
@@ -235,7 +237,7 @@ function Stat({
         <p className="caption">{label}</p>
       </div>
       <p className="font-display mt-3 text-4xl leading-none text-ink">
-        {value}
+        <CountUp value={value} />
       </p>
     </div>
   );
@@ -263,11 +265,13 @@ function Group({
           Aucun projet dans cette colonne.
         </p>
       ) : (
-        <ul className="grid gap-3">
+        <Reveal as="ul" stagger className="grid gap-3">
           {(collapsedByDefault ? items.slice(0, 3) : items).map((p) => (
-            <li
+            <Reveal
+              as="li"
+              item
               key={p.id}
-              className="rounded-[3px] border border-line bg-paper p-5 transition-colors hover:border-line-strong"
+              className="lift rounded-[3px] border border-line bg-paper p-5 transition-colors hover:border-line-strong"
             >
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0 flex-1">
@@ -304,9 +308,9 @@ function Group({
                 </a>
               </div>
               {children(p)}
-            </li>
+            </Reveal>
           ))}
-        </ul>
+        </Reveal>
       )}
     </section>
   );

@@ -7,6 +7,8 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
+import { CountUp } from "@/components/motion/CountUp";
+import { Reveal } from "@/components/motion/Reveal";
 import { StatusPill } from "@/components/ui/StatusPill";
 import {
   confidentialityLabels,
@@ -98,12 +100,12 @@ export function ClientDashboard({ user, projects, unreadMessages }: Props) {
         {recentProjects.length === 0 ? (
           <DashboardEmptyState />
         ) : (
-          <ul className="mt-6 grid gap-3">
+          <Reveal as="ul" stagger className="mt-6 grid gap-3">
             {recentProjects.map((project) => (
-              <li key={project.id}>
+              <Reveal as="li" item key={project.id}>
                 <a
                   href={routes.client.project(project.id)}
-                  className="group flex flex-col gap-3 rounded-[3px] border border-line bg-paper p-5 transition-colors hover:border-ink hover:bg-vellum/40 sm:flex-row sm:items-center sm:justify-between"
+                  className="lift group flex flex-col gap-3 rounded-[3px] border border-line bg-paper p-5 transition-colors hover:border-ink hover:bg-vellum/40 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
@@ -143,15 +145,15 @@ export function ClientDashboard({ user, projects, unreadMessages }: Props) {
                     />
                   </div>
                 </a>
-              </li>
+              </Reveal>
             ))}
-          </ul>
+          </Reveal>
         )}
       </section>
 
       {/* Continue last project */}
       {lastProject ? (
-        <section className="rounded-[4px] border border-line bg-vellum/40 p-6">
+        <Reveal as="section" className="rounded-[4px] border border-line bg-vellum/40 p-6">
           <p className="caption">Reprendre</p>
           <p className="mt-3 text-[15px] text-ink">
             <strong className="font-medium">{lastProject.title}</strong>
@@ -175,7 +177,7 @@ export function ClientDashboard({ user, projects, unreadMessages }: Props) {
               Envoyer un message
             </a>
           </div>
-        </section>
+        </Reveal>
       ) : null}
     </div>
   );
@@ -194,7 +196,7 @@ function StatCell({
     <div className="bg-paper p-6">
       <p className="caption">{label}</p>
       <p className="font-display mt-3 text-4xl leading-none text-ink">
-        {value}
+        {typeof value === "number" ? <CountUp value={value} /> : value}
       </p>
       {hint ? <p className="mt-2 text-[12px] text-mute">{hint}</p> : null}
     </div>

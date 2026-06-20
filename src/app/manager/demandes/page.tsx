@@ -1,5 +1,6 @@
 import { Inbox } from "lucide-react";
 
+import { Reveal } from "@/components/motion/Reveal";
 import { ManagerShell } from "@/components/shells/ManagerShell";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { requireRole } from "@/lib/auth";
@@ -27,12 +28,12 @@ export default async function ManagerRequestsPage() {
           description="Toutes les demandes clients en cours sont déjà qualifiées ou en production. La file se remplit dès qu'un client dépose un nouveau projet."
         />
       ) : (
-        <ul className="grid gap-3">
+        <Reveal as="ul" stagger className="grid gap-3">
           {projects.map((project) => (
-            <li key={project.id}>
+            <Reveal as="li" item key={project.id}>
               <a
                 href={routes.manager.project(project.id)}
-                className="group block rounded-[3px] border border-line bg-paper p-5 transition-colors hover:border-ink hover:bg-vellum/40"
+                className="lift group block rounded-[3px] border border-line bg-paper p-5 transition-colors hover:border-ink hover:bg-vellum/40"
               >
                 <div className="flex items-baseline justify-between gap-4">
                   <p className="caption">{project.reference ?? "—"}</p>
@@ -50,9 +51,9 @@ export default async function ManagerRequestsPage() {
                   {project.description ?? "Sans description"}
                 </p>
               </a>
-            </li>
+            </Reveal>
           ))}
-        </ul>
+        </Reveal>
       )}
     </ManagerShell>
   );

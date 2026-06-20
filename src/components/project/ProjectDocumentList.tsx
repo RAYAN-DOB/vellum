@@ -11,6 +11,7 @@ import {
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 
 import { DocumentDownloadButton } from "@/components/files/DocumentDownloadButton";
+import { Reveal } from "@/components/motion/Reveal";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Button } from "@/components/ui/Button";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -183,14 +184,16 @@ export function ProjectDocumentList({
           className="mt-4"
         />
       ) : (
-        <ul className="mt-4 grid gap-2">
+        <Reveal as="ul" stagger className="mt-4 grid gap-2">
           {items.map((document) => {
             const Icon = iconForDocument(document);
             const href = viewerHref(currentUserRole, projectId, document.id);
             return (
-              <li
+              <Reveal
+                as="li"
+                item
                 key={document.id}
-                className="grid gap-3 rounded-[3px] border border-line bg-vellum/25 p-3 sm:grid-cols-[1fr_auto] sm:items-center"
+                className="lift grid gap-3 rounded-[3px] border border-line bg-vellum/25 p-3 sm:grid-cols-[1fr_auto] sm:items-center"
               >
                 <div className="flex min-w-0 items-center gap-3">
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-[3px] border border-line bg-paper">
@@ -219,10 +222,10 @@ export function ProjectDocumentList({
                   ) : null}
                   <DocumentDownloadButton path={document.file_path} />
                 </div>
-              </li>
+              </Reveal>
             );
           })}
-        </ul>
+        </Reveal>
       )}
     </section>
   );

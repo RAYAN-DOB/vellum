@@ -5,6 +5,7 @@ import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 import { toast } from "sonner";
 
+import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
 import { StatusPill } from "@/components/ui/StatusPill";
 import {
@@ -207,11 +208,13 @@ export function QuoteList({ quotes, projects, canManage }: Props) {
           <span className="mt-3 block">Aucun devis pour le moment.</span>
         </p>
       ) : (
-        <ul className="space-y-4">
+        <Reveal as="ul" stagger className="space-y-4">
           {quotes.map((quote) => (
-            <li
+            <Reveal
+              as="li"
+              item
               key={quote.id}
-              className="rounded-[4px] border border-line-strong bg-paper p-4"
+              className="lift rounded-[4px] border border-line-strong bg-paper p-4"
             >
               <header className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0">
@@ -288,9 +291,9 @@ export function QuoteList({ quotes, projects, canManage }: Props) {
                   canManage={canManage}
                 />
               </div>
-            </li>
+            </Reveal>
           ))}
-        </ul>
+        </Reveal>
       )}
     </div>
   );

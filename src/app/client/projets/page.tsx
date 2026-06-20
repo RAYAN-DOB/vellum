@@ -1,5 +1,6 @@
 import { FilePlus2, FolderKanban, ShieldCheck } from "lucide-react";
 
+import { Reveal } from "@/components/motion/Reveal";
 import { ClientShell } from "@/components/shells/ClientShell";
 import { Button } from "@/components/ui/Button";
 import { StatusPill } from "@/components/ui/StatusPill";
@@ -59,7 +60,7 @@ export default async function ClientProjectsPage() {
           </div>
         </div>
       ) : (
-        <div className="overflow-hidden rounded-[4px] border border-line-strong bg-paper/95">
+        <Reveal as="div" className="overflow-hidden rounded-[4px] border border-line-strong bg-paper/95">
           <table className="min-w-full divide-y divide-line text-sm">
             <thead className="bg-vellum/60 text-left text-xs uppercase tracking-[0.18em] text-mute">
               <tr>
@@ -124,7 +125,7 @@ export default async function ClientProjectsPage() {
               ))}
             </tbody>
           </table>
-        </div>
+        </Reveal>
       )}
     </ClientShell>
   );

@@ -2,6 +2,7 @@
 
 import { ArrowUpRight, Layers3, ShieldCheck } from "lucide-react";
 
+import { Reveal } from "@/components/motion/Reveal";
 import { StatusPill } from "@/components/ui/StatusPill";
 import {
   confidentialityLabels,
@@ -39,13 +40,13 @@ export function ArchitectCockpit({ projects }: Props) {
   return (
     <div className="space-y-12">
       <Group title="Projets actifs" count={active.length}>
-        <ul className="grid gap-3">
+        <Reveal as="ul" stagger className="grid gap-3">
           {active.map((p) => (
-            <li key={p.id}>
+            <Reveal as="li" item key={p.id}>
               <ProjectCard project={p} />
-            </li>
+            </Reveal>
           ))}
-        </ul>
+        </Reveal>
       </Group>
 
       {closed.length > 0 ? (
@@ -107,7 +108,7 @@ function ProjectCard({ project }: { project: ProjectListItem }) {
   return (
     <a
       href={routes.studio.project(project.id)}
-      className="group flex flex-col gap-3 rounded-[3px] border border-line bg-paper p-5 transition-colors hover:border-ink hover:bg-vellum/40 sm:flex-row sm:items-start sm:justify-between"
+      className="lift group flex flex-col gap-3 rounded-[3px] border border-line bg-paper p-5 transition-colors hover:border-ink hover:bg-vellum/40 sm:flex-row sm:items-start sm:justify-between"
     >
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">
