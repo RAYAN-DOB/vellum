@@ -1,9 +1,12 @@
+import { Clock, FileText, LayoutGrid, MessageSquare } from "lucide-react";
+
 import { ProjectActionsPanel } from "@/components/project/ProjectActionsPanel";
 import { ProjectDocumentList } from "@/components/project/ProjectDocumentList";
 import { ProjectEventLog } from "@/components/project/ProjectEventLog";
 import { ProjectHeader } from "@/components/project/ProjectHeader";
 import { ProjectMessageThread } from "@/components/project/ProjectMessageThread";
 import { ProjectTracker } from "@/components/project/ProjectTracker";
+import { ProjectWorkspaceTabs } from "@/components/project/ProjectWorkspaceTabs";
 import { routes } from "@/lib/routes";
 import type {
   ProjectDocumentWithUploader,
@@ -46,29 +49,55 @@ export function ProjectDetailView({
         audience={currentUserRole === "client" ? "client" : "internal"}
       />
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
-        <div className="min-w-0 space-y-6">
-          <ProjectDocumentList
-            projectId={project.id}
-            documents={documents}
-            canUpload={canUpload}
-            currentUserRole={currentUserRole}
-          />
-          <ProjectMessageThread
-            projectId={project.id}
-            messages={messages}
-            currentUserId={currentUserId}
-            currentUserRole={currentUserRole}
-          />
-        </div>
-        <div className="min-w-0 space-y-6">
-          <ProjectActionsPanel
-            project={project}
-            currentUserRole={currentUserRole}
-          />
-          <ProjectEventLog events={events} />
-        </div>
-      </div>
+      <ProjectWorkspaceTabs
+        tabs={[
+          {
+            id: "apercu",
+            label: "Aperçu",
+            icon: <LayoutGrid />,
+            content: (
+              <ProjectActionsPanel
+                project={project}
+                currentUserRole={currentUserRole}
+              />
+            ),
+          },
+          {
+            id: "fichiers",
+            label: "Fichiers",
+            icon: <FileText />,
+            badge: documents.length,
+            content: (
+              <ProjectDocumentList
+                projectId={project.id}
+                documents={documents}
+                canUpload={canUpload}
+                currentUserRole={currentUserRole}
+              />
+            ),
+          },
+          {
+            id: "messages",
+            label: "Messages",
+            icon: <MessageSquare />,
+            content: (
+              <ProjectMessageThread
+                projectId={project.id}
+                messages={messages}
+                currentUserId={currentUserId}
+                currentUserRole={currentUserRole}
+              />
+            ),
+          },
+          {
+            id: "activite",
+            label: "Activité",
+            icon: <Clock />,
+            badge: events.length,
+            content: <ProjectEventLog events={events} />,
+          },
+        ]}
+      />
     </div>
   );
 }
