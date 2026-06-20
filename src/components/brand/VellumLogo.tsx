@@ -12,18 +12,20 @@ type VellumLogoProps = {
 
 const sizeMap = {
   sm: { mark: "h-5 w-5", word: "text-[1.05rem]" },
-  md: { mark: "h-7 w-7", word: "text-[1.35rem]" },
-  lg: { mark: "h-10 w-10", word: "text-[2rem]" },
+  md: { mark: "h-7 w-7", word: "text-[1.3rem]" },
+  lg: { mark: "h-10 w-10", word: "text-[1.9rem]" },
 } as const;
 
 /**
- * Vellum brand mark — a folded sheet of drafting paper carrying a drafted "V"
- * that resolves at a single measured datum point (the sienna tick), the way a
- * dimension converges on a benchmark. Flat, drafted, premium: ink + paper +
- * one sienna accent, no gradients, no shadow.
+ * Vellum brand mark — "Datum": the survey benchmark symbol of every
+ * architectural plan. A datum rule (the ground line) with a downward triangle
+ * converging on a single measured point, marked by one pine accent diamond —
+ * the way a dimension resolves on a benchmark, and the way a project resolves
+ * to one signed-off deliverable. Not a letter; real drafting iconography.
  *
- * Tone-aware: on a paper-toned sheet the glyph is inked, on an ink-toned sheet
- * the glyph is paper — so the mark stays legible on both light and dark chrome.
+ * Tone-aware: the rule + triangle take currentColor by default (or ink/paper
+ * when forced), so the mark stays legible on light and dark chrome; the apex
+ * diamond is the lone pine accent.
  */
 export function VellumLogo({
   className,
@@ -32,9 +34,8 @@ export function VellumLogo({
   tone,
 }: VellumLogoProps) {
   const colorClass = tone === "ink" ? "text-ink" : tone === "paper" ? "text-paper" : "";
-  const sheetFill =
+  const markColor =
     tone === "paper" ? "var(--paper)" : tone === "ink" ? "var(--ink)" : "currentColor";
-  const glyphFill = tone === "paper" ? "var(--ink)" : "var(--paper)";
   const dims = sizeMap[size];
 
   return (
@@ -51,24 +52,30 @@ export function VellumLogo({
         focusable="false"
         className={cn("shrink-0", dims.mark)}
       >
-        {/* Outer sheet */}
-        <rect x="2.5" y="2.5" width="27" height="27" rx="4" fill={sheetFill} />
-        {/* Folded vellum corner — a deliberate hairline fold */}
-        <path d="M22.5 2.5 L29.5 9.5 L29.5 2.5 Z" fill={glyphFill} opacity="0.16" />
-        {/* The drafted V — two precise strokes meeting at the measured vertex */}
+        {/* Datum rule — the ground / benchmark line */}
+        <rect x="4" y="7" width="24" height="1.9" fill={markColor} />
+        {/* Benchmark triangle — converges on one measured point */}
         <path
-          d="M9.5 9.8 L16 21.4 L22.5 9.8"
-          stroke={glyphFill}
-          strokeWidth="2.3"
-          strokeLinecap="square"
-          strokeLinejoin="miter"
+          d="M7.5 9.2 L24.5 9.2 L16 24 Z"
           fill="none"
+          stroke={markColor}
+          strokeWidth="2.1"
+          strokeLinejoin="miter"
         />
-        {/* Datum tick — the single sienna accent, the measured origin point */}
-        <rect x="14.9" y="20.3" width="2.2" height="2.2" rx="0.35" fill="var(--sienna)" />
+        {/* Datum tick — the single pine accent at the measured origin */}
+        <rect
+          x="14.45"
+          y="22.45"
+          width="3.1"
+          height="3.1"
+          transform="rotate(45 16 24)"
+          fill="var(--pine)"
+        />
       </svg>
       {withWordmark && (
-        <span className={cn("font-display tracking-tight", dims.word)}>Vellum</span>
+        <span className={cn("font-sans font-medium tracking-[-0.02em]", dims.word)}>
+          Vellum
+        </span>
       )}
     </span>
   );
