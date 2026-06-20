@@ -30,16 +30,16 @@ function Tools() {
       {/* The emerald gem */}
       <Float speed={1.6} rotationIntensity={0.5} floatIntensity={0.9}>
         <mesh>
-          <icosahedronGeometry args={[1.35, 0]} />
+          <icosahedronGeometry args={[1.4, 0]} />
           <meshPhysicalMaterial
-            color="#0f766e"
-            roughness={0.12}
-            metalness={0.35}
+            color="#0e8d7d"
+            roughness={0.08}
+            metalness={0.3}
             clearcoat={1}
-            clearcoatRoughness={0.12}
-            emissive="#0a4f49"
-            emissiveIntensity={0.3}
-            reflectivity={0.7}
+            clearcoatRoughness={0.08}
+            emissive="#0c6b5f"
+            emissiveIntensity={0.55}
+            reflectivity={0.85}
           />
         </mesh>
       </Float>
@@ -91,10 +91,11 @@ export default function Hero3DScene() {
       dpr={[1, 2]}
       gl={{ antialias: true, alpha: true }}
     >
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[5, 6, 5]} intensity={2} />
-      <pointLight position={[-5, 2, 4]} color="#10b981" intensity={2.4} decay={0} />
-      <pointLight position={[4, -3, 3]} color="#0e7490" intensity={2} decay={0} />
+      <ambientLight intensity={0.7} />
+      <directionalLight position={[5, 6, 5]} intensity={2.6} />
+      <pointLight position={[2, 3, 5]} color="#ffffff" intensity={1.6} decay={0} />
+      <pointLight position={[-5, 2, 4]} color="#10b981" intensity={2.8} decay={0} />
+      <pointLight position={[4, -3, 3]} color="#0e7490" intensity={2.2} decay={0} />
       <Tools />
     </Canvas>
   );

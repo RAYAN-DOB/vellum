@@ -35,7 +35,7 @@ export function Hero3D() {
         className="pointer-events-none absolute -inset-12 rounded-[48px]"
         style={{
           background:
-            "radial-gradient(circle at 55% 42%, rgba(16,185,129,0.20), rgba(14,116,144,0.10) 38%, transparent 64%)",
+            "radial-gradient(circle at 55% 42%, rgba(16,185,129,0.30), rgba(14,116,144,0.14) 38%, transparent 66%)",
         }}
       />
       {reduce ? <Glow /> : <Hero3DScene />}
