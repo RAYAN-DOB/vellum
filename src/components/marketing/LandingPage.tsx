@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Footer } from "@/components/layout/Footer";
 import { PublicHeader } from "@/components/layout/PublicHeader";
+import { InstantEstimate } from "@/components/marketing/InstantEstimate";
 import { LivingBlueprintHero } from "@/components/marketing/LivingBlueprintHero";
 import { MotionSection } from "@/components/marketing/MotionSection";
 import { ProductDemoFilm } from "@/components/marketing/ProductDemoFilm";
@@ -26,6 +27,9 @@ export function LandingPage() {
 
       <main>
         <Hero />
+        <MotionSection>
+          <InstantEstimate />
+        </MotionSection>
         <ProductDemoFilm />
         <TrustStrip />
         <MotionSection>
