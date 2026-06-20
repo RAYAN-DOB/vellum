@@ -36,7 +36,7 @@ function Building() {
           roughness={0.5}
           metalness={0.2}
           emissive="#082f2b"
-          emissiveIntensity={0.25}
+          emissiveIntensity={0.12}
         />
       </mesh>
 
@@ -48,7 +48,7 @@ function Building() {
           roughness={0.32}
           metalness={0.25}
           emissive="#0a4f49"
-          emissiveIntensity={0.28}
+          emissiveIntensity={0.14}
         />
       </mesh>
 
@@ -60,7 +60,7 @@ function Building() {
           roughness={0.28}
           metalness={0.25}
           emissive="#0c6b5f"
-          emissiveIntensity={0.32}
+          emissiveIntensity={0.15}
         />
       </mesh>
 
@@ -68,11 +68,11 @@ function Building() {
       <mesh position={[0.42, 1.08, -0.2]}>
         <boxGeometry args={[1.72, 0.07, 1.42]} />
         <meshStandardMaterial
-          color="#34d399"
-          roughness={0.22}
-          metalness={0.5}
-          emissive="#10b981"
-          emissiveIntensity={0.5}
+          color="#2f9e92"
+          roughness={0.25}
+          metalness={0.45}
+          emissive="#0f766e"
+          emissiveIntensity={0.15}
         />
       </mesh>
     </group>
@@ -89,7 +89,7 @@ export default function Hero3DScene() {
       <ambientLight intensity={0.7} />
       <directionalLight position={[5, 6, 5]} intensity={2.4} />
       <pointLight position={[2, 3, 5]} color="#ffffff" intensity={1.6} decay={0} />
-      <pointLight position={[-5, 2, 4]} color="#10b981" intensity={2.6} decay={0} />
+      <pointLight position={[-5, 2, 4]} color="#0f766e" intensity={1.8} decay={0} />
       <Building />
     </Canvas>
   );

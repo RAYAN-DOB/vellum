@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Footer } from "@/components/layout/Footer";
 import { PublicHeader } from "@/components/layout/PublicHeader";
+import { CartoucheHeader } from "@/components/atelier/CartoucheHeader";
 import { InstantEstimate } from "@/components/marketing/InstantEstimate";
 import { MotionSection } from "@/components/marketing/MotionSection";
 import { Hero3D } from "@/components/three/Hero3D";
@@ -13,11 +14,11 @@ import { WorkflowStrip } from "@/components/marketing/WorkflowStrip";
 import { routes } from "@/lib/routes";
 
 const proofPoints = [
-  "PDF · DWG · Croquis",
-  "Plans 2D & aperçus 3D",
-  "Devis & livrables",
-  "Suivi avec dessinateur",
-  "Corrections et validation",
+  "Réalisés par un dessinateur",
+  "Devis clair avant de payer",
+  "Corrections suivies jusqu'à validation",
+  "Fichiers PDF & DWG livrés",
+  "Devis sous 48 h · réponse 24 h",
 ] as const;
 
 export function LandingPage() {
@@ -27,6 +28,9 @@ export function LandingPage() {
 
       <main>
         <Hero />
+        <MotionSection>
+          <HowItWorks />
+        </MotionSection>
         <MotionSection>
           <InstantEstimate />
         </MotionSection>
@@ -65,21 +69,27 @@ function Hero() {
         <div className="max-w-2xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-pine/30 bg-pine-tint px-3 py-1 text-[12px] font-medium text-pine-active">
             <span aria-hidden="true" className="size-1.5 rounded-full bg-pine" />
-            Plans techniques · Schémas · Rendus 3D
+            Vos plans réalisés par un dessinateur
           </span>
 
           <h1 className="display mt-5 text-balance text-[clamp(2.5rem,4.7vw,4rem)] text-ink">
-            De votre croquis
+            Un dessinateur réalise
             <br />
-            au plan professionnel.
+            vos plans techniques.
             <br />
-            <span className="italic text-graphite">2D, 3D, livré.</span>
+            <span className="italic text-graphite">
+              À partir d&apos;un simple croquis.
+            </span>
           </h1>
 
           <p className="mt-7 max-w-xl text-[17px] leading-[1.65] text-graphite">
-            Un dessinateur réalise vos plans techniques, schémas et aperçus 3D à
-            partir d&apos;un simple croquis, d&apos;une photo ou d&apos;un cahier
-            des charges. Devis clair, corrections suivies, fichiers livrés.
+            Déposez un croquis, une photo ou un cahier des charges. Un
+            dessinateur professionnel produit vos plans 2D, schémas techniques
+            et aperçus 3D — devis clair, corrections suivies, fichiers livrés.
+          </p>
+          <p className="mt-4 max-w-xl text-[13px] leading-[1.5] text-mute">
+            Pour rénovateurs, artisans, agences, bureaux d&apos;études et
+            porteurs de projet qui ont besoin de plans propres, vite.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -120,6 +130,47 @@ function Hero() {
         <div className="relative min-w-0">
           <Hero3D />
         </div>
+      </div>
+    </section>
+  );
+}
+
+function HowItWorks() {
+  const steps = [
+    {
+      n: "01",
+      title: "Déposez votre besoin",
+      body: "Un croquis, une photo, un plan existant ou un simple cahier des charges. Le compte n'est demandé qu'au moment d'envoyer.",
+    },
+    {
+      n: "02",
+      title: "Un dessinateur dessine",
+      body: "Il vous pose les bonnes questions, prépare un devis clair, puis réalise vos plans. Vous suivez chaque correction jusqu'à validation.",
+    },
+    {
+      n: "03",
+      title: "Recevez vos fichiers",
+      body: "Plans 2D, schémas techniques et aperçus 3D — livrés en PDF et DWG, prêts à l'emploi.",
+    },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <CartoucheHeader
+        eyebrow="Comment ça marche"
+        meta="Vellum · 3 étapes"
+        title="Du croquis au plan livré, en trois temps."
+      />
+      <div className="mt-10 grid gap-px overflow-hidden rounded-[4px] border border-line bg-line sm:grid-cols-3">
+        {steps.map((s) => (
+          <div key={s.n} className="bg-paper p-6 sm:p-7">
+            <span className="font-mono text-[13px] text-pine">{s.n}</span>
+            <h3 className="display mt-3 text-2xl text-ink">{s.title}</h3>
+            <p className="mt-3 text-[14px] leading-[1.6] text-graphite">
+              {s.body}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );

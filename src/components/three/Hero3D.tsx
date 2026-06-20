@@ -15,7 +15,7 @@ function Glow() {
       className="absolute inset-0"
       style={{
         background:
-          "radial-gradient(circle at 58% 40%, rgba(16,185,129,0.22), transparent 60%)",
+          "radial-gradient(circle at 58% 40%, rgba(15,118,110,0.12), transparent 60%)",
       }}
     />
   );
@@ -35,7 +35,7 @@ export function Hero3D() {
         className="pointer-events-none absolute -inset-10 rounded-[44px]"
         style={{
           background:
-            "radial-gradient(circle at 55% 42%, rgba(16,185,129,0.22), rgba(14,116,144,0.10) 40%, transparent 66%)",
+            "radial-gradient(circle at 55% 42%, rgba(15,118,110,0.12), rgba(14,116,144,0.06) 40%, transparent 66%)",
         }}
       />
       {reduce ? <Glow /> : <Hero3DScene />}
