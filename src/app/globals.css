@@ -24,14 +24,15 @@
   --iron: #16191a;          /* primary CTA bg */
   --iron-hover: #2b2f2e;    /* CTA hover */
 
-  /* Accent — ATELIER pine green, used sparingly
+  /* Accent — ATELIER ÉMERAUDE, used sparingly
      (links, active nav/selection, focus companion, logo tick, status) */
-  --pine: #1f6b47;          /* signature accent */
-  --pine-hover: #1a5c3c;    /* accent hover */
-  --pine-active: #154c31;   /* accent pressed */
-  --pine-tint: #e4f0e9;     /* selected rows / soft washes */
-  --sage: #6e8c76;          /* validated / positive secondary */
-  --sage-soft: #dde7de;
+  --pine: #0f766e;          /* emerald signature accent */
+  --pine-hover: #115e59;    /* accent hover */
+  --pine-active: #134e4a;   /* accent pressed */
+  --pine-tint: #e2efed;     /* selected rows / soft washes */
+  --sage: #6f8f86;          /* validated / positive secondary */
+  --sage-soft: #dde9e6;
+  --canard: #0e7490;        /* deep teal — links / secondary accent */
 
   /* Semantic */
   --moss: #5f6f55;          /* positive states (done / delivered) */
@@ -84,6 +85,7 @@
   --color-pine-tint: var(--pine-tint);
   --color-sage: var(--sage);
   --color-sage-soft: var(--sage-soft);
+  --color-canard: var(--canard);
   --color-moss: var(--moss);
   --color-crimson: var(--crimson);
   /* legacy aliases (resolve to pine) — keep until call-sites migrate */
@@ -94,7 +96,7 @@
   --color-blueprint: var(--blueprint);
 
   --font-sans: var(--font-inter);
-  --font-display: var(--font-instrument-serif);
+  --font-display: var(--font-playfair);
   --font-mono: var(--font-jetbrains-mono);
 
   /* Radius tokens → rounded-* utilities */
@@ -223,7 +225,7 @@ body {
 
   /* Display headline — Instrument Serif treatment */
   .display {
-    font-family: var(--font-instrument-serif), ui-serif, Georgia, serif;
+    font-family: var(--font-playfair), ui-serif, Georgia, serif;
     font-weight: 400;
     letter-spacing: 0;
     line-height: 0.95;
