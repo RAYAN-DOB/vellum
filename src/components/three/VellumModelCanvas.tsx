@@ -176,7 +176,7 @@ function ModelScene({ selectedFloor, layers, embedMode, reduce }: ModelSceneProp
   const materials = useMemo<MaterialPack>(
     () => ({
       glass: new THREE.MeshPhysicalMaterial({
-        color: '#d7eee8',
+        color: '#cbdcf1',
         transparent: true,
         opacity: 0.52,
         roughness: 0.06,
@@ -389,7 +389,7 @@ function StairRun({ start }: { start: [number, number, number] }) {
       {Array.from({ length: 4 }).map((_, index) => (
         <mesh key={index} position={[index * 0.17, index * 0.035, index * 0.08]} castShadow receiveShadow>
           <boxGeometry args={[0.48, 0.05, 0.18]} />
-          <meshStandardMaterial color="#d5cab7" roughness={0.9} />
+          <meshStandardMaterial color="#ece6da" roughness={0.42} metalness={0.05} />
         </mesh>
       ))}
     </group>
@@ -429,13 +429,13 @@ function FloorAssembly({ floor, selected, textures, embedMode, reduce }: FloorAs
         <mesh receiveShadow castShadow>
           <boxGeometry args={floor.size} />
           <meshStandardMaterial
-            color={roof ? '#e3d8c4' : selected ? '#f0e2c8' : '#dbcfb9'}
-            map={(roof ? textures.roof : selected ? textures.vellum : textures.concrete).map}
-            normalMap={(roof ? textures.roof : textures.concrete).nor}
+            color={roof ? '#e3d8c4' : selected ? '#d3af80' : '#c5a475'}
+            map={(roof ? textures.roof : textures.wood).map}
+            normalMap={(roof ? textures.roof : textures.wood).nor}
             normalScale={[0.6, 0.6]}
             transparent
             opacity={opacity}
-            roughness={0.9}
+            roughness={roof ? 0.9 : 0.58}
             metalness={0.02}
           />
           <Edges color={selected ? '#0d4d47' : '#766d60'} linewidth={selected ? 1.8 : 0.85} />
@@ -565,7 +565,7 @@ function WallMesh({ wall, active, hovered, textures, onHover }: WallMeshProps) {
     config: { tension: 150, friction: 20 },
   })
   const opacity = active ? (wall.kind === 'low' ? 0.72 : 0.98) : wall.kind === 'outer' ? 0.6 : 0.42
-  const color = hovered ? '#f2dfbd' : wall.kind === 'outer' ? '#e8ddc9' : '#ddd0b9'
+  const color = hovered ? '#fbf8f1' : wall.kind === 'outer' ? '#f2efe7' : '#ece8de'
 
   const handleOver = (event: ThreeEvent<PointerEvent>) => {
     event.stopPropagation()
@@ -780,7 +780,7 @@ function TerraceRailing({
   const railGlass = useMemo(
     () =>
       new THREE.MeshPhysicalMaterial({
-        color: '#d6e6df',
+        color: '#cfe0f2',
         transparent: true,
         opacity: 0.26,
         roughness: 0.09,
@@ -832,7 +832,7 @@ function SideRailing({
   const railGlass = useMemo(
     () =>
       new THREE.MeshPhysicalMaterial({
-        color: '#d6e6df',
+        color: '#cfe0f2',
         transparent: true,
         opacity: 0.24,
         roughness: 0.09,
@@ -931,7 +931,7 @@ function StairCore() {
       {Array.from({ length: 8 }).map((_, index) => (
         <mesh key={index} position={[index * 0.09, index * 0.048, index * 0.03]} castShadow receiveShadow>
           <boxGeometry args={[0.42, 0.035, 0.2]} />
-          <meshStandardMaterial color="#b79c72" roughness={0.78} />
+          <meshStandardMaterial color="#e9e3d7" roughness={0.36} metalness={0.06} />
         </mesh>
       ))}
       <Line points={[[-0.06, 0.1, -0.16], [0.75, 0.48, 0.1]]} color="#0d4d47" lineWidth={1.2} />
