@@ -15,6 +15,7 @@ import { Spotlight } from "@/components/atelier/Spotlight";
 import { ESTIMATOR_KINDS, estimate, formatEuro } from "@/lib/estimator";
 import { InstantEstimate } from "@/components/marketing/InstantEstimate";
 import { MotionSection } from "@/components/marketing/MotionSection";
+import { MovingGradient } from "@/components/marketing/MovingGradient";
 import { Hero3D } from "@/components/three/Hero3D";
 import { ProductDemoFilm } from "@/components/marketing/ProductDemoFilm";
 import { ProductShowcase } from "@/components/marketing/ProductShowcase";
@@ -363,24 +364,36 @@ function TrustStrip() {
 
 function FinalCta() {
   return (
-    <section className="relative overflow-hidden border-t border-line bg-ink text-paper">
+    <section className="relative overflow-hidden border-t border-line text-paper">
+      {/* dark cinematic moving gradient — emerald / cyan / petrol on black */}
+      <MovingGradient variant="dark" />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-20"
+        className="pointer-events-none absolute inset-0 opacity-[0.07]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(250,249,245,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(250,249,245,0.06) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
+            "linear-gradient(rgba(250,249,245,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(250,249,245,0.5) 1px, transparent 1px)",
+          backgroundSize: "34px 34px",
         }}
       />
-      <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:px-10 lg:py-24">
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:px-10 lg:py-28">
         <div>
+          <div className="mb-6 flex flex-wrap gap-2">
+            <Pill tone="cyan" dot>
+              Croquis → plan
+            </Pill>
+            <Pill tone="pine" dot>
+              Devis avant paiement
+            </Pill>
+          </div>
           <h2 className="display text-[clamp(2.25rem,5.5vw,4rem)]">
             Un croquis suffit pour commencer.
             <br />
-            <span className="italic">Vellum vous livre le plan.</span>
+            <span className="italic text-[color-mix(in_srgb,var(--cyan)_60%,var(--paper))]">
+              Vellum vous livre le plan.
+            </span>
           </h2>
-          <p className="mt-6 max-w-lg text-[16px] leading-[1.7] text-paper/70">
+          <p className="mt-6 max-w-lg text-[16px] leading-[1.7] text-paper/75">
             Décrivez votre besoin, joignez un croquis ou une photo. Un
             dessinateur s&apos;occupe du reste — le compte n&apos;est demandé
             qu&apos;au moment d&apos;envoyer le dossier.
@@ -390,7 +403,7 @@ function FinalCta() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-end lg:flex-col lg:items-stretch">
           <Link
             href={routes.public.deposit}
-            className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-sienna px-7 text-[14px] font-medium text-paper transition hover:bg-sienna-dark"
+            className="cta-premium group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full px-7 text-[14px] font-semibold text-paper"
           >
             Déposer un projet
             <ArrowRight
@@ -400,7 +413,7 @@ function FinalCta() {
           </Link>
           <Link
             href={routes.public.login}
-            className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full border border-paper/20 px-7 text-[14px] font-medium text-paper transition hover:border-paper/50"
+            className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full border border-paper/25 bg-white/5 px-7 text-[14px] font-medium text-paper backdrop-blur-sm transition hover:border-paper/50 hover:bg-white/10"
           >
             Retrouver mes projets
             <ArrowUpRight

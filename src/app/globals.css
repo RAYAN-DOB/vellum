@@ -314,17 +314,14 @@ body {
   /* Premium CTA: emerald→canard→soft-cyan sheen that shifts on hover + soft halo */
   .cta-premium {
     background-image: var(--gradient-cta-premium);
-    background-size: 180% 100%;
-    background-position: 0 0;
     transition:
-      background-position 0.5s ease,
       box-shadow 0.3s ease,
-      transform 0.2s ease;
-    box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--pine) 55%, transparent);
+      filter 0.2s ease;
+    box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--pine) 50%, transparent);
   }
   .cta-premium:hover {
-    background-position: 100% 0;
-    box-shadow: 0 14px 38px -12px color-mix(in srgb, var(--cyan) 50%, transparent);
+    box-shadow: 0 14px 38px -12px color-mix(in srgb, var(--cyan) 48%, transparent);
+    filter: brightness(1.04);
   }
 
   /* Drifting ambient light field — full-bleed background layer, slow drift */
@@ -703,6 +700,38 @@ body {
   }
   50% {
     transform: translateY(-6px);
+  }
+}
+
+/* ── Aurora — slow cinematic gradient blobs (dark moody emerald field) ── */
+@keyframes aurora-1 {
+  0%,
+  100% {
+    transform: translate3d(-8%, -6%, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(10%, 4%, 0) scale(1.18);
+  }
+  66% {
+    transform: translate3d(-4%, 9%, 0) scale(0.94);
+  }
+}
+@keyframes aurora-2 {
+  0%,
+  100% {
+    transform: translate3d(9%, 7%, 0) scale(1.1);
+  }
+  50% {
+    transform: translate3d(-11%, -5%, 0) scale(0.88);
+  }
+}
+@keyframes aurora-3 {
+  0%,
+  100% {
+    transform: translate3d(2%, 10%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(7%, -9%, 0) scale(1.22);
   }
 }
 
