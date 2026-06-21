@@ -16,6 +16,7 @@ import {
   type Urgency,
 } from "@/lib/estimator";
 import { CountUp } from "@/components/motion/CountUp";
+import { SampleQuoteModal } from "@/components/marketing/SampleQuoteModal";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
@@ -185,6 +186,9 @@ export function InstantEstimate() {
             Estimation indicative, sans engagement. Vous ne payez qu&apos;après
             un devis clair du dessinateur.
           </p>
+          <div className="mt-3 flex justify-center">
+            <SampleQuoteModal />
+          </div>
         </div>
       </div>
     </section>
