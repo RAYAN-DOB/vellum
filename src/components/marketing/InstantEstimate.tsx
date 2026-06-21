@@ -66,7 +66,9 @@ function OptionRow<T extends string>({
 }
 
 export function InstantEstimate() {
-  const [kind, setKind] = useState<ProjectKind | null>(null);
+  // Pre-select a sensible default so a real fourchette shows on first paint
+  // (no empty card at the moment a visitor is weighing cost).
+  const [kind, setKind] = useState<ProjectKind>(ESTIMATOR_KINDS[0]!.value);
   const [complexity, setComplexity] = useState<Complexity>("standard");
   const [urgency, setUrgency] = useState<Urgency>("semaine");
 

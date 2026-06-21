@@ -130,7 +130,7 @@ function Hero() {
               className="pointer-events-none absolute -left-6 top-1/2 size-44 -translate-y-1/2 rounded-full blur-2xl [animation:breathe_5s_ease-in-out_infinite]"
               style={{
                 background:
-                  "radial-gradient(circle, color-mix(in srgb, var(--pine) 26%, transparent), color-mix(in srgb, var(--cyan) 14%, transparent) 45%, transparent 70%)",
+                  "radial-gradient(circle, color-mix(in srgb, var(--pine) 42%, transparent), color-mix(in srgb, var(--cyan) 26%, transparent) 45%, transparent 70%)",
               }}
             />
             <Link
@@ -165,6 +165,19 @@ function Hero() {
               </li>
             ))}
           </ul>
+
+          {/* compact pill strip — replaces the desktop-only floating pills below lg */}
+          <div className="mt-6 flex flex-wrap gap-2 lg:hidden">
+            <Pill tone="pine" dot size="sm">
+              Croquis reçu
+            </Pill>
+            <Pill tone="cyan" dot size="sm">
+              Plan en cours
+            </Pill>
+            <Pill tone="petrol" mono size="sm">
+              PDF + DWG
+            </Pill>
+          </div>
         </div>
 
         <div className="relative min-w-0">
@@ -252,18 +265,18 @@ function Guarantee() {
   const items = [
     {
       icon: FileCheck2,
-      title: "Devis clair avant de payer",
-      body: "Vous ne réglez l'acompte qu'après avoir accepté un devis détaillé.",
+      title: "Vous validez le devis avant de payer",
+      body: "Vous ne réglez l'acompte qu'après avoir accepté un devis détaillé. Rien n'est lancé sans votre accord.",
     },
     {
       icon: RefreshCw,
-      title: "Corrections incluses",
-      body: "Des allers-retours sont prévus jusqu'à la validation de vos plans.",
+      title: "Corrections suivies jusqu'à validation",
+      body: "Vous pilotez les retours : le dessinateur ajuste jusqu'à ce que le plan vous convienne.",
     },
     {
       icon: ShieldCheck,
-      title: "Sans engagement",
-      body: "Le devis ne vous engage pas. S'il ne vous convient pas, vous ne payez rien.",
+      title: "Vous gardez la main",
+      body: "Le devis ne vous engage pas. Vous décidez, à chaque étape, de continuer ou non.",
     },
   ];
 

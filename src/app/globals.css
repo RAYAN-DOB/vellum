@@ -753,6 +753,13 @@ body {
   border-radius: 2px;
 }
 
+/* The premium gradient CTAs are dark end-to-end — an ink outline is invisible
+   on them. Give them a light focus ring instead (WCAG 2.4.7). */
+.cta-premium:focus-visible {
+  outline-color: var(--paper);
+  outline-offset: 3px;
+}
+
 button,
 a {
   -webkit-tap-highlight-color: transparent;
