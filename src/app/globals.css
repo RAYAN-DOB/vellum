@@ -64,6 +64,30 @@
   --e2: 0 4px 10px -4px rgba(22, 25, 26, 0.1);
   --e3: 0 12px 24px -12px rgba(22, 25, 26, 0.14);
   --e4: 0 30px 60px -30px rgba(22, 25, 26, 0.18);
+
+  /* ── Neo-Atelier — futuristic premium layer (sober, controlled) ──
+     "A drawing table of the future": paper + ink + a thin band of light.
+     Muted only: emerald + soft cyan + petrol, brass in trace amounts.
+     No neon, no gaming hues, no rainbow, no orange. */
+  --cyan: #2f93a6; /* soft cyan — never neon */
+  --cyan-soft: #74b7c3; /* lighter cyan for thin sheens */
+  --petrol: #154f63; /* bleu pétrole — deep teal-blue */
+  --brass: #b6a06c; /* brass très léger — trace accent only */
+  --paper-warm: #f6f3ea; /* papier chaud */
+  --calque: #fcfcf8; /* blanc calque */
+
+  /* Premium gradients — used like reflections, mostly at low opacity */
+  --gradient-pine-cyan: linear-gradient(135deg, var(--pine), var(--cyan));
+  --gradient-ink-teal: linear-gradient(160deg, var(--ink), var(--petrol));
+  --gradient-paper-light: linear-gradient(180deg, var(--calque), var(--paper) 72%);
+  --gradient-blueprint-soft: radial-gradient(
+    120% 90% at 72% 4%,
+    color-mix(in srgb, var(--pine) 12%, transparent),
+    color-mix(in srgb, var(--cyan) 7%, transparent) 36%,
+    transparent 60%
+  );
+  --gradient-dark-atelier: linear-gradient(165deg, #0d1618, var(--ink) 55%, #0f1b1d);
+  --gradient-cta-premium: linear-gradient(120deg, var(--pine), var(--canard) 55%, var(--cyan));
 }
 
 @theme inline {
@@ -86,6 +110,12 @@
   --color-sage: var(--sage);
   --color-sage-soft: var(--sage-soft);
   --color-canard: var(--canard);
+  --color-cyan: var(--cyan);
+  --color-cyan-soft: var(--cyan-soft);
+  --color-petrol: var(--petrol);
+  --color-brass: var(--brass);
+  --color-paper-warm: var(--paper-warm);
+  --color-calque: var(--calque);
   --color-moss: var(--moss);
   --color-crimson: var(--crimson);
   /* legacy aliases (resolve to pine) — keep until call-sites migrate */
@@ -272,6 +302,110 @@ body {
   /* A small emerald light travelling along a connector line (sober) */
   .animate-flow {
     animation: flow-x 4.5s ease-in-out infinite;
+  }
+
+  /* Gentle floating bob — for hero pills / annotations (vary via animation-delay) */
+  .float-y {
+    animation: float-y 6s ease-in-out infinite;
+  }
+
+  /* ── Neo-Atelier — light & gradient utilities (sober, premium) ── */
+
+  /* Premium CTA: emerald→canard→soft-cyan sheen that shifts on hover + soft halo */
+  .cta-premium {
+    background-image: var(--gradient-cta-premium);
+    background-size: 180% 100%;
+    background-position: 0 0;
+    transition:
+      background-position 0.5s ease,
+      box-shadow 0.3s ease,
+      transform 0.2s ease;
+    box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--pine) 55%, transparent);
+  }
+  .cta-premium:hover {
+    background-position: 100% 0;
+    box-shadow: 0 14px 38px -12px color-mix(in srgb, var(--cyan) 50%, transparent);
+  }
+
+  /* Drifting ambient light field — full-bleed background layer, slow drift */
+  .ambient-field {
+    background-image: var(--gradient-blueprint-soft);
+    animation: ambient-drift 16s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  /* A thin emerald/cyan scanner line — parent must be relative + overflow-hidden */
+  .scanner-line {
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--cyan) 70%, transparent),
+      color-mix(in srgb, var(--pine) 70%, transparent),
+      transparent
+    );
+    box-shadow: 0 0 8px color-mix(in srgb, var(--cyan) 45%, transparent);
+    animation: scan-y 7s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  /* Light sweep sheen — add to a relative element; a soft band crosses it */
+  .light-sweep {
+    position: relative;
+    overflow: hidden;
+  }
+  .light-sweep::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 34%,
+      color-mix(in srgb, var(--calque) 60%, transparent) 50%,
+      transparent 66%
+    );
+    background-size: 220% 100%;
+    animation: light-sweep 9s ease-in-out infinite;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+  }
+
+  /* Soft halos behind CTAs / active elements */
+  .glow-pine {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--pine) 18%, transparent),
+      0 10px 36px -14px color-mix(in srgb, var(--pine) 55%, transparent);
+  }
+  .glow-cyan {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--cyan) 16%, transparent),
+      0 10px 36px -14px color-mix(in srgb, var(--cyan) 50%, transparent);
+  }
+
+  /* Thin gradient "light rail" border (emerald→cyan), masked to the edge */
+  .light-rail {
+    position: relative;
+  }
+  .light-rail::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--gradient-pine-cyan);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0.6;
+    pointer-events: none;
   }
 
   /* Futuristic emerald beam travelling around a card border — sober: a thin
@@ -488,6 +622,87 @@ body {
   100% {
     left: 100%;
     opacity: 0;
+  }
+}
+
+/* ── Neo-Atelier — slow, premium light & colour motion ── */
+@property --drift-a {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* slow ambient light drift behind the hero / key sections */
+@keyframes ambient-drift {
+  0%,
+  100% {
+    transform: translate3d(-1.5%, -1%, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(1.5%, 1%, 0) scale(1.05);
+    opacity: 1;
+  }
+}
+
+/* a thin light sweeping across the header / an important card */
+@keyframes light-sweep {
+  0% {
+    background-position: -160% 0;
+  }
+  100% {
+    background-position: 260% 0;
+  }
+}
+
+/* a scanner line travelling down a plan (drives `top` to traverse the parent) */
+@keyframes scan-y {
+  0% {
+    top: -2%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.6;
+  }
+  88% {
+    opacity: 0.6;
+  }
+  100% {
+    top: 102%;
+    opacity: 0;
+  }
+}
+
+/* a soft halo that breathes */
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* slow emerald→cyan hue drift on a gradient border */
+@keyframes hue-drift {
+  0%,
+  100% {
+    --drift-a: 0deg;
+  }
+  50% {
+    --drift-a: 36deg;
+  }
+}
+
+/* gentle floating bob for hero pills / annotations */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
   }
 }
 

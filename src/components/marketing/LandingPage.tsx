@@ -10,6 +10,7 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { CartoucheHeader } from "@/components/atelier/CartoucheHeader";
+import { Pill, type PillTone } from "@/components/atelier/Pill";
 import { Spotlight } from "@/components/atelier/Spotlight";
 import { ESTIMATOR_KINDS, estimate, formatEuro } from "@/lib/estimator";
 import { InstantEstimate } from "@/components/marketing/InstantEstimate";
@@ -67,24 +68,41 @@ export function LandingPage() {
   );
 }
 
+const heroPills: {
+  label: string;
+  tone: PillTone;
+  dot?: boolean;
+  mono?: boolean;
+  icon?: boolean;
+  pos: string;
+  delay: string;
+}[] = [
+  { label: "Croquis reçu", tone: "pine", dot: true, pos: "left-0 top-10", delay: "0s" },
+  { label: "Plan en cours", tone: "cyan", dot: true, pos: "right-0 top-24", delay: "1.1s" },
+  { label: "Devis clair", tone: "pine", pos: "left-0 top-1/2", delay: "0.6s" },
+  { label: "PDF + DWG", tone: "petrol", mono: true, pos: "right-1 top-[46%]", delay: "1.7s" },
+  { label: "2 révisions incluses", tone: "neutral", pos: "left-8 bottom-16", delay: "0.9s" },
+  { label: "Paiement sécurisé", tone: "cyan", icon: true, pos: "right-2 bottom-4", delay: "2.2s" },
+];
+
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-line bg-paper">
+      {/* Neo-Atelier ambient light — a soft cyan/pine halo drifting behind the hero */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 grid-paper-dense opacity-45"
+        className="ambient-field pointer-events-none absolute -inset-x-16 -top-24 bottom-0"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-paper via-paper/80 to-transparent"
+        className="pointer-events-none absolute inset-0 grid-paper opacity-40 [mask-image:linear-gradient(to_bottom,black,transparent_92%)]"
       />
 
       <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-16 pt-32 sm:pb-20 sm:pt-36 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-16 lg:px-10 lg:pb-24 lg:pt-40">
         <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-pine/30 bg-pine-tint px-3 py-1 text-[12px] font-medium text-pine-active">
-            <span aria-hidden="true" className="size-1.5 rounded-full bg-pine" />
+          <Pill tone="pine" dot>
             Vos plans réalisés par un dessinateur
-          </span>
+          </Pill>
 
           <h1 className="display mt-5 text-balance text-[clamp(2.5rem,4.7vw,4rem)] text-ink">
             Un dessinateur réalise
@@ -109,7 +127,7 @@ function Hero() {
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Link
               href={routes.public.deposit}
-              className="group inline-flex h-12 cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-pine to-canard px-6 text-[14px] font-medium text-paper shadow-[0_10px_30px_-8px_rgba(15,118,110,0.5)] transition hover:shadow-[0_16px_40px_-8px_rgba(15,118,110,0.65)] hover:brightness-105"
+              className="cta-premium group inline-flex h-12 cursor-pointer items-center gap-2 rounded-full px-6 text-[14px] font-medium text-paper"
             >
               Déposer un projet
               <ArrowRight
@@ -118,8 +136,8 @@ function Hero() {
               />
             </Link>
             <a
-              href="#demo"
-              className="group inline-flex h-12 cursor-pointer items-center gap-2 rounded-full border border-line-strong bg-paper/70 px-6 text-[14px] font-medium text-graphite transition hover:border-graphite hover:bg-vellum/70 hover:text-ink"
+              href="#estimer"
+              className="group inline-flex h-12 cursor-pointer items-center gap-2 rounded-full border border-line-strong bg-paper/60 px-6 text-[14px] font-medium text-graphite backdrop-blur-[2px] transition hover:border-pine/50 hover:text-ink"
             >
               Voir comment ça marche
             </a>
@@ -133,7 +151,7 @@ function Hero() {
               >
                 <span
                   aria-hidden="true"
-                  className="size-1.5 shrink-0 rounded-full bg-sienna"
+                  className="size-1.5 shrink-0 rounded-full bg-pine"
                 />
                 {point}
               </li>
@@ -143,6 +161,35 @@ function Hero() {
 
         <div className="relative min-w-0">
           <Hero3D />
+
+          {/* scanner line gliding over the 3D */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-6 overflow-hidden rounded-[28px]"
+          >
+            <span className="scanner-line" />
+          </div>
+
+          {/* floating explanatory pills (desktop) */}
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden lg:block">
+            {heroPills.map((p) => (
+              <div
+                key={p.label}
+                className={`float-y absolute ${p.pos}`}
+                style={{ animationDelay: p.delay }}
+              >
+                <Pill
+                  tone={p.tone}
+                  dot={p.dot}
+                  mono={p.mono}
+                  icon={p.icon ? <ShieldCheck /> : undefined}
+                  className="shadow-[0_10px_26px_-14px_rgba(22,25,26,0.5)]"
+                >
+                  {p.label}
+                </Pill>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -156,7 +203,10 @@ function Deliverables() {
   });
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+    <section
+      id="prestations"
+      className="mx-auto max-w-7xl scroll-mt-24 px-6 py-16 lg:px-10 lg:py-20"
+    >
       <CartoucheHeader
         eyebrow="Prestations"
         meta="Fourchettes indicatives · EUR"
@@ -246,7 +296,10 @@ function HowItWorks() {
   ];
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+    <section
+      id="procede"
+      className="mx-auto max-w-7xl scroll-mt-24 px-6 py-16 lg:px-10 lg:py-20"
+    >
       <CartoucheHeader
         eyebrow="Comment ça marche"
         meta="Vellum · 3 étapes"
