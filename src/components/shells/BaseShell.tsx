@@ -99,6 +99,11 @@ export function BaseShell({
             <UserMenu />
           </div>
         </Container>
+        {/* premium pine→cyan light rail under the top bar */}
+        <span
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-px bg-[image:var(--gradient-pine-cyan)] opacity-40"
+        />
       </header>
 
       <Container className="grid min-w-0 gap-8 py-8 lg:grid-cols-[240px_1fr] lg:gap-10 lg:py-10">
@@ -117,7 +122,7 @@ export function BaseShell({
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "group flex min-w-0 cursor-pointer items-center gap-2.5 rounded-[2px] border px-3 py-2 text-[13px] font-medium transition-colors",
+                    "group relative flex min-w-0 cursor-pointer items-center gap-2.5 rounded-[2px] border px-3 py-2 text-[13px] font-medium transition-colors",
                     isActive
                       ? "border-ink bg-ink text-paper"
                       : item.emphasis
@@ -125,6 +130,12 @@ export function BaseShell({
                         : "border-transparent text-graphite hover:border-line-strong hover:bg-vellum/40 hover:text-ink",
                   )}
                 >
+                  {isActive ? (
+                    <span
+                      aria-hidden="true"
+                      className="absolute left-0 top-1/2 h-5 w-[2px] -translate-y-1/2 rounded-r-full bg-pine"
+                    />
+                  ) : null}
                   {item.icon ? (
                     <item.icon className="size-4 shrink-0" aria-hidden="true" />
                   ) : (
