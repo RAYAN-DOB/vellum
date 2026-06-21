@@ -99,7 +99,7 @@ function Hero() {
 
       <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-16 pt-32 sm:pb-20 sm:pt-36 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-16 lg:px-10 lg:pb-24 lg:pt-40">
         <div className="max-w-2xl">
-          <Pill tone="pine" dot>
+          <Pill tone="pine" dot active>
             Vos plans réalisés par un dessinateur
           </Pill>
 
@@ -123,10 +123,19 @@ function Hero() {
             porteurs de projet qui ont besoin de plans propres, vite.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3">
+          <div className="relative mt-9 flex flex-wrap items-center gap-3">
+            {/* breathing halo behind the primary CTA */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -left-6 top-1/2 size-44 -translate-y-1/2 rounded-full blur-2xl [animation:breathe_5s_ease-in-out_infinite]"
+              style={{
+                background:
+                  "radial-gradient(circle, color-mix(in srgb, var(--pine) 26%, transparent), color-mix(in srgb, var(--cyan) 14%, transparent) 45%, transparent 70%)",
+              }}
+            />
             <Link
               href={routes.public.deposit}
-              className="cta-premium group inline-flex h-12 cursor-pointer items-center gap-2 rounded-full px-6 text-[14px] font-medium text-paper"
+              className="cta-premium group relative inline-flex h-12 cursor-pointer items-center gap-2 rounded-full px-6 text-[14px] font-medium text-paper"
             >
               Déposer un projet
               <ArrowRight
@@ -259,15 +268,33 @@ function Guarantee() {
   ];
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-12 lg:px-10">
+    <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div className="mb-8 flex flex-wrap items-center gap-2.5">
+        <Pill tone="pine" icon={<ShieldCheck />}>
+          Sans engagement
+        </Pill>
+        <Pill tone="cyan" icon={<FileCheck2 />}>
+          Devis clair avant de payer
+        </Pill>
+        <Pill tone="petrol" icon={<RefreshCw />}>
+          Corrections incluses
+        </Pill>
+      </div>
       <div className="grid gap-px overflow-hidden rounded-[4px] border border-line bg-line sm:grid-cols-3">
         {items.map((it) => (
-          <div key={it.title} className="bg-paper p-6">
+          <div
+            key={it.title}
+            className="group/g relative bg-paper p-6 transition-colors hover:bg-vellum/30"
+          >
             <it.icon className="size-5 text-pine" aria-hidden="true" />
             <h3 className="mt-3 font-medium text-ink">{it.title}</h3>
             <p className="mt-1.5 text-[13px] leading-[1.55] text-mute">
               {it.body}
             </p>
+            <span
+              aria-hidden="true"
+              className="absolute bottom-0 left-0 h-px w-0 bg-[image:var(--gradient-pine-cyan)] transition-all duration-300 group-hover/g:w-full"
+            />
           </div>
         ))}
       </div>
@@ -279,16 +306,19 @@ function HowItWorks() {
   const steps = [
     {
       n: "01",
+      tag: "Croquis",
       title: "Déposez votre besoin",
       body: "Un croquis, une photo, un plan existant ou un simple cahier des charges. Le compte n'est demandé qu'au moment d'envoyer.",
     },
     {
       n: "02",
+      tag: "Tracé",
       title: "Un dessinateur dessine",
       body: "Il vous pose les bonnes questions, prépare un devis clair, puis réalise vos plans. Vous suivez chaque correction jusqu'à validation.",
     },
     {
       n: "03",
+      tag: "Livraison",
       title: "Recevez vos fichiers",
       body: "Plans 2D, schémas techniques et aperçus 3D — livrés en PDF et DWG, prêts à l'emploi.",
     },
@@ -306,9 +336,17 @@ function HowItWorks() {
       />
       <div className="mt-10 grid gap-px overflow-hidden rounded-[4px] border border-line bg-line sm:grid-cols-3">
         {steps.map((s) => (
-          <div key={s.n} className="bg-paper p-6 sm:p-7">
-            <span className="font-mono text-[13px] text-pine">{s.n}</span>
-            <h3 className="display mt-3 text-2xl text-ink">{s.title}</h3>
+          <div
+            key={s.n}
+            className="relative bg-paper p-6 transition-colors hover:bg-vellum/30 sm:p-7"
+          >
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[13px] text-pine">{s.n}</span>
+              <Pill tone="cyan" size="sm">
+                {s.tag}
+              </Pill>
+            </div>
+            <h3 className="display mt-4 text-2xl text-ink">{s.title}</h3>
             <p className="mt-3 text-[14px] leading-[1.6] text-graphite">
               {s.body}
             </p>
