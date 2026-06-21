@@ -10,6 +10,7 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { CartoucheHeader } from "@/components/atelier/CartoucheHeader";
+import { Spotlight } from "@/components/atelier/Spotlight";
 import { ESTIMATOR_KINDS, estimate, formatEuro } from "@/lib/estimator";
 import { InstantEstimate } from "@/components/marketing/InstantEstimate";
 import { MotionSection } from "@/components/marketing/MotionSection";
@@ -164,23 +165,25 @@ function Deliverables() {
       />
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((it) => (
-          <div
+          <Spotlight
             key={it.label}
-            className="lift rounded-[4px] border border-line bg-paper p-5 hover:border-line-strong"
+            className="lift rounded-[4px] border border-line bg-paper hover:border-line-strong"
           >
-            <h3 className="font-display text-xl leading-tight text-ink">
-              {it.label}
-            </h3>
-            <p className="mt-1.5 text-[13px] leading-[1.5] text-mute">
-              {it.hint}
-            </p>
-            <div className="mt-4 flex items-end justify-between border-t border-line pt-3">
-              <span className="font-mono text-[15px] text-ink">
-                {formatEuro(it.low)} – {formatEuro(it.high)}
-              </span>
-              <span className="caption">~ {it.days} j</span>
+            <div className="p-5">
+              <h3 className="font-display text-xl leading-tight text-ink">
+                {it.label}
+              </h3>
+              <p className="mt-1.5 text-[13px] leading-[1.5] text-mute">
+                {it.hint}
+              </p>
+              <div className="mt-4 flex items-end justify-between border-t border-line pt-3">
+                <span className="font-mono text-[15px] text-ink">
+                  {formatEuro(it.low)} – {formatEuro(it.high)}
+                </span>
+                <span className="caption">~ {it.days} j</span>
+              </div>
             </div>
-          </div>
+          </Spotlight>
         ))}
       </div>
     </section>

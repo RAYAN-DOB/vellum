@@ -269,6 +269,35 @@ body {
     animation: marquee 36s linear infinite;
   }
 
+  /* Futuristic emerald beam travelling around a card border — sober: a thin
+     pine arc, not neon. Freezes under prefers-reduced-motion. */
+  .border-beam {
+    position: relative;
+  }
+  .border-beam::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--beam-angle, 0deg),
+      transparent 0deg,
+      color-mix(in srgb, var(--pine) 85%, transparent) 18deg,
+      transparent 48deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    animation: beam-rotate 6s linear infinite;
+    pointer-events: none;
+  }
+
   /* Marquee / strip used for partners */
   .mask-fade-x {
     mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
@@ -425,6 +454,18 @@ body {
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+@property --beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes beam-rotate {
+  to {
+    --beam-angle: 360deg;
   }
 }
 

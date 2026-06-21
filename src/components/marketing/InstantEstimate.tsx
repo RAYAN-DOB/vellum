@@ -122,8 +122,8 @@ export function InstantEstimate() {
           />
         </div>
 
-        {/* Result — a small Atelier "devis" planche */}
-        <div className="rounded-[4px] border border-line-strong bg-vellum/40 p-6 sm:p-7">
+        {/* Result — a small Atelier "devis" planche, with a sober beam border */}
+        <div className="border-beam relative rounded-[4px] border border-line-strong bg-vellum/40 p-6 sm:p-7">
           <div className="flex items-center justify-between border-b border-line pb-3">
             <span className="caption">Estimation indicative</span>
             <span className="caption text-soft">EST-30S</span>
