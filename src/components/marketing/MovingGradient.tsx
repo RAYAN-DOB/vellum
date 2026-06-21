@@ -20,15 +20,23 @@ export function MovingGradient({
   className,
   variant = "dark",
   grain = false,
+  phase = 0,
 }: {
   className?: string;
   variant?: "dark" | "light";
   grain?: boolean;
+  /**
+   * Per-instance time offset (seconds) added as a negative animation-delay so
+   * stacked dark sections don't drift in lock-step — breaks the monotony of a
+   * long dark stretch without touching the palette or darkness.
+   */
+  phase?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: "140px" });
   const dark = variant === "dark";
   const play = inView ? "running" : "paused";
+  const delay = (offset: number) => `-${phase + offset}s`;
 
   const blob = (color: string, pct: number) =>
     `radial-gradient(circle at center, color-mix(in srgb, ${color} ${pct}%, transparent), transparent 66%)`;
@@ -49,6 +57,7 @@ export function MovingGradient({
           background: blob("var(--pine)", dark ? 56 : 24),
           mixBlendMode: dark ? "screen" : "multiply",
           animation: "aurora-1 24s ease-in-out infinite",
+          animationDelay: delay(0),
           animationPlayState: play,
           willChange: "transform",
         }}
@@ -60,6 +69,7 @@ export function MovingGradient({
           background: blob("var(--cyan)", dark ? 46 : 20),
           mixBlendMode: dark ? "screen" : "multiply",
           animation: "aurora-2 30s ease-in-out infinite",
+          animationDelay: delay(6),
           animationPlayState: play,
           willChange: "transform",
         }}
@@ -71,6 +81,7 @@ export function MovingGradient({
           background: blob("var(--petrol)", dark ? 60 : 16),
           mixBlendMode: dark ? "screen" : "multiply",
           animation: "aurora-3 26s ease-in-out infinite",
+          animationDelay: delay(11),
           animationPlayState: play,
           willChange: "transform",
         }}
@@ -83,6 +94,7 @@ export function MovingGradient({
             background: blob("var(--brass)", 12),
             mixBlendMode: "screen",
             animation: "aurora-2 34s ease-in-out infinite",
+            animationDelay: delay(3),
             animationPlayState: play,
           }}
         />

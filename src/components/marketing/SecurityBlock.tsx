@@ -36,7 +36,7 @@ export function SecurityBlock() {
       id="securite"
       className="relative overflow-hidden border-t border-white/10 text-paper"
     >
-      <MovingGradient variant="dark" />
+      <MovingGradient variant="dark" phase={23} />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.06]"
@@ -67,7 +67,7 @@ export function SecurityBlock() {
                   aria-hidden="true"
                   strokeWidth={1.5}
                 />
-                <span className="caption !text-paper/40">{ref}</span>
+                <span className="caption !text-paper/60">{ref}</span>
               </div>
               <h3 className="font-display text-xl leading-[1.2] text-paper">
                 {title}

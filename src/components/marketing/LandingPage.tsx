@@ -62,11 +62,13 @@ export function LandingPage() {
   );
 }
 
-/** Shared dark cinematic background (moving gradient + faint technical grid). */
-function DarkField() {
+/** Shared dark cinematic background (moving gradient + faint technical grid).
+ *  `phase` desyncs stacked dark sections so the long dark stretch never reads
+ *  as one frozen, repeating backdrop. */
+function DarkField({ phase = 0 }: { phase?: number }) {
   return (
     <>
-      <MovingGradient variant="dark" />
+      <MovingGradient variant="dark" phase={phase} />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.06]"
@@ -100,7 +102,7 @@ const heroPills: {
 function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#0a1213] text-paper">
-      <DarkField />
+      <DarkField phase={0} />
 
       <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-16 pt-32 sm:pb-20 sm:pt-36 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-16 lg:px-10 lg:pb-24 lg:pt-40">
         <div className="max-w-2xl">
@@ -123,7 +125,7 @@ function Hero() {
             dessinateur professionnel produit vos plans 2D, schémas techniques
             et aperçus 3D — devis clair, corrections suivies, fichiers livrés.
           </p>
-          <p className="mt-4 max-w-xl text-[13px] leading-[1.5] text-paper/55">
+          <p className="mt-4 max-w-xl text-[13px] leading-[1.5] text-paper/65">
             Pour rénovateurs, artisans, agences, bureaux d&apos;études et
             porteurs de projet qui ont besoin de plans propres, vite.
           </p>
@@ -299,7 +301,7 @@ function Deliverables() {
       id="prestations"
       className="relative overflow-hidden border-y border-white/10 text-paper"
     >
-      <DarkField />
+      <DarkField phase={7} />
       <div className="relative mx-auto max-w-7xl scroll-mt-24 px-6 py-20 lg:px-10 lg:py-24">
         <CartoucheHeader
           dark
@@ -312,20 +314,20 @@ function Deliverables() {
           {items.map((it) => (
             <Spotlight
               key={it.label}
-              className="lift rounded-[4px] border border-white/10 bg-white/[0.04] hover:border-white/20"
+              className="lift rounded-[4px] border border-white/10 bg-white/[0.06] hover:border-white/20"
             >
               <div className="p-5">
                 <h3 className="font-display text-xl leading-tight text-paper">
                   {it.label}
                 </h3>
-                <p className="mt-1.5 text-[13px] leading-[1.5] text-paper/55">
+                <p className="mt-1.5 text-[13px] leading-[1.5] text-paper/65">
                   {it.hint}
                 </p>
                 <div className="mt-4 flex items-end justify-between border-t border-white/10 pt-3">
                   <span className="font-mono text-[15px] text-paper">
                     {formatEuro(it.low)} – {formatEuro(it.high)}
                   </span>
-                  <span className="caption !text-paper/45">~ {it.days} j</span>
+                  <span className="caption !text-paper/60">~ {it.days} j</span>
                 </div>
               </div>
             </Spotlight>
@@ -357,7 +359,7 @@ function Guarantee() {
 
   return (
     <section className="relative overflow-hidden border-y border-white/10 text-paper">
-      <DarkField />
+      <DarkField phase={18} />
       <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="mb-8 flex flex-wrap items-center gap-2.5">
           <Pill tone="pine" dark icon={<ShieldCheck />}>
@@ -403,7 +405,7 @@ const promisePills: { label: string; tone: PillTone }[] = [
 function DarkPromiseBand() {
   return (
     <section className="relative overflow-hidden border-y border-white/10 text-paper">
-      <DarkField />
+      <DarkField phase={13} />
       <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
         <span className="caption !text-[color-mix(in_srgb,var(--cyan)_55%,var(--paper))]">
           Pourquoi Vellum
@@ -432,7 +434,7 @@ function DarkPromiseBand() {
 function FinalCta() {
   return (
     <section className="relative overflow-hidden border-t border-white/10 text-paper">
-      <DarkField />
+      <DarkField phase={11} />
       <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:px-10 lg:py-28">
         <div>
           <div className="mb-6 flex flex-wrap gap-2">

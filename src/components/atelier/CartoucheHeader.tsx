@@ -42,7 +42,7 @@ export function CartoucheHeader({
           <span
             className={cn(
               "caption hidden sm:inline",
-              dark ? "!text-paper/40" : "text-soft",
+              dark ? "!text-paper/60" : "text-soft",
             )}
           >
             {meta}
