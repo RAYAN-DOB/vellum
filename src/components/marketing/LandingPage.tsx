@@ -47,6 +47,7 @@ export function LandingPage() {
         <MotionSection>
           <Deliverables />
         </MotionSection>
+        <DarkPromiseBand />
         <ProductDemoFilm />
         <TrustStrip />
         <MotionSection>
@@ -353,6 +354,55 @@ function TrustStrip() {
               </span>
             ))}
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const promisePills: { label: string; tone: PillTone }[] = [
+  { label: "Un seul interlocuteur", tone: "cyan" },
+  { label: "Devis clair avant de payer", tone: "pine" },
+  { label: "Corrections suivies", tone: "pine" },
+  { label: "Fichiers PDF + DWG", tone: "petrol" },
+  { label: "Confidentiel", tone: "neutral" },
+];
+
+function DarkPromiseBand() {
+  return (
+    <section className="relative overflow-hidden border-y border-line text-paper">
+      {/* dark cinematic moving gradient */}
+      <MovingGradient variant="dark" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(250,249,245,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(250,249,245,0.5) 1px, transparent 1px)",
+          backgroundSize: "34px 34px",
+        }}
+      />
+      <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+        <span className="caption text-[color-mix(in_srgb,var(--cyan)_55%,var(--paper))]">
+          Pourquoi Vellum
+        </span>
+        <h2 className="display mt-4 max-w-3xl text-[clamp(2rem,4.4vw,3.4rem)] text-paper">
+          Des plans techniques propres,{" "}
+          <span className="italic text-[color-mix(in_srgb,var(--cyan)_60%,var(--paper))]">
+            sans gérer de prestataire.
+          </span>
+        </h2>
+        <p className="mt-5 max-w-xl text-[15px] leading-[1.7] text-paper/75">
+          Vous décrivez votre besoin, un dessinateur professionnel exécute, vous
+          validez. Un seul interlocuteur, un devis clair avant tout paiement, des
+          corrections suivies jusqu&apos;au livrable.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-2.5">
+          {promisePills.map((p) => (
+            <Pill key={p.label} tone={p.tone} dot>
+              {p.label}
+            </Pill>
+          ))}
         </div>
       </div>
     </section>
