@@ -36,7 +36,8 @@ type VellumModelCanvasProps = {
   embedMode?: boolean
 }
 
-type TexturePack = Record<'paper' | 'plaster' | 'concrete' | 'roof' | 'wood' | 'vellum', THREE.Texture | null>
+type TexSet = { map: THREE.Texture; nor: THREE.Texture }
+type TexturePack = Record<'paper' | 'plaster' | 'concrete' | 'roof' | 'wood' | 'vellum', TexSet>
 
 type MaterialPack = {
   glass: THREE.MeshPhysicalMaterial
@@ -138,25 +139,37 @@ type ModelSceneProps = {
 function ModelScene({ selectedFloor, layers, embedMode, reduce }: ModelSceneProps) {
   const groupRef = useRef<Group>(null)
   const [hovered, setHovered] = useState<string | null>(null)
-  // Real CC0 PBR diffuse maps (Poly Haven) — replace the procedural look.
+  // Real CC0 PBR maps (Poly Haven) — diffuse + normal, replace the procedural look.
   const raw = useTexture({
-    plaster: '/textures/plaster_diff.jpg',
-    concrete: '/textures/concrete_diff.jpg',
-    wood: '/textures/wood_diff.jpg',
+    plasterMap: '/textures/plaster_diff.jpg',
+    plasterNor: '/textures/plaster_nor.jpg',
+    concreteMap: '/textures/concrete_diff.jpg',
+    concreteNor: '/textures/concrete_nor.jpg',
+    woodMap: '/textures/wood_diff.jpg',
+    woodNor: '/textures/wood_nor.jpg',
   })
   const textures = useMemo<TexturePack>(() => {
-    const cfg = (t: THREE.Texture, repeat: [number, number]) => {
+    const cfg = (t: THREE.Texture, repeat: [number, number], srgb: boolean) => {
       t.wrapS = THREE.RepeatWrapping
       t.wrapT = THREE.RepeatWrapping
       t.repeat.set(repeat[0], repeat[1])
       t.anisotropy = 8
-      t.colorSpace = THREE.SRGBColorSpace
+      t.colorSpace = srgb ? THREE.SRGBColorSpace : THREE.NoColorSpace
       t.needsUpdate = true
       return t
     }
-    const plaster = cfg(raw.plaster, [2.6, 2.6])
-    const concrete = cfg(raw.concrete, [2.2, 2.2])
-    const wood = cfg(raw.wood, [1.4, 2.4])
+    const plaster: TexSet = {
+      map: cfg(raw.plasterMap, [2.6, 2.6], true),
+      nor: cfg(raw.plasterNor, [2.6, 2.6], false),
+    }
+    const concrete: TexSet = {
+      map: cfg(raw.concreteMap, [2.2, 2.2], true),
+      nor: cfg(raw.concreteNor, [2.2, 2.2], false),
+    }
+    const wood: TexSet = {
+      map: cfg(raw.woodMap, [1.4, 2.4], true),
+      nor: cfg(raw.woodNor, [1.4, 2.4], false),
+    }
     return { paper: plaster, plaster, concrete, roof: plaster, wood, vellum: plaster }
   }, [raw])
 
@@ -286,25 +299,25 @@ function PremiumSiteBase({ textures, materials }: { textures: TexturePack; mater
       <mesh receiveShadow castShadow position={[0, -0.11, 0]}>
         <boxGeometry args={[6.95, 0.16, 4.95]} />
         <meshStandardMaterial
-          color="#ddd2bd"
-          map={textures.concrete ?? undefined}
-          bumpMap={textures.concrete ?? undefined}
-          bumpScale={0.018}
+          color="#e9e2d2"
+          map={textures.concrete.map}
+          normalMap={textures.concrete.nor}
+          normalScale={[0.85, 0.85]}
           roughness={0.93}
         />
         <Edges color="#968a78" linewidth={0.7} />
       </mesh>
       <mesh receiveShadow position={[-0.22, -0.015, 2.55]}>
         <boxGeometry args={[5.7, 0.075, 0.42]} />
-        <meshStandardMaterial color="#d6cab5" map={textures.concrete ?? undefined} bumpMap={textures.concrete ?? undefined} bumpScale={0.014} roughness={0.93} />
+        <meshStandardMaterial color="#e4dccb" map={textures.concrete.map} normalMap={textures.concrete.nor} normalScale={[0.6, 0.6]} roughness={0.93} />
       </mesh>
       <mesh receiveShadow position={[2.9, 0.0, -0.25]}>
         <boxGeometry args={[0.42, 0.075, 3.55]} />
-        <meshStandardMaterial color="#d6cab5" map={textures.concrete ?? undefined} bumpMap={textures.concrete ?? undefined} bumpScale={0.014} roughness={0.93} />
+        <meshStandardMaterial color="#e4dccb" map={textures.concrete.map} normalMap={textures.concrete.nor} normalScale={[0.6, 0.6]} roughness={0.93} />
       </mesh>
       <mesh castShadow receiveShadow position={[-1.55, 0.03, 2.04]}>
         <boxGeometry args={[1.55, 0.12, 0.5]} />
-        <meshStandardMaterial color="#cdbf9f" map={textures.wood ?? undefined} bumpMap={textures.wood ?? undefined} bumpScale={0.016} roughness={0.76} />
+        <meshStandardMaterial color="#cdbf9f" map={textures.wood.map} normalMap={textures.wood.nor} normalScale={[0.7, 0.7]} roughness={0.76} />
         <Edges color="#74634c" linewidth={0.5} />
       </mesh>
       <StairRun start={[-2.38, -0.02, 2.42]} />
@@ -334,10 +347,10 @@ function Planter({
       <mesh castShadow receiveShadow>
         <boxGeometry args={size} />
         <meshStandardMaterial
-          color="#d6ccb8"
-          map={textures.concrete ?? undefined}
-          bumpMap={textures.concrete ?? undefined}
-          bumpScale={0.012}
+          color="#e6ddcb"
+          map={textures.concrete.map}
+          normalMap={textures.concrete.nor}
+          normalScale={[0.55, 0.55]}
           roughness={0.92}
         />
         <Edges color="#847969" linewidth={0.55} />
@@ -417,9 +430,9 @@ function FloorAssembly({ floor, selected, textures, embedMode, reduce }: FloorAs
           <boxGeometry args={floor.size} />
           <meshStandardMaterial
             color={roof ? '#e3d8c4' : selected ? '#f0e2c8' : '#dbcfb9'}
-            map={(roof ? textures.roof : selected ? textures.vellum : textures.concrete) ?? undefined}
-            bumpMap={(roof ? textures.roof : textures.concrete) ?? undefined}
-            bumpScale={roof ? 0.019 : 0.011}
+            map={(roof ? textures.roof : selected ? textures.vellum : textures.concrete).map}
+            normalMap={(roof ? textures.roof : textures.concrete).nor}
+            normalScale={[0.6, 0.6]}
             transparent
             opacity={opacity}
             roughness={0.9}
@@ -488,9 +501,9 @@ function RoofDetails({ selected, textures }: { selected: boolean; textures: Text
         <boxGeometry args={[5.95, 0.08, 4.42]} />
         <meshStandardMaterial
           color={selected ? '#eee5d2' : '#ded4c1'}
-          map={textures.roof ?? undefined}
-          bumpMap={textures.roof ?? undefined}
-          bumpScale={0.02}
+          map={textures.roof.map}
+          normalMap={textures.roof.nor}
+          normalScale={[0.7, 0.7]}
           transparent
           opacity={0.86}
           roughness={0.88}
@@ -571,9 +584,9 @@ function WallMesh({ wall, active, hovered, textures, onHover }: WallMeshProps) {
       <boxGeometry args={wall.size} />
       <meshStandardMaterial
         color={color}
-        map={textures.plaster ?? undefined}
-        bumpMap={textures.plaster ?? undefined}
-        bumpScale={wall.kind === 'outer' ? 0.028 : 0.018}
+        map={textures.plaster.map}
+        normalMap={textures.plaster.nor}
+        normalScale={wall.kind === 'outer' ? [1, 1] : [0.7, 0.7]}
         transparent
         opacity={opacity}
         roughness={0.86}
@@ -865,22 +878,22 @@ function FurnitureLayer({ selectedFloor, textures }: { selectedFloor: FloorKey; 
     () => ({
       wood: new THREE.MeshStandardMaterial({
         color: '#9b7a52',
-        map: textures.wood ?? undefined,
-        bumpMap: textures.wood ?? undefined,
-        bumpScale: 0.014,
+        map: textures.wood.map,
+        normalMap: textures.wood.nor,
+        normalScale: new THREE.Vector2(0.6, 0.6),
         roughness: 0.74,
       }),
       stone: new THREE.MeshStandardMaterial({
         color: '#d8ccb7',
-        map: textures.concrete ?? undefined,
-        bumpMap: textures.concrete ?? undefined,
-        bumpScale: 0.009,
+        map: textures.concrete.map,
+        normalMap: textures.concrete.nor,
+        normalScale: new THREE.Vector2(0.5, 0.5),
         roughness: 0.92,
       }),
       fabric: new THREE.MeshStandardMaterial({ color: '#b9aa94', roughness: 0.88 }),
       brass: new THREE.MeshStandardMaterial({ color: '#b19a68', roughness: 0.45, metalness: 0.22 }),
     }),
-    [textures.concrete, textures.wood],
+    [textures],
   )
 
   return (
@@ -1000,13 +1013,13 @@ function ExplodedGuides({ selectedFloor }: { selectedFloor: FloorKey }) {
           opacity={0.42}
         />
       ))}
-      <Html position={[3.38, 2.2, -1.55]} center className={selectedFloor === 'toiture' ? 'r3f-level-label active' : 'r3f-level-label'}>
+      <Html position={[2.96, 2.2, -1.55]} center className={selectedFloor === 'toiture' ? 'r3f-level-label active' : 'r3f-level-label'}>
         TOITURE <small>+12,80</small>
       </Html>
-      <Html position={[3.33, 1.2, -1.25]} center className={selectedFloor === 'etage' ? 'r3f-level-label active' : 'r3f-level-label'}>
+      <Html position={[2.93, 1.2, -1.25]} center className={selectedFloor === 'etage' ? 'r3f-level-label active' : 'r3f-level-label'}>
         ÉTAGE 1 <small>+6,40</small>
       </Html>
-      <Html position={[3.28, 0.18, -1.08]} center className={selectedFloor === 'rdc' ? 'r3f-level-label active' : 'r3f-level-label'}>
+      <Html position={[2.9, 0.18, -1.08]} center className={selectedFloor === 'rdc' ? 'r3f-level-label active' : 'r3f-level-label'}>
         RDC <small>±0,00</small>
       </Html>
       <Html position={[-3.05, selected.y + 0.42, -1.94]} center className="r3f-dwg-tag">
