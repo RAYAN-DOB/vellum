@@ -1,7 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import {
+  animate,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useTransform,
+} from "framer-motion";
 import {
   ArrowRight,
   CheckCircle2,
@@ -312,9 +319,10 @@ export function QuoteSheet({ quote }: { quote: QuoteSheetData }) {
 
           <div className="mt-4 flex items-baseline justify-between border-t border-line-strong pt-4">
             <span className="caption">À régler maintenant</span>
-            <span className="font-display text-2xl text-ink">
-              {formatEuro(breakdown.amountNow)}
-            </span>
+            <LiveAmount
+              value={breakdown.amountNow}
+              className="font-display text-2xl text-ink"
+            />
           </div>
 
           {accepted ? (
@@ -344,6 +352,34 @@ export function QuoteSheet({ quote }: { quote: QuoteSheetData }) {
       </div>
     </div>
   );
+}
+
+/** A money figure that smoothly rolls between values when it changes
+ *  (e.g. when options or the payment choice are toggled). Reduced-motion safe. */
+function LiveAmount({
+  value,
+  className,
+}: {
+  value: number;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+  const mv = useMotionValue(value);
+  const text = useTransform(mv, (v) => formatEuro(Math.round(v)));
+
+  useEffect(() => {
+    if (reduce) {
+      mv.set(value);
+      return;
+    }
+    const controls = animate(mv, value, {
+      duration: 0.4,
+      ease: [0.16, 1, 0.3, 1],
+    });
+    return () => controls.stop();
+  }, [value, reduce, mv]);
+
+  return <motion.span className={className}>{text}</motion.span>;
 }
 
 function Row({
