@@ -227,7 +227,7 @@ export function PublicProjectDepositFlow() {
           {/* Progress line */}
           <div className="mb-6 h-px w-full overflow-hidden bg-[#3b352e]">
             <motion.div
-              className="h-full bg-gradient-to-r from-[#1f6b47] to-[#2f7d56]"
+              className="h-full bg-gradient-to-r from-[#0f766e] to-[#0f766e]"
               initial={false}
               animate={{ width: `${Math.max(progress, 4)}%` }}
               transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeOut" }}
@@ -243,7 +243,7 @@ export function PublicProjectDepositFlow() {
                 className={cn(
                   "inline-flex h-9 cursor-pointer items-center gap-2 rounded-full border px-3 text-[12px] font-medium transition",
                   index === step
-                    ? "border-[#2f7d56] bg-[#1f6b47] text-[#fbfaf6]"
+                    ? "border-pine bg-pine text-[#fbfaf6]"
                     : index < step
                       ? "border-[#5f6f55]/40 bg-[#5f6f55]/12 text-[#cbd4c2]"
                       : "border-[#3b352e] bg-[#1c1a16] text-[#b9ad9d] hover:border-[#746d62] hover:text-[#fbfaf6]",
@@ -288,7 +288,7 @@ export function PublicProjectDepositFlow() {
                             className={cn(
                               "min-h-20 cursor-pointer rounded-[4px] border p-4 text-left transition",
                               projectType === type
-                                ? "border-[#2f7d56] bg-[#1f6b47] text-[#fbfaf6]"
+                                ? "border-pine bg-pine text-[#fbfaf6]"
                                 : "border-[#3b352e] bg-[#100f0d] text-[#d8d0bf] hover:border-[#746d62] hover:bg-[#201d18]",
                             )}
                           >
@@ -306,7 +306,7 @@ export function PublicProjectDepositFlow() {
                           onChange={(event) => setDescription(event.target.value)}
                           rows={9}
                           autoFocus
-                          className="mt-3 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-[15px] leading-7 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#2f7d56] focus:ring-2 focus:ring-[#2f7d56]/20"
+                          className="mt-3 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-[15px] leading-7 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-pine/20"
                           placeholder="Expliquez ce que vous voulez obtenir, les contraintes, les corrections à faire, les dimensions connues, les fichiers disponibles."
                         />
                         <span className="mt-2 block text-[12px] text-[#b9ad9d]">
@@ -329,9 +329,9 @@ export function PublicProjectDepositFlow() {
                         <button
                           type="button"
                           onClick={() => fileInputRef.current?.click()}
-                          className="flex min-h-44 w-full cursor-pointer flex-col items-center justify-center gap-3 rounded-[6px] border border-dashed border-[#4c4339] bg-[#100f0d] px-6 text-center transition hover:border-[#2f7d56] hover:bg-[#201d18]"
+                          className="flex min-h-44 w-full cursor-pointer flex-col items-center justify-center gap-3 rounded-[6px] border border-dashed border-[#4c4339] bg-[#100f0d] px-6 text-center transition hover:border-pine hover:bg-[#201d18]"
                         >
-                          <Paperclip className="size-7 text-[#2f7d56]" aria-hidden="true" />
+                          <Paperclip className="size-7 text-pine" aria-hidden="true" />
                           <span className="font-display text-2xl text-[#fbfaf6]">
                             Ajouter PDF, DWG, images, croquis ou notes
                           </span>
@@ -353,7 +353,7 @@ export function PublicProjectDepositFlow() {
                                 >
                                   <span className="flex min-w-0 items-center gap-3">
                                     <Icon
-                                      className="size-4 shrink-0 text-[#2f7d56]"
+                                      className="size-4 shrink-0 text-pine"
                                       aria-hidden="true"
                                     />
                                     <span className="min-w-0">
@@ -392,7 +392,7 @@ export function PublicProjectDepositFlow() {
                           <select
                             value={deliverable}
                             onChange={(event) => setDeliverable(event.target.value)}
-                            className="mt-3 h-12 w-full cursor-pointer rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-[#2f7d56] focus:ring-2 focus:ring-[#2f7d56]/20"
+                            className="mt-3 h-12 w-full cursor-pointer rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-pine/20"
                           >
                             {deliverables.map((item) => (
                               <option key={item} value={item}>
@@ -408,7 +408,7 @@ export function PublicProjectDepositFlow() {
                             <input
                               value={deadline}
                               onChange={(event) => setDeadline(event.target.value)}
-                              className="mt-3 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#2f7d56] focus:ring-2 focus:ring-[#2f7d56]/20"
+                              className="mt-3 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-pine/20"
                               placeholder="Ex. fin de semaine, 10 jours, urgent"
                             />
                           </label>
@@ -421,7 +421,7 @@ export function PublicProjectDepositFlow() {
                                   event.target.value as PublicProjectDraft["urgency"],
                                 )
                               }
-                              className="mt-3 h-12 w-full cursor-pointer rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-[#2f7d56] focus:ring-2 focus:ring-[#2f7d56]/20"
+                              className="mt-3 h-12 w-full cursor-pointer rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-pine/20"
                             >
                               <option value="normal">Standard</option>
                               <option value="high">Élevé</option>
@@ -453,7 +453,7 @@ export function PublicProjectDepositFlow() {
                             value={notes}
                             onChange={(event) => setNotes(event.target.value)}
                             rows={4}
-                            className="mt-3 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-sm leading-6 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#2f7d56] focus:ring-2 focus:ring-[#2f7d56]/20"
+                            className="mt-3 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-sm leading-6 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-pine/20"
                             placeholder="Contraintes, formats finaux, pièces manquantes, précisions utiles."
                           />
                         </label>
@@ -482,7 +482,7 @@ export function PublicProjectDepositFlow() {
                           </dl>
                         </div>
 
-                        <div className="rounded-[6px] border border-[#1f6b47]/35 bg-[#1f6b47]/10 p-5">
+                        <div className="rounded-[6px] border border-[#0f766e]/35 bg-pine/10 p-5">
                           <p className="caption flex items-center gap-2 text-[#9ec9b4]">
                             <Sparkles className="size-3.5" aria-hidden="true" />
                             Dernière étape
@@ -502,14 +502,14 @@ export function PublicProjectDepositFlow() {
                         <div className="flex flex-col gap-3 sm:flex-row">
                           <a
                             href={`${routes.public.register}?redirect=${authRedirect}`}
-                            className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-[#1f6b47] px-6 text-sm font-medium text-[#fbfaf6] transition hover:bg-[#154c31]"
+                            className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-pine px-6 text-sm font-medium text-[#fbfaf6] transition hover:bg-pine-hover"
                           >
                             Créer mon espace et envoyer
                             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
                           </a>
                           <a
                             href={`${routes.public.login}?redirect=${authRedirect}`}
-                            className="inline-flex h-12 cursor-pointer items-center justify-center rounded-full border border-[#4c4339] px-6 text-sm font-medium text-[#d8d0bf] transition hover:border-[#2f7d56] hover:text-[#fbfaf6]"
+                            className="inline-flex h-12 cursor-pointer items-center justify-center rounded-full border border-[#4c4339] px-6 text-sm font-medium text-[#d8d0bf] transition hover:border-pine hover:text-[#fbfaf6]"
                           >
                             J&apos;ai déjà un compte
                           </a>
@@ -524,7 +524,7 @@ export function PublicProjectDepositFlow() {
                   type="button"
                   onClick={back}
                   disabled={step === 0}
-                  className="inline-flex h-11 cursor-pointer items-center justify-center gap-2 rounded-full border border-[#4c4339] px-5 text-sm font-medium text-[#d8d0bf] transition hover:border-[#2f7d56] hover:text-[#fbfaf6] disabled:pointer-events-none disabled:opacity-35"
+                  className="inline-flex h-11 cursor-pointer items-center justify-center gap-2 rounded-full border border-[#4c4339] px-5 text-sm font-medium text-[#d8d0bf] transition hover:border-pine hover:text-[#fbfaf6] disabled:pointer-events-none disabled:opacity-35"
                 >
                   <ArrowLeft className="size-4" aria-hidden="true" />
                   Retour
@@ -534,7 +534,7 @@ export function PublicProjectDepositFlow() {
                     type="button"
                     onClick={next}
                     disabled={!canContinue}
-                    className="group inline-flex h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-[#1f6b47] px-6 text-sm font-medium text-[#fbfaf6] transition hover:bg-[#154c31] disabled:pointer-events-none disabled:opacity-50"
+                    className="group inline-flex h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-pine px-6 text-sm font-medium text-[#fbfaf6] transition hover:bg-pine-hover disabled:pointer-events-none disabled:opacity-50"
                   >
                     Continuer
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
@@ -641,7 +641,7 @@ function ToggleCard({
       className={cn(
         "flex min-h-16 cursor-pointer items-center justify-between gap-3 rounded-[4px] border p-4 text-left transition",
         active
-          ? "border-[#2f7d56] bg-[#1f6b47] text-[#fbfaf6]"
+          ? "border-pine bg-pine text-[#fbfaf6]"
           : "border-[#3b352e] bg-[#100f0d] text-[#d8d0bf] hover:border-[#746d62]",
       )}
     >

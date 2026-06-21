@@ -60,7 +60,7 @@ function SubmitButton({ disabled }: { disabled?: boolean }) {
     <button
       type="submit"
       disabled={pending || disabled}
-      className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#1f6b47] px-6 text-sm font-semibold text-[#fbfaf6] transition hover:bg-[#154c31] disabled:cursor-not-allowed disabled:opacity-60"
+      className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-pine px-6 text-sm font-semibold text-[#fbfaf6] transition hover:bg-pine-hover disabled:cursor-not-allowed disabled:opacity-60"
     >
       {pending ? (
         <Loader2 className="size-4 animate-spin" aria-hidden="true" />
@@ -242,7 +242,7 @@ export function NewProjectFlow() {
           backgroundSize: "44px 44px",
         }}
       />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_22%_0%,rgba(47,125,86,0.24),transparent_38%),linear-gradient(180deg,rgba(21,20,16,0.2),rgba(21,20,16,0))]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_22%_0%,rgba(15,118,110,0.24),transparent_38%),linear-gradient(180deg,rgba(21,20,16,0.2),rgba(21,20,16,0))]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-[#0c0b09] to-transparent" />
 
       <header className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-5 sm:px-6 lg:px-8">
@@ -273,7 +273,7 @@ export function NewProjectFlow() {
           </p>
 
           {draftRestored ? (
-            <div className="mt-6 rounded-[5px] border border-[#2f7d56]/35 bg-[#2f7d56]/10 px-4 py-3 text-sm leading-6 text-[#cfe0d4]">
+            <div className="mt-6 rounded-[5px] border border-pine/35 bg-pine/10 px-4 py-3 text-sm leading-6 text-[#cfe0d4]">
               Votre brouillon commencé sans compte a été repris ici.
             </div>
           ) : null}
@@ -287,7 +287,7 @@ export function NewProjectFlow() {
                 name="title"
                 value={title}
                 onChange={(event) => setTitle(event.target.value)}
-                className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#2f7d56] focus:ring-2 focus:ring-[#2f7d56]/20"
+                className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-pine/20"
                 placeholder="Ex. Reprise PDF d'un bureau open-space"
               />
             </label>
@@ -305,7 +305,7 @@ export function NewProjectFlow() {
                     className={cn(
                       "min-h-14 rounded-[4px] border px-4 py-3 text-left text-sm transition",
                       projectType === type
-                        ? "border-[#2f7d56] bg-[#1f6b47] text-[#fbfaf6]"
+                        ? "border-pine bg-pine text-[#fbfaf6]"
                         : "border-[#3b352e] bg-[#100f0d] text-[#d8d0bf] hover:border-[#746d62] hover:bg-[#201d18]",
                     )}
                   >
@@ -323,7 +323,7 @@ export function NewProjectFlow() {
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
                 rows={7}
-                className="mt-2 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-sm leading-6 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#2f7d56] focus:ring-2 focus:ring-[#2f7d56]/20"
+                className="mt-2 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-sm leading-6 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-pine/20"
                 placeholder="Expliquez les corrections, contraintes, dimensions connues, formats attendus."
               />
             </label>
@@ -336,7 +336,7 @@ export function NewProjectFlow() {
                 <select
                   value={deliverable}
                   onChange={(event) => setDeliverable(event.target.value)}
-                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-[#2f7d56] focus:ring-2 focus:ring-[#2f7d56]/20"
+                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-pine/20"
                 >
                   {deliverables.map((item) => (
                     <option key={item} value={item}>
@@ -355,7 +355,7 @@ export function NewProjectFlow() {
                   onChange={(event) =>
                     setPriority(event.target.value as typeof priority)
                   }
-                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-[#2f7d56] focus:ring-2 focus:ring-[#2f7d56]/20"
+                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-pine/20"
                 >
                   <option value="normal">Standard</option>
                   <option value="high">Élevée</option>
@@ -372,7 +372,7 @@ export function NewProjectFlow() {
                   onChange={(event) =>
                     setConfidentiality(event.target.value as typeof confidentiality)
                   }
-                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-[#2f7d56] focus:ring-2 focus:ring-[#2f7d56]/20"
+                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-pine/20"
                 >
                   <option value="standard">Standard</option>
                   <option value="nda_required">Accès limité</option>
@@ -389,7 +389,7 @@ export function NewProjectFlow() {
                 <input
                   value={deadline}
                   onChange={(event) => setDeadline(event.target.value)}
-                  className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#2f7d56] focus:ring-2 focus:ring-[#2f7d56]/20"
+                  className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-pine/20"
                   placeholder="Ex. fin de semaine, 10 jours"
                 />
               </label>
@@ -401,7 +401,7 @@ export function NewProjectFlow() {
                 <input
                   value={notes}
                   onChange={(event) => setNotes(event.target.value)}
-                  className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-[#2f7d56] focus:ring-2 focus:ring-[#2f7d56]/20"
+                  className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-pine/20"
                   placeholder="Format, contraintes, éléments manquants"
                 />
               </label>
@@ -421,9 +421,9 @@ export function NewProjectFlow() {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="mt-2 flex w-full items-center justify-center gap-3 rounded-[5px] border border-dashed border-[#4c4339] bg-[#100f0d] px-4 py-7 text-sm text-[#d8d0bf] transition hover:border-[#2f7d56] hover:bg-[#201d18]"
+                className="mt-2 flex w-full items-center justify-center gap-3 rounded-[5px] border border-dashed border-[#4c4339] bg-[#100f0d] px-4 py-7 text-sm text-[#d8d0bf] transition hover:border-pine hover:bg-[#201d18]"
               >
-                <Paperclip className="size-4 text-[#2f7d56]" aria-hidden="true" />
+                <Paperclip className="size-4 text-pine" aria-hidden="true" />
                 Ajouter des fichiers PDF, DWG, images ou croquis
               </button>
 
@@ -436,9 +436,9 @@ export function NewProjectFlow() {
                     >
                       <span className="flex min-w-0 items-center gap-2 text-[#d8d0bf]">
                         {file.name.toLowerCase().endsWith(".dwg") ? (
-                          <FileArchive className="size-4 shrink-0 text-[#2f7d56]" />
+                          <FileArchive className="size-4 shrink-0 text-pine" />
                         ) : (
-                          <FileText className="size-4 shrink-0 text-[#2f7d56]" />
+                          <FileText className="size-4 shrink-0 text-pine" />
                         )}
                         <span className="truncate">{file.name}</span>
                         <span className="shrink-0 text-[#746d62]">
@@ -466,7 +466,7 @@ export function NewProjectFlow() {
                       className="flex items-center justify-between gap-3 rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-3 py-2 text-xs"
                     >
                       <span className="flex min-w-0 items-center gap-2 text-[#d8d0bf]">
-                        <FileText className="size-4 shrink-0 text-[#2f7d56]" />
+                        <FileText className="size-4 shrink-0 text-pine" />
                         <span className="truncate">{file.name}</span>
                       </span>
                       <span className="shrink-0 text-[#9b9183]">à joindre</span>
@@ -492,7 +492,7 @@ export function NewProjectFlow() {
         </form>
 
         <aside className="min-w-0 rounded-[8px] border border-[#3b352e] bg-[#1c1a16]/88 p-5 shadow-[0_30px_90px_rgba(0,0,0,0.34)] backdrop-blur lg:sticky lg:top-8 lg:self-start">
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#2f7d56]">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-pine">
             <Sparkles className="size-4" aria-hidden="true" />
             Dossier prêt
           </div>
@@ -532,7 +532,7 @@ export function NewProjectFlow() {
 
           <a
             href="/client"
-            className="mt-5 inline-flex h-10 w-full items-center justify-center gap-2 rounded-full border border-[#4c4339] text-sm font-medium text-[#d8d0bf] transition hover:border-[#2f7d56] hover:text-[#fbfaf6]"
+            className="mt-5 inline-flex h-10 w-full items-center justify-center gap-2 rounded-full border border-[#4c4339] text-sm font-medium text-[#d8d0bf] transition hover:border-pine hover:text-[#fbfaf6]"
           >
             Revenir à l'espace client
             <ArrowRight className="size-4" aria-hidden="true" />
