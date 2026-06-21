@@ -17,16 +17,8 @@ export function InkButton({
   className,
   onClick,
   type = "button",
-  square = false,
-  tone = "ink",
   ...props
-}: ButtonHTMLAttributes<HTMLButtonElement> & {
-  children: ReactNode;
-  /** Squared drafting button (rounded-[2px]) instead of the pill. */
-  square?: boolean;
-  /** ink = near-black fill (default, emerald rationed); paper = inverse for ink panels. */
-  tone?: "ink" | "paper";
-}) {
+}: ButtonHTMLAttributes<HTMLButtonElement> & { children: ReactNode }) {
   const reduce = useReducedMotion();
   const [ripples, setRipples] = useState<Ripple[]>([]);
 
@@ -45,20 +37,12 @@ export function InkButton({
     onClick?.(event);
   }
 
-  const rippleTone = tone === "paper" ? "bg-ink/15" : "bg-paper/40";
-
   return (
     <button
       type={type}
       onClick={handleClick}
       className={cn(
-        "relative inline-flex h-12 cursor-pointer items-center justify-center gap-2 overflow-hidden px-6 text-[14px] font-medium transition active:translate-y-px disabled:pointer-events-none disabled:opacity-60",
-        square ? "rounded-[2px]" : "rounded-full",
-        square
-          ? tone === "paper"
-            ? "bg-paper text-ink hover:bg-vellum"
-            : "bg-ink text-paper hover:bg-graphite"
-          : "bg-pine text-paper hover:bg-pine-hover",
+        "relative inline-flex h-12 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full bg-pine px-6 text-[14px] font-medium text-paper transition hover:bg-pine-hover active:translate-y-px disabled:pointer-events-none disabled:opacity-60",
         className,
       )}
       {...props}
@@ -73,10 +57,7 @@ export function InkButton({
           onAnimationComplete={() =>
             setRipples((cur) => cur.filter((x) => x.id !== r.id))
           }
-          className={cn(
-            "pointer-events-none absolute size-10 -translate-x-1/2 -translate-y-1/2 rounded-full",
-            rippleTone,
-          )}
+          className="pointer-events-none absolute size-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-paper/40"
           style={{ left: r.x, top: r.y }}
         />
       ))}
