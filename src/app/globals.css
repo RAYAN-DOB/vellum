@@ -263,6 +263,12 @@ body {
     transform: translateY(-2px);
   }
 
+  /* Slow seamless marquee (content duplicated, translate -50%) */
+  .animate-marquee {
+    width: max-content;
+    animation: marquee 36s linear infinite;
+  }
+
   /* Marquee / strip used for partners */
   .mask-fade-x {
     mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
@@ -410,6 +416,15 @@ body {
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
 

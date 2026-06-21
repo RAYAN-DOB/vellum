@@ -267,24 +267,30 @@ function HowItWorks() {
 function TrustStrip() {
   const items = [
     "Reprise de plans",
-    "Corrections DWG/PDF",
-    "Schémas techniques",
+    "Corrections DWG / PDF",
+    "Schémas électriques",
+    "Schémas plomberie",
+    "Mise au propre de croquis",
+    "Plans techniques 2D",
+    "Aperçus 3D & axonométrie",
     "Maquettes d'avancement",
-    "Livrables finaux",
+    "Dossiers de livraison",
   ] as const;
 
   return (
-    <section className="border-b border-line bg-vellum/55">
-      <div className="mx-auto max-w-7xl px-6 py-8 lg:px-10">
-        <div className="mask-fade-x flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-          {items.map((item) => (
-            <span
-              key={item}
-              className="font-display text-xl text-graphite/72 transition-colors hover:text-graphite"
-            >
-              {item}
-            </span>
-          ))}
+    <section className="border-y border-line bg-vellum/55">
+      <div className="mx-auto max-w-7xl px-6 py-6 lg:px-10">
+        <div className="mask-fade-x overflow-hidden">
+          <div className="animate-marquee flex items-center gap-x-10 whitespace-nowrap">
+            {[...items, ...items].map((item, index) => (
+              <span
+                key={index}
+                className="caption shrink-0 text-graphite/65"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
