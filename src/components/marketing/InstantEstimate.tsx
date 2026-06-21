@@ -15,6 +15,7 @@ import {
   type ProjectKind,
   type Urgency,
 } from "@/lib/estimator";
+import { CountUp } from "@/components/motion/CountUp";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
@@ -137,9 +138,9 @@ export function InstantEstimate() {
               transition={{ duration: 0.35, ease: EASE }}
             >
                 <p className="mt-5 font-display text-[clamp(2rem,4vw,2.75rem)] leading-none text-ink">
-                  {formatEuro(result.low)}
+                  <CountUp value={result.low} format={formatEuro} />
                   <span className="px-2 text-mute">–</span>
-                  {formatEuro(result.high)}
+                  <CountUp value={result.high} format={formatEuro} />
                 </p>
                 <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-[3px] border border-line bg-line text-[13px]">
                   <div className="bg-paper p-3">

@@ -263,6 +263,14 @@ function HowItWorks() {
           </div>
         ))}
       </div>
+
+      {/* Flow connector — an emerald light travels from step 1 to 3 */}
+      <div
+        aria-hidden="true"
+        className="relative mx-auto mt-8 hidden h-px max-w-3xl bg-line sm:block"
+      >
+        <span className="animate-flow absolute top-1/2 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pine shadow-[0_0_8px_var(--pine)]" />
+      </div>
     </section>
   );
 }

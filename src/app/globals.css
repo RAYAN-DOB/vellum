@@ -269,6 +269,11 @@ body {
     animation: marquee 36s linear infinite;
   }
 
+  /* A small emerald light travelling along a connector line (sober) */
+  .animate-flow {
+    animation: flow-x 4.5s ease-in-out infinite;
+  }
+
   /* Futuristic emerald beam travelling around a card border — sober: a thin
      pine arc, not neon. Freezes under prefers-reduced-motion. */
   .border-beam {
@@ -466,6 +471,23 @@ body {
 @keyframes beam-rotate {
   to {
     --beam-angle: 360deg;
+  }
+}
+
+@keyframes flow-x {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
   }
 }
 
