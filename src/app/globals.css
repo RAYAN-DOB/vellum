@@ -281,7 +281,10 @@ body {
   /* Page-enter — replayed on every route mount via app/template.tsx, so each
      navigation fades+rises in. Neutralised by the reduce block below. */
   .page-enter {
-    animation: page-enter 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+    /* `backwards` (not `both`): the fade+rise is identical, but the wrapper does
+       NOT retain a transform afterwards — a lingering transform would make this
+       div the containing block for position:fixed, breaking the sticky header. */
+    animation: page-enter 0.42s cubic-bezier(0.16, 1, 0.3, 1) backwards;
   }
 
   /* Subtle lift for interactive cards / list rows */
