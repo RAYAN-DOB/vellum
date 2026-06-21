@@ -89,11 +89,8 @@ const heroPills: {
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-line bg-paper">
-      {/* Neo-Atelier ambient light — a soft cyan/pine halo drifting behind the hero */}
-      <div
-        aria-hidden="true"
-        className="ambient-field pointer-events-none absolute -inset-x-16 -top-24 bottom-0"
-      />
+      {/* Neo-Atelier dynamic light field — soft emerald/cyan blobs drifting on paper */}
+      <MovingGradient variant="light" grain={false} />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 grid-paper opacity-40 [mask-image:linear-gradient(to_bottom,black,transparent_92%)]"
