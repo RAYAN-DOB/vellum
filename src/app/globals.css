@@ -763,6 +763,15 @@ body {
   outline-offset: 3px;
 }
 
+/* Dark surfaces (floating header, connected top bar, the dark cinematic home
+   sections) sit on near-ink — the default ink focus ring is invisible there.
+   Mark the container `.on-dark` and every focusable inside gets a light ring
+   instead (WCAG 2.4.7). */
+.on-dark :focus-visible {
+  outline-color: var(--paper);
+  outline-offset: 3px;
+}
+
 button,
 a {
   -webkit-tap-highlight-color: transparent;

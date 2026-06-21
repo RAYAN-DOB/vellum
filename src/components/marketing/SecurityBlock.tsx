@@ -34,7 +34,7 @@ export function SecurityBlock() {
   return (
     <section
       id="securite"
-      className="relative overflow-hidden border-t border-white/10 text-paper"
+      className="on-dark relative overflow-hidden border-t border-white/10 text-paper"
     >
       <MovingGradient variant="dark" phase={23} />
       <div

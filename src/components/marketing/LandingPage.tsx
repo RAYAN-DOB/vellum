@@ -101,7 +101,7 @@ const heroPills: {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#0a1213] text-paper">
+    <section className="on-dark relative overflow-hidden bg-[#0a1213] text-paper">
       <DarkField phase={0} />
 
       <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-16 pt-32 sm:pb-20 sm:pt-36 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-16 lg:px-10 lg:pb-24 lg:pt-40">
@@ -299,7 +299,7 @@ function Deliverables() {
   return (
     <section
       id="prestations"
-      className="relative overflow-hidden border-y border-white/10 text-paper"
+      className="on-dark relative overflow-hidden border-y border-white/10 text-paper"
     >
       <DarkField phase={7} />
       <div className="relative mx-auto max-w-7xl scroll-mt-24 px-6 py-20 lg:px-10 lg:py-24">
@@ -358,7 +358,7 @@ function Guarantee() {
   ];
 
   return (
-    <section className="relative overflow-hidden border-y border-white/10 text-paper">
+    <section className="on-dark relative overflow-hidden border-y border-white/10 text-paper">
       <DarkField phase={18} />
       <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="mb-8 flex flex-wrap items-center gap-2.5">
@@ -404,7 +404,7 @@ const promisePills: { label: string; tone: PillTone }[] = [
 
 function DarkPromiseBand() {
   return (
-    <section className="relative overflow-hidden border-y border-white/10 text-paper">
+    <section className="on-dark relative overflow-hidden border-y border-white/10 text-paper">
       <DarkField phase={13} />
       <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
         <span className="caption !text-[color-mix(in_srgb,var(--cyan)_55%,var(--paper))]">
@@ -433,7 +433,7 @@ function DarkPromiseBand() {
 
 function FinalCta() {
   return (
-    <section className="relative overflow-hidden border-t border-white/10 text-paper">
+    <section className="on-dark relative overflow-hidden border-t border-white/10 text-paper">
       <DarkField phase={11} />
       <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:px-10 lg:py-28">
         <div>

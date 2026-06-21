@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -25,6 +25,7 @@ export function PublicHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   // Condense the bar once the page leaves the very top.
   useEffect(() => {
@@ -55,8 +56,21 @@ export function PublicHeader() {
     return () => io.disconnect();
   }, []);
 
+  // Close the mobile sheet on Escape and return focus to the toggle.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
-    <header className="fixed inset-x-3 top-3 z-50 sm:top-4">
+    <header className="on-dark fixed inset-x-3 top-3 z-50 sm:top-4">
       <div
         className={cn(
           "relative mx-auto flex max-w-5xl items-center justify-between gap-2 rounded-full border px-3.5 py-2.5 text-paper backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-500 sm:gap-3",
@@ -97,7 +111,7 @@ export function PublicHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                aria-current={isActive ? "true" : undefined}
+                aria-current={isActive ? "location" : undefined}
                 className={cn(
                   "relative rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors",
                   isActive
@@ -145,6 +159,7 @@ export function PublicHeader() {
             Déposer
           </Link>
           <button
+            ref={menuButtonRef}
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
@@ -193,7 +208,7 @@ export function PublicHeader() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                aria-current={isActive ? "true" : undefined}
+                aria-current={isActive ? "location" : undefined}
                 className={cn(
                   "flex items-center gap-2 rounded-full px-3 py-2.5 text-[14px] font-medium transition-colors",
                   isActive

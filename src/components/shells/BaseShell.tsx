@@ -71,7 +71,7 @@ export function BaseShell({
   return (
     <div className="min-h-screen bg-paper text-ink">
       {/* Top bar — dark ink, identity + actions */}
-      <header className="relative z-30 border-b border-line-strong/40 bg-ink text-paper">
+      <header className="on-dark relative z-30 border-b border-line-strong/40 bg-ink text-paper">
         <Container className="flex min-h-16 items-center justify-between gap-4">
           <Link
             href="/"
