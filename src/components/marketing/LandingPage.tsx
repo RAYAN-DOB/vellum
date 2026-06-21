@@ -16,7 +16,7 @@ import { ESTIMATOR_KINDS, estimate, formatEuro } from "@/lib/estimator";
 import { InstantEstimate } from "@/components/marketing/InstantEstimate";
 import { MotionSection } from "@/components/marketing/MotionSection";
 import { MovingGradient } from "@/components/marketing/MovingGradient";
-import { Hero3D } from "@/components/three/Hero3D";
+import { HeroMaquette } from "@/components/three/HeroMaquette";
 import { SecurityBlock } from "@/components/marketing/SecurityBlock";
 import { routes } from "@/lib/routes";
 
@@ -81,23 +81,6 @@ function DarkField({ phase = 0 }: { phase?: number }) {
     </>
   );
 }
-
-const heroPills: {
-  label: string;
-  tone: PillTone;
-  dot?: boolean;
-  mono?: boolean;
-  icon?: boolean;
-  pos: string;
-  delay: string;
-}[] = [
-  { label: "Croquis reçu", tone: "pine", dot: true, pos: "left-0 top-10", delay: "0s" },
-  { label: "Plan en cours", tone: "cyan", dot: true, pos: "right-0 top-24", delay: "1.1s" },
-  { label: "Devis clair", tone: "pine", pos: "left-0 top-1/2", delay: "0.6s" },
-  { label: "PDF + DWG", tone: "petrol", mono: true, pos: "right-1 top-[46%]", delay: "1.7s" },
-  { label: "2 révisions incluses", tone: "neutral", pos: "left-8 bottom-16", delay: "0.9s" },
-  { label: "Paiement sécurisé", tone: "cyan", icon: true, pos: "right-2 bottom-4", delay: "2.2s" },
-];
 
 function Hero() {
   return (
@@ -187,40 +170,7 @@ function Hero() {
         </div>
 
         <div className="relative min-w-0">
-          <Hero3D />
-
-          {/* scanner line gliding over the 3D */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-6 overflow-hidden rounded-[28px]"
-          >
-            <span className="scanner-line" />
-          </div>
-
-          {/* floating explanatory pills (desktop) */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 hidden lg:block"
-          >
-            {heroPills.map((p) => (
-              <div
-                key={p.label}
-                className={`float-y absolute ${p.pos}`}
-                style={{ animationDelay: p.delay }}
-              >
-                <Pill
-                  tone={p.tone}
-                  dark
-                  dot={p.dot}
-                  mono={p.mono}
-                  icon={p.icon ? <ShieldCheck /> : undefined}
-                  className="shadow-[0_10px_28px_-14px_rgba(0,0,0,0.7)]"
-                >
-                  {p.label}
-                </Pill>
-              </div>
-            ))}
-          </div>
+          <HeroMaquette />
         </div>
       </div>
     </section>

@@ -776,3 +776,195 @@ button,
 a {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Hero 3D maquette — a lit architect's drawing table floating in the dark hero
+   ────────────────────────────────────────────────────────────────────────── */
+.maquette-card {
+  position: relative;
+  width: 100%;
+  height: clamp(420px, 50vw, 600px);
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background:
+    radial-gradient(circle at 56% 32%, rgba(255, 250, 240, 0.99), rgba(244, 237, 223, 0.7) 48%, rgba(226, 215, 196, 0.78) 100%),
+    #f4eddf;
+  box-shadow:
+    0 40px 90px -30px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(13, 77, 71, 0.08),
+    0 18px 64px -40px rgba(47, 147, 166, 0.5);
+  isolation: isolate;
+}
+
+.maquette-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(90deg, rgba(24, 20, 15, 0.035) 1px, transparent 1px),
+    linear-gradient(rgba(24, 20, 15, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  -webkit-mask-image: radial-gradient(circle at 56% 46%, black 0 52%, transparent 84%);
+  mask-image: radial-gradient(circle at 56% 46%, black 0 52%, transparent 84%);
+}
+
+.vellum-model-canvas {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+.vellum-model-canvas.is-embed canvas {
+  cursor: grab;
+}
+
+.maquette-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+}
+
+.maquette-loading span {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #0d4d47, #1e645e);
+  animation: breathe 1.6s ease-in-out infinite;
+}
+
+.maquette-caption {
+  position: absolute;
+  z-index: 4;
+  left: 16px;
+  bottom: 16px;
+  max-width: 270px;
+  display: grid;
+  gap: 4px;
+  padding: 11px 13px;
+  border-radius: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 250, 240, 0.72);
+  box-shadow: 0 16px 40px rgba(43, 35, 24, 0.12);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.maquette-caption span {
+  color: #0d4d47;
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.maquette-caption p {
+  margin: 0;
+  color: #4a4337;
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+.maquette-timeline {
+  position: absolute;
+  z-index: 4;
+  right: 16px;
+  bottom: 20px;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 6px;
+}
+
+.maquette-timeline span {
+  width: 22px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(13, 77, 71, 0.2);
+  transition: background 0.3s ease, width 0.3s ease;
+}
+
+.maquette-timeline span.active {
+  width: 30px;
+  background: #0d4d47;
+}
+
+/* In-scene drei <Html> labels (rendered as DOM over the canvas) */
+.r3f-floor-chip,
+.r3f-callout,
+.r3f-stamp,
+.r3f-level-label,
+.r3f-dwg-tag {
+  white-space: nowrap;
+  border-radius: 6px;
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  pointer-events: none;
+}
+
+.r3f-floor-chip,
+.r3f-dwg-tag {
+  padding: 4px 6px;
+  color: #0d4d47;
+  border: 1px solid rgba(13, 77, 71, 0.22);
+  background: rgba(255, 250, 240, 0.86);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.r3f-level-label {
+  display: grid;
+  gap: 2px;
+  padding: 5px 8px;
+  color: #625b4f;
+  border: 1px solid rgba(24, 20, 15, 0.16);
+  background: rgba(255, 250, 240, 0.78);
+  box-shadow: 0 10px 24px rgba(43, 35, 24, 0.1);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.r3f-level-label small {
+  color: rgba(23, 20, 15, 0.48);
+  font-size: 9px;
+}
+
+.r3f-level-label.active {
+  color: #fffaf0;
+  border-color: rgba(13, 77, 71, 0.45);
+  background: #0d4d47;
+}
+
+.r3f-level-label.active small {
+  color: rgba(255, 250, 240, 0.72);
+}
+
+.r3f-callout {
+  padding: 6px 8px;
+  color: #0d4d47;
+  border: 1px solid rgba(13, 77, 71, 0.24);
+  background: rgba(255, 250, 240, 0.86);
+  box-shadow: 0 12px 30px rgba(43, 35, 24, 0.12);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.r3f-callout.warm,
+.r3f-stamp {
+  color: #a75c41;
+  border-color: rgba(167, 92, 65, 0.28);
+}
+
+.r3f-stamp {
+  padding: 7px 10px;
+  background: rgba(255, 250, 240, 0.86);
+  box-shadow: 0 12px 30px rgba(43, 35, 24, 0.12);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
