@@ -2,6 +2,7 @@
 
 import { Loader2, MessageSquare, Send } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/Button";
@@ -36,6 +37,7 @@ export function ProjectMessageThread({
   currentUserRole: string;
 }) {
   const supabase = useMemo(() => createSupabaseBrowserClient(), []);
+  const reduce = useReducedMotion();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [items, setItems] = useState(messages);
   const [pending, startTransition] = useTransition();
@@ -149,15 +151,18 @@ export function ProjectMessageThread({
         <ol className="mt-5 space-y-3">
           {items.map((message) => {
             const isSelf = message.sender_id === currentUserId;
+            const isTemp = message.id.startsWith("temp-");
             return (
-              <li
+              <motion.li
                 key={message.id}
+                initial={reduce ? false : { opacity: 0, y: 8 }}
+                animate={{ opacity: isTemp ? 0.7 : 1, y: 0 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                 className={cn(
                   "rounded-[3px] border p-3 text-sm",
                   isSelf
                     ? "ml-8 border-ink bg-ink text-paper sm:ml-16"
                     : "mr-8 border-line bg-vellum/35 text-ink sm:mr-16",
-                  message.id.startsWith("temp-") && "opacity-70",
                 )}
               >
                 <div
@@ -175,7 +180,7 @@ export function ProjectMessageThread({
                   <span>{formatDateTime(message.created_at)}</span>
                 </div>
                 <p className="whitespace-pre-line leading-6">{message.body}</p>
-              </li>
+              </motion.li>
             );
           })}
         </ol>
