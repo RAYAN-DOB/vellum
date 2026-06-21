@@ -413,10 +413,9 @@ function TrustStrip() {
 
 const promisePills: { label: string; tone: PillTone }[] = [
   { label: "Un seul interlocuteur", tone: "cyan" },
-  { label: "Devis clair avant de payer", tone: "pine" },
+  { label: "Devis avant paiement", tone: "pine" },
   { label: "Corrections suivies", tone: "pine" },
-  { label: "Fichiers PDF + DWG", tone: "petrol" },
-  { label: "Confidentiel", tone: "neutral" },
+  { label: "PDF + DWG", tone: "petrol" },
 ];
 
 function DarkPromiseBand() {

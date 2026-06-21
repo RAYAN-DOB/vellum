@@ -229,7 +229,7 @@ export function QuoteSheet({ quote }: { quote: QuoteSheetData }) {
 
       {/* PriceRail — sticky conversion bar */}
       <aside className="lg:sticky lg:top-24 lg:self-start">
-        <div className="border-beam relative rounded-[4px] border border-line-strong bg-paper p-5 shadow-[var(--shadow-e2)]">
+        <div className="light-rail relative rounded-[4px] border border-line-strong bg-paper p-5 shadow-[var(--shadow-e2)]">
           {/* Upsells */}
           <p className="caption">Options</p>
           <div className="mt-3 space-y-2">
