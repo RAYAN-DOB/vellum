@@ -21,6 +21,7 @@ import {
   useTransition,
 } from "react";
 import { useFormStatus } from "react-dom";
+import { motion, useReducedMotion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -79,6 +80,7 @@ function formatBytes(size: number) {
 
 export function NewProjectFlow() {
   const router = useRouter();
+  const reduce = useReducedMotion();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState("");
   const [projectType, setProjectType] = useState<string>(needTypes[0]);
@@ -490,7 +492,7 @@ export function NewProjectFlow() {
         </form>
 
         <aside className="min-w-0 rounded-[8px] border border-[#3b352e] bg-[#1c1a16]/88 p-5 shadow-[0_30px_90px_rgba(0,0,0,0.34)] backdrop-blur lg:sticky lg:top-8 lg:self-start">
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#c58a73]">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#2f7d56]">
             <Sparkles className="size-4" aria-hidden="true" />
             Dossier prêt
           </div>
@@ -504,7 +506,17 @@ export function NewProjectFlow() {
                 <dt className="text-[11px] uppercase tracking-[0.18em] text-[#9b9183]">
                   {row.label}
                 </dt>
-                <dd className="mt-1 text-sm text-[#fbfaf6]">{row.value}</dd>
+                <dd className="mt-1 text-sm text-[#fbfaf6]">
+                  <motion.span
+                    key={row.value}
+                    initial={reduce ? false : { opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                    className="inline-block"
+                  >
+                    {row.value}
+                  </motion.span>
+                </dd>
               </div>
             ))}
           </dl>
