@@ -9,6 +9,8 @@ import {
 
 import { CountUp } from "@/components/motion/CountUp";
 import { Reveal } from "@/components/motion/Reveal";
+import { MovingGradient } from "@/components/marketing/MovingGradient";
+import { Pill } from "@/components/atelier/Pill";
 import { StatusPill } from "@/components/ui/StatusPill";
 import {
   confidentialityLabels,
@@ -51,15 +53,18 @@ export function ClientDashboard({ user, projects, unreadMessages }: Props) {
 
   return (
     <div className="space-y-12">
-      {/* Hero band — primary CTA */}
-      <section className="relative overflow-hidden rounded-[4px] border border-line bg-paper">
+      {/* Hero band — primary CTA, Neo-Atelier light field */}
+      <section className="relative overflow-hidden rounded-[6px] border border-line">
+        <MovingGradient variant="light" />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 grid-paper opacity-40"
         />
         <div className="relative grid gap-8 p-8 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end">
           <div className="max-w-xl">
-            <p className="caption">Nouveau dépôt</p>
+            <Pill tone="pine" dot>
+              Votre espace Vellum
+            </Pill>
             <h2 className="display mt-4 text-3xl text-ink sm:text-[2.5rem]">
               Bonjour {firstName},
               <br />

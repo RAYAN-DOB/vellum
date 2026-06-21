@@ -115,7 +115,7 @@ export function QuoteSheet({ quote }: { quote: QuoteSheetData }) {
       <div className="relative grid gap-6 lg:grid-cols-[1fr_360px] lg:gap-8">
       {/* The quote planche */}
       <div className="min-w-0 space-y-6">
-        <article className="sheet relative overflow-hidden rounded-[4px] border border-line-strong bg-paper">
+        <article className="light-rail sheet relative overflow-hidden rounded-[4px] border border-line-strong bg-paper">
           {/* Cartouche */}
           <header className="flex items-center justify-between gap-4 border-b border-line-strong bg-vellum/40 px-6 py-3">
             <span className="caption">
