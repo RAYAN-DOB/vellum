@@ -11,13 +11,13 @@ import {
   OrbitControls,
   PerspectiveCamera,
   Text,
+  useTexture,
 } from '@react-three/drei'
 import { EffectComposer, N8AO, SMAA } from '@react-three/postprocessing'
 import { a, useSpring } from '@react-spring/three'
 import type { Group } from 'three'
 import * as THREE from 'three'
 import { useReducedMotion } from 'framer-motion'
-import { createProceduralTexture } from '@/lib/paperTexture'
 import {
   furniture3d,
   heroFloors,
@@ -138,17 +138,27 @@ type ModelSceneProps = {
 function ModelScene({ selectedFloor, layers, embedMode, reduce }: ModelSceneProps) {
   const groupRef = useRef<Group>(null)
   const [hovered, setHovered] = useState<string | null>(null)
-  const textures = useMemo<TexturePack>(
-    () => ({
-      paper: createProceduralTexture('paper', { repeat: [2.2, 2.2] }),
-      plaster: createProceduralTexture('plaster', { repeat: [1.35, 1.35] }),
-      concrete: createProceduralTexture('concrete', { repeat: [1.6, 1.25] }),
-      roof: createProceduralTexture('roof', { repeat: [2.4, 1] }),
-      wood: createProceduralTexture('wood', { repeat: [1.4, 2.2] }),
-      vellum: createProceduralTexture('vellum', { repeat: [1.45, 1.45] }),
-    }),
-    [],
-  )
+  // Real CC0 PBR diffuse maps (Poly Haven) — replace the procedural look.
+  const raw = useTexture({
+    plaster: '/textures/plaster_diff.jpg',
+    concrete: '/textures/concrete_diff.jpg',
+    wood: '/textures/wood_diff.jpg',
+  })
+  const textures = useMemo<TexturePack>(() => {
+    const cfg = (t: THREE.Texture, repeat: [number, number]) => {
+      t.wrapS = THREE.RepeatWrapping
+      t.wrapT = THREE.RepeatWrapping
+      t.repeat.set(repeat[0], repeat[1])
+      t.anisotropy = 8
+      t.colorSpace = THREE.SRGBColorSpace
+      t.needsUpdate = true
+      return t
+    }
+    const plaster = cfg(raw.plaster, [2.6, 2.6])
+    const concrete = cfg(raw.concrete, [2.2, 2.2])
+    const wood = cfg(raw.wood, [1.4, 2.4])
+    return { paper: plaster, plaster, concrete, roof: plaster, wood, vellum: plaster }
+  }, [raw])
 
   const materials = useMemo<MaterialPack>(
     () => ({
