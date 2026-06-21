@@ -4,7 +4,7 @@
   <defs>
     <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#eee7db" stroke-width="0.45"/></pattern>
     <style>
-      .bg{fill:#fbfaf6}.sheet{fill:#fffdf8;stroke:#171613;stroke-width:2}.grid{fill:url(#grid)}.wall{stroke:#171613;stroke-width:7;fill:none;stroke-linecap:square}.thin{stroke:#171613;stroke-width:1.8;fill:none}.hair{stroke:#171613;stroke-width:1;fill:none}.wire{stroke:#b6543a;stroke-width:2.1;fill:none;stroke-dasharray:10 7}.wire2{stroke:#5b5a50;stroke-width:1.6;fill:none;stroke-dasharray:3 6}.txt{font-family:Arial,Helvetica,sans-serif;fill:#171613}.mono{font-family:Courier New,monospace;fill:#171613}.small{font-size:10px;letter-spacing:.15em}.note{font-size:12px;letter-spacing:.12em}.room{font-size:16px;font-weight:700;letter-spacing:.08em}.muted{fill:#706a60}.sienna{fill:#b6543a;stroke:#b6543a}.symbol{stroke:#171613;stroke-width:1.6;fill:#fffdf8}.cart{font-size:11px;letter-spacing:.12em}.title{font-size:20px;font-weight:700}.light{fill:#f2eee5;stroke:#d8d0bf}
+      .bg{fill:#fbfaf6}.sheet{fill:#fffdf8;stroke:#171613;stroke-width:2}.grid{fill:url(#grid)}.wall{stroke:#171613;stroke-width:7;fill:none;stroke-linecap:square}.thin{stroke:#171613;stroke-width:1.8;fill:none}.hair{stroke:#171613;stroke-width:1;fill:none}.wire{stroke:#0f766e;stroke-width:2.1;fill:none;stroke-dasharray:10 7}.wire2{stroke:#5b5a50;stroke-width:1.6;fill:none;stroke-dasharray:3 6}.txt{font-family:Arial,Helvetica,sans-serif;fill:#171613}.mono{font-family:Courier New,monospace;fill:#171613}.small{font-size:10px;letter-spacing:.15em}.note{font-size:12px;letter-spacing:.12em}.room{font-size:16px;font-weight:700;letter-spacing:.08em}.muted{fill:#706a60}.sienna{fill:#0f766e;stroke:#0f766e}.symbol{stroke:#171613;stroke-width:1.6;fill:#fffdf8}.cart{font-size:11px;letter-spacing:.12em}.title{font-size:20px;font-weight:700}.light{fill:#f2eee5;stroke:#d8d0bf}
     </style>
   </defs>
   <rect class="bg" width="1400" height="900"/><rect x="24" y="24" width="1352" height="852" class="sheet"/><rect x="54" y="54" width="1048" height="784" class="grid"/>
@@ -49,8 +49,8 @@
   <path d="M952 259C950 350 940 415 954 474" class="wire"/>
 
   <!-- electrical board and callouts -->
-  <rect x="165" y="615" width="92" height="62" fill="#fffdf8" stroke="#b6543a" stroke-width="2"/><text x="184" y="650" class="mono small" fill="#b6543a">TABLEAU</text><text x="180" y="668" class="mono small muted">TGBT R+1</text>
+  <rect x="165" y="615" width="92" height="62" fill="#fffdf8" stroke="#0f766e" stroke-width="2"/><text x="184" y="650" class="mono small" fill="#0f766e">TABLEAU</text><text x="180" y="668" class="mono small muted">TGBT R+1</text>
   <path d="M257 644C385 610 515 585 885 640" class="wire"/>
-  <circle cx="932" cy="335" r="28" fill="none" stroke="#b6543a" stroke-width="2" stroke-dasharray="6 5"/><text x="878" y="386" class="mono small" fill="#b6543a">E-03 · APPLIQUE À DÉPLACER</text>
-  <circle cx="612" cy="210" r="21" fill="none" stroke="#b6543a" stroke-width="2"/><text x="640" y="208" class="mono small" fill="#b6543a">E-02 RJ45</text>
+  <circle cx="932" cy="335" r="28" fill="none" stroke="#0f766e" stroke-width="2" stroke-dasharray="6 5"/><text x="878" y="386" class="mono small" fill="#0f766e">E-03 · APPLIQUE À DÉPLACER</text>
+  <circle cx="612" cy="210" r="21" fill="none" stroke="#0f766e" stroke-width="2"/><text x="640" y="208" class="mono small" fill="#0f766e">E-02 RJ45</text>
 </svg>
