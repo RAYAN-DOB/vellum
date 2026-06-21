@@ -79,24 +79,13 @@ export function VellumHeroMaquette() {
   );
 
   return (
-    <div className="maquette-card">
+    <div className="maquette-stage">
       <VellumModelCanvas
         selectedFloor={step.floor}
         layers={layers}
         showCornerLabel={false}
         embedMode
       />
-
-      <div className="maquette-caption">
-        <span>{step.label}</span>
-        <p>{step.caption}</p>
-      </div>
-
-      <div className="maquette-timeline" aria-hidden="true">
-        {autoScene.map((item, index) => (
-          <span key={item.label} className={index === stepIndex ? "active" : ""} />
-        ))}
-      </div>
     </div>
   );
 }

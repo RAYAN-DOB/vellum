@@ -780,35 +780,34 @@ a {
 /* ──────────────────────────────────────────────────────────────────────────
    Hero 3D maquette — a lit architect's drawing table floating in the dark hero
    ────────────────────────────────────────────────────────────────────────── */
-.maquette-card {
+.maquette-stage {
   position: relative;
   width: 100%;
-  height: clamp(420px, 50vw, 600px);
-  overflow: hidden;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background:
-    radial-gradient(circle at 56% 32%, rgba(255, 250, 240, 0.99), rgba(244, 237, 223, 0.7) 48%, rgba(226, 215, 196, 0.78) 100%),
-    #f4eddf;
-  box-shadow:
-    0 40px 90px -30px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(13, 77, 71, 0.08),
-    0 18px 64px -40px rgba(47, 147, 166, 0.5);
+  height: clamp(440px, 52vw, 640px);
   isolation: isolate;
 }
 
-.maquette-card::before {
+/* soft pool of light the floating maquette sits in — grounds it on the dark
+   hero without any card or visible background */
+.maquette-stage::before {
   content: "";
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 55%;
+  width: 90%;
+  height: 72%;
+  transform: translate(-50%, -50%);
   z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(246, 243, 234, 0.2),
+    rgba(47, 147, 166, 0.11) 38%,
+    rgba(15, 118, 110, 0.06) 56%,
+    transparent 72%
+  );
+  filter: blur(36px);
   pointer-events: none;
-  background-image:
-    linear-gradient(90deg, rgba(24, 20, 15, 0.035) 1px, transparent 1px),
-    linear-gradient(rgba(24, 20, 15, 0.035) 1px, transparent 1px);
-  background-size: 32px 32px;
-  -webkit-mask-image: radial-gradient(circle at 56% 46%, black 0 52%, transparent 84%);
-  mask-image: radial-gradient(circle at 56% 46%, black 0 52%, transparent 84%);
 }
 
 .vellum-model-canvas {
@@ -837,62 +836,6 @@ a {
   border-radius: 999px;
   background: radial-gradient(circle, #0d4d47, #1e645e);
   animation: breathe 1.6s ease-in-out infinite;
-}
-
-.maquette-caption {
-  position: absolute;
-  z-index: 4;
-  left: 16px;
-  bottom: 16px;
-  max-width: 270px;
-  display: grid;
-  gap: 4px;
-  padding: 11px 13px;
-  border-radius: 9px;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  background: rgba(255, 250, 240, 0.72);
-  box-shadow: 0 16px 40px rgba(43, 35, 24, 0.12);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-}
-
-.maquette-caption span {
-  color: #0d4d47;
-  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.maquette-caption p {
-  margin: 0;
-  color: #4a4337;
-  font-size: 12.5px;
-  line-height: 1.35;
-}
-
-.maquette-timeline {
-  position: absolute;
-  z-index: 4;
-  right: 16px;
-  bottom: 20px;
-  display: grid;
-  grid-auto-flow: column;
-  gap: 6px;
-}
-
-.maquette-timeline span {
-  width: 22px;
-  height: 3px;
-  border-radius: 999px;
-  background: rgba(13, 77, 71, 0.2);
-  transition: background 0.3s ease, width 0.3s ease;
-}
-
-.maquette-timeline span.active {
-  width: 30px;
-  background: #0d4d47;
 }
 
 /* In-scene drei <Html> labels (rendered as DOM over the canvas) */

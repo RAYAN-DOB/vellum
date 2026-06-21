@@ -58,12 +58,11 @@ export function VellumModelCanvas({
   return (
     <div className={embedMode ? 'vellum-model-canvas is-embed' : 'vellum-model-canvas'} data-testid="vellum-hero-3d">
       <Canvas shadows dpr={[1, 1.85]} gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }}>
-        <color attach="background" args={['#f4eddf']} />
         <Suspense fallback={null}>
           <SceneCamera embedMode={embedMode} />
           <Environment preset="apartment" />
-          <ambientLight intensity={0.58} />
-          <hemisphereLight args={['#fff8ea', '#b7a990', 0.72]} />
+          <ambientLight intensity={0.42} />
+          <hemisphereLight args={['#fff8ea', '#9fb0a8', 0.5]} />
           <directionalLight
             position={[4.2, 8.4, 4.8]}
             intensity={1.9}
@@ -83,11 +82,12 @@ export function VellumModelCanvas({
             castShadow
             shadow-mapSize={[1024, 1024]}
           />
-          <directionalLight position={[-4.5, 3.2, -5.4]} intensity={0.42} color="#f1dcc2" />
+          {/* teal rim/back light — detaches the maquette from the dark hero */}
+          <directionalLight position={[-3.6, 4.7, -6]} intensity={1.1} color="#bfe6df" />
           <ModelScene selectedFloor={selectedFloor} layers={layers} embedMode={embedMode} reduce={reduce} />
-          <ContactShadows position={[0, -0.23, 0]} opacity={0.38} scale={10.5} blur={3.6} far={5.1} />
+          <ContactShadows position={[0, -0.24, 0]} opacity={0.52} scale={9} blur={2.9} far={4.6} color="#08201d" />
           <EffectComposer multisampling={0}>
-            <N8AO aoRadius={2.35} intensity={0.48} />
+            <N8AO aoRadius={2.0} intensity={0.78} color="#0b2a26" />
             <SMAA />
           </EffectComposer>
           <OrbitControls
@@ -122,7 +122,7 @@ function SceneCamera({ embedMode }: { embedMode: boolean }) {
     : tablet
       ? [7.9, 5.2, 8.4]
       : embedMode
-        ? [6.8, 4.45, 7.15]
+        ? [8.3, 5.4, 8.7]
         : [7.05, 4.9, 7.6]
 
   return <PerspectiveCamera makeDefault position={position} fov={mobile ? 50 : tablet ? 39 : embedMode ? 33 : 35} />
@@ -186,7 +186,6 @@ function ModelScene({ selectedFloor, layers, embedMode, reduce }: ModelSceneProp
 
   return (
     <group ref={groupRef} rotation={[0, -0.42, 0]} position={[0, -0.12, 0]}>
-      <DraftingTable texture={textures.paper} />
       <PremiumSiteBase textures={textures} materials={materials} />
       {embedMode ? <KineticDraftingOverlays selectedFloor={selectedFloor} reduce={reduce} /> : null}
       <ExplodedGuides selectedFloor={selectedFloor} />
@@ -219,67 +218,6 @@ function ModelScene({ selectedFloor, layers, embedMode, reduce }: ModelSceneProp
       {layers.electrical ? <ElectricalLayer selectedFloor={selectedFloor} /> : null}
       {layers.plumbing ? <PlumbingLayer selectedFloor={selectedFloor} /> : null}
       {layers.annotations ? <AnnotationLayer selectedFloor={selectedFloor} /> : null}
-    </group>
-  )
-}
-
-function DraftingTable({ texture }: { texture: THREE.Texture | null }) {
-  return (
-    <group>
-      <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.22, 0]}>
-        <planeGeometry args={[8.8, 6.35]} />
-        <meshStandardMaterial
-          color="#f4ecdc"
-          map={texture ?? undefined}
-          bumpMap={texture ?? undefined}
-          bumpScale={0.012}
-          roughness={0.98}
-          metalness={0.01}
-        />
-      </mesh>
-      <gridHelper args={[8.4, 42, '#b9ad99', '#e1d7c7']} position={[0, -0.205, 0]} />
-      <BlueprintGhostLines />
-      <Line
-        points={[
-          [-3.66, -0.19, -2.62],
-          [3.66, -0.19, -2.62],
-          [3.66, -0.19, 2.62],
-          [-3.66, -0.19, 2.62],
-          [-3.66, -0.19, -2.62],
-        ]}
-        color="#7f7465"
-        lineWidth={1}
-      />
-      <Text position={[-3.45, -0.17, 2.78]} rotation={[-Math.PI / 2, 0, 0]} fontSize={0.12} color="#8f563f">
-        VELLUM / AVANT-PROJET / REV 02
-      </Text>
-      <CompassRose />
-    </group>
-  )
-}
-
-function BlueprintGhostLines() {
-  return (
-    <group position={[0, -0.18, 0]}>
-      <Line
-        points={[
-          [-3.25, 0, 2.2],
-          [-1.1, 0, 1.74],
-          [0.62, 0, 1.98],
-          [2.9, 0, 1.22],
-          [3.25, 0, -1.96],
-          [0.35, 0, -2.38],
-          [-2.8, 0, -1.4],
-          [-3.25, 0, 2.2],
-        ]}
-        color="#7b7161"
-        lineWidth={0.7}
-        transparent
-        opacity={0.28}
-      />
-      <Line points={[[-3.05, 0, 0.24], [3.18, 0, -0.55]]} color="#7b7161" lineWidth={0.55} transparent opacity={0.22} />
-      <Line points={[[-2.48, 0, -2.24], [2.2, 0, 2.2]]} color="#7b7161" lineWidth={0.55} transparent opacity={0.2} />
-      <Line points={[[-2.2, 0, 2.5], [-0.9, 0, 1.38], [0.58, 0, 1.52]]} color="#a85d42" lineWidth={0.55} transparent opacity={0.28} />
     </group>
   )
 }
@@ -328,19 +266,6 @@ function KineticDraftingOverlays({ selectedFloor, reduce }: { selectedFloor: Flo
         transparent
         opacity={0.52}
       />
-    </group>
-  )
-}
-
-function CompassRose() {
-  return (
-    <group position={[2.95, -0.17, 2.16]} rotation={[-Math.PI / 2, 0, 0]}>
-      <Line points={[[0, 0, 0], [0.26, 0, 0.1], [0, 0, 0.36], [-0.1, 0, 0.1], [0, 0, 0]]} color="#5d564d" lineWidth={0.9} />
-      <Line points={[[0, 0, -0.2], [0, 0, 0.44]]} color="#5d564d" lineWidth={0.8} />
-      <Line points={[[-0.25, 0, 0.12], [0.25, 0, 0.12]]} color="#5d564d" lineWidth={0.8} />
-      <Text position={[0.05, 0.015, -0.28]} fontSize={0.11} color="#27231c">
-        N
-      </Text>
     </group>
   )
 }

@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 /** Paper-card placeholder shown while the (heavy) three.js maquette loads. */
 function MaquetteFallback() {
   return (
-    <div className="maquette-card" aria-hidden="true">
+    <div className="maquette-stage" aria-hidden="true">
       <div className="maquette-loading">
         <span />
       </div>
