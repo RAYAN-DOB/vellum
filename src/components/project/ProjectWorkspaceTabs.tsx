@@ -83,11 +83,21 @@ export function ProjectWorkspaceTabs({
       </div>
 
       <div className="pt-6">
-        {tabs.map((tab) => (
-          <div key={tab.id} role="tabpanel" hidden={tab.id !== active}>
-            {tab.content}
-          </div>
-        ))}
+        {tabs.map((tab) => {
+          const on = tab.id === active;
+          return (
+            <motion.div
+              key={tab.id}
+              role="tabpanel"
+              hidden={!on}
+              initial={false}
+              animate={reduce ? undefined : { opacity: on ? 1 : 0, y: on ? 0 : 6 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {tab.content}
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );
