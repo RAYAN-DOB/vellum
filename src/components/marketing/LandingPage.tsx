@@ -1,9 +1,16 @@
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  FileCheck2,
+  RefreshCw,
+  ShieldCheck,
+} from "lucide-react";
 import Link from "next/link";
 
 import { Footer } from "@/components/layout/Footer";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { CartoucheHeader } from "@/components/atelier/CartoucheHeader";
+import { ESTIMATOR_KINDS, estimate, formatEuro } from "@/lib/estimator";
 import { InstantEstimate } from "@/components/marketing/InstantEstimate";
 import { MotionSection } from "@/components/marketing/MotionSection";
 import { Hero3D } from "@/components/three/Hero3D";
@@ -34,6 +41,9 @@ export function LandingPage() {
         <MotionSection>
           <InstantEstimate />
         </MotionSection>
+        <MotionSection>
+          <Deliverables />
+        </MotionSection>
         <ProductDemoFilm />
         <TrustStrip />
         <MotionSection>
@@ -41,6 +51,9 @@ export function LandingPage() {
         </MotionSection>
         <MotionSection>
           <WorkflowStrip />
+        </MotionSection>
+        <MotionSection>
+          <Guarantee />
         </MotionSection>
         <MotionSection>
           <SecurityBlock />
@@ -130,6 +143,81 @@ function Hero() {
         <div className="relative min-w-0">
           <Hero3D />
         </div>
+      </div>
+    </section>
+  );
+}
+
+function Deliverables() {
+  const items = ESTIMATOR_KINDS.map((k) => {
+    const e = estimate(k.value, "standard", "semaine");
+    return { label: k.label, hint: k.hint, low: e.low, high: e.high, days: e.days };
+  });
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <CartoucheHeader
+        eyebrow="Prestations"
+        meta="Fourchettes indicatives · EUR"
+        title="Ce qu'un dessinateur réalise pour vous."
+        description="Quelques livrables courants et leur fourchette de prix indicative. Le tarif exact est confirmé au devis, après lecture de vos fichiers."
+      />
+      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((it) => (
+          <div
+            key={it.label}
+            className="lift rounded-[4px] border border-line bg-paper p-5 hover:border-line-strong"
+          >
+            <h3 className="font-display text-xl leading-tight text-ink">
+              {it.label}
+            </h3>
+            <p className="mt-1.5 text-[13px] leading-[1.5] text-mute">
+              {it.hint}
+            </p>
+            <div className="mt-4 flex items-end justify-between border-t border-line pt-3">
+              <span className="font-mono text-[15px] text-ink">
+                {formatEuro(it.low)} – {formatEuro(it.high)}
+              </span>
+              <span className="caption">~ {it.days} j</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Guarantee() {
+  const items = [
+    {
+      icon: FileCheck2,
+      title: "Devis clair avant de payer",
+      body: "Vous ne réglez l'acompte qu'après avoir accepté un devis détaillé.",
+    },
+    {
+      icon: RefreshCw,
+      title: "Corrections incluses",
+      body: "Des allers-retours sont prévus jusqu'à la validation de vos plans.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Sans engagement",
+      body: "Le devis ne vous engage pas. S'il ne vous convient pas, vous ne payez rien.",
+    },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-12 lg:px-10">
+      <div className="grid gap-px overflow-hidden rounded-[4px] border border-line bg-line sm:grid-cols-3">
+        {items.map((it) => (
+          <div key={it.title} className="bg-paper p-6">
+            <it.icon className="size-5 text-pine" aria-hidden="true" />
+            <h3 className="mt-3 font-medium text-ink">{it.title}</h3>
+            <p className="mt-1.5 text-[13px] leading-[1.55] text-mute">
+              {it.body}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );

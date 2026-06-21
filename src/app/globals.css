@@ -223,7 +223,7 @@ body {
     color: var(--mute);
   }
 
-  /* Display headline — Instrument Serif treatment */
+  /* Display headline — Playfair Display treatment */
   .display {
     font-family: var(--font-playfair), ui-serif, Georgia, serif;
     font-weight: 400;

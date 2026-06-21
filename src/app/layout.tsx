@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
-import {
-  Instrument_Serif,
-  Inter,
-  JetBrains_Mono,
-  Playfair_Display,
-} from "next/font/google";
+import { Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import { getSiteUrl } from "@/lib/site-url";
 import { Toaster } from "@/components/ui/Toaster";
 import "./globals.css";
@@ -12,14 +7,6 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -88,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${playfair.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
         {children}
