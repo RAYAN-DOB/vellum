@@ -287,7 +287,7 @@ export function NewProjectFlow() {
                 name="title"
                 value={title}
                 onChange={(event) => setTitle(event.target.value)}
-                className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-pine/20"
+                className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-cyan/45"
                 placeholder="Ex. Reprise PDF d'un bureau open-space"
               />
             </label>
@@ -323,7 +323,7 @@ export function NewProjectFlow() {
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
                 rows={7}
-                className="mt-2 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-sm leading-6 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-pine/20"
+                className="mt-2 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-sm leading-6 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-cyan/45"
                 placeholder="Expliquez les corrections, contraintes, dimensions connues, formats attendus."
               />
             </label>
@@ -336,7 +336,7 @@ export function NewProjectFlow() {
                 <select
                   value={deliverable}
                   onChange={(event) => setDeliverable(event.target.value)}
-                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-pine/20"
+                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-cyan/45"
                 >
                   {deliverables.map((item) => (
                     <option key={item} value={item}>
@@ -355,7 +355,7 @@ export function NewProjectFlow() {
                   onChange={(event) =>
                     setPriority(event.target.value as typeof priority)
                   }
-                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-pine/20"
+                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-cyan/45"
                 >
                   <option value="normal">Standard</option>
                   <option value="high">Élevée</option>
@@ -372,7 +372,7 @@ export function NewProjectFlow() {
                   onChange={(event) =>
                     setConfidentiality(event.target.value as typeof confidentiality)
                   }
-                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-pine/20"
+                  className="mt-2 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-cyan/45"
                 >
                   <option value="standard">Standard</option>
                   <option value="nda_required">Accès limité</option>
@@ -389,7 +389,7 @@ export function NewProjectFlow() {
                 <input
                   value={deadline}
                   onChange={(event) => setDeadline(event.target.value)}
-                  className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-pine/20"
+                  className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-cyan/45"
                   placeholder="Ex. fin de semaine, 10 jours"
                 />
               </label>
@@ -401,7 +401,7 @@ export function NewProjectFlow() {
                 <input
                   value={notes}
                   onChange={(event) => setNotes(event.target.value)}
-                  className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-pine/20"
+                  className="mt-2 block h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-cyan/45"
                   placeholder="Format, contraintes, éléments manquants"
                 />
               </label>

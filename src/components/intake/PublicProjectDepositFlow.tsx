@@ -306,7 +306,7 @@ export function PublicProjectDepositFlow() {
                           onChange={(event) => setDescription(event.target.value)}
                           rows={9}
                           autoFocus
-                          className="mt-3 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-[15px] leading-7 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-pine/20"
+                          className="mt-3 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-[15px] leading-7 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-cyan/45"
                           placeholder="Expliquez ce que vous voulez obtenir, les contraintes, les corrections à faire, les dimensions connues, les fichiers disponibles."
                         />
                         <span className="mt-2 block text-[12px] text-[#b9ad9d]">
@@ -392,7 +392,7 @@ export function PublicProjectDepositFlow() {
                           <select
                             value={deliverable}
                             onChange={(event) => setDeliverable(event.target.value)}
-                            className="mt-3 h-12 w-full cursor-pointer rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-pine/20"
+                            className="mt-3 h-12 w-full cursor-pointer rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-cyan/45"
                           >
                             {deliverables.map((item) => (
                               <option key={item} value={item}>
@@ -408,7 +408,7 @@ export function PublicProjectDepositFlow() {
                             <input
                               value={deadline}
                               onChange={(event) => setDeadline(event.target.value)}
-                              className="mt-3 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-pine/20"
+                              className="mt-3 h-12 w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-cyan/45"
                               placeholder="Ex. fin de semaine, 10 jours, urgent"
                             />
                           </label>
@@ -421,7 +421,7 @@ export function PublicProjectDepositFlow() {
                                   event.target.value as PublicProjectDraft["urgency"],
                                 )
                               }
-                              className="mt-3 h-12 w-full cursor-pointer rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-pine/20"
+                              className="mt-3 h-12 w-full cursor-pointer rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 text-sm text-[#fbfaf6] outline-none focus:border-pine focus:ring-2 focus:ring-cyan/45"
                             >
                               <option value="normal">Standard</option>
                               <option value="high">Élevé</option>
@@ -453,7 +453,7 @@ export function PublicProjectDepositFlow() {
                             value={notes}
                             onChange={(event) => setNotes(event.target.value)}
                             rows={4}
-                            className="mt-3 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-sm leading-6 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-pine/20"
+                            className="mt-3 block w-full rounded-[4px] border border-[#3b352e] bg-[#100f0d] px-4 py-3 text-sm leading-6 text-[#fbfaf6] outline-none transition placeholder:text-[#746d62] focus:border-pine focus:ring-2 focus:ring-cyan/45"
                             placeholder="Contraintes, formats finaux, pièces manquantes, précisions utiles."
                           />
                         </label>
