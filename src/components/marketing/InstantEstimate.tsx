@@ -170,7 +170,7 @@ export function InstantEstimate() {
             className={cn(
               "group mt-7 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full px-6 text-[14px] font-medium transition",
               result
-                ? "bg-pine text-paper hover:bg-pine-hover"
+                ? "cta-premium text-paper"
                 : "pointer-events-none bg-vellum text-mute",
             )}
             aria-disabled={!result}
