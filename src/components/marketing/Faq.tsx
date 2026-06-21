@@ -60,7 +60,7 @@ export function Faq() {
                 type="button"
                 onClick={() => setOpen(isOpen ? null : i)}
                 aria-expanded={isOpen}
-                className="group flex w-full items-center gap-4 py-5 text-left"
+                className="group flex w-full flex-col items-start gap-2 py-5 text-left sm:flex-row sm:items-center sm:gap-4"
               >
                 <span
                   className={cn(
@@ -87,7 +87,7 @@ export function Faq() {
                 transition={{ duration: 0.22, ease: EASE }}
                 className="overflow-hidden"
               >
-                <p className="pb-5 pl-16 pr-6 text-[14px] leading-[1.65] text-graphite">
+                <p className="pb-5 pl-0 pr-6 text-[14px] leading-[1.65] text-graphite sm:pl-16">
                   {it.a}
                 </p>
               </motion.div>

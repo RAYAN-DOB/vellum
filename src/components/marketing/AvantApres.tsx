@@ -129,11 +129,11 @@ export function AvantApres() {
             if (e.key === "ArrowLeft") setPos((p) => Math.max(4, p - 4));
             if (e.key === "ArrowRight") setPos((p) => Math.min(96, p + 4));
           }}
-          className="absolute inset-y-0 z-10 -ml-4 w-8 cursor-ew-resize focus-visible:outline-none"
+          className="absolute inset-y-0 z-10 -ml-5 w-10 cursor-ew-resize focus-visible:outline-none sm:-ml-4 sm:w-8"
           style={{ left: `${pos}%` }}
         >
           <span className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-ink/70" />
-          <span className="absolute left-1/2 top-1/2 flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-ink bg-paper shadow-[var(--shadow-e2)]">
+          <span className="absolute left-1/2 top-1/2 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-ink bg-paper shadow-[var(--shadow-e2)] sm:size-9">
             <span className="size-2 rounded-full bg-pine" />
           </span>
         </div>

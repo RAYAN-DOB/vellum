@@ -71,7 +71,7 @@ const WIN_RIGHT = "M560 196 V256";
 
 /* Axonometric massing (pre-projected, centered ~330) */
 const AX = {
-  shadow: { cx: 330, cy: 582, rx: 150, ry: 24 },
+  shadow: { cx: 330, cy: 580, rx: 98, ry: 15 },
   groundLeft: "220,499 330,436 330,356 220,419", // L0 F0 F1 L1
   groundRight: "330,436 440,499 440,419 330,356", // F0 R0 R1 F1
   upperLeft: "220,419 330,356 330,276 220,339",
@@ -92,12 +92,6 @@ const CALQUES = [
   { label: "ÉLECTRICITÉ", tone: CANARD },
   { label: "PLOMBERIE", tone: MUTE },
 ] as const;
-
-const REVISIONS: { ref: string; note: string; done?: boolean }[] = [
-  { ref: "RÉV. A", note: "Relevé" },
-  { ref: "RÉV. B", note: "Cotations" },
-  { ref: "RÉV. C", note: "Validé", done: true },
-];
 
 /** A drawn ink stroke — pathLength 0→1 when playing, full when reduced. */
 function Ink({
@@ -275,7 +269,7 @@ export function AtelierFilmHero() {
           {/* ── flat plan + cotations (ghost out when the volume resolves) ── */}
           <motion.g
             initial={{ opacity: 1 }}
-            animate={reduce ? { opacity: 0.16 } : play ? { opacity: 0.16 } : { opacity: 1 }}
+            animate={reduce ? { opacity: 0.22 } : play ? { opacity: 0.22 } : { opacity: 1 }}
             transition={reduce ? { duration: 0 } : { delay: B.axo, duration: 0.8, ease: EASE }}
           >
             {/* croquis — same coordinates as the ink, hand-jittered, fades as ink lands */}
@@ -373,12 +367,12 @@ export function AtelierFilmHero() {
           >
             {/* ground shadow */}
             <ellipse cx={AX.shadow.cx} cy={AX.shadow.cy} rx={AX.shadow.rx} ry={AX.shadow.ry} fill={INK} opacity={0.06} />
-            {/* storey faces — light logic: left darker, right mid, roof lightest */}
-            <polygon points={AX.groundLeft} fill="var(--vellum-dim)" stroke={INK} strokeWidth={1.4} />
-            <polygon points={AX.groundRight} fill="var(--vellum)" stroke={INK} strokeWidth={1.4} />
-            <polygon points={AX.upperLeft} fill="var(--vellum-dim)" stroke={INK} strokeWidth={1.4} />
-            <polygon points={AX.upperRight} fill="var(--vellum)" stroke={INK} strokeWidth={1.4} />
-            <polygon points={AX.roof} fill="var(--paper)" stroke={INK} strokeWidth={1.4} />
+            {/* storey faces — light logic: left in shade, right lit, roof brightest */}
+            <polygon points={AX.groundLeft} fill="rgba(22,25,26,0.13)" stroke={INK} strokeWidth={1.7} />
+            <polygon points={AX.groundRight} fill="rgba(22,25,26,0.05)" stroke={INK} strokeWidth={1.7} />
+            <polygon points={AX.upperLeft} fill="rgba(22,25,26,0.13)" stroke={INK} strokeWidth={1.7} />
+            <polygon points={AX.upperRight} fill="rgba(22,25,26,0.05)" stroke={INK} strokeWidth={1.7} />
+            <polygon points={AX.roof} fill="var(--paper)" stroke={INK} strokeWidth={1.7} />
             {/* floor divisions */}
             <polyline points={AX.floorLineL0} fill="none" stroke={INK} strokeWidth={0.8} opacity={0.5} />
             <polyline points={AX.floorLineR0} fill="none" stroke={INK} strokeWidth={0.8} opacity={0.5} />
@@ -438,54 +432,23 @@ export function AtelierFilmHero() {
           >
             <g>
               <rect x={232} y={648} width={92} height={28} rx={2} fill="var(--paper)" stroke={INK} strokeWidth={1.2} />
-              <rect x={232} y={674} width={92} height={2} fill={PINE} />
+              <rect x={232} y={674} width={92} height={2} fill={INK} />
               <text x={246} y={666} style={{ fontSize: 11, letterSpacing: "0.08em" }} fill={INK}>PLAN.PDF</text>
             </g>
             <g>
               <rect x={332} y={648} width={104} height={28} rx={2} fill="var(--paper)" stroke={INK} strokeWidth={1.2} />
-              <rect x={332} y={674} width={104} height={2} fill={PINE} />
+              <rect x={332} y={674} width={104} height={2} fill={INK} />
               <text x={346} y={666} style={{ fontSize: 11, letterSpacing: "0.08em" }} fill={INK}>PROJET.DWG</text>
             </g>
           </motion.g>
         </svg>
       </motion.div>
 
-      {/* le calque vivant — persistent dated revision trail (desktop only) */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-3 top-12 z-30 hidden flex-col gap-2.5 sm:flex lg:-right-5"
-      >
-        {REVISIONS.map((rev, i) => (
-          <motion.div
-            key={rev.ref}
-            initial={reduce ? false : { opacity: 0, x: 12 }}
-            animate={showFinal ? { opacity: 1, x: 0 } : { opacity: 0, x: 12 }}
-            transition={reduce ? { duration: 0 } : { delay: B.cotes + 0.4 + i * 0.5, duration: 0.5, ease: EASE }}
-            className={
-              "flex items-center gap-2 rounded-[3px] border px-2.5 py-1.5 backdrop-blur-[1px] " +
-              (rev.done
-                ? "border-pine/40 bg-pine-tint/85"
-                : "border-line-strong bg-paper/90")
-            }
-          >
-            <span
-              className={
-                "size-1.5 shrink-0 rounded-full " +
-                (rev.done ? "bg-pine" : "border border-pine/50 bg-paper")
-              }
-            />
-            <span className="font-mono text-[10px] tracking-[0.08em] text-ink">
-              {rev.ref}
-            </span>
-            <span
-              className={
-                "text-[10px] " + (rev.done ? "font-medium text-pine-active" : "text-mute")
-              }
-            >
-              {rev.note}
-            </span>
-          </motion.div>
-        ))}
+      {/* mobile proof strip — the SVG cartouche is decorative-small on phones,
+          so the key proof is restated here in legible HTML */}
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 sm:hidden">
+        <span className="caption text-pine">Plan livré · Rév C · Validé</span>
+        <span className="caption text-soft">PDF + DWG · révisions suivies</span>
       </div>
     </div>
   );

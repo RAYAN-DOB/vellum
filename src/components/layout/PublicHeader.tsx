@@ -112,9 +112,9 @@ export function PublicHeader() {
               aria-expanded={open}
               className="flex size-10 flex-col items-center justify-center gap-[5px] md:hidden"
             >
-              <span aria-hidden="true" className="h-px w-5 bg-ink" />
-              <span aria-hidden="true" className="h-px w-5 bg-ink" />
-              <span aria-hidden="true" className="h-px w-5 bg-ink" />
+              <span aria-hidden="true" className="h-[1.5px] w-5 bg-ink" />
+              <span aria-hidden="true" className="h-[1.5px] w-5 bg-ink" />
+              <span aria-hidden="true" className="h-[1.5px] w-5 bg-ink" />
             </button>
           </div>
         </div>
