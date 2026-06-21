@@ -392,14 +392,14 @@ function DarkPromiseBand() {
             sans gérer de prestataire.
           </span>
         </h2>
-        <p className="mt-5 max-w-xl text-[15px] leading-[1.7] text-paper/75">
+        <p className="mt-5 max-w-xl text-[15px] leading-[1.7] text-paper/85">
           Vous décrivez votre besoin, un dessinateur professionnel exécute, vous
           validez. Un seul interlocuteur, un devis clair avant tout paiement, des
           corrections suivies jusqu&apos;au livrable.
         </p>
         <div className="mt-8 flex flex-wrap gap-2.5">
           {promisePills.map((p) => (
-            <Pill key={p.label} tone={p.tone} dot>
+            <Pill key={p.label} tone={p.tone} dot dark>
               {p.label}
             </Pill>
           ))}
@@ -426,10 +426,10 @@ function FinalCta() {
       <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:px-10 lg:py-28">
         <div>
           <div className="mb-6 flex flex-wrap gap-2">
-            <Pill tone="cyan" dot>
+            <Pill tone="cyan" dot dark>
               Croquis → plan
             </Pill>
-            <Pill tone="pine" dot>
+            <Pill tone="pine" dot dark>
               Devis avant paiement
             </Pill>
           </div>
@@ -440,7 +440,7 @@ function FinalCta() {
               Vellum vous livre le plan.
             </span>
           </h2>
-          <p className="mt-6 max-w-lg text-[16px] leading-[1.7] text-paper/75">
+          <p className="mt-6 max-w-lg text-[16px] leading-[1.7] text-paper/85">
             Décrivez votre besoin, joignez un croquis ou une photo. Un
             dessinateur s&apos;occupe du reste — le compte n&apos;est demandé
             qu&apos;au moment d&apos;envoyer le dossier.
@@ -460,7 +460,7 @@ function FinalCta() {
           </Link>
           <Link
             href={routes.public.login}
-            className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full border border-paper/25 bg-white/5 px-7 text-[14px] font-medium text-paper backdrop-blur-sm transition hover:border-paper/50 hover:bg-white/10"
+            className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full border border-paper/40 bg-white/5 px-7 text-[14px] font-medium text-paper backdrop-blur-sm transition hover:border-paper/60 hover:bg-white/10"
           >
             Retrouver mes projets
             <ArrowUpRight

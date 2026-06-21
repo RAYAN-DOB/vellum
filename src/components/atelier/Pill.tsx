@@ -51,6 +51,7 @@ export function Pill({
   active = false,
   dot = false,
   mono = false,
+  dark = false,
   size = "md",
   className,
 }: {
@@ -63,6 +64,8 @@ export function Pill({
   dot?: boolean;
   /** Mono type — for prices, délais, références. */
   mono?: boolean;
+  /** Dark-context: translucent ink surface + paper text, for dark sections. */
+  dark?: boolean;
   size?: "sm" | "md";
   className?: string;
 }) {
@@ -73,11 +76,20 @@ export function Pill({
         "group/pill relative inline-flex items-center gap-1.5 rounded-full border font-medium backdrop-blur-[2px] transition-all duration-200 ease-out",
         size === "sm" ? "px-2.5 py-1 text-[11px]" : "px-3 py-1.5 text-[12px]",
         mono && "font-mono tracking-[0.02em]",
-        t.border,
-        t.text,
-        active
-          ? "bg-[image:var(--pill-grad)] shadow-[0_4px_16px_-8px_var(--pill-ring)]"
-          : "bg-paper/60 hover:-translate-y-px hover:bg-paper/85 hover:shadow-[0_4px_16px_-9px_var(--pill-ring)]",
+        dark
+          ? cn(
+              "border-white/15 text-paper/90",
+              active
+                ? "bg-white/[0.13] shadow-[0_4px_16px_-9px_var(--pill-ring)]"
+                : "bg-white/[0.06] hover:-translate-y-px hover:bg-white/[0.13]",
+            )
+          : cn(
+              t.border,
+              t.text,
+              active
+                ? "bg-[image:var(--pill-grad)] shadow-[0_4px_16px_-8px_var(--pill-ring)]"
+                : "bg-paper/60 hover:-translate-y-px hover:bg-paper/85 hover:shadow-[0_4px_16px_-9px_var(--pill-ring)]",
+            ),
         className,
       )}
       style={

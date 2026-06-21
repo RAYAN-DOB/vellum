@@ -32,37 +32,40 @@ export function MovingGradient({
 
       {/* emerald blob */}
       <div
-        className="absolute -left-[12%] -top-[18%] h-[75%] w-[75%] rounded-full blur-[90px]"
+        className="absolute -left-[12%] -top-[18%] h-[75%] w-[75%] rounded-full blur-[70px]"
         style={{
-          background: blob("var(--pine)", dark ? 80 : 24),
+          background: blob("var(--pine)", dark ? 56 : 24),
           mixBlendMode: dark ? "screen" : "multiply",
           animation: "aurora-1 24s ease-in-out infinite",
+          willChange: "transform",
         }}
       />
       {/* cyan blob */}
       <div
-        className="absolute -right-[10%] top-[10%] h-[70%] w-[70%] rounded-full blur-[100px]"
+        className="absolute -right-[10%] top-[10%] h-[70%] w-[70%] rounded-full blur-[75px]"
         style={{
-          background: blob("var(--cyan)", dark ? 70 : 20),
+          background: blob("var(--cyan)", dark ? 46 : 20),
           mixBlendMode: dark ? "screen" : "multiply",
           animation: "aurora-2 30s ease-in-out infinite",
+          willChange: "transform",
         }}
       />
       {/* petrol blob (depth) */}
       <div
-        className="absolute bottom-[-22%] left-[22%] h-[78%] w-[78%] rounded-full blur-[110px]"
+        className="absolute bottom-[-22%] left-[22%] h-[78%] w-[78%] rounded-full blur-[80px]"
         style={{
-          background: blob("var(--petrol)", dark ? 85 : 16),
+          background: blob("var(--petrol)", dark ? 60 : 16),
           mixBlendMode: dark ? "screen" : "multiply",
           animation: "aurora-3 26s ease-in-out infinite",
+          willChange: "transform",
         }}
       />
       {/* faint brass warmth (trace) — dark only */}
       {dark ? (
         <div
-          className="absolute right-[18%] top-[-8%] h-[40%] w-[40%] rounded-full blur-[100px]"
+          className="absolute right-[18%] top-[-8%] h-[40%] w-[40%] rounded-full blur-[80px]"
           style={{
-            background: blob("var(--brass)", 22),
+            background: blob("var(--brass)", 12),
             mixBlendMode: "screen",
             animation: "aurora-2 34s ease-in-out infinite",
           }}
@@ -82,7 +85,7 @@ export function MovingGradient({
 
       {/* fine grain — kills banding, adds texture */}
       {grain ? (
-        <svg className="absolute inset-0 h-full w-full opacity-[0.05] mix-blend-overlay">
+        <svg className="absolute inset-0 hidden h-full w-full opacity-[0.05] mix-blend-overlay md:block">
           <filter id="mg-grain">
             <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
           </filter>

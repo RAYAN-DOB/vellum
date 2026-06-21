@@ -314,21 +314,17 @@ body {
   /* Premium CTA: emerald→canard→soft-cyan sheen that shifts on hover + soft halo */
   .cta-premium {
     background-image: var(--gradient-cta-premium);
-    transition:
-      box-shadow 0.3s ease,
-      filter 0.2s ease;
+    transition: box-shadow 0.3s ease;
     box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--pine) 50%, transparent);
   }
   .cta-premium:hover {
-    box-shadow: 0 14px 38px -12px color-mix(in srgb, var(--cyan) 48%, transparent);
-    filter: brightness(1.04);
+    box-shadow: 0 14px 40px -12px color-mix(in srgb, var(--cyan) 46%, transparent);
   }
 
   /* Drifting ambient light field — full-bleed background layer, slow drift */
   .ambient-field {
     background-image: var(--gradient-blueprint-soft);
     animation: ambient-drift 16s ease-in-out infinite;
-    will-change: transform, opacity;
   }
 
   /* A thin emerald/cyan scanner line — parent must be relative + overflow-hidden */
