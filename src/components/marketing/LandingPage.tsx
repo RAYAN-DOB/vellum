@@ -426,9 +426,7 @@ function DarkPromiseBand() {
         </span>
         <h2 className="display mt-4 max-w-3xl text-[clamp(2rem,4.4vw,3.4rem)] text-paper">
           Des plans techniques propres,{" "}
-          <span className="italic text-[color-mix(in_srgb,var(--cyan)_60%,var(--paper))]">
-            sans gérer de prestataire.
-          </span>
+          <span className="text-gradient italic">sans gérer de prestataire.</span>
         </h2>
         <p className="mt-5 max-w-xl text-[15px] leading-[1.7] text-paper/85">
           Vous décrivez votre besoin, un dessinateur professionnel exécute, vous
@@ -474,7 +472,7 @@ function FinalCta() {
           <h2 className="display text-[clamp(2.25rem,5.5vw,4rem)]">
             Un croquis suffit pour commencer.
             <br />
-            <span className="italic text-[color-mix(in_srgb,var(--cyan)_60%,var(--paper))]">
+            <span className="text-gradient italic">
               Vellum vous livre le plan.
             </span>
           </h2>

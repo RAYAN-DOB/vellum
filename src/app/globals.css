@@ -378,6 +378,18 @@ body {
       0 10px 36px -14px color-mix(in srgb, var(--cyan) 50%, transparent);
   }
 
+  /* Emerald→cyan gradient text (light tones — for accents on dark sections) */
+  .text-gradient {
+    background-image: linear-gradient(
+      120deg,
+      color-mix(in srgb, var(--pine) 38%, var(--paper)),
+      color-mix(in srgb, var(--cyan) 52%, var(--paper))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   /* Thin gradient "light rail" border (emerald→cyan), masked to the edge */
   .light-rail {
     position: relative;
