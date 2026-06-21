@@ -138,11 +138,21 @@ export function InstantEstimate() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, ease: EASE }}
             >
-                <p className="mt-5 font-display text-[clamp(2rem,4vw,2.75rem)] leading-none text-ink">
-                  <CountUp value={result.low} format={formatEuro} />
-                  <span className="px-2 text-mute">–</span>
-                  <CountUp value={result.high} format={formatEuro} />
-                </p>
+                <div className="relative mt-5">
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -inset-x-4 -inset-y-3 opacity-70 blur-2xl"
+                    style={{
+                      background:
+                        "radial-gradient(60% 120% at 12% 50%, color-mix(in srgb, var(--cyan) 16%, transparent), color-mix(in srgb, var(--pine) 12%, transparent) 45%, transparent 72%)",
+                    }}
+                  />
+                  <p className="relative font-display text-[clamp(2rem,4vw,2.75rem)] leading-none text-ink">
+                    <CountUp value={result.low} format={formatEuro} />
+                    <span className="px-2 text-mute">–</span>
+                    <CountUp value={result.high} format={formatEuro} />
+                  </p>
+                </div>
                 <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-[3px] border border-line bg-line text-[13px]">
                   <div className="bg-paper p-3">
                     <dt className="caption">Délai estimé</dt>
