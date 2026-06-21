@@ -60,7 +60,7 @@ function SubmitButton({ disabled }: { disabled?: boolean }) {
     <button
       type="submit"
       disabled={pending || disabled}
-      className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-pine px-6 text-sm font-semibold text-[#fbfaf6] transition hover:bg-pine-hover disabled:cursor-not-allowed disabled:opacity-60"
+      className="cta-premium inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold text-[#fbfaf6] disabled:cursor-not-allowed disabled:opacity-60"
     >
       {pending ? (
         <Loader2 className="size-4 animate-spin" aria-hidden="true" />

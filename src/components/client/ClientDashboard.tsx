@@ -73,7 +73,7 @@ export function ClientDashboard({ user, projects, unreadMessages }: Props) {
           </div>
           <a
             href={routes.client.newProject}
-            className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 self-start rounded-full bg-ink px-6 text-[14px] font-medium text-paper transition hover:bg-iron-hover lg:self-end"
+            className="cta-premium group inline-flex h-12 cursor-pointer items-center justify-center gap-2 self-start rounded-full px-6 text-[14px] font-medium text-paper lg:self-end"
           >
             <FilePlus2 className="size-4" aria-hidden="true" />
             Nouveau dépôt

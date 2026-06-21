@@ -333,7 +333,7 @@ export function QuoteSheet({ quote }: { quote: QuoteSheetData }) {
           ) : (
             <Link
               href={checkoutHref}
-              className="group mt-4 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-pine px-6 text-[14px] font-medium text-paper transition hover:bg-pine-hover"
+              className="cta-premium group mt-4 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full px-6 text-[14px] font-medium text-paper"
             >
               Accepter et payer {formatEuro(breakdown.amountNow)}
               <ArrowRight
