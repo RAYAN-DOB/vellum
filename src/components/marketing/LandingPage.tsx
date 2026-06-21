@@ -358,38 +358,35 @@ function Guarantee() {
   ];
 
   return (
-    <section className="on-dark relative overflow-hidden border-y border-white/10 text-paper">
-      <DarkField phase={18} />
-      <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
-        <div className="mb-8 flex flex-wrap items-center gap-2.5">
-          <Pill tone="pine" dark icon={<ShieldCheck />}>
-            Sans engagement
-          </Pill>
-          <Pill tone="cyan" dark icon={<FileCheck2 />}>
-            Devis clair avant de payer
-          </Pill>
-          <Pill tone="petrol" dark icon={<RefreshCw />}>
-            Corrections incluses
-          </Pill>
-        </div>
-        <div className="grid gap-px overflow-hidden rounded-[4px] border border-white/10 bg-white/10 sm:grid-cols-3">
-          {items.map((it) => (
-            <div
-              key={it.title}
-              className="group/g relative bg-[#0b1416] p-6 transition-colors hover:bg-[#0e1a1c]"
-            >
-              <it.icon className="size-5 text-cyan" aria-hidden="true" />
-              <h3 className="mt-3 font-medium text-paper">{it.title}</h3>
-              <p className="mt-1.5 text-[13px] leading-[1.55] text-paper/60">
-                {it.body}
-              </p>
-              <span
-                aria-hidden="true"
-                className="absolute bottom-0 left-0 h-px w-0 bg-[image:var(--gradient-pine-cyan)] transition-all duration-300 group-hover/g:w-full"
-              />
-            </div>
-          ))}
-        </div>
+    <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
+      <div className="mb-8 flex flex-wrap items-center gap-2.5">
+        <Pill tone="pine" icon={<ShieldCheck />}>
+          Sans engagement
+        </Pill>
+        <Pill tone="cyan" icon={<FileCheck2 />}>
+          Devis clair avant de payer
+        </Pill>
+        <Pill tone="petrol" icon={<RefreshCw />}>
+          Corrections incluses
+        </Pill>
+      </div>
+      <div className="grid gap-px overflow-hidden rounded-[4px] border border-line bg-line sm:grid-cols-3">
+        {items.map((it) => (
+          <div
+            key={it.title}
+            className="group/g relative bg-paper p-6 transition-colors hover:bg-vellum/30"
+          >
+            <it.icon className="size-5 text-pine" aria-hidden="true" />
+            <h3 className="mt-3 font-medium text-ink">{it.title}</h3>
+            <p className="mt-1.5 text-[13px] leading-[1.55] text-mute">
+              {it.body}
+            </p>
+            <span
+              aria-hidden="true"
+              className="absolute bottom-0 left-0 h-px w-0 bg-[image:var(--gradient-pine-cyan)] transition-all duration-300 group-hover/g:w-full"
+            />
+          </div>
+        ))}
       </div>
     </section>
   );
